@@ -1,0 +1,16 @@
+{
+  "name": "akblog",
+  "version": "0.0.1",
+  "author":"petitspois",
+  "description":"基于angularjs+koajs构建的博客系统",
+  "keywords":["nodejs","koajs","angularjs"],
+  "repository":{
+
+  },
+  "license":"MIT",
+  "engines":"0.11.14",
+  "dependencies":{
+    "koa":"~0.14.0",
+    "koa-router":"~3.8.0"
+  }
+}
