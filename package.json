@@ -11,6 +11,12 @@
   "engines":"0.11.14",
   "dependencies":{
     "koa":"~0.14.0",
-    "koa-router":"~3.8.0"
+    "swig":"~1.4.2",
+    "koa-router":"3.8.0",
+    "koa-logger": "1.2.2",
+    "co":"~4.1.0",
+    "co-views":"*",
+    "co-fs":"*",
+    "mongoose": "^3.8.19"
   }
 }
