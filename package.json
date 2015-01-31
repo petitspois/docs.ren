@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "author":"petitspois",
   "description":"基于angularjs+koajs构建的博客系统",
+  "repository": "petitspois/QD-blog",
   "keywords":["nodejs","koajs","angularjs"],
-  "repository":{
-
+  "scripts": {
+    "start": "DEBUG=* node --harmony app"
   },
   "license":"MIT",
   "engines":"0.11.14",
@@ -14,9 +15,12 @@
     "swig":"~1.4.2",
     "koa-router":"3.8.0",
     "koa-logger": "1.2.2",
+    "koa-session": "2.0.0",
+    "koa-static-cache":"~3.0.1",
     "co":"~4.1.0",
     "co-views":"*",
     "co-fs":"*",
+    "co-busboy":"*",
     "mongoose": "^3.8.19"
   }
 }
