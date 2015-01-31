@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://flatfull.com/themes/angulr/angular/#/app/page/profile -->
+<html lang="en" data-ng-app="app" class="ng-scope">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">@charset "UTF-8";
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+
+    ng\:form {
+        display: block;
+    }</style>
+    <meta charset="utf-8">
+    <title>Angular version | Angulr</title>
+    <meta name="description"
+          content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./assets/app.min.css" type="text/css">
+    <script src="./assets/chart.js" async=""></script>
+    <style type="text/css">.jqstooltip {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        visibility: hidden;
+        background: rgb(0, 0, 0) transparent;
+        background-color: rgba(0, 0, 0, 0.6);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+        color: white;
+        font: 10px arial, san serif;
+        text-align: left;
+        white-space: nowrap;
+        padding: 5px;
+        border: 1px solid white;
+        z-index: 10000;
+    }
+
+    .jqsfield {
+        color: white;
+        font: 10px arial, san serif;
+        text-align: left;
+    }</style>
+</head>
+<body ng-controller="AppCtrl" style="" class="ng-scope">
+<!-- uiView:  -->
+<div class="app ng-scope app-header-fixed" id="app"
+     ng-class="{&#39;app-header-fixed&#39;:app.settings.headerFixed, &#39;app-aside-fixed&#39;:app.settings.asideFixed, &#39;app-aside-folded&#39;:app.settings.asideFolded, &#39;app-aside-dock&#39;:app.settings.asideDock, &#39;container&#39;:app.settings.container}"
+     ui-view="">  <!-- navbar -->
+    <!-- ngInclude: 'tpl/blocks/header.html' -->
+    <div data-ng-include=" &#39;tpl/blocks/header.html&#39; " class="app-header navbar ng-scope"><!-- navbar header -->
+        <div class="navbar-header bg-black">
+            <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
+                <i class="glyphicon glyphicon-cog"></i>
+            </button>
+            <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll="app">
+                <i class="glyphicon glyphicon-align-justify"></i>
+            </button>
+            <!-- brand -->
+            <a href="http://flatfull.com/themes/angulr/angular/#/" class="navbar-brand text-lt">
+                <i class="fa fa-btc"></i>
+                <img src="./assets/logo.png" alt="." class="hide">
+                <span class="hidden-folded m-l-xs ng-binding">Angulr</span>
+            </a>
+            <!-- / brand -->
+        </div>
+        <!-- / navbar header -->
+
+        <!-- navbar collapse -->
+        <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
+            <!-- buttons -->
+            <div class="nav navbar-nav hidden-xs">
+                <a href="" class="btn no-shadow navbar-btn"
+                   ng-click="app.settings.asideFolded = !app.settings.asideFolded">
+                    <i class="fa fa-dedent fa-fw"></i>
+                </a>
+                <a href="" class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">
+                    <i class="icon-user fa-fw"></i>
+                </a>
+            </div>
+            <!-- / buttons -->
+
+            <!-- link and dropdown -->
+            <ul class="nav navbar-nav hidden-sm">
+                <li class="dropdown pos-stc" dropdown="">
+                    <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                        <span>Mega</span>
+                        <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu wrapper w-full bg-white">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="m-l-xs m-t-xs m-b-xs font-bold">Pages <span
+                                        class="badge badge-sm bg-success">10</span></div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <ul class="list-unstyled l-h-2x">
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Post</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Search</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Invoice</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <ul class="list-unstyled l-h-2x">
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Price</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Lock
+                                                    screen</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sign
+                                                    in</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sign
+                                                    up</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 b-l b-light">
+                                <div class="m-l-xs m-t-xs m-b-xs font-bold">UI Kits <span
+                                        class="label label-sm bg-primary">12</span></div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <ul class="list-unstyled l-h-2x">
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Buttons</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Icons
+                                                    <span class="badge badge-sm bg-warning">1000+</span></a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Grid</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Widgets</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <ul class="list-unstyled l-h-2x">
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Bootstap</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sortable</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Portlet</a>
+                                            </li>
+                                            <li>
+                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Timeline</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 b-l b-light">
+                                <div class="m-l-xs m-t-xs m-b-sm font-bold">Analysis</div>
+                                <div class="text-center">
+                                    <div class="inline">
+                                        <div ui-jq="easyPieChart" ui-options="{
+                          percent: 65,
+                          lineWidth: 50,
+                          trackColor: &#39;#e8eff0&#39;,
+                          barColor: &#39;#23b7e5&#39;,
+                          scaleColor: false,
+                          size: 100,
+                          rotate: 90,
+                          lineCap: &#39;butt&#39;,
+                          animate: 2000
+                        }" class="easyPieChart" style="width: 100px; height: 100px; line-height: 100px;">
+                                            <canvas width="100" height="100"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown" dropdown="">
+                    <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+                        <span translate="header.navbar.new.NEW" class="ng-scope">New</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://flatfull.com/themes/angulr/angular/#" translate="header.navbar.new.PROJECT"
+                               class="ng-scope">Projects</a></li>
+                        <li>
+                            <a href="">
+                                <span class="badge bg-info pull-right">5</span>
+                                <span translate="header.navbar.new.TASK" class="ng-scope">Task</span>
+                            </a>
+                        </li>
+                        <li><a href="" translate="header.navbar.new.USER" class="ng-scope">User</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="">
+                                <span class="badge bg-danger pull-right">4</span>
+                                <span translate="header.navbar.new.EMAIL" class="ng-scope">Email</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-form-sm navbar-left shift ng-pristine ng-valid ng-scope"
+                  ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" ng-model="selected"
+                               typeahead="state for state in states | filter:$viewValue | limitTo:8"
+                               class="form-control input-sm bg-light no-border rounded padder ng-pristine ng-untouched ng-valid"
+                               placeholder="Search projects..." aria-autocomplete="list" aria-expanded="false"
+                               aria-owns="typeahead-43-3253">
+                        <ul class="dropdown-menu ng-isolate-scope ng-hide" ng-show="isOpen()"
+                            ng-style="{top: position.top+&#39;px&#39;, left: position.left+&#39;px&#39;}"
+                            style="display: block;;display: block;" role="listbox" aria-hidden="true" typeahead-popup=""
+                            id="typeahead-43-3253" matches="matches" active="activeIdx" select="select(activeIdx)"
+                            query="query" position="position">
+                            <!-- ngRepeat: match in matches track by $index -->
+                        </ul>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+              </span>
+                    </div>
+                </div>
+            </form>
+            <!-- / link and dropdown -->
+
+            <!-- search form -->
+
+            <!-- / search form -->
+
+            <!-- nabar right -->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown hidden-sm" is-open="lang.isopen" dropdown="">
+                    <a href="" class="dropdown-toggle ng-binding" dropdown-toggle="" aria-haspopup="true"
+                       aria-expanded="false">
+                        English <b class="caret"></b>
+                    </a>
+                    <!-- dropdown -->
+                    <ul class="dropdown-menu animated fadeInRight w">
+                        <!-- ngRepeat: (langKey, label) in langs -->
+                        <li ng-repeat="(langKey, label) in langs" class="ng-scope">
+                            <a ng-click="setLang(langKey, $event)" href="" class="ng-binding">German</a>
+                        </li>
+                        <!-- end ngRepeat: (langKey, label) in langs -->
+                        <li ng-repeat="(langKey, label) in langs" class="ng-scope">
+                            <a ng-click="setLang(langKey, $event)" href="" class="ng-binding">English</a>
+                        </li>
+                        <!-- end ngRepeat: (langKey, label) in langs -->
+                        <li ng-repeat="(langKey, label) in langs" class="ng-scope">
+                            <a ng-click="setLang(langKey, $event)" href="" class="ng-binding">Italian</a>
+                        </li>
+                        <!-- end ngRepeat: (langKey, label) in langs -->
+                    </ul>
+                    <!-- / dropdown -->
+                </li>
+                <li class="hidden-xs">
+                    <a ui-fullscreen="" class=""><i class="fa fa-expand fa-fw text"></i><i
+                            class="fa fa-compress fa-fw text-active"></i></a>
+                </li>
+                <li class="dropdown" dropdown="">
+                    <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-bell fa-fw"></i>
+                        <span class="visible-xs-inline">Notifications</span>
+                        <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
+                    </a>
+                    <!-- dropdown -->
+                    <div class="dropdown-menu w-xl animated fadeInUp">
+                        <div class="panel bg-white">
+                            <div class="panel-heading b-light bg-light">
+                                <strong>You have <span>2</span> notifications</strong>
+                            </div>
+                            <div class="list-group">
+                                <a href="" class="media list-group-item">
+                    <span class="pull-left thumb-sm">
+                      <img src="./assets/a0.jpg" alt="..." class="img-circle">
+                    </span>
+                    <span class="media-body block m-b-none">
+                      Use awesome animate.css<br>
+                      <small class="text-muted">10 minutes ago</small>
+                    </span>
+                                </a>
+                                <a href="" class="media list-group-item">
+                    <span class="media-body block m-b-none">
+                      1.0 initial released<br>
+                      <small class="text-muted">1 hour ago</small>
+                    </span>
+                                </a>
+                            </div>
+                            <div class="panel-footer text-sm">
+                                <a href="" class="pull-right"><i class="fa fa-cog"></i></a>
+                                <a href="http://flatfull.com/themes/angulr/angular/#notes"
+                                   data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / dropdown -->
+                </li>
+                <li class="dropdown" dropdown="">
+                    <a href="" class="dropdown-toggle clear" dropdown-toggle="" aria-haspopup="true"
+                       aria-expanded="false">
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img src="./assets/a0.jpg" alt="...">
+                <i class="on md b-white bottom"></i>
+              </span>
+                        <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
+                    </a>
+                    <!-- dropdown -->
+                    <ul class="dropdown-menu animated fadeInRight w">
+                        <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                            <div>
+                                <p>300mb of 500mb used</p>
+                            </div>
+                            <div class="progress-xs m-b-none bg-white progress ng-isolate-scope" value="60">
+                                <div class="progress-bar" ng-class="type &amp;&amp; &#39;progress-bar-&#39; + type"
+                                     role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                     ng-style="{width: percent + &#39;%&#39;}" aria-valuetext="60%" ng-transclude=""
+                                     style="width: 60%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="badge bg-danger pull-right">30%</span>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="app.page.profile"
+                               href="./assets/Angular version   Angulr.html">Profile</a>
+                        </li>
+                        <li>
+                            <a ui-sref="app.docs" href="http://flatfull.com/themes/angulr/angular/#/app/docs">
+                                <span class="label bg-info pull-right">new</span>
+                                Help
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a ui-sref="access.signin" href="http://flatfull.com/themes/angulr/angular/#/access/signin">Logout</a>
+                        </li>
+                    </ul>
+                    <!-- / dropdown -->
+                </li>
+            </ul>
+            <!-- / navbar right -->
+
+        </div>
+        <!-- / navbar collapse --></div>
+    <!-- / navbar -->
+
+    <!-- menu -->
+    <!-- ngInclude: 'tpl/blocks/aside.html' -->
+    <div data-ng-include=" &#39;tpl/blocks/aside.html&#39; " class="app-aside hidden-xs bg-black">
+        <div class="aside-wrap ng-scope">
+            <!-- if you want to use a custom scroll when aside fixed, use the slimScroll
+              <div class="navi-wrap" ui-jq="slimScroll" ui-options="{height:'100%', size:'8px'}">
+            -->
+            <div class="navi-wrap">
+                <!-- user -->
+                <div class="clearfix hidden-xs text-center hide" id="aside-user">
+                    <div class="dropdown wrapper" dropdown="">
+                        <a ui-sref="app.page.profile"
+                           href="./assets/Angular version   Angulr.html">
+          <span class="thumb-lg w-auto-folded avatar m-t-sm">
+            <img src="./assets/a0.jpg" class="img-full" alt="...">
+          </span>
+                        </a>
+                        <a href="" class="dropdown-toggle hidden-folded" dropdown-toggle="" aria-haspopup="true"
+                           aria-expanded="false">
+          <span class="clear">
+            <span class="block m-t-sm">
+              <strong class="font-bold text-lt">John.Smith</strong> 
+              <b class="caret"></b>
+            </span>
+            <span class="text-muted text-xs block">Art Director</span>
+          </span>
+                        </a>
+                        <!-- dropdown -->
+                        <ul class="dropdown-menu animated fadeInRight w hidden-folded">
+                            <li class="wrapper b-b m-b-sm bg-info m-t-n-xs">
+                                <span class="arrow top hidden-folded arrow-info"></span>
+
+                                <div>
+                                    <p>300mb of 500mb used</p>
+                                </div>
+                                <div class="progress-xs m-b-none dker progress ng-isolate-scope" value="60"
+                                     type="white">
+                                    <div class="progress-bar progress-bar-white"
+                                         ng-class="type &amp;&amp; &#39;progress-bar-&#39; + type" role="progressbar"
+                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                         ng-style="{width: percent + &#39;%&#39;}" aria-valuetext="60%" ng-transclude=""
+                                         style="width: 60%;"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="">Settings</a>
+                            </li>
+                            <li>
+                                <a ui-sref="app.page.profile"
+                                   href="./assets/Angular version   Angulr.html">Profile</a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <span class="badge bg-danger pull-right">3</span>
+                                    Notifications
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a ui-sref="access.signin"
+                                   href="http://flatfull.com/themes/angulr/angular/#/access/signin">Logout</a>
+                            </li>
+                        </ul>
+                        <!-- / dropdown -->
+                    </div>
+                    <div class="line dk hidden-folded"></div>
+                </div>
+                <!-- / user -->
+
+                <!-- nav -->
+                <!-- ngInclude: 'tpl/blocks/nav.html' -->
+                <nav ui-nav="" class="navi clearfix ng-scope" ng-include="&#39;tpl/blocks/nav.html&#39;"><!-- list -->
+                    <ul class="nav ng-scope">
+                        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                            <span translate="aside.nav.HEADER" class="ng-scope">Navigation</span>
+                        </li>
+                        <li>
+                            <a href="" class="auto">      
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+                                <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
+                                <span class="font-bold ng-scope" translate="aside.nav.DASHBOARD">Dashboard</span>
+                            </a>
+                            <ul class="nav nav-sub dk">
+                                <li class="nav-sub-header">
+                                    <a href="">
+                                        <span translate="aside.nav.DASHBOARD" class="ng-scope">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active" class="">
+                                    <a ui-sref="app.dashboard-v1"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/dashboard-v1">
+                                        <span>Dashboard v1</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.dashboard-v2"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/dashboard-v2">
+                                        <b class="label bg-info pull-right">N</b>
+                                        <span>Dashboard v2</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="app.calendar" href="http://flatfull.com/themes/angulr/angular/#/app/calendar">
+                                <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                                <span class="font-bold ng-scope" translate="aside.nav.CALENDAR">Calendar</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="app.mail.list"
+                               href="http://flatfull.com/themes/angulr/angular/#/app/mail/inbox/">
+                                <b class="badge bg-info pull-right">9</b>
+                                <i class="glyphicon glyphicon-envelope icon text-info-lter"></i>
+                                <span class="font-bold ng-scope" translate="aside.nav.EMAIL">Email</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+                                <i class="glyphicon glyphicon-th-large icon text-success"></i>
+                                <span class="font-bold">Apps</span>
+                            </a>
+                            <ul class="nav nav-sub dk">
+                                <li class="nav-sub-header">
+                                    <a href="">
+                                        <span>Apps</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="apps.note" href="http://flatfull.com/themes/angulr/angular/#/apps/note">
+                                        <span>Note</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="apps.contact"
+                                       href="http://flatfull.com/themes/angulr/angular/#/apps/contact">
+                                        <span>Contacts</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.weather"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/weather">
+                                        <span>Weather</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="line dk"></li>
+
+                        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                            <span translate="aside.nav.components.COMPONENTS" class="ng-scope">Components</span>
+                        </li>
+                        <li>
+                            <a href="" class="auto">      
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+                                <b class="badge bg-info pull-right">3</b>
+                                <i class="glyphicon glyphicon-th"></i>
+                                <span>Layout</span>
+                            </a>
+                            <ul class="nav nav-sub dk">
+                                <li class="nav-sub-header">
+                                    <a href="">
+                                        <span>Layout</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="layout.app"
+                                       href="http://flatfull.com/themes/angulr/angular/#/layout/app">
+                                        <span>Application</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="layout.fullwidth"
+                                       href="http://flatfull.com/themes/angulr/angular/#/layout/fullwidth">
+                                        <span>Full width</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="layout.mobile"
+                                       href="http://flatfull.com/themes/angulr/angular/#/layout/mobile">
+                                        <span>Mobile</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-class="{active:$state.includes(&#39;app.ui&#39;)}">
+                            <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+                                <i class="glyphicon glyphicon-briefcase icon"></i>
+                                <span translate="aside.nav.components.ui_kits.UI_KITS" class="ng-scope">UI Kits</span>
+                            </a>
+                            <ul class="nav nav-sub dk">
+                                <li class="nav-sub-header">
+                                    <a href="">
+                                        <span translate="aside.nav.components.ui_kits.UI_KITS"
+                                              class="ng-scope">UI Kits</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.buttons"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/buttons">
+                                        <span translate="aside.nav.components.ui_kits.BUTTONS"
+                                              class="ng-scope">Buttons</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.icons"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/icons">
+                                        <b class="badge bg-info pull-right">3</b>
+                                        <span translate="aside.nav.components.ui_kits.ICONS"
+                                              class="ng-scope">Icons</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.grid"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/grid">
+                                        <span translate="aside.nav.components.ui_kits.GRID" class="ng-scope">Grid</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.widgets"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/widgets">
+                                        <b class="badge bg-success pull-right">13</b>
+                                        <span translate="aside.nav.WIDGETS" class="ng-scope">Widgets</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.bootstrap"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/bootstrap">
+                                        <b class="badge bg-primary pull-right">16</b>
+                                        <span translate="aside.nav.components.ui_kits.BOOTSTRAP" class="ng-scope">Bootstrap</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.sortable"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/sortable">
+                                        <span translate="aside.nav.components.ui_kits.SORTABLE" class="ng-scope">Sortable</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.portlet"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/portlet">
+                                        <span translate="aside.nav.components.ui_kits.PORTLET"
+                                              class="ng-scope">Portlet</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.timeline"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/timeline">
+                                        <span translate="aside.nav.components.ui_kits.TIMELINE" class="ng-scope">Timeline</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.tree"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/tree">
+                                        <span>Tree</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.ui.toaster"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/ui/toaster">
+                                        <span>Toaster</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+                                        <b class="label bg-info pull-right">2</b>
+                                        <span>Maps</span>
+                                    </a>
+                                    <ul class="nav dker">
+                                        <li ui-sref-active="active">
+                                            <a ui-sref="app.ui.jvectormap"
+                                               href="http://flatfull.com/themes/angulr/angular/#/app/ui/jvectormap">
+                                                <span translate="aside.nav.components.ui_kits.VECTOR_MAP"
+                                                      class="ng-scope">Vector Map</span>
+                                            </a>
+                                        </li>
+                                        <li ui-sref-active="active">
+                                            <a ui-sref="app.ui.googlemap"
+                                               href="http://flatfull.com/themes/angulr/angular/#/app/ui/googlemap">
+                                                <span>Google Map</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-class="{active:$state.includes(&#39;app.table&#39;)}">
+                            <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+                                <b class="label bg-primary pull-right">2</b>
+                                <i class="glyphicon glyphicon-list"></i>
+                                <span translate="aside.nav.components.table.TABLE" class="ng-scope">Table</span>
+                            </a>
+                            <ul class="nav nav-sub dk">
+                                <li class="nav-sub-header">
+                                    <a href="">
+                                        <span translate="aside.nav.components.table.TABLE" class="ng-scope">Table</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.table.static"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/table/static">
+                                        <span translate="aside.nav.components.table.TABLE_STATIC" class="ng-scope">Table static</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.table.datatable"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/table/datatable">
+                                        <span translate="aside.nav.components.table.DATATABLE" class="ng-scope">Datatable</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.table.footable"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/table/footable">
+                                        <span translate="aside.nav.components.table.FOOTABLE"
+                                              class="ng-scope">Footable</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.table.grid"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/table/grid">
+                                        <span>ngGrid</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.table.uigrid"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/table/uigrid">
+                                        <span>uiGrid</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.table.editable"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/table/editable">
+                                        <span>Editable</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-class="{active:$state.includes(&#39;app.form&#39;)}">
+                            <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+                                <i class="glyphicon glyphicon-edit"></i>
+                                <span translate="aside.nav.components.form.FORM" class="ng-scope">Form</span>
+                            </a>
+                            <ul class="nav nav-sub dk">
+                                <li class="nav-sub-header">
+                                    <a href="">
+                                        <span translate="aside.nav.components.form.FORM" class="ng-scope">Form</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.elements"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/elements">
+                                        <span translate="aside.nav.components.form.FORM_ELEMENTS" class="ng-scope">Form elements</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.validation"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/validation">
+                                        <span translate="aside.nav.components.form.FORM_VALIDATION" class="ng-scope">Form validation</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.wizard"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/wizard">
+                                        <span translate="aside.nav.components.form.FORM_WIZARD" class="ng-scope">Form wizard</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.fileupload"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/fileupload">
+                                        <span>File upload</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.imagecrop"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/imagecrop">
+                                        <span>Image crop</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.select"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/select">
+                                        <span>Select</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.slider"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/slider">
+                                        <span>Slider</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.editor"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/editor">
+                                        <span>Editor</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.form.xeditable"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/form/xeditable">
+                                        <span>Xeditable</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ui-sref-active="active" class="">
+                            <a ui-sref="app.chart" href="http://flatfull.com/themes/angulr/angular/#/app/chart">
+                                <i class="glyphicon glyphicon-signal"></i>
+                                <span translate="aside.nav.components.CHART" class="ng-scope">Chart</span>
+                            </a>
+                        </li>
+                        <li ng-class="{active:$state.includes(&#39;app.page&#39;)}" class="active">
+                            <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+                                <i class="glyphicon glyphicon-file icon"></i>
+                                <span translate="aside.nav.components.pages.PAGES" class="ng-scope">Pages</span>
+                            </a>
+                            <ul class="nav nav-sub dk">
+                                <li class="nav-sub-header">
+                                    <a href="">
+                                        <span translate="aside.nav.components.pages.PAGES" class="ng-scope">Pages</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active" class="active">
+                                    <a ui-sref="app.page.profile"
+                                       href="./assets/Angular version   Angulr.html">
+                                        <span translate="aside.nav.components.pages.PROFILE"
+                                              class="ng-scope">Profile</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active" class="">
+                                    <a ui-sref="app.page.post"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/page/post">
+                                        <span translate="aside.nav.components.pages.POST" class="ng-scope">Post</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.page.search"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/page/search">
+                                        <span translate="aside.nav.components.pages.SEARCH"
+                                              class="ng-scope">Search</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active" class="">
+                                    <a ui-sref="app.page.invoice"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/page/invoice">
+                                        <span translate="aside.nav.components.pages.INVOICE"
+                                              class="ng-scope">Invoice</span>
+                                    </a>
+                                </li>
+                                <li ui-sref-active="active">
+                                    <a ui-sref="app.page.price"
+                                       href="http://flatfull.com/themes/angulr/angular/#/app/page/price">
+                                        <span>Price</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="lockme" href="http://flatfull.com/themes/angulr/angular/#/lockme">
+                                        <span translate="aside.nav.components.pages.LOCK_SCREEN" class="ng-scope">Lock screen</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="access.signin"
+                                       href="http://flatfull.com/themes/angulr/angular/#/access/signin">
+                                        <span translate="aside.nav.components.pages.SIGNIN"
+                                              class="ng-scope">Signin</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="access.signup"
+                                       href="http://flatfull.com/themes/angulr/angular/#/access/signup">
+                                        <span translate="aside.nav.components.pages.SIGNUP"
+                                              class="ng-scope">Signup</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="access.forgotpwd"
+                                       href="http://flatfull.com/themes/angulr/angular/#/access/forgotpwd">
+                                        <span translate="aside.nav.components.pages.FORGOT_PASSWORD" class="ng-scope">Forgot password</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="access.404"
+                                       href="http://flatfull.com/themes/angulr/angular/#/access/404">
+                                        <span translate="aside.nav.components.pages.404" class="ng-scope">404</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="line dk hidden-folded"></li>
+
+                        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                            <span translate="aside.nav.your_stuff.YOUR_STUFF" class="ng-scope">Your Stuff</span>
+                        </li>
+                        <li>
+                            <a ui-sref="app.page.profile"
+                               href="./assets/Angular version   Angulr.html">
+                                <i class="icon-user icon text-success-lter"></i>
+                                <b class="badge bg-success pull-right">30%</b>
+                                <span translate="aside.nav.your_stuff.PROFILE" class="ng-scope">Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="app.docs" href="http://flatfull.com/themes/angulr/angular/#/app/docs">
+                                <i class="icon-question icon"></i>
+                                <span translate="aside.nav.your_stuff.DOCUMENTS" class="ng-scope">Documents</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- / list --></nav>
+                <!-- nav -->
+
+                <!-- aside footer -->
+                <div class="wrapper m-t">
+                    <div class="text-center-folded">
+                        <span class="pull-right pull-none-folded">60%</span>
+                        <span class="hidden-folded ng-scope" translate="aside.MILESTONE">Milestone</span>
+                    </div>
+                    <div class="progress-xxs m-t-sm dk progress ng-isolate-scope" value="60" type="info">
+                        <div class="progress-bar progress-bar-info"
+                             ng-class="type &amp;&amp; &#39;progress-bar-&#39; + type" role="progressbar"
+                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                             ng-style="{width: percent + &#39;%&#39;}" aria-valuetext="60%" ng-transclude=""
+                             style="width: 60%;"></div>
+                    </div>
+                    <div class="text-center-folded">
+                        <span class="pull-right pull-none-folded">35%</span>
+                        <span class="hidden-folded ng-scope" translate="aside.RELEASE">Release</span>
+                    </div>
+                    <div class="progress-xxs m-t-sm dk progress ng-isolate-scope" value="35" type="primary">
+                        <div class="progress-bar progress-bar-primary"
+                             ng-class="type &amp;&amp; &#39;progress-bar-&#39; + type" role="progressbar"
+                             aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"
+                             ng-style="{width: percent + &#39;%&#39;}" aria-valuetext="35%" ng-transclude=""
+                             style="width: 35%;"></div>
+                    </div>
+                </div>
+                <!-- / aside footer -->
+            </div>
+        </div>
+    </div>
+    <!-- / menu -->
+
+    <!-- content -->
+    <div class="app-content ng-scope">
+        <div ui-butterbar="" class="butterbar hide"><span class="bar"></span></div>
+        <a href="" class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside"></a>
+        <!-- uiView:  -->
+        <div class="app-content-body fade-in-up ng-scope" ui-view=""><!-- uiView:  -->
+            <div ui-view="" class="fade-in-down ng-scope">
+                <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
+                    <div class="col">
+                        <div style="background:url(img/c4.jpg) center center; background-size:cover">
+                            <div class="wrapper-lg bg-white-opacity">
+                                <div class="row m-t">
+                                    <div class="col-sm-7">
+                                        <a href="" class="thumb-lg pull-left m-r">
+                                            <img src="./assets/a0.jpg" class="img-circle">
+                                        </a>
+
+                                        <div class="clear m-b">
+                                            <div class="m-b m-t-sm">
+                                                <span class="h3 text-black">John.Smith</span>
+                                                <small class="m-l">London, UK</small>
+                                            </div>
+                                            <p class="m-b">
+                                                <a href="" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i
+                                                        class="fa fa-twitter"></i></a>
+                                                <a href="" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i
+                                                        class="fa fa-facebook"></i></a>
+                                                <a href="" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i
+                                                        class="fa fa-google-plus"></i></a>
+                                            </p>
+                                            <a href="" class="btn btn-sm btn-success btn-rounded">Follow</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="pull-right pull-none-xs text-center">
+                                            <a href="" class="m-b-md inline m">
+                                                <span class="h3 block font-bold">2k</span>
+                                                <small>Followers</small>
+                                            </a>
+                                            <a href="" class="m-b-md inline m">
+                                                <span class="h3 block font-bold">250</span>
+                                                <small>Following</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper bg-white b-b">
+                            <ul class="nav nav-pills nav-sm">
+                                <li class="active"><a href="">Stream</a></li>
+                                <li><a href="">Profile</a></li>
+                                <li><a href="">Messages</a></li>
+                            </ul>
+                        </div>
+                        <div class="padder">
+                            <div class="streamline b-l b-info m-l-lg m-b padder-v">
+                                <div>
+                                    <a class="pull-left thumb-sm avatar m-l-n-md">
+                                        <img src="./assets/a9.jpg" class="img-circle" alt="...">
+                                    </a>
+
+                                    <div class="m-l-lg">
+                                        <div class="m-b-xs">
+                                            <a href="" class="h4">John smith</a>
+              <span class="text-muted m-l-sm pull-right">
+                Just now
+              </span>
+                                        </div>
+                                        <div class="m-b">
+                                            <div>Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam
+                                                nonummy nibh euismod tincidunt ut laoreet. ullamcorper sodales nisi nec
+                                                adipiscing elit. Morbi id neque quam. Aliquam sollicitudin
+                                            </div>
+                                            <div class="m-t-sm">
+                                                <a href="" class="text-muted m-xs"><i class="icon-action-redo"></i></a>
+                                                <a href="" class="text-muted m-xs"><i class="icon-star"></i></a>
+                                                <a href="" class="text-muted m-xs"><i class="icon-refresh"></i> 13</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- .comment-reply -->
+                                <div class="m-l-lg">
+                                    <a class="pull-left thumb-sm avatar">
+                                        <img src="./assets/a5.jpg" alt="...">
+                                    </a>
+
+                                    <div class="m-l-xxl panel b-a">
+                                        <div class="panel-heading pos-rlt">
+                                            <span class="arrow left pull-up"></span>
+              <span class="text-muted m-l-sm pull-right">
+                10m ago
+              </span>
+                                            <a href="">Mika Sam</a>
+                                            Report this comment is helpful
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / .comment-reply -->
+                                <div>
+                                    <a class="pull-left thumb-sm avatar m-l-n-md">
+                                        <img src="./assets/a3.jpg" alt="...">
+                                    </a>
+
+                                    <div class="m-l-lg m-b-lg panel b-a bg-light lt">
+                                        <div class="panel-heading pos-rlt b-light">
+                                            <span class="arrow arrow-light left"></span>
+                                            <a href="">By me</a>
+              <span class="text-muted m-l-sm pull-right">
+                1h ago
+              </span>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div>This comment was posted by you.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="pull-left thumb-sm avatar m-l-n-md">
+                                        <img src="./assets/a6.jpg" class="img-circle" alt="...">
+                                    </a>
+
+                                    <div class="m-l-lg m-b-lg">
+                                        <div class="m-b-xs">
+                                            <a href="" class="h4">Jessica</a>
+              <span class="text-muted m-l-sm pull-right">
+                3h ago
+              </span>
+                                        </div>
+                                        <div class="m-b">
+                                            <div class="m-b">Cecteter adipiscing elit, sed diam nonummy nibh euismod
+                                                tincidunt ut laoreet. ullamcorper sodales nisi nec adipiscing elit.
+                                                Morbi id neque quam. Aliquam sollicitudin
+                                            </div>
+                                            <img src="./assets/c5.jpg"
+                                                 class="b b-a wrapper-xs bg-white img-responsive">
+
+                                            <div class="m-t-sm">
+                                                <a href="" class="text-muted m-xs"><i class="icon-action-redo"></i></a>
+                                                <a href="" class="text-muted m-xs"><i class="icon-star"></i></a>
+                                                <a href="" class="text-muted m-xs"><i class="icon-refresh"></i> 13</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="pull-left thumb-sm avatar m-l-n-md">
+                                        <img src="./assets/a4.jpg" class="img-circle" alt="...">
+                                    </a>
+
+                                    <div class="m-l-lg m-b-lg">
+                                        <div class="m-b-xs">
+                                            <a href="" class="h4">Fisio</a>
+              <span class="text-muted m-l-sm pull-right">
+                4h ago
+              </span>
+                                        </div>
+                                        <div>
+                                            <div class="m-b">Diam nonummy nibh euismod tincidunt ut laoreet. ullamcorper
+                                                sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam
+                                                sollicitudin
+                                            </div>
+                                            <div class="panel panel-default m-t-md m-b-n-sm pos-rlt">
+                                                <form class="ng-pristine ng-valid">
+                                                    <textarea class="form-control no-border" rows="3"
+                                                              placeholder="Your comment..."></textarea>
+                                                </form>
+                                                <div class="panel-footer bg-light lter">
+                                                    <button class="btn btn-info pull-right btn-sm">Comment</button>
+                                                    <ul class="nav nav-pills nav-sm">
+                                                        <li><a href=""><i class="fa fa-camera text-muted"></i></a></li>
+                                                        <li><a href=""><i class="fa fa-video-camera text-muted"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="pull-left thumb-sm avatar m-l-n-md">
+                                        <img src="./assets/a2.jpg" alt="...">
+                                    </a>
+
+                                    <div class="m-l-lg panel b-a">
+                                        <div class="panel-heading pos-rlt b-b b-light">
+                                            <span class="arrow left"></span>
+                                            <a href="">Peter</a>
+                                            <label class="label bg-light m-l-xs">VIP</label> 
+              <span class="text-muted m-l-sm pull-right">
+                9h ago
+              </span>
+                                        </div>
+                                        <div class="panel-body">
+                                            <blockquote>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                                                    posuere erat a ante.</p>
+                                                <small>Someone famous in <cite title="Source Title">Source Title</cite>
+                                                </small>
+                                            </blockquote>
+                                            <div>Lorem ipsum dolor sit amet, consecteter adipiscing elit...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col w-lg bg-light lter b-l bg-auto">
+                        <div class="wrapper">
+                            <div class="">
+                                <h4 class="m-t-xs m-b-xs">Who to follow</h4>
+                                <ul class="list-group no-bg no-borders pull-in">
+                                    <li class="list-group-item">
+                                        <a herf="" class="pull-left thumb-sm avatar m-r">
+                                            <img src="./assets/a4.jpg" alt="..."
+                                                 class="img-circle">
+                                            <i class="on b-white bottom"></i>
+                                        </a>
+
+                                        <div class="clear">
+                                            <div><a href="">Chris Fox</a></div>
+                                            <small class="text-muted">Designer, Blogger</small>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a herf="" class="pull-left thumb-sm avatar m-r">
+                                            <img src="./assets/a5.jpg" alt="..."
+                                                 class="img-circle">
+                                            <i class="on b-white bottom"></i>
+                                        </a>
+
+                                        <div class="clear">
+                                            <div><a href="">Mogen Polish</a></div>
+                                            <small class="text-muted">Writter, Mag Editor</small>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a herf="" class="pull-left thumb-sm avatar m-r">
+                                            <img src="./assets/a6.jpg" alt="..."
+                                                 class="img-circle">
+                                            <i class="busy b-white bottom"></i>
+                                        </a>
+
+                                        <div class="clear">
+                                            <div><a href="">Joge Lucky</a></div>
+                                            <small class="text-muted">Art director, Movie Cut</small>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a herf="" class="pull-left thumb-sm avatar m-r">
+                                            <img src="./assets/a7.jpg" alt="..."
+                                                 class="img-circle">
+                                            <i class="away b-white bottom"></i>
+                                        </a>
+
+                                        <div class="clear">
+                                            <div><a href="">Folisise Chosielie</a></div>
+                                            <small class="text-muted">Musician, Player</small>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="panel b-a">
+                                <h4 class="font-thin padder">Latest Tweets</h4>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <p>Wellcome <a href="" class="text-info">@Drew Wllon</a> and play this web
+                                            application template, have fun1 </p>
+                                        <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 2 minuts ago
+                                        </small>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <p>Morbi nec <a href="" class="text-info">@Jonathan George</a> nunc condimentum
+                                            ipsum dolor sit amet, consectetur</p>
+                                        <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 1 hour ago
+                                        </small>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <p><a href="" class="text-info">@Josh Long</a> Vestibulum ullamcorper sodales
+                                            nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin
+                                            venenatis</p>
+                                        <small class="block text-muted"><i class="fa fa-fw fa-clock-o"></i> 2 hours ago
+                                        </small>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="panel b-light clearfix">
+                                <div class="panel-body">
+                                    <a href="" class="thumb pull-left m-r">
+                                        <img src="./assets/a0.jpg" class="img-circle">
+                                    </a>
+
+                                    <div class="clear">
+                                        <a href="" class="text-info">@Mike Mcalidek <i class="fa fa-twitter"></i></a>
+                                        <small class="block text-muted">2,415 followers / 225 tweets</small>
+                                        <a href="" class="btn btn-xs btn-success m-t-xs">Follow</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /content -->
+
+    <!-- aside right -->
+    <div class="app-aside-right pos-fix no-padder w-md w-auto-xs bg-white b-l animated fadeInRight hide ng-scope">
+        <div class="vbox">
+            <div class="wrapper b-b b-t b-light m-b">
+                <a href="" class="pull-right text-muted text-md" ui-toggle-class="show" target=".app-aside-right"><i
+                        class="icon-close"></i></a>
+                Chat
+            </div>
+            <div class="row-row">
+                <div class="cell">
+                    <div class="cell-inner padder">
+                        <!-- chat list -->
+                        <div class="m-b">
+                            <a href="" class="pull-left thumb-xs avatar"><img
+                                    src="./assets/a2.jpg" alt="..."></a>
+
+                            <div class="clear">
+                                <div class="pos-rlt wrapper-sm b b-light r m-l-sm">
+                                    <span class="arrow left pull-up"></span>
+
+                                    <p class="m-b-none">Hi John, What's up...</p>
+                                </div>
+                                <small class="text-muted m-l-sm"><i class="fa fa-ok text-success"></i> 2 minutes ago
+                                </small>
+                            </div>
+                        </div>
+                        <div class="m-b">
+                            <a href="" class="pull-right thumb-xs avatar"><img
+                                    src="./assets/a3.jpg" class="img-circle" alt="..."></a>
+
+                            <div class="clear">
+                                <div class="pos-rlt wrapper-sm bg-light r m-r-sm">
+                                    <span class="arrow right pull-up arrow-light"></span>
+
+                                    <p class="m-b-none">Lorem ipsum dolor :)</p>
+                                </div>
+                                <small class="text-muted">1 minutes ago</small>
+                            </div>
+                        </div>
+                        <div class="m-b">
+                            <a href="" class="pull-left thumb-xs avatar"><img
+                                    src="./assets/a2.jpg" alt="..."></a>
+
+                            <div class="clear">
+                                <div class="pos-rlt wrapper-sm b b-light r m-l-sm">
+                                    <span class="arrow left pull-up"></span>
+
+                                    <p class="m-b-none">Great!</p>
+                                </div>
+                                <small class="text-muted m-l-sm"><i class="fa fa-ok text-success"></i>Just Now</small>
+                            </div>
+                        </div>
+                        <!-- / chat list -->
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper m-t b-t b-light">
+                <form class="m-b-none ng-pristine ng-valid">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Say something">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">SEND</button>
+            </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / aside right -->
+
+    <!-- footer -->
+    <div class="app-footer wrapper b-t bg-light ng-scope">
+        <span class="pull-right ng-binding">2.0.0 <a href="" ui-scroll="app" class="m-l-sm text-muted"><i
+                class="fa fa-long-arrow-up"></i></a></span>
+        © 2015 Copyright.
+    </div>
+    <!-- / footer -->
+
+    <!-- ngInclude: 'tpl/blocks/settings.html' -->
+    <div data-ng-include=" &#39;tpl/blocks/settings.html&#39; " class="settings panel panel-default ng-scope">
+        <!-- settings -->
+        <button class="btn btn-default no-shadow pos-abt ng-scope" ui-toggle-class="active" target=".settings">
+            <i class="fa fa-spin fa-gear"></i>
+        </button>
+        <div class="panel-heading ng-scope">
+            Settings
+        </div>
+        <div class="panel-body ng-scope">
+            <div class="m-b-sm">
+                <label class="i-switch bg-info pull-right">
+                    <input type="checkbox" ng-model="app.settings.headerFixed"
+                           class="ng-pristine ng-untouched ng-valid">
+                    <i></i>
+                </label>
+                Fixed header
+            </div>
+            <div class="m-b-sm">
+                <label class="i-switch bg-info pull-right">
+                    <input type="checkbox" ng-model="app.settings.asideFixed" class="ng-pristine ng-untouched ng-valid">
+                    <i></i>
+                </label>
+                Fixed aside
+            </div>
+            <div class="m-b-sm">
+                <label class="i-switch bg-info pull-right">
+                    <input type="checkbox" ng-model="app.settings.asideFolded"
+                           class="ng-pristine ng-untouched ng-valid">
+                    <i></i>
+                </label>
+                Folded aside
+            </div>
+            <div class="m-b-sm">
+                <label class="i-switch bg-info pull-right">
+                    <input type="checkbox" ng-model="app.settings.asideDock" class="ng-pristine ng-untouched ng-valid">
+                    <i></i>
+                </label>
+                Dock aside
+            </div>
+            <div>
+                <label class="i-switch bg-info pull-right">
+                    <input type="checkbox" ng-model="app.settings.container" class="ng-pristine ng-untouched ng-valid">
+                    <i></i>
+                </label>
+                Boxed layout
+            </div>
+        </div>
+        <div class="wrapper b-t b-light bg-light lter r-b ng-scope">
+            <div class="row row-sm">
+                <div class="col-xs-6">
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-black&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-white-only&#39;; 
+          app.settings.asideColor=&#39;bg-black&#39;;
+         ">
+                        <input type="radio" name="a" ng-model="app.settings.themeID" value="1"
+                               class="ng-pristine ng-untouched ng-valid">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-black header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-black"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-dark&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-white-only&#39;; 
+          app.settings.asideColor=&#39;bg-dark&#39;;
+         ">
+                        <input type="radio" name="a" ng-model="app.settings.themeID" value="13"
+                               class="ng-pristine ng-untouched ng-valid">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-dark header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-dark"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-white-only&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-white-only&#39;; 
+          app.settings.asideColor=&#39;bg-black&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="2"
+                               class="ng-pristine ng-untouched ng-valid" name="54">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-white header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-black"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-primary&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-white-only&#39;; 
+          app.settings.asideColor=&#39;bg-dark&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="3"
+                               class="ng-pristine ng-untouched ng-valid" name="55">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-primary header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-dark"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-info&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-white-only&#39;; 
+          app.settings.asideColor=&#39;bg-black&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="4"
+                               class="ng-pristine ng-untouched ng-valid" name="56">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-info header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-black"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-success&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-white-only&#39;; 
+          app.settings.asideColor=&#39;bg-dark&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="5"
+                               class="ng-pristine ng-untouched ng-valid" name="57">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-success header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-dark"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-danger&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-white-only&#39;; 
+          app.settings.asideColor=&#39;bg-dark&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="6"
+                               class="ng-pristine ng-untouched ng-valid" name="58">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-danger header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-dark"></b>
+          </span>
+                    </label>
+                </div>
+                <div class="col-xs-6">
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-black&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-black&#39;; 
+          app.settings.asideColor=&#39;bg-white b-r&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="7"
+                               class="ng-pristine ng-untouched ng-valid" name="59">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-black header"></b>
+            <b class="bg-black header"></b>
+            <b class="bg-white"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-dark&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-dark&#39;; 
+          app.settings.asideColor=&#39;bg-light&#39;;
+         ">
+                        <input type="radio" name="a" ng-model="app.settings.themeID" value="14"
+                               class="ng-pristine ng-untouched ng-valid">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-dark header"></b>
+            <b class="bg-dark header"></b>
+            <b class="bg-light"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-info dker&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-info dker&#39;; 
+          app.settings.asideColor=&#39;bg-light dker b-r&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="8"
+                               class="ng-pristine ng-untouched ng-valid" name="60">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-info dker header"></b>
+            <b class="bg-info dker header"></b>
+            <b class="bg-light dker"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-primary&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-primary&#39;; 
+          app.settings.asideColor=&#39;bg-dark&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="9"
+                               class="ng-pristine ng-untouched ng-valid" name="61">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-primary header"></b>
+            <b class="bg-primary header"></b>
+            <b class="bg-dark"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-info dker&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-info dk&#39;; 
+          app.settings.asideColor=&#39;bg-black&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="10"
+                               class="ng-pristine ng-untouched ng-valid" name="62">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-info dker header"></b>
+            <b class="bg-info dk header"></b>
+            <b class="bg-black"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block m-b" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-success&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-success&#39;;
+          app.settings.asideColor=&#39;bg-dark&#39;;
+          ">
+                        <input type="radio" ng-model="app.settings.themeID" value="11"
+                               class="ng-pristine ng-untouched ng-valid" name="63">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-success header"></b>
+            <b class="bg-success header"></b>
+            <b class="bg-dark"></b>
+          </span>
+                    </label>
+
+                    <label class="i-checks block" ng-click="
+          app.settings.navbarHeaderColor=&#39;bg-danger dker bg-gd&#39;; 
+          app.settings.navbarCollapseColor=&#39;bg-danger dker bg-gd&#39;; 
+          app.settings.asideColor=&#39;bg-dark&#39;;
+         ">
+                        <input type="radio" ng-model="app.settings.themeID" value="12"
+                               class="ng-pristine ng-untouched ng-valid" name="64">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-danger dker header"></b>
+            <b class="bg-danger dker header"></b>
+            <b class="bg-dark"></b>
+          </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- /settings --></div>
+</div>
+
+</body>
+</html>

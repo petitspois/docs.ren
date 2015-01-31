@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="/css/editor.css" type="text/css">
+
+{% endblock%}
+
+{% block content %}
+<div class="app-content-body">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">文章发布</h1>
+    </div>
+    <div class="wrapper-md">
+
+
+        <div class="panel panel-default">
+            <div class="panel-body" style="padding: 50px;">
+                <form class="form-horizontal" method="get">
+
+                    <!--标题-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">标题</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="标题字数 10 字以上">
+                        </div>
+                    </div>
+
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                    <!--标签-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">标签</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="tag:用空格分开">
+                        </div>
+                    </div>
+
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                    <!--分类-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分类目录</label>
+
+                        <div class="col-sm-10">
+                            <select name="account" class="form-control">
+                                <option>默认</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                    <!--文章内容-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="padding-top: 15px;">文章内容</label>
+
+                        <div class="col-sm-10">
+                            <textarea id="editor" placeholder="Content here ...."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- end editor -->
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button type="submit" class="btn btn-default">取 消</button>
+                            <button type="submit" class="btn btn-primary">发 布</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block loadjs %}
+<script type="text/javascript">
+    require(['editor'],function(){
+        $('#editor').load('../markdown.md',
+            function(data) {
+                var editor = new Editor();
+                editor.render();
+            }
+        );
+    });
+</script>
+{% endblock %}
