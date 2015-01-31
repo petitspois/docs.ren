@@ -2,21 +2,14 @@
 
 {% block title %}{{title}}{% endblock %}
 
+{% block secondtitle %}{{secondtitle}}{% endblock %}
+
 {% block content %}
 
-<div class="app-content-body">
-    <div class="fade-in-down ">
-        <div class="bg-light lter b-b wrapper-md">
-            <h1 class="m-n font-thin h3">最新文章</h1>
-        </div>
         <div class="wrapper-md">
             <div class="row">
                 <div class="col-sm-9">
                     <div class="blog-post">
-                        <form action="/upload" method="post" enctype="multipart/form-data" >
-                            <input type="file" name="files" multiple/>
-                            <input type="submit" value="上传"/>
-                        </form>
                         <div class="panel">
                             <div>
                                 <img src="./assets/c0.jpg" class="img-full">
@@ -135,7 +128,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
 
 {% endblock %}

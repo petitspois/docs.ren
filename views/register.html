@@ -1,23 +1,22 @@
 {% extends 'layout.html' %}
 
-{% block title%}
+{% block title %}
 {{title}}
 {% endblock %}
 
+{% block secondtitle %}{{secondtitle}}{% endblock %}
+
 {% block content %}
-<div class="app ng-scope app-header-fixed" id="app"
-     ng-class="{&#39;app-header-fixed&#39;:app.settings.headerFixed, &#39;app-aside-fixed&#39;:app.settings.asideFixed, &#39;app-aside-folded&#39;:app.settings.asideFolded, &#39;app-aside-dock&#39;:app.settings.asideDock, &#39;container&#39;:app.settings.container}"
-     ui-view="">
-    <div ui-view="" class="fade-in-right-big smooth ng-scope">
-        <div class="container w-xxl w-auto-xs ng-scope" ng-controller="SignupFormController"
-             ng-init="app.settings.container = false;">
+
+    <div class="fade-in-right-big smooth ">
+        <div class="container w-xxl w-auto-xs">
             <a href="" class="navbar-brand block m-t ng-binding">qdblog</a>
 
             <div class="m-b-lg">
                 <div class="wrapper text-center">
                     <strong>青豆前端-关注web前端开发</strong>
                 </div>
-                <form name="userform" class="form-validation ng-pristine ng-invalid ng-invalid-required ng-valid-email" method="post">
+                <form name="userform" action="/signup" class="form-validation ng-pristine ng-invalid ng-invalid-required ng-valid-email" method="post">
 
                     <div class="list-group list-group-sm">
 
@@ -46,7 +45,6 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 

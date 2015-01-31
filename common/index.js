@@ -24,8 +24,6 @@ module.exports = function(root){
 
         views = require('co-views'),
 
-
-
         //favicon中间件
         fav = require('./middleware/favicon'),
 
@@ -42,6 +40,8 @@ module.exports = function(root){
     //debug
     app.use(logger());
 
+    //session
+    app.use(session());
 
     //static cache
     app.use(sC(path.join(root, 'assets'),{maxAge:0}));
@@ -50,7 +50,7 @@ module.exports = function(root){
     app.use(fav(favUrl));
 
     //routers
-    router(app, render);
+    router(app, render, conf);
 
     //监听
     app.listen(conf.port,function(){

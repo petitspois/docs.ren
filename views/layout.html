@@ -899,9 +899,41 @@
 
 
     <div class="app-content">
-        {% block content %}
-        <p>找不到相应的内容</p>
-        {% endblock %}
+
+        <div class="butterbar active"><span class="bar"></span></div>
+
+        <div class="app-content-body">
+
+            <div class="fade-in-down">
+
+                <div class="bg-light lter b-b wrapper-md">
+                    <h1 class="m-n font-thin h3">{% block secondtitle %}default{% endblock %}</h1>
+                </div>
+
+
+                <ul id="wrap-msg" class="gutter list-group-lg list-group-sp wrapper-md m-b-n-sm hide">
+
+                    <li class="list-group-item bg-info">
+                          <span class="pull-right">
+                            <a id="close-msg" href="javascript:;"><i class="fa fa-times fa-fw"></i></a>
+                          </span>
+                         <span class="pull-left"><i class="fa fa-exclamation-circle text-muted fa m-r-sm"></i> </span>
+                            <div class="clear">
+                                default
+                            </div>
+                    </li>
+
+                </ul>
+
+
+                {% block content %}
+                     <p>找不到相应的内容</p>
+                {% endblock %}
+
+            </div>
+
+        </div>
+
     </div>
 
 

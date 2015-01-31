@@ -8087,7 +8087,6 @@ a.list-group-item:hover, a.list-group-item:focus, a.list-group-item.hover {
 }
 
 .list-group-sp .list-group-item {
-    margin-bottom: 5px;
     border-radius: 3px
 }
 
