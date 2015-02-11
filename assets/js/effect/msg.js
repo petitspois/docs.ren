@@ -11,19 +11,24 @@ define(['petitspois'],function($){
 
             var className = 'alert-'+type+' ng-enter';
 
+            clearTimeout(delmsg);
+
             $msg.removeClass('no-show').addClass(className);
 
-            //$msg.children().eq(1).append(msg).end();
-            //delmsg = setTimeout(function(){
-            //    $msg.addClass('no-show').removeClass('ng-enter');
-            //    $msg.children().eq(1).text();
-            //},3000);
+            $msg.children().eq(1).text(msg).end();
+
+            delmsg = setTimeout(function(){
+                $msg.children().eq(0).trigger('click').end();
+            },3000);
 
         }
 
         $msg.children().eq(0).on('click',function(){
-            $msg.removeClass(className).addClass('no-show');
-        }).end();
+            var $closeNode = $(this).parent();
+            if(!$closeNode.hasClass('no-show')){
+                $closeNode.removeClass(className).addClass('no-show');
+            }
+        });
 
     }
 

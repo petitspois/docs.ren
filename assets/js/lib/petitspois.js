@@ -40,7 +40,13 @@ typeof function () {
             this[0]['addEventListener'](type, cb, false);
             return this;
         },
-
+        trigger: function (type) {
+            var event;
+            event = document.createEvent('HTMLEvents');
+            event.initEvent(type, true, true);
+            this[0].dispatchEvent(event);
+            return this;
+        },
         hasClass: function (value, other) {
             var values = (!other && this[0].className.split(' ')) || other.className;
             return !!~values.indexOf(value);
@@ -56,11 +62,11 @@ typeof function () {
         removeClass: function (classes) {
             this.each('', function () {
                 var classColl = this.className.split(' ') || [],
-                    removeColl = classes.split(' ') ||[];
+                    removeColl = classes.split(' ') || [];
                 petitspois.prototype.each(removeColl, function (k, v) {
-                    petitspois.prototype.each(classColl,function(k1,v2){
-                        if(v==v2){
-                            classColl.splice(k1,1);
+                    petitspois.prototype.each(classColl, function (k1, v2) {
+                        if (v == v2) {
+                            classColl.splice(k1, 1);
                         }
                     });
                 });
@@ -108,6 +114,11 @@ typeof function () {
             this.length = len;
             return this;
         },
+        parent: function () {
+            this[0] = this[0].parentNode;
+            this.length = 1;
+            return this;
+        },
         end: function () {
             petitspois.mixIn(this, this.ancestor);
         }
@@ -115,16 +126,20 @@ typeof function () {
 
     var init = petitspois.prototype.initialize = function (selector, context) {
 
-        var elem = document.querySelectorAll(selector),
-            len = elem.length;
 
-        if (len) {
-            var i = -1,
-                node;
-            while (node = elem[++i]) {
-                this[i] = node;
+        if (typeof selector == 'string') {
+            var elem = document.querySelectorAll(selector),
+                len = elem.length;
+            if (len) {
+                var i = -1,
+                    node;
+                while (node = elem[++i]) {
+                    this[i] = node;
+                }
+                this.length = len;
             }
-            this.length = len;
+        } else if (1 == selector.nodeType) {
+            this[0] = selector;
         }
 
         return this;

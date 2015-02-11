@@ -23,7 +23,7 @@ define(['petitspois', 'vue', 'vueValidator', 'msg', 'loadin'], function ($, Vue,
                 var user = this.$data.user;
                 e.preventDefault();
                 if (user.pwd != user.pwd_re) {
-                    msg('两次密码输入不一致！', 'info');
+                    msg('两次密码输入不一致！', 'danger');
                     return;
                 }
                 loadin.show();
