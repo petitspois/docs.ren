@@ -1,7 +1,7 @@
-define(function(){
-    var $aside = $('#sh-aside');
-    var $app = $('#app');
-    var display = false;
+define(['petitspois'],function($){
+    var $aside = $('#sh-aside'),
+        $app = $('#app'),
+        display = false;
     $aside.on('click',function(){
         display = !display;
         display ? $app.addClass('app-aside-folded'):$app.removeClass('app-aside-folded');

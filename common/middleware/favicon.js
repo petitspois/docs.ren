@@ -1,11 +1,11 @@
 
 var fs = require('co-fs'),
-    resolve = require('path').resolve;
 
-module.exports = function(path){
+    conf = require('../config');
 
-    var iconPath = path,
-        icon;
+module.exports = function(){
+
+    var icon;
 
     return function *favicon(next){
         //非fav直接下一个
@@ -15,7 +15,7 @@ module.exports = function(path){
             this.set('Allow', 'GET, HEAD, OPTIONS');
             return;
         }
-        icon = yield fs.readFile(resolve(iconPath));
+        icon = yield fs.readFile(conf.static+'/img/favicon.ico');
         this.set('Cache-Control','no-cache');
         this.type = 'image/x-icon';
         this.body = icon;

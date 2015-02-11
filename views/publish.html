@@ -79,8 +79,8 @@
 
 {% block loadjs %}
 <script type="text/javascript">
-    require(['editor'],function(){
-        $('#editor').load('../markdown.md',
+    require(['editor/editor'],function(){
+        $('#editor').load('../../markdown.md',
             function(data) {
                 var editor = new Editor();
                 editor.render();

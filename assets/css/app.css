@@ -4999,27 +4999,27 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     color: #333
 }
 
-.alert {
+.alertok {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 4px
 }
 
-.alert h4 {
+.alertok h4 {
     margin-top: 0;
     color: inherit
 }
 
-.alert .alert-link {
+.alertok .alert-link {
     font-weight: bold
 }
 
-.alert > p, .alert > ul {
+.alertok > p, .alertok > ul {
     margin-bottom: 0
 }
 
-.alert > p + p {
+.alertok > p + p {
     margin-top: 5px
 }
 
@@ -6453,7 +6453,7 @@ button.close {
     content: " "
 }
 
-.clearfix:after, .dl-horizontal dd:after, .container:after, .container-fluid:after, .row:after,  .btn-toolbar:after, .btn-group-vertical > .btn-group:after, .nav:after, .navbar:after, .navbar-header:after, .navbar-collapse:after, .pager:after, .panel-body:after, .modal-footer:after {
+.clearfix:after, .dl-horizontal dd:after, .container:after, .container-fluid:after, .row:after, .btn-toolbar:after, .btn-group-vertical > .btn-group:after, .nav:after, .navbar:after, .navbar-header:after, .navbar-collapse:after, .pager:after, .panel-body:after, .modal-footer:after {
     clear: both
 }
 
@@ -7969,12 +7969,12 @@ a:hover .caret-white {
     border-radius: 2px
 }
 
-.alert {
+.alertok {
     font-size: 13px;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2)
 }
 
-.alert .close i {
+.alertok .close i {
     display: block;
     font-size: 12px;
     font-weight: normal
@@ -10426,11 +10426,11 @@ body {
     display: none
 }
 
-[ui-view].ng-leave {
+[v-view].ng-leave {
     display: none
 }
 
-[ui-view].ng-leave.smooth {
+[v-view].ng-leave.smooth {
     display: block
 }
 
@@ -15448,3 +15448,28 @@ a.text-#000000:hover {
 .icon-users:before {
     content: "\e001"
 }
+
+.mask {
+    visibility:hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 50000;
+    overflow: hidden;
+    background:rgba(255,255,255,.6);
+}
+.mask > img{
+    position:absolute;
+    top: 0;
+    right:0;
+    bottom:0;
+    left:0;
+    margin:auto;
+}
+.loading{
+    overflow: hidden;
+}
+.msg{margin:20px;}
+.no-show{display:none;}

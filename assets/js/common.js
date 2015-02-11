@@ -1,36 +1,38 @@
-typeof function(window, $){
+typeof function (window) {
 
-  var Q = {
-      init:function(){
+    var Q = {
+        init: function () {
 
-          var me = this;
+            var me = this;
 
-          requirejs.config({
-              baseUrl:'./js'
-          });
+            requirejs.config({
+                baseUrl: './js',
+                paths: {
+                    'jquery':'lib/jquery-2.1.3',
+                    'petitspois':'lib/petitspois',
+                    'vue':'lib/vue.min',
+                    'vueValidator':'lib/vueValidator',
+                    'msg':'effect/msg',
+                    'loadin':'effect/loading'
+                },
+                urlArgs: "bust=" +  (new Date()).getTime()
+            });
+            //左侧拦显示或隐藏
+            me.showHideAside();
 
-          //左侧拦显示或隐藏
-          me.showHideAside();
+        },
+        showHideAside: function () {
+            require(['effect/showhideaside']);
+        }
+    }
 
-          //点击关闭msg
-          me.closeMsg();
+    document.addEventListener('DOMContentLoaded', function () {
+        Q.init();
+    }, false);
 
-      },
-      showHideAside:function(){
-          require(['showhideaside']);
-      },
-      closeMsg:function(){
-          require(['closemsg']);
-      }
-  }
-
-  $(document).ready(function(){
-      Q.init();
-  });
-
-    window.onload = function(){
-        $('.butterbar').fadeOut();
+    window.onload = function () {
+        document.querySelector('.butterbar').style.display = 'none';
     }
 
 
-}(this, window.jQuery);
+}(this);

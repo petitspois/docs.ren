@@ -1,8 +1,9 @@
 
-const ROOT = __dirname;
+//设置跟目录
+const ROOT = module.exports = __dirname;
 
 //调用index bootstrap
-require(ROOT+'/common/index')(ROOT);
+require(ROOT+'/common')();
 
 
 

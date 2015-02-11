@@ -1,56 +1,55 @@
 /* bootstorp */
 
-module.exports = function(root){
-
-    //当前目录
-    const DIR = __dirname;
+module.exports = function(){
 
     //引入模块
     var app = require('koa')(),
 
-        path = require('path'),
-
         swig = require('swig'),
-
-        fs = require('fs'),
-
-        session = require('koa-session'),
 
         logger = require('koa-logger'),
 
         sC = require('koa-static-cache'),
 
-        co = require('co'),
-
         views = require('co-views'),
+
+        bodyparser = require('koa-bodyparser'),
 
         //favicon中间件
         fav = require('./middleware/favicon'),
 
         router = require('./router/'),
 
+        mongoose = require('./mongoose'),
+
         //获取默认配置
-        conf = require('./config')(root),
+        conf = require('./config');
 
-        //favicon.ico路径
-        favUrl = path.join(conf.static.img,'favicon.ico'),
+        app.context.render = render = views(conf.views, { map:{ html:'swig' } });
 
-        render = views(conf.views, { map:{ html:'swig' } });
 
     //debug
     app.use(logger());
 
-    //session
-    app.use(session());
+    //parse
+    app.use(bodyparser());
 
     //static cache
-    app.use(sC(path.join(root, 'assets'),{maxAge:0}));
+    app.use(sC(conf.static, {maxAge:0}));
 
     //加载favicon.ioc
-    app.use(fav(favUrl));
+    app.use(fav());
+
+    //connection db
+    mongoose(conf.mongodb);
 
     //routers
-    router(app, render, conf);
+    router(app);
+
+    //404
+    app.use(function* (){
+        this.body = yield render('404');
+    });
 
     //监听
     app.listen(conf.port,function(){
