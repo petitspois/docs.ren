@@ -15,6 +15,7 @@ module.exports = function(){
 
         bodyparser = require('koa-bodyparser'),
 
+        session = require('koa-session'),
         //favicon中间件
         fav = require('./middleware/favicon'),
 
@@ -28,11 +29,17 @@ module.exports = function(){
         app.context.render = render = views(conf.views, { map:{ html:'swig' } });
 
 
+    //cookie key
+    app.keys = [conf.secret];
+
     //debug
     app.use(logger());
 
     //parse
     app.use(bodyparser());
+
+    //session
+    app.use(session());
 
     //static cache
     app.use(sC(conf.static, {maxAge:0}));

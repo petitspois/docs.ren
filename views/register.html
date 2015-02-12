@@ -26,11 +26,11 @@
                         </div>
 
                         <div class="list-group-item">
-                            <input name="password" v-model="user.pwd" v-validate="minLength: 8, maxLength: 16" type="password" placeholder="密码至少8位" class="form-control no-border" />
+                            <input name="password" v-model="user.pwd" v-validate="minLength: 6, maxLength: 16" type="password" placeholder="密码6-16位" class="form-control no-border" />
                         </div>
 
                         <div class="list-group-item">
-                            <input name="password_re" v-model="user.pwd_re" v-validate="minLength: 8, maxLength: 16" type="password" placeholder="密码确认" class="form-control no-border" />
+                            <input name="password_re" v-model="user.pwd_re" v-validate="minLength: 6, maxLength: 16" type="password" placeholder="密码确认" class="form-control no-border" />
                         </div>
 
                     </div>

@@ -4,6 +4,6 @@
 module.exports = function(app, control){
 
     //signup
-    app.post('/signup', control.user.signup);
+    app.post('/signup', control.user.checkLogin, control.user.signup);
 
 }

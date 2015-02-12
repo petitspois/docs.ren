@@ -4,21 +4,28 @@
  * @create 2015/2/9
  */
 
-var models = {
-    user: require('./user')
-}, model;
+var mongoose = require('mongoose'),
+
+    models = {
+        user: require('./user')
+    };
 
 for (var key in models) {
 
-    model = models[key];
+    var schema = models[key];
 
-    exports[key] = {};
+    schema.static('add', function(data){
+        return this.create(data);
+    });
 
-    exports[key].createOne = function (data, callback) {
-        model.create(data, function(err, data){
-            console.log(data)
-             callback(err, data);
-        });
-    }
+    schema.static('get',function(data, name){
+        return this.findOne(data, name).exec();
+    });
+
+
+
+
+    exports[key] = mongoose.model(key, schema);
+
 }
 

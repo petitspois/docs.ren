@@ -28,4 +28,4 @@ var mongoose = require('mongoose'),
         }
     });
 
-module.exports = mongoose.model('user', schema);
+module.exports = schema;

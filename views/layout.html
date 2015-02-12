@@ -909,13 +909,17 @@
                     <h1 class="m-n font-thin h3">{% block secondtitle %}default{% endblock %}</h1>
                 </div>
 
-                    <div class="msg fade-in-down no-show alertok">
+
+                    <div class="msg fade-in-down alertok">
                         <button class="close">
                             <span>×</span>
                             <span class="sr-only">Close</span>
                         </button>
                         <span></span>
                     </div>
+                <script>
+                    console.log({{msg}})
+                </script>
 
                 {% block content %}
                      <p>找不到相应的内容</p>
