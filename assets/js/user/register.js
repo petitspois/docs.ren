@@ -30,7 +30,9 @@ define(['petitspois', 'vue', 'vueValidator', 'msg', 'loadin'], function ($, Vue,
                 $.ajax({type:'POST',dataType:'json', url:'/signup',data:user}).then(function(ret){
                     loadin.hide();
                     msg('注册成功！','success');
-                    location.replace('/');
+                    setTimeout(function(){
+                        location.replace('/');
+                    },1200)
                 },function(){
                     msg('注册失败，请重试！', 'danger');
                 });

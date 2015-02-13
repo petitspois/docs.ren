@@ -8671,8 +8671,7 @@ body {
 
 .navbar-brand img {
     display: inline;
-    max-height: 20px;
-    margin-top: -4px;
+    max-height: 35px;
     vertical-align: middle
 }
 
@@ -15456,7 +15455,7 @@ a.text-#000000:hover {
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 7;
+    z-index: 77777;
     overflow: hidden;
     background:rgba(255,255,255,.7);
 }
@@ -15480,4 +15479,7 @@ a.text-#000000:hover {
     text-decoration: none;
     color: #428bca;
     border-bottom: dashed 1px #428bca;
+}
+.logo{
+    background:url("../img/logo.png");
 }

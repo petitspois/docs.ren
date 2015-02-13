@@ -50,6 +50,41 @@ module.exports = function () {
             status: 1
         }
     }
+    //signin
+    user.signin = function* (){
+        var body = this.request.body,
+            email = body.email,
+            password = body.pwd;
+
+        var getData = yield model.get({email:email});
+        if(!getData){
+            this.body = {
+                msg:'用户名或密码输入错误',
+                status:0
+            }
+            return;
+        }
+        var getPwd = getData.password;
+        if(getPwd){
+            if(getPwd!==md5(password)){
+                this.body = {
+                    msg:'用户名或密码输入错误',
+                    status:0
+                }
+                return;
+            }
+        }
+        getData = getData.toObject();
+        delete getData.password;
+        this.session.user = getData;
+        this.body = {
+            msg: '登陆成功',
+            status: 1
+        }
+
+
+
+    }
 
     //checklogin
     user.checkLogin = function* (next) {

@@ -18,9 +18,15 @@ module.exports = function(){
             this.body = yield this.render('index',{title:'首页',secondtitle:'最新文章'});
         }
     }
+    //signup
     fusion.getSignup = function* (){
         this.body = yield this.render('register',{title:'注册',secondtitle:'新用户注册'});
     }
+    //signin
+    fusion.getSignin = function* (){
+        this.body = yield this.render('login',{title:'登陆',secondtitle:'立即登陆'});
+    }
+    //logout
     fusion.logout = function* (){
         if(this.session.user){
             this.session.user = null;
