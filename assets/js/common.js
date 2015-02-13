@@ -13,16 +13,23 @@ typeof function (window) {
                     'vue':'lib/vue.min',
                     'vueValidator':'lib/vueValidator',
                     'msg':'effect/msg',
+                    'nav':'effect/nav',
                     'loadin':'effect/loading'
                 },
-                urlArgs: "bust=" +  (new Date()).getTime()
+                urlArgs: "petitspois=" +  (new Date()).getTime()
             });
+
             //左侧拦显示或隐藏
             me.showHideAside();
 
+            //nav
+            me.loadNav();
         },
         showHideAside: function () {
             require(['effect/showhideaside']);
+        },
+        loadNav:function(){
+            require(['nav']);
         }
     }
 

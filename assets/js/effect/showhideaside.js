@@ -4,6 +4,6 @@ define(['petitspois'],function($){
         display = false;
     $aside.on('click',function(){
         display = !display;
-        display ? $app.addClass('app-aside-folded'):$app.removeClass('app-aside-folded');
+        display ? $app.removeClass('app-aside-folded'):$app.addClass('app-aside-folded');
     });
 });

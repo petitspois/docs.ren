@@ -11,8 +11,9 @@
 
 </head>
 <body>
-<div class="app app-header-fixed" id="app">
-    <div data-ng-include=" &#39;tpl/blocks/header.html&#39; " class="app-header navbar">
+<div class="app app-header-fixed app-aside-folded" id="app">
+    <div class="app-header navbar">
+        <div class="mask-header no-show"></div>
         <div class="navbar-header bg-black">
             <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
                 <i class="glyphicon glyphicon-cog"></i>
@@ -201,16 +202,10 @@
 
             <!-- nabar right -->
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <div class="m-t-sm m-r">
-                        <a href="/signin" class="btn btn-link btn-sm">登陆</a> or
-                        <a href="/signup" class="btn btn-sm btn-success btn-rounded m-l"><strong>注册</strong></a>
-                    </div>
-                </li>
 
-
-                <li class="dropdown" style="display:none;">
-                    <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                {% if user %}
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
                         <i class="icon-bell fa-fw"></i>
                         <span class="visible-xs-inline">Notifications</span>
                         <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
@@ -250,15 +245,14 @@
 
 
 
-                <li class="dropdown" style="display: none;">
+                <li class="dropdown" id="user-right">
 
-                    <a href="" class="dropdown-toggle clear" dropdown-toggle="" aria-haspopup="true"
-                       aria-expanded="false">
+                    <a href="javascript:;" class="dropdown-toggle clear">
                           <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                             <img src="img/b20.jpg" alt="...">
                             <i class="on md b-white bottom"></i>
                           </span>
-                          <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
+                        <span class="hidden-sm hidden-md">{{user.nickname}}</span> <b class="caret"></b>
                     </a>
 
 
@@ -293,16 +287,29 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a ui-sref="access.signin" href="http://flatfull.com/themes/angulr/angular/#/access/signin">Logout</a>
+                            <a id="logout" href="javascript:;"> 注 销 </a>
                         </li>
                     </ul>
                     <!-- / dropdown -->
                 </li>
 
+                {% else %}
 
+                    <li>
+                        <div class="m-t-sm m-r">
+                            <a href="/signin" class="btn btn-link btn-sm">登陆</a> or
+                            <a href="/signup" class="btn btn-sm btn-success btn-rounded m-l"><strong>注册</strong></a>
+                        </div>
+                    </li>
+
+                {% endif %}
 
 
             </ul>
+
+
+
+
             <!-- / navbar right -->
 
         </div>
@@ -386,8 +393,8 @@
                 <!-- / user -->
 
                 <!-- nav -->
-                <!-- ngInclude: 'tpl/blocks/nav.html' -->
-                <nav ui-nav="" class="navi clearfix " ng-include="&#39;tpl/blocks/nav.html&#39;"><!-- list -->
+                <nav class="navi clearfix ">
+                    <div class="mask-nav no-show"></div>
                     <ul class="nav ">
                         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                             <span translate="aside.nav.HEADER" class="">Navigation</span>
@@ -910,16 +917,13 @@
                 </div>
 
 
-                    <div class="msg fade-in-down alertok">
+                    <div class="msg fade-in-down alertok no-show">
                         <button class="close">
                             <span>×</span>
                             <span class="sr-only">Close</span>
                         </button>
                         <span></span>
                     </div>
-                <script>
-                    console.log({{msg}})
-                </script>
 
                 {% block content %}
                      <p>找不到相应的内容</p>
@@ -949,9 +953,10 @@
     <div class="mask fade-in-down"><img src="./img/flickr.svg" alt="loading..."/></div>
     <!-- / footer -->
 </div>
-
+{% block commonloadjs %}
     <script src="js/lib/require.min.js" type="text/javascript"></script>
     <script src="js/common.js" type="text/javascript"></script>
+{% endblock %}
 {% block loadjs %}
 {% endblock %}
 </body>

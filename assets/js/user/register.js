@@ -29,9 +29,10 @@ define(['petitspois', 'vue', 'vueValidator', 'msg', 'loadin'], function ($, Vue,
                 loadin.show();
                 $.ajax({type:'POST',dataType:'json', url:'/signup',data:user}).then(function(ret){
                     loadin.hide();
-                },function(ret){
-                    loadin.hide();
-                    msg('404错误请重试！');
+                    msg('注册成功！','success');
+                    location.replace('/');
+                },function(){
+                    msg('注册失败，请重试！', 'danger');
                 });
             }
         }

@@ -4,8 +4,6 @@
 
 var model = require('../model/').user;
 
-msg = require('../lib/msg'),
-
 md5 = require('../lib/md5');
 
 module.exports = function () {
@@ -38,9 +36,9 @@ module.exports = function () {
         }
 
         var newUser = {
-            email: email,
-            nickname: name,
-            password: md5(password)
+            email: String(email),
+            nickname: String(name),
+            password: md5(String(password))
         };
 
         yield model.add(newUser);
@@ -56,7 +54,7 @@ module.exports = function () {
     //checklogin
     user.checkLogin = function* (next) {
         if (this.session.user) {
-            this.redirect('/');
+            this.body = yield this.msg('您已经登陆','已登陆');
         }else{
             yield next;
         }

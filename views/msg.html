@@ -1,12 +1,35 @@
 {% extends 'layout.html' %}
 
-{% block title%}
-{{title}}
-{% endblock %}
-
+{% block secondtitle %}{{secondtitle}}{% endblock %}
 {% block content %}
-
+   <p class="show-skip"> {{msg}}，系统在<span id="time">{{time}}</span>秒内跳转，如没跳转 <a class="editable editable-click" href="javascript:_skipclick();">请点击</a>  </p>
 {% endblock %}
+{% block commonloadjs %}
+<script>
+    var time = {{time}}
+    ,skip = function(){
+        --time;
+        document.getElementById('time').innerHTML = time;
+        if(!!time){
+            setTimeout(skip,1000);
+        }else{
+            clearTimeout(cskip);
+            _skipclick();
+        }
+    };
 
+    document.querySelector('.mask-header').className = 'mask-header';
+
+    document.querySelector('.mask-nav').className = 'mask-nav';
+
+    document.body.className = 'loading';
+
+    cskip = setTimeout(skip, 1000);
+
+    function _skipclick(){
+        location.replace('/');
+    }
+</script>
+{% endblock%}
 
 

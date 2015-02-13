@@ -17,7 +17,7 @@ module.exports = function(){
 
         session = require('koa-session'),
         //favicon中间件
-        fav = require('./middleware/favicon'),
+        fav = require('./parts/favicon'),
 
         router = require('./router/'),
 
@@ -26,7 +26,6 @@ module.exports = function(){
         //获取默认配置
         conf = require('./config');
 
-        app.context.render = render = views(conf.views, { map:{ html:'swig' } });
 
 
     //cookie key
@@ -39,7 +38,7 @@ module.exports = function(){
     app.use(bodyparser());
 
     //session
-    app.use(session());
+    app.use(session({maxAge:7* 24 * 60 * 60 * 1000},app));
 
     //static cache
     app.use(sC(conf.static, {maxAge:0}));
@@ -49,6 +48,14 @@ module.exports = function(){
 
     //connection db
     mongoose(conf.mongodb);
+
+    //init methods
+    app.context.render = render = views(conf.views, { map:{ html:'swig' } });
+
+    app.context.msg = function(val,title){
+        return render('msg',{msg:val,secondtitle:title,time:5});
+    };
+
 
     //routers
     router(app);

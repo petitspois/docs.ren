@@ -15456,9 +15456,9 @@ a.text-#000000:hover {
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 50000;
+    z-index: 7;
     overflow: hidden;
-    background:rgba(255,255,255,.6);
+    background:rgba(255,255,255,.7);
 }
 .mask > img{
     position:absolute;
@@ -15473,3 +15473,11 @@ a.text-#000000:hover {
 }
 .msg{margin:20px;}
 .no-show{display:none;}
+.mask-header{width:100%;height:50px;position:fixed;top:0;left:0;z-index:7;background: rgba(255,255,255,.7);}
+.mask-nav{width:60px;height:100%;position:fixed;top:0;left:0;z-index:7;background: rgba(255,255,255,.7);}
+.show-skip{text-align: center;margin-top:100px;}
+.show-skip a{
+    text-decoration: none;
+    color: #428bca;
+    border-bottom: dashed 1px #428bca;
+}

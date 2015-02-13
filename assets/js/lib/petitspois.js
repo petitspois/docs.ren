@@ -36,8 +36,17 @@ typeof function () {
                 if (value === false)break;
             }
         },
-        on: function (type, cb) {
-            this[0]['addEventListener'](type, cb, false);
+        on: function (type, cb, bubble) {
+            bubble = bubble || false;
+            var value;
+            this[0]['addEventListener'](type, function(e){
+                value = cb.call(this,e);
+                if(!value){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                }
+            }, bubble);
             return this;
         },
         trigger: function (type) {
@@ -138,8 +147,9 @@ typeof function () {
                 }
                 this.length = len;
             }
-        } else if (1 == selector.nodeType) {
+        } else if (1 == selector.nodeType || 9 == selector.nodeType) {
             this[0] = selector;
+            this.length = 1;
         }
 
         return this;
