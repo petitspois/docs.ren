@@ -248,7 +248,7 @@
 
                     <a href="javascript:;" class="dropdown-toggle clear">
                           <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                            <img src="img/b20.jpg" alt="...">
+                            <img src="{{user.avatar}}" alt="...">
                             <i class="on md b-white bottom"></i>
                           </span>
                         <span class="hidden-sm hidden-md">{{user.nickname}}</span> <b class="caret"></b>
@@ -256,7 +256,7 @@
 
 
                     <!-- dropdown -->
-                    <ul class="dropdown-menu animated fadeInRight w">
+                    <ul id="user-child-right" class="dropdown-menu animated fadeInRight w">
                         <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
                             <div>
                                 <p>300mb of 500mb used</p>
@@ -271,17 +271,16 @@
                         <li>
                             <a href="">
                                 <span class="badge bg-danger pull-right">30%</span>
-                                <span>Settings</span>
+                                <span>设置</span>
                             </a>
                         </li>
                         <li>
-                            <a ui-sref="app.page.profile"
-                               href="http://flatfull.com/themes/angulr/angular/#/app/page/profile">Profile</a>
+                            <a href="/profile">个人中心</a>
                         </li>
                         <li>
-                            <a ui-sref="app.docs" href="http://flatfull.com/themes/angulr/angular/#/app/docs">
+                            <a href="http://flatfull.com/themes/angulr/angular/#/app/docs">
                                 <span class="label bg-info pull-right">new</span>
-                                Help
+                                帮助
                             </a>
                         </li>
                         <li class="divider"></li>
@@ -910,12 +909,11 @@
         <div class="app-content-body">
 
             <div class="fade-in-down">
-
+            {% if secondtitle %}
                 <div class="bg-light lter b-b wrapper-md">
                     <h2 class="m-n font-thin h3">{% block secondtitle %}default{% endblock %}</h2>
-                    <!--<small class="text-muted">Welcome to angulr application</small>-->
                 </div>
-
+            {% endif %}
 
                     <div class="msg fade-in-down alertok no-show">
                         <button class="close">

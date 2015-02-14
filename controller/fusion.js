@@ -2,6 +2,9 @@
  * Created by qingdou on 15/2/11.
  */
 
+var userModel = require('../model/').user
+
+
 module.exports = function(){
     var fusion = {};
 
@@ -36,7 +39,21 @@ module.exports = function(){
             status:1
         }
     }
-
+    //profile
+    fusion.profile = function* (){
+        if(this.session.user){
+            this.body = yield this.render('profile',{
+                title:'个人中心',
+                user:yield userModel.get({email:this.session.user.email})
+            });
+        }else{
+            this.redirect('/signin');
+        }
+    }
+    //publish
+    //fusion.publish = function* (){
+    //    this.body = yield this.render('publish',{title:'发布',secondtitle:'立即发布'});
+    //}
 
 
 

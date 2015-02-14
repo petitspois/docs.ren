@@ -60,10 +60,7 @@ module.exports = function(){
     //routers
     router(app);
 
-    //404
-    app.use(function* (){
-        this.body = yield render('404');
-    });
+
 
     //监听
     app.listen(conf.port,function(){

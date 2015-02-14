@@ -13,6 +13,11 @@ module.exports = function(app){
 
     require('./user')(app, ctrl);
 
-
+    //404
+    app.use(function* (){
+        var data;
+        if(this.session.user) data = {user:this.session.user};
+        this.body = yield render('404', data);
+    });
 
 }

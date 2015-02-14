@@ -22,14 +22,20 @@
                     <i class="fa fa-chevron-right text-muted"></i>
                     <i class="fa fa-fw fa-mail-forward m-r-xs"></i> 返回主页
                 </a>
-                <a class="list-group-item" href="/signin">
-                    <i class="fa fa-chevron-right text-muted"></i>
-                    <i class="fa fa-fw fa-sign-in m-r-xs"></i> 登 陆
-                </a>
-                <a class="list-group-item" href="/signup">
-                    <i class="fa fa-chevron-right text-muted"></i>
-                    <i class="fa fa-fw fa-unlock-alt m-r-xs"></i> 退 出
-                </a>
+                {% if !user %}
+                    <a class="list-group-item" href="/signin">
+                        <i class="fa fa-chevron-right text-muted"></i>
+                        <i class="fa fa-fw fa-sign-in m-r-xs"></i> 登 陆
+                    </a>
+                    <a class="list-group-item" href="/signup">
+                        <i class="fa fa-chevron-right text-muted"></i>
+                        <i class="fa fa-fw fa-unlock-alt m-r-xs"></i> 注 册
+                    </a>
+                    <a class="list-group-item" href="/logout">
+                        <i class="fa fa-chevron-right text-muted"></i>
+                        <i class="fa fa-fw fa-unlock-alt m-r-xs"></i> 退 出
+                    </a>
+                {% endif %}
             </div>
 
         </div>

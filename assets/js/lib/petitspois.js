@@ -42,7 +42,7 @@ typeof function () {
             this[0]['addEventListener'](type, function(e){
                 value = cb.call(this,e);
                 if(!value){
-                    e.preventDefault();
+                    //e.preventDefault();
                     e.stopPropagation();
                     e.stopImmediatePropagation();
                 }

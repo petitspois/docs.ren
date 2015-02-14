@@ -35,10 +35,15 @@ module.exports = function () {
             return;
         }
 
+        var rander = Math.random()*32+1|0,
+            avatar = 'avatar/'+ rander +'.jpg';
+
         var newUser = {
             email: String(email),
             nickname: String(name),
-            password: md5(String(password))
+            password: md5(String(password)),
+            avatar:avatar,
+            cover:'img/cover.jpg'
         };
 
         yield model.add(newUser);

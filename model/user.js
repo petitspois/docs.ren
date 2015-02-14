@@ -18,6 +18,14 @@ var mongoose = require('mongoose'),
             type:String,
             required:true
         },
+        avatar:{
+            type:String,
+            required:true
+        },
+        cover:{
+            type:String,
+            required:true
+        },
         role: {
             type: Number,
             required: true,
