@@ -7,7 +7,8 @@
 var mongoose = require('mongoose'),
 
     models = {
-        user: require('./user')
+        user: require('./user'),
+        post:require('./post')
     };
 
 for (var key in models) {
@@ -22,6 +23,9 @@ for (var key in models) {
         return this.findOne(data, name).exec();
     });
 
+    schema.static('update',function(conditions,update){
+        return this.findOneAndUpdate(conditions,update).exec();
+    });
 
 
 

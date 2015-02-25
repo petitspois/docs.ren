@@ -1,4 +1,4 @@
-define(['marked'],function(marked) {
+define(['editor/marked'],function(marked) {
 
   window.marked = marked;
 
@@ -7928,6 +7928,7 @@ define(['marked'],function(marked) {
       this.element = el;
       var options = this.options;
 
+
       var self = this;
       var keyMaps = {};
 
@@ -7949,7 +7950,7 @@ define(['marked'],function(marked) {
         tabSize: '2',
         indentWithTabs: true,
         lineNumbers: false,
-        autofocus: true,
+        autofocus: false,
         extraKeys: keyMaps
       });
 
@@ -7961,6 +7962,7 @@ define(['marked'],function(marked) {
       }
 
       this._rendered = this.element;
+
     };
 
     Editor.prototype.createToolbar = function (items) {

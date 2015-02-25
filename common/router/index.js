@@ -13,6 +13,8 @@ module.exports = function(app){
 
     require('./user')(app, ctrl);
 
+    require('./post')(app, ctrl);
+
     //404
     app.use(function* (){
         var data;

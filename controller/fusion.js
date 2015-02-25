@@ -15,7 +15,7 @@ module.exports = function(){
             this.body = yield this.render('index',{
                 title:'首页',
                 secondtitle:'最新文章',
-                user:this.session.user
+                user:yield userModel.get({email:this.session.user.email})
             });
         }else{
             this.body = yield this.render('index',{title:'首页',secondtitle:'最新文章'});
@@ -39,6 +39,10 @@ module.exports = function(){
             status:1
         }
     }
+    //forgot
+    fusion.forgat = function* (){
+        this.body = yield this.render('forgat',{title:'忘记密码',secondtitle:'找回密码？'});
+    }
     //profile
     fusion.profile = function* (){
         if(this.session.user){
@@ -51,9 +55,17 @@ module.exports = function(){
         }
     }
     //publish
-    //fusion.publish = function* (){
-    //    this.body = yield this.render('publish',{title:'发布',secondtitle:'立即发布'});
-    //}
+    fusion.publish = function* (){
+        if(this.session.user){
+            this.body = yield this.render('publish',{
+                title:'发布文章',
+                secondtitle:'发布文章',
+                user:yield userModel.get({email:this.session.user.email})
+            });
+        }else{
+            this.redirect('/signin');
+        }
+    }
 
 
 

@@ -18,6 +18,21 @@ var mongoose = require('mongoose'),
             type:String,
             required:true
         },
+        sex:{
+            type:String
+        },
+        company:{
+            type:String
+        },
+        description:{
+            type:String
+        },
+        github:{
+            type:String
+        },
+        weibo:{
+            type:String
+        },
         avatar:{
             type:String,
             required:true

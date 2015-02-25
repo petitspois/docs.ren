@@ -9,4 +9,7 @@ module.exports = function(app, control){
     //signin
     app.post('/signin',control.user.signin);
 
+    //profile
+    app.post('/profile', control.user.profile);
+
 }

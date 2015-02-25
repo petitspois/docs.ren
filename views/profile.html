@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 {% block title%}{{title}}{% endblock %}
 {% block content %}
-<div class="app-content-body fade-in-up ng-scope" ui-view=""><!-- uiView:  -->
-    <div class="fade-in-down ng-scope">
+<div class="app-content-body fade-in-up">
+    <div class="fade-in-down">
         <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
             <div class="col">
                 <div style="background:url({{user.cover}}) center center; background-size:cover">
@@ -19,12 +19,10 @@
                                         <small class="m-l">{{user.location}}</small>
                                     </div>
                                     <p class="m-b">
-                                        <a href="" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon">
+                                        <a href="{{user.github}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon">
                                             <i class="fa fa-github"></i></a>
-                                        <a href="" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i
+                                        <a href="{{user.weibo}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i
                                                 class="fa fa-weibo"></i></a>
-                                        <a href="" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i
-                                                class="fa fa-google-plus"></i></a>
                                     </p>
                                     <a href="" class="btn btn-sm btn-success btn-rounded">Follow</a>
                                 </div>
@@ -44,14 +42,19 @@
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="wrapper bg-white b-b">
-                    <ul class="nav nav-pills nav-sm">
+                    <ul id="profile-tab" class="nav nav-pills nav-sm">
                         <li class="active"><a href="javascript:;">动态</a></li>
                         <li><a href="javascript:;">个人信息</a></li>
-                        <!--<li><a href="">Messages</a></li>-->
                     </ul>
                 </div>
-                <div class="padder no-show">
+
+
+
+                <div class="profile-sh fade-in-down show padder">
                     <div class="streamline b-l b-info m-l-lg m-b padder-v">
                         <div>
                             <a class="pull-left thumb-sm avatar m-l-n-md">
@@ -203,13 +206,14 @@
                         </div>
                     </div>
                 </div>
-
-
-
-                <div class="margin5">
+                <script>
+                    var profileSex = '{{user.sex}}' || 'man';
+                </script>
+                <div class="profile-sh fade-in-down margin5">
                     <div class="panel">
                         <div class="panel-body" style="padding: 50px;">
-                            <form class="form-horizontal" method="get">
+
+                            <form id="profile-form" class="form-horizontal">
 
                                 <!--邮箱-->
                                 <div class="form-group">
@@ -220,20 +224,19 @@
                                     </div>
                                 </div>
 
-                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="line line-dashed b-b line-lg "></div>
 
                                 <!--花名-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">花名</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="{{user.nickname}}">
+                                        <input name="nickname" v-model="profile.nickname" type="text" class="form-control" value="{{user.nickname}}">
                                     </div>
 
                                 </div>
 
-                                <div class="line line-dashed b-b line-lg pull-in"></div>
-
+                                <div class="line line-dashed b-b line-lg "></div>
                                 <!--性别-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">性别</label>
@@ -241,14 +244,14 @@
                                     <div class="col-sm-10">
                                         <div class="radio">
                                             <label class="i-checks">
-                                                <input type="radio" name="a" value="option1" checked>
+                                                <input type="radio" name="sex" value="man" v-model="profile.sex" />
                                                 <i></i>
                                                 男
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label class="i-checks">
-                                                <input type="radio" name="a" value="option1">
+                                                <input type="radio" name="sex" value="woman" v-model="profile.sex" />
                                                 <i></i>
                                                 女
                                             </label>
@@ -257,7 +260,7 @@
 
                                 </div>
 
-                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="line line-dashed b-b line-lg "></div>
 
                                 <!--用户组-->
                                 <div class="form-group">
@@ -269,61 +272,93 @@
 
                                 </div>
                                 <script>
-                                    var role = {{user.role}};
-                                    switch(role){
-                                        case 1:
-                                            document.getElementById('show-role').value = '会员';
-                                            break;
-                                        case 2:
-                                            document.getElementById('show-role').value = '管理员';
-                                            break;
-                                        default:
-                                            document.getElementById('show-role').value = 'Boss';
-                                    }
+//                                    var role = {{user.role}};
+//                                    switch(role){
+//                                        case 1:
+//                                            document.getElementById('show-role').value = '会员';
+//                                            break;
+//                                        case 2:
+//                                            document.getElementById('show-role').value = '管理员';
+//                                            break;
+//                                        default:
+//                                            document.getElementById('show-role').value = 'Boss';
+//                                    }
                                 </script>
-                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="line line-dashed b-b line-lg "></div>
 
                                 <!--所在公司-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">所在公司</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="{{user.company}}"/>
+                                        <input type="text" v-model="profile.company" class="form-control" value="{{user.company}}"/>
                                     </div>
                                 </div>
 
-                                <div class="line line-dashed b-b line-lg pull-in"></div>
-                                <!--分类-->
+                                <div class="line line-dashed b-b line-lg "></div>
+
+                                <!--头像-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">头像</label>
 
                                     <div class="col-sm-10">
-                                        <input type="file" id="f" class="no-show"/>
-                                        <button type="button" class="btn btn-success btn-sm" onclick="document.getElementById('f').click()"><i class="fa fa-fw m-r-xs fa-plus"></i> 点击上传头像</button>
+                                        <input type="file" id="avatar" class="no-show"/>
+                                        <button type="button" class="btn btn-success btn-sm" onclick="document.getElementById('avatar').click()"><i class="fa fa-fw m-r-xs fa-plus"></i> 点击上传头像</button>
+                                        <span id="show-precent"></span>
+                                    </div>
+
+                                    <div id="wrap-progress" class="no-show">
+                                        <div class="line"></div>
+                                        <label class="col-sm-2 control-label"></label>
+                                        <div id="preview-avatar" class="col-sm-10"></div>
                                     </div>
                                 </div>
-                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="line line-dashed b-b line-lg "></div>
 
-                                <!--文章内容-->
+                                <!--个人介绍-->
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" style="padding-top: 15px;">文章内容</label>
+                                    <label class="col-sm-2 control-label" style="padding-top: 15px;">个人介绍</label>
 
                                     <div class="col-sm-10">
-                                        <textarea id="editor" placeholder="Content here ...."></textarea>
+                                            <textarea v-model="profile.description" style="resize:none;" class="form-control" rows="3" placeholder="个人介绍">{{user.description}}</textarea>
+                                    </div>
+                                </div>
+
+
+                                <!--github-->
+                                <div class="line line-dashed b-b line-lg "></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">github</label>
+
+                                    <div class="col-sm-10">
+                                        <input v-model="profile.github" type="text" class="form-control" value="{{user.github}}"/>
+                                    </div>
+                                </div>
+
+                                <!--微博-->
+                                <div class="line line-dashed b-b line-lg "></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">微博</label>
+
+                                    <div class="col-sm-10">
+                                        <input v-model="profile.weibo" type="text" class="form-control" value="{{user.weibo}}"/>
                                     </div>
                                 </div>
 
                                 <!-- end editor -->
-                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="line line-dashed b-b line-lg "></div>
                                 <div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-2">
-                                        <button type="submit" class="btn btn-primary">更新信息</button>
+                                        <button v-on="click:submit" class="btn btn-primary">更新信息</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
 
 
@@ -336,7 +371,7 @@
                 <div class="wrapper">
                     <div class="">
                         <h4 class="m-t-xs m-b-xs">Who to follow</h4>
-                        <ul class="list-group no-bg no-borders pull-in">
+                        <ul class="list-group no-bg no-borders ">
                             <li class="list-group-item">
                                 <a herf="" class="pull-left thumb-sm avatar m-r">
                                     <img src="./assets/a4.jpg" alt="..."
@@ -430,7 +465,8 @@
     </div>
 </div>
 {% endblock%}
-
 {% block loadjs %}
-
+<script>
+    require(['profile']);
+</script>
 {% endblock %}

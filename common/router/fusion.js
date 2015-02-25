@@ -12,10 +12,12 @@ module.exports = function(app, control){
     app.get('/signin', control.user.checkLogin, control.fusion.getSignin);
     //logout
     app.post('/logout', control.fusion.logout);
+    //forgot
+    app.get('/forgat',control.fusion.forgat);
     //profile
     app.get('/profile',control.fusion.profile);
     //publish
-    app.get('/publish', control.fusion.publish);
+    app.get('/publish',control.fusion.publish);
 
 
 }

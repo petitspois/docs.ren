@@ -14,7 +14,9 @@ typeof function (window) {
                     'vueValidator':'lib/vueValidator',
                     'msg':'effect/msg',
                     'nav':'effect/nav',
-                    'loadin':'effect/loading'
+                    'loadin':'effect/loading',
+                    'profile':'profile/index',
+                    'upload':'upload/upload'
                 },
                 urlArgs: "petitspois=" +  (new Date()).getTime()
             });

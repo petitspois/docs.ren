@@ -2,7 +2,7 @@
  * Created by petitspois on 15/2/13.
  */
 
-define(['petitspois','vue', 'vueValidator', 'msg', 'loadin'],function($, Vue, Valid, msg, loadin){
+define(['petitspois','vue', 'vueValidator', 'loadin'],function($, Vue, Valid, loadin){
 
     Vue.use(Valid);
 
@@ -24,21 +24,19 @@ define(['petitspois','vue', 'vueValidator', 'msg', 'loadin'],function($, Vue, Va
             submit: function (e) {
                 var user = this.$data.user;
                 e.preventDefault();
-                loadin.show();
+                loadin.show('load');
                 $.ajax({type:'POST', url: '/signin', data:user}).then(function(ret){
                      ret = JSON.parse(ret);
                      if(ret.status){
-                         loadin.hide();
-                         msg('登陆成功！','success');
+                         loadin.show('alert', '登陆成功！','success');
                          setTimeout(function(){
                              location.replace('/');
                          },1200);
                      }else{
-                         loadin.hide();
-                         msg(ret.msg,'danger');
+                         loadin.show('alert', ret.msg, 'danger');
                      }
                 },function(){
-                    msg('登陆失败，请重试！', 'danger');
+                    loadin.show('alert','登陆失败，请重试！', 'danger');
                 });
             }
         }

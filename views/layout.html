@@ -8,7 +8,8 @@
 
     <!--<link rel="stylesheet" href="/css/bootstrap.css" type="text/css">-->
     <link rel="stylesheet" href="/css/app.css" type="text/css">
-
+    {% block style %}
+    {% endblock %}
 </head>
 <body>
 <div class="app app-header-fixed app-aside-folded" id="app">
@@ -46,132 +47,21 @@
             <!-- link and dropdown -->
             <ul class="nav navbar-nav hidden-sm">
 
-                <li class="dropdown pos-stc" dropdown="">
-                    <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
-                        <span>Mega</span>
+                <li class="nav-dropdown-toggle">
+                    <a href="javascript:;">
+                        <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+                        <span>发布</span>
                         <span class="caret"></span>
                     </a>
 
-                    <div class="dropdown-menu wrapper w-full bg-white">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="m-l-xs m-t-xs m-b-xs font-bold">Pages <span
-                                        class="badge badge-sm bg-success">10</span></div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <ul class="list-unstyled l-h-2x">
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Profile</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Post</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Search</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Invoice</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <ul class="list-unstyled l-h-2x">
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Price</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Lock
-                                                    screen</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sign
-                                                    in</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sign
-                                                    up</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 b-l b-light">
-                                <div class="m-l-xs m-t-xs m-b-xs font-bold">UI Kits <span
-                                        class="label label-sm bg-primary">12</span></div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <ul class="list-unstyled l-h-2x">
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Buttons</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Icons
-                                                    <span class="badge badge-sm bg-warning">1000+</span></a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Grid</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Widgets</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <ul class="list-unstyled l-h-2x">
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Bootstap</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sortable</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Portlet</a>
-                                            </li>
-                                            <li>
-                                                <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Timeline</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 b-l b-light">
-                                <div class="m-l-xs m-t-xs m-b-sm font-bold">Analysis</div>
-                                <div class="text-center">
-                                    <div class="inline">
-                                        <div ui-jq="easyPieChart" ui-options="{
-                          percent: 65,
-                          lineWidth: 50,
-                          trackColor: &#39;#e8eff0&#39;,
-                          barColor: &#39;#23b7e5&#39;,
-                          scaleColor: false,
-                          size: 100,
-                          rotate: 90,
-                          lineCap: &#39;butt&#39;,
-                          animate: 2000
-                        }" class="easyPieChart" style="width: 100px; height: 100px; line-height: 100px;">
-                                            <canvas width="100" height="100"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="dropdown" dropdown="">
-                    <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-                        <span translate="header.navbar.new.NEW" class="">New</span> <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="http://flatfull.com/themes/angulr/angular/#" translate="header.navbar.new.PROJECT"
-                               class="">Projects</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a href="/publish">文章</a></li>
                         <li>
-                            <a href="">
+                            <a href="/publish">
                                 <span class="badge bg-info pull-right">5</span>
                                 <span translate="header.navbar.new.TASK" class="">Task</span>
                             </a>
                         </li>
-                        <li><a href="" translate="header.navbar.new.USER" class="">User</a></li>
                         <li class="divider"></li>
                         <li>
                             <a href="">
@@ -182,29 +72,29 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-form-sm navbar-left shift ng-pristine ng-valid "
-                  ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+
+
+
+
+            <form class="navbar-form navbar-form-sm navbar-left shift">
                 <div class="form-group">
                     <div class="input-group">
-                          <input type="text" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects..." />
+                          <input type="text" class="form-control input-sm bg-light no-border padder" placeholder="Search projects..." />
                           <span class="input-group-btn">
-                                <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+                                <button type="submit" class="btn btn-sm bg-light"><i class="fa fa-search"></i></button>
                           </span>
                     </div>
                 </div>
             </form>
             <!-- / link and dropdown -->
 
-            <!-- search form -->
-
-            <!-- / search form -->
 
             <!-- nabar right -->
             <ul class="nav navbar-nav navbar-right">
 
                 {% if user %}
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
+                <li class="nav-dropdown-toggle">
+                    <a href="javascript:;">
                         <i class="icon-bell fa-fw"></i>
                         <span class="visible-xs-inline">Notifications</span>
                         <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
@@ -244,14 +134,15 @@
 
 
 
-                <li class="dropdown" id="user-right">
+                <li class="nav-dropdown-toggle">
 
-                    <a href="javascript:;" class="dropdown-toggle clear">
+                    <a href="javascript:;" class="clear">
                           <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                             <img src="{{user.avatar}}" alt="...">
-                            <i class="on md b-white bottom"></i>
+                            <i class="{{user.sex}} md b-white bottom"></i>
                           </span>
-                        <span class="hidden-sm hidden-md">{{user.nickname}}</span> <b class="caret"></b>
+                        <span class="hidden-sm hidden-md">{{user.nickname}}</span>
+                        <b class="caret"></b>
                     </a>
 
 
@@ -262,14 +153,11 @@
                                 <p>300mb of 500mb used</p>
                             </div>
                             <div class="progress-xs m-b-none bg-white progress ng-isolate-scope" value="60">
-                                <div class="progress-bar" ng-class="type &amp;&amp; &#39;progress-bar-&#39; + type"
-                                     role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                     ng-style="{width: percent + &#39;%&#39;}" aria-valuetext="60%" ng-transclude=""
-                                     style="width: 60%;"></div>
+                                <div class="progress-bar" style="width: 60%;"></div>
                             </div>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="/profile#settings">
                                 <span class="badge bg-danger pull-right">30%</span>
                                 <span>设置</span>
                             </a>
@@ -915,14 +803,6 @@
                 </div>
             {% endif %}
 
-                    <div class="msg fade-in-down alertok no-show">
-                        <button class="close">
-                            <span>×</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <span></span>
-                    </div>
-
                 {% block content %}
                      <p>找不到相应的内容</p>
                 {% endblock %}
@@ -944,11 +824,20 @@
 
     <!-- footer -->
     <div class="app-footer wrapper b-t bg-light ">
-        <span class="pull-right ng-binding">2.0.0 <a href="" ui-scroll="app" class="m-l-sm text-muted"><i
+        <span class="pull-right ng-binding">2.0.0 <a href="" class="m-l-sm text-muted"><i
                 class="fa fa-long-arrow-up"></i></a></span>
         © 2015 Copyright.
     </div>
-    <div class="mask fade-in-down"><img src="./img/flickr.svg" alt="loading..."/></div>
+    <div class="mask fade-in-down">
+        <div id="alert" class="msg fade-in-down alertok no-show">
+            <button class="close">
+                <span>×</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <span></span>
+        </div>
+        <img id="load" class="no-show" src="./img/flickr.svg" alt="loading..."/>
+    </div>
     <!-- / footer -->
 </div>
 {% block commonloadjs %}

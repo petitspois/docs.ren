@@ -35,7 +35,7 @@ module.exports = function(){
     app.use(logger());
 
     //parse
-    app.use(bodyparser());
+    app.use(bodyparser({formLimit:'2mb'}));
 
     //session
     app.use(session({maxAge:7* 24 * 60 * 60 * 1000},app));
@@ -56,11 +56,12 @@ module.exports = function(){
         return render('msg',{msg:val,secondtitle:title,time:5});
     };
 
-
     //routers
     router(app);
 
-
+    app.use(function* (){
+        this.body = render('404');
+    });
 
     //监听
     app.listen(conf.port,function(){

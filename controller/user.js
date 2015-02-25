@@ -2,9 +2,11 @@
  * Created by apple on 15/1/31.
  */
 
-var model = require('../model/').user;
+var model = require('../model/').user,
 
-md5 = require('../lib/md5');
+    fs =require('co-fs'),
+
+    md5 = require('../lib/md5');
 
 module.exports = function () {
 
@@ -26,7 +28,8 @@ module.exports = function () {
             return;
         }
 
-        var user = yield model.get({email: email}, email);
+        var user = yield model.get({email: email}, 'email');
+
         if (user) {
             this.body = {
                 msg: 'Email已经存在。',
@@ -35,7 +38,7 @@ module.exports = function () {
             return;
         }
 
-        var rander = Math.random()*32+1|0,
+        var rander = Math.random()*31+1|0,
             avatar = 'avatar/'+ rander +'.jpg';
 
         var newUser = {
@@ -87,8 +90,6 @@ module.exports = function () {
             status: 1
         }
 
-
-
     }
 
     //checklogin
@@ -98,6 +99,54 @@ module.exports = function () {
         }else{
             yield next;
         }
+    }
+
+    //profile
+    user.profile = function* (){
+        var body = this.request.body,
+            nickname = body.nickname,
+            sex = body.sex,
+            company=body.company,
+            avatar = body.avatar,
+            description= body.description,
+            github=body.github,
+            weibo = body.weibo;
+
+        if(avatar){
+            var imgbuffer = new Buffer(avatar,'base64');
+            var imgName = yield model.get({email:this.session.user.email},'avatar');
+
+            if(/custom/.test(imgName.avatar)){
+                imgName = 'assets'+imgName.avatar;
+            }else{
+                imgName = 'assets/customavatar/petitspois:'+(+new Date)+(Math.random()*1000|0)+'.png';
+            }
+
+            yield fs.writeFile(imgName,imgbuffer);
+
+        }
+
+        var profile = {
+            nickname:nickname,
+            sex: sex,
+            company:company,
+            description:description,
+            github:github,
+            weibo:weibo
+        }
+
+        avatar && (profile.avatar = imgName.slice(6));
+
+        var update =  yield model.update({email:this.session.user.email},{$set:profile});
+
+        if(update){
+            this.body = {
+                msg:'更新成功',
+                status:1
+            }
+        }
+
+
     }
 
     return user;

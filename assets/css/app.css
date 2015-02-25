@@ -5118,7 +5118,8 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 
 .progress {
-    height: 20px;
+    padding: 0;
+    height: 5px;
     margin-bottom: 20px;
     overflow: hidden;
     background-color: #f5f5f5;
@@ -12189,21 +12190,14 @@ a.text-#000000:hover {
     bottom: 0
 }
 
-.avatar i.on {
-    background-color: #27c24c
+.avatar i.woman {
+    background-color: #fe6397
 }
 
-.avatar i.off {
-    background-color: #98a6ad
+.avatar i.man {
+    background-color: #23b7e5
 }
 
-.avatar i.busy {
-    background-color: #f05050
-}
-
-.avatar i.away {
-    background-color: #fad733
-}
 
 .avatar.thumb-md i {
     width: 12px;
@@ -15459,7 +15453,7 @@ a.text-#000000:hover {
     overflow: hidden;
     background:rgba(255,255,255,.7);
 }
-.mask > img{
+.mask > img,.msg{
     position:absolute;
     top: 0;
     right:0;
@@ -15467,10 +15461,15 @@ a.text-#000000:hover {
     left:0;
     margin:auto;
 }
+.msg{
+    width:270px;height:50px;
+}
+#alert{
+    z-index: 77779;
+}
 .loading{
     overflow: hidden;
 }
-.msg{margin:20px;}
 .no-show{display:none !important;}
 .mask-header{width:100%;height:50px;position:fixed;top:0;left:0;z-index:7;background: rgba(255,255,255,.7);}
 .mask-nav{width:60px;height:100%;position:fixed;top:0;left:0;z-index:7;background: rgba(255,255,255,.7);}
@@ -15488,4 +15487,60 @@ a.text-#000000:hover {
 }
 .color999{
     color:#999;
+}
+#preview-avatar img{
+    width:200px;
+    height:200px;
+}
+#show-precent{
+    margin-left:10px;color: #19a9d5;
+}
+
+@-webkit-keyframes petits-ui-window-shake {
+    0%, 100% {
+        -webkit-transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        -webkit-transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        -webkit-transform: translateX(10px);
+    }
+}
+
+@-moz-keyframes petits-ui-window-shake {
+    0%, 100% {
+        -moz-transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        -moz-transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        -moz-transform: translateX(10px);
+    }
+}
+
+@keyframes petits-ui-window-shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+.petits-ui-window-shake {
+    -webkit-animation: petits-ui-window-shake both 500ms;
+    -moz-animation: petits-ui-window-shake both 500ms;
+    animation: petits-ui-window-shake both 500ms;
+}
+.profile-sh{
+    display:none;
+}
+#publish-form .form-group{
+    margin-left: -110px;
+    margin-right: 0;
 }

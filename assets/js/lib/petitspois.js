@@ -26,27 +26,38 @@ typeof function () {
 
         ancestor: {},
 
-        each: function (obj, cb, context) {
+        each: function (obj, cb) {
             var i = 0,
-                value,
-                obj = obj || this,
-                len = obj.length;
-            for (; i < len; i++) {
-                value = cb.apply((context || obj[i] ), [i, obj[i]]);
-                if (value === false)break;
+                value;
+            if('function' == typeof obj){
+                var cb = obj,
+                    len = this.length;
+                for (; i < len; i++) {
+                    value = cb.apply((this[i] ), [i, this[i]]);
+                    if (value === false)break;
+                }
+            }else{
+                var len = obj.length;
+                for (; i < len; i++) {
+                    value = cb.apply(( obj[i] ), [i, obj[i]]);
+                    if (value === false)break;
+                }
             }
         },
         on: function (type, cb, bubble) {
             bubble = bubble || false;
             var value;
-            this[0]['addEventListener'](type, function(e){
-                value = cb.call(this,e);
-                if(!value){
-                    //e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                }
-            }, bubble);
+            petitspois.prototype.each(this,function(){
+                this['addEventListener'](type, function(e){
+                    value = cb.call(this,e);
+                    if(!value){
+                        //e.preventDefault();
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
+                    }
+                }, bubble);
+            });
+
             return this;
         },
         trigger: function (type) {
@@ -61,7 +72,7 @@ typeof function () {
             return !!~values.indexOf(value);
         },
         addClass: function (classes) {
-            this.each('', function () {
+            this.each(function () {
                 if (classes) {
                     this.className = this.className + ' ' + classes;
                 }
@@ -69,7 +80,7 @@ typeof function () {
             return this;
         },
         removeClass: function (classes) {
-            this.each('', function () {
+            this.each(function () {
                 var classColl = this.className.split(' ') || [],
                     removeColl = classes.split(' ') || [];
                 petitspois.prototype.each(removeColl, function (k, v) {
@@ -128,8 +139,24 @@ typeof function () {
             this.length = 1;
             return this;
         },
+        siblings:function(){
+            this[0] = this[0].nextElementSibling;
+            this.length =1;
+            return this;
+        },
         end: function () {
             petitspois.mixIn(this, this.ancestor);
+            return this;
+        },
+        load:function(url, cb){
+            var me = this;
+            petitspois.ajax({
+                url:url,
+                dataType:'html'
+            }).then(function(responseText){
+                me[0].innerHTML = responseText;
+                cb();
+            },function(){});
         }
     }
 
@@ -287,15 +314,15 @@ typeof function () {
                 opts.url += (~opts.url.indexOf('?') ? '&' : '?') + param(opts.data);
                 opts.data = null;
             } else {
-                opts.data = param(opts.data);
+                opts.data = opts.contentType? param(opts.data):opts.data;
             }
         }
 
         xhr.open(opts.type, opts.url, opts.async);
 
-        xhr.setRequestHeader('Content-type', opts.contentType);
+        opts.contentType && xhr.setRequestHeader('Content-type', opts.contentType);
 
-        if (opts.dataType && opts.accepts[opts.dataType]) {
+        if (opts.contentType && opts.dataType && opts.accepts[opts.dataType]) {
             xhr.setRequestHeader('Accept', opts.accepts[opts.dataType]);
         }
         pms = new Promise(function (resolve, reject) {
