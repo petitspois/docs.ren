@@ -2,35 +2,56 @@
  * Created by petitspois on 15/2/25.
  */
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-schema = new mongoose.Schema({
+
+var post = new Schema({
     title: {
-        type: 'String',
+        type: String,
         required: true
     }
     , content: {
-        type: 'String',
+        type: String,
+        required: true
+    }
+    , description: {
+        type: String,
         required: true
     }
     , tags: {
         type: [String],
         required: false
     }
-    , creattime: {
+    , name: {
+        type: String
+    }
+    , category: {
+        type: String,
+        required: true
+    }
+    , createtime: {
         type: Date,
         required: false,
-        default:Date.now
+        default: Date.now
     }
     , updatetime: {
         type: Date,
         required: false,
-        default:Date.now
+        default: Date.now
     }
     , author: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'user'
     }
+
+}, {
+    toObject: {getters: true, virtuals: true},
+    toJSON: {getters: true, virtuals: true}
 });
 
-module.exports = schema;
+post.static('getAvatar',function(query, name){
+     return this.findOne(query).populate('author').exec();
+});
+
+module.exports = post;

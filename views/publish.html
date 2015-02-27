@@ -22,7 +22,7 @@
                         <label class="col-sm-2 control-label">标题</label>
 
                         <div class="col-sm-10">
-                            <input type="text" v-model="title" v-validate="minLength:10" class="form-control" autofocus placeholder="标题字数 10 字以上">
+                            <input type="text" v-model="post.title" v-validate="minLength:10" class="form-control" autofocus placeholder="标题字数 10 字以上">
                         </div>
                     </div>
 
@@ -33,7 +33,7 @@
                         <label class="col-sm-2 control-label">标签</label>
 
                         <div class="col-sm-10">
-                            <input type="text" v-model="tags" class="form-control" placeholder="tag:用空格分开">
+                            <input type="text" v-model="post.tags" class="form-control" placeholder="tag:多个标签请用英文逗号（,）分开">
                         </div>
                     </div>
 
@@ -44,8 +44,8 @@
                         <label class="col-sm-2 control-label">分类目录</label>
 
                         <div class="col-sm-10">
-                            <select v-model="category" name="account" class="form-control">
-                                <option value="default">默认</option>
+                            <select v-model="post.category" name="account" class="form-control">
+                                <option value="default" selected>默认</option>
                             </select>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                         <label class="col-sm-2 control-label" style="padding-top: 15px;">文章内容</label>
 
                         <div class="col-sm-10">
-                            <textarea id="editor" v-model="content" placeholder="Content here ...."></textarea>
+                            <textarea id="editor" v-model="post.content" placeholder="Content here ...."></textarea>
                         </div>
                     </div>
 

@@ -8769,7 +8769,7 @@ body {
         width: 200px
     }
 
-    .app-aside-fixed.app-aside-folded .app-aside {
+    .app .app-aside {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -8994,6 +8994,10 @@ body {
 
 .nav-sub-header a {
     padding: 15px 20px
+}
+
+.navi{
+    padding-top: 50px;
 }
 
 .navi ul.nav li {

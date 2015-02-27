@@ -2,132 +2,185 @@
 
 {% block title %}{{title}}{% endblock %}
 
-{% block secondtitle %}{{secondtitle}}{% endblock %}
-
 {% block content %}
 
-        <div class="wrapper-md">
-            <div class="row">
-                <div class="col-sm-9">
-                    <div class="blog-post">
-                        <div class="panel">
-                            <div>
-                                <img src="./assets/c0.jpg" class="img-full">
-                            </div>
-                            <div class="wrapper-lg">
-                                <h2 class="m-t-none"><a href="">7 things you need to know about the flat design</a></h2>
 
-                                <div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam.
-                                        Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales
-                                        nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat.
-                                        <br><br>
-                                        Phasellus at ultricies neque, quis malesuada augue. Donec eleifend condimentum
-                                        nisl eu consectetur. Integer eleifend, nisl venenatis consequat iaculis, lectus
-                                        arcu malesuada sem, dapibus porta quam lacus eu neque.</p>
-                                </div>
-                                <div class="line line-lg b-b b-light"></div>
-                                <div class="text-muted">
-                                    <i class="fa fa-user text-muted"></i> by <a href="" class="m-r-sm">Admin</a>
-                                    <i class="fa fa-clock-o text-muted"></i> Feb 20, 2013
-                                    <a href="" class="m-l-sm"><i class="fa fa-comment-o text-muted"></i> 2 comments</a>
-                                </div>
-                            </div>
-                        </div>
-
-
+<div class="hbox hbox-auto-xs hbox-auto-sm ">
+    <div class="col w-md bg-light dk b-r bg-auto">
+        <div class="wrapper b-b bg">
+            <button class="btn btn-sm btn-default pull-right visible-sm visible-xs" ui-toggle-class="show"
+                    target="#email-menu"><i class="fa fa-bars"></i></button>
+            <a ui-sref="app.mail.compose" class="btn btn-sm btn-danger w-xs font-bold"
+               href="#/app/mail/compose">Compose</a>
+        </div>
+        <div class="wrapper hidden-sm hidden-xs" id="email-menu">
+            <ul class="nav nav-pills nav-stacked nav-sm">
+                <!-- ngRepeat: fold in folds -->
+                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope active">
+                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/">
+                        Inbox
+                    </a>
+                </li>
+                <!-- end ngRepeat: fold in folds -->
+                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/starred">
+                        Starred
+                    </a>
+                </li>
+                <!-- end ngRepeat: fold in folds -->
+                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/sent">
+                        Sent
+                    </a>
+                </li>
+                <!-- end ngRepeat: fold in folds -->
+                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/important">
+                        Important
+                    </a>
+                </li>
+                <!-- end ngRepeat: fold in folds -->
+                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/draft">
+                        Draft
+                    </a>
+                </li>
+                <!-- end ngRepeat: fold in folds -->
+                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/trash">
+                        Trash
+                    </a>
+                </li>
+                <!-- end ngRepeat: fold in folds -->
+            </ul>
+            <div class="wrapper">Labels</div>
+            <ul class="nav nav-pills nav-stacked nav-sm">
+                <!-- ngRepeat: label in labels -->
+                <li ng-repeat="label in labels" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:label.filter})" class="ng-binding" href="#/app/mail/inbox/angular">
+                        <i class="fa fa-fw fa-circle text-muted" color="#23b7e5" label-color=""
+                           style="color: rgb(35, 183, 229);"></i>
+                        Angular
+                    </a>
+                </li>
+                <!-- end ngRepeat: label in labels -->
+                <li ng-repeat="label in labels" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:label.filter})" class="ng-binding"
+                       href="#/app/mail/inbox/bootstrap">
+                        <i class="fa fa-fw fa-circle text-muted" color="#7266ba" label-color=""
+                           style="color: rgb(114, 102, 186);"></i>
+                        Bootstrap
+                    </a>
+                </li>
+                <!-- end ngRepeat: label in labels -->
+                <li ng-repeat="label in labels" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:label.filter})" class="ng-binding" href="#/app/mail/inbox/client">
+                        <i class="fa fa-fw fa-circle text-muted" color="#fad733" label-color=""
+                           style="color: rgb(250, 215, 51);"></i>
+                        Client
+                    </a>
+                </li>
+                <!-- end ngRepeat: label in labels -->
+                <li ng-repeat="label in labels" ui-sref-active="active" class="ng-scope">
+                    <a ui-sref="app.mail.list({fold:label.filter})" class="ng-binding" href="#/app/mail/inbox/work">
+                        <i class="fa fa-fw fa-circle text-muted" color="#27c24c" label-color=""
+                           style="color: rgb(39, 194, 76);"></i>
+                        Work
+                    </a>
+                </li>
+                <!-- end ngRepeat: label in labels -->
+            </ul>
+            <div class="wrapper">
+                <form name="label" class="ng-pristine ng-invalid ng-invalid-required">
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                               ng-model="newLabel.name" placeholder="New label" required="">
+            <span class="input-group-btn">
+              <button class="btn btn-sm btn-default" type="button" ng-click="addLabel()" ng-disabled="label.$invalid"
+                      disabled="disabled">Add
+              </button>
+            </span>
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-                    <div class="text-center m-t-lg m-b-lg">
-                        <ul class="pagination pagination-md">
-                            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-                            <li class="active"><a href="">1</a></li>
-                            <li><a href="">2</a></li>
-                            <li><a href="">3</a></li>
-                            <li><a href="">4</a></li>
-                            <li><a href="">5</a></li>
-                            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="col-sm-3">
-                    <h5 class="font-bold">Categories</h5>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="">
-                                <span class="badge pull-right">15</span>
-                                Photograph
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">
-                                <span class="badge pull-right">30</span>
-                                Life style
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">
-                                <span class="badge pull-right">9</span>
-                                Food
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">
-                                <span class="badge pull-right">4</span>
-                                Travel world
-                            </a>
-                        </li>
+    <!--index right-->
+    <div class="col">
+        <div class="wrapper bg-light lter b-b">
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-sm btn-bg btn-default"><i class="fa fa-chevron-left"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-bg btn-default"><i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="btn-toolbar">
+                <div class="btn-group dropdown">
+                    <button class="btn btn-default btn-sm btn-bg dropdown-toggle" data-toggle="dropdown">
+                        <span class="dropdown-label">Filter</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu text-left text-sm">
+                        <li><a ui-sref="app.mail.list({fold:'unread'})"
+                               href="#/app/mail/inbox/unread">Unread</a></li>
+                        <li><a ui-sref="app.mail.list({fold:'starred'})"
+                               href="#/app/mail/inbox/starred">Starred</a></li>
                     </ul>
-                    <div class="tags m-b-lg l-h-2x">
-                        <a href="" class="label bg-primary">Bootstrap</a> <a href="" class="label bg-primary">Application</a>
-                        <a href="" class="label bg-primary">Apple</a> <a href="" class="label bg-primary">Less</a> <a
-                            href="" class="label bg-primary">Theme</a> <a href="" class="label bg-primary">Wordpress</a>
-                    </div>
-                    <h5 class="font-bold">Recent Posts</h5>
-
-                    <div>
-                        <div>
-                            <a class="pull-left thumb thumb-wrapper m-r">
-                                <img src="./assets/b0.jpg">
-                            </a>
-
-                            <div class="clear">
-                                <a href="" class="font-semibold text-ellipsis">Bootstrap 3: What you need to know</a>
-
-                                <div class="text-xs block m-t-xs"><a href="">Travel</a> 2 minutes ago</div>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div>
-                            <a class="pull-left thumb thumb-wrapper m-r">
-                                <img src="./assets/b1.jpg">
-                            </a>
-
-                            <div class="clear">
-                                <a href="" class="font-semibold text-ellipsis">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.</a>
-
-                                <div class="text-xs block m-t-xs"><a href="">Design</a> 2 hours ago</div>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div>
-                            <a class="pull-left thumb thumb-wrapper m-r">
-                                <img src="./assets/b2.jpg">
-                            </a>
-
-                            <div class="clear">
-                                <a href="" class="font-semibold text-ellipsis">Sed diam nonummy nibh euismod tincidunt
-                                    ut laoreet</a>
-
-                                <div class="text-xs block m-t-xs"><a href="">MFC</a> 1 week ago</div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-bg btn-default" data-toggle="tooltip" data-placement="bottom"
+                            data-title="Refresh" data-original-title="" title=""><i class="fa fa-refresh"></i>
+                    </button>
                 </div>
             </div>
         </div>
+        <!-- / header -->
+
+        <!-- list -->
+        <ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">
+            {% if !posts.length %}
+                <div class="wrapper-md">暂无文章</div>
+            {% endif%}
+            <!-- ngRepeat: mail in mails | filter:fold -->
+            {% for post in posts %}
+            <li class="list-group-item clearfix b-l-3x b-l-info">
+
+                <a class="avatar thumb pull-left m-r" href="#/app/page/profile">
+                    <img ng-src="img/a10.jpg" src="{{post.avatar}}">
+                </a>
+
+                <div class="pull-right text-sm text-muted">
+                    <span class="hidden-xs ng-binding">{{post.updatetime}}</span>
+                    <i class="fa fa-paperclip m-l-sm"></i>
+                </div>
+
+                <div class="clear">
+                    <div>
+                        <a class="text-md ng-binding" href="#/app/mail/10">{{post.title}}</a>
+                        {% for tag in post.tags %}
+                        <span class="label bg-light m-l-sm ng-binding">{{tag}}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="text-ellipsis m-t-xs ng-binding">
+                        {{post.description}}
+                    </div>
+                </div>
+
+            </li>
+            {% endfor %}
+            <!-- end ngRepeat: mail in mails | filter:fold -->
+
+        </ul>
+        <!-- / list -->
+
+
+    </div>
+
+
+</div>
 
 
 {% endblock %}

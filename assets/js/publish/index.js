@@ -13,21 +13,31 @@ define(['petitspois', 'vue', 'vueValidator','loadin', 'editor/editor'], function
 
         var publishForm = new Vue({
             data: {
-                title: '',
-                tags: '',
-                category: '默认',
-                content: ''
+                post:{
+                    title: '',
+                    tags: '',
+                    category: '',
+                    content: ''
+                }
             },
             methods: {
                 submit: function (e) {
                     e.preventDefault();
                     //get editor value
                     if(!!editor.codemirror.getValue()){
-                        this.content = editor.codemirror.getValue();
+                        this.post.content = editor.codemirror.getValue();
                     }else{
                         loadin.show('alert', '文章内容不能为空', 'danger');
                     }
-
+                    loadin.show('load');
+                    $.ajax({type:'POST',url:'/publish',data:this.$data.post}).then(function(ret){
+                        ret = JSON.parse(ret);
+                        if(ret.status){
+                            location.href = '/';
+                        }else{
+                            loadin.show('alert', ret.msg, 'danger');
+                        }
+                    },function(){});
                 }
             }
         }).$mount('#publish-form');

@@ -2,24 +2,41 @@
  * Created by qingdou on 15/2/11.
  */
 
-var userModel = require('../model/').user
+var userModel = require('../model/').user,
 
+    postModel = require('../model/').post,
+
+    formatDate = require('../lib/format');
+
+//get request
 
 module.exports = function(){
+
     var fusion = {};
 
     //index
     fusion.getHome = function* (){
+
+        var posts = yield postModel.getAll({});
+
+        for(var i = 0;i<posts.length;i++){
+            posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;
+            posts[i].createtime = formatDate(posts[i].createtime, true);
+            posts[i].updatetime = formatDate(posts[i].updatetime, true);
+        }
+
+        console.log(posts)
         //signed
         if(this.session.user){
             this.body = yield this.render('index',{
                 title:'首页',
-                secondtitle:'最新文章',
-                user:yield userModel.get({email:this.session.user.email})
+                user:yield userModel.get({email:this.session.user.email}),
+                posts:posts
             });
         }else{
-            this.body = yield this.render('index',{title:'首页',secondtitle:'最新文章'});
+            this.body = yield this.render('index',{title:'首页',posts:posts});
         }
+
     }
     //signup
     fusion.getSignup = function* (){

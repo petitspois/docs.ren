@@ -211,7 +211,7 @@
 
     <!-- menu -->
     <!-- ngInclude: 'tpl/blocks/aside.html' -->
-    <div data-ng-include=" &#39;tpl/blocks/aside.html&#39; " class="app-aside hidden-xs bg-dark">
+    <div class="app-aside hidden-xs bg-dark">
         <div class="aside-wrap ">
             <!-- if you want to use a custom scroll when aside fixed, use the slimScroll
               <div class="navi-wrap" ui-jq="slimScroll" ui-options="{height:'100%', size:'8px'}">
@@ -279,18 +279,19 @@
                 <!-- / user -->
 
                 <!-- nav -->
-                <nav class="navi clearfix ">
+                <nav class="navi clearfix">
                     <div class="mask-nav no-show"></div>
+
                     <ul class="nav ">
                         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                            <span translate="aside.nav.HEADER" class="">Navigation</span>
+                            <span class="">Navigation</span>
                         </li>
                         <li>
                             <a href="" class="auto">
-      <span class="pull-right text-muted">
-        <i class="fa fa-fw fa-angle-right text"></i>
-        <i class="fa fa-fw fa-angle-down text-active"></i>
-      </span>
+                              <span class="pull-right text-muted">
+                                <i class="fa fa-fw fa-angle-right text"></i>
+                                <i class="fa fa-fw fa-angle-down text-active"></i>
+                              </span>
                                 <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
                                 <span class="font-bold " translate="aside.nav.DASHBOARD">Dashboard</span>
                             </a>

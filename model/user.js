@@ -19,7 +19,8 @@ var mongoose = require('mongoose'),
             required:true
         },
         sex:{
-            type:String
+            type:String,
+            default:'man'
         },
         company:{
             type:String

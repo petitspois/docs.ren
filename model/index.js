@@ -23,13 +23,18 @@ for (var key in models) {
         return this.findOne(data, name).exec();
     });
 
+    'post' == key && schema.static('getAll',function(query){
+        return this.find(query).sort('-createtime').lean().exec();
+    });
+
     schema.static('update',function(conditions,update){
         return this.findOneAndUpdate(conditions,update).exec();
     });
 
 
-
     exports[key] = mongoose.model(key, schema);
 
 }
+
+
 
