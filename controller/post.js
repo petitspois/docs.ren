@@ -57,6 +57,11 @@ module.exports = function(){
 
     }
 
+    //post detail
+    post.post = function* (){
+        this.body = yield this.render('post',{title:'文章'});
+    }
+
 
     return post;
 }

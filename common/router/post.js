@@ -6,5 +6,8 @@ module.exports = function(app, control){
     //publish
     app.post('/publish', control.post.publish);
 
+    //post
+    app.get('/post', control.post.post);
+
 
 }

@@ -25,7 +25,6 @@ module.exports = function(){
             posts[i].updatetime = formatDate(posts[i].updatetime, true);
         }
 
-        console.log(posts)
         //signed
         if(this.session.user){
             this.body = yield this.render('index',{
