@@ -6,7 +6,7 @@ typeof function (window) {
             var me = this;
 
             requirejs.config({
-                baseUrl: './js',
+                baseUrl: '/js',
                 paths: {
                     'jquery':'lib/jquery-2.1.3',
                     'petitspois':'lib/petitspois',
@@ -16,7 +16,8 @@ typeof function (window) {
                     'nav':'effect/nav',
                     'loadin':'effect/loading',
                     'profile':'profile/index',
-                    'upload':'upload/upload'
+                    'upload':'upload/upload',
+                    'hljs':'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min'
                 },
                 urlArgs: "petitspois=" +  (new Date()).getTime()
             });

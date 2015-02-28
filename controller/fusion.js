@@ -23,6 +23,7 @@ module.exports = function(){
             posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;
             posts[i].createtime = formatDate(posts[i].createtime, true);
             posts[i].updatetime = formatDate(posts[i].updatetime, true);
+            posts[i].flag = posts[i]['_id'].toString();
         }
 
         //signed

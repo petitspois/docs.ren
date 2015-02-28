@@ -3,8 +3,20 @@
  */
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    marked = require('../assets/js/editor/marked');
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false
+    });
 
+var formatDate = require('../lib/format');
 
 var post = new Schema({
     title: {
@@ -48,6 +60,17 @@ var post = new Schema({
 }, {
     toObject: {getters: true, virtuals: true},
     toJSON: {getters: true, virtuals: true}
+});
+
+post.virtual('ctime').get(function(){
+    return formatDate(this.createtime, true);
+});
+post.virtual('utime').get(function(){
+    return formatDate(this.updatetime, true);
+});
+
+post.virtual('mdRender').get(function(){
+    return marked(this.content);
 });
 
 post.static('getAvatar',function(query, name){

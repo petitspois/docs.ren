@@ -144,22 +144,21 @@
             {% if !posts.length %}
                 <div class="wrapper-md">暂无文章</div>
             {% endif%}
-            <!-- ngRepeat: mail in mails | filter:fold -->
+
             {% for post in posts %}
             <li class="list-group-item clearfix b-l-3x b-l-info">
 
                 <a class="avatar thumb pull-left m-r" href="#/app/page/profile">
-                    <img ng-src="img/a10.jpg" src="{{post.avatar}}">
+                    <img src="{{post.avatar}}">
                 </a>
 
                 <div class="pull-right text-sm text-muted">
                     <span class="hidden-xs ng-binding">{{post.updatetime}}</span>
                     <i class="fa fa-paperclip m-l-sm"></i>
                 </div>
-
                 <div class="clear">
                     <div>
-                        <a class="text-md ng-binding" href="#/app/mail/10">{{post.title}}</a>
+                        <a class="text-md ng-binding" href="/post/{{post.flag}}">{{post.title}}</a>
                         {% for tag in post.tags %}
                         <span class="label bg-light m-l-sm ng-binding">{{tag}}</span>
                         {% endfor %}

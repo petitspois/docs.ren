@@ -113,7 +113,8 @@
     <!-- uiView:  --><div ui-view="" class="ng-scope"><div ng-controller="MailDetailCtrl" class="ng-scope">
     <!-- header -->
     <div class="wrapper bg-light lter b-b">
-      <a ui-sref="app.mail.list" class="btn btn-sm btn-default w-xxs m-r-sm" tooltip="Back to Inbox" href="#/app/mail/inbox/"><i class="fa fa-long-arrow-left"></i></a>
+      <a class="btn btn-sm btn-default w-xxs m-r-sm" href="/"><i class="fa fa-long-arrow-left"></i></a>
+
       <div class="btn-group m-r-sm">
         <button class="btn btn-sm btn-default w-xxs w-auto-xs" tooltip="Archive"><i class="fa fa-archive"></i></button>
         <button class="btn btn-sm btn-default w-xxs w-auto-xs" tooltip="Report"><i class="fa fa-exclamation-circle"></i></button>
@@ -155,16 +156,18 @@
         </div>
       </div>
     </div>
+
+
+
     <!-- / header -->
     <div class="wrapper b-b">
-      <h2 class="font-thin m-n ng-binding">Bootstrap components written in pure AngularJS</h2>
+      <h2 class="font-thin m-n ng-binding">{{title}}</h2>
     </div>
-    <div class="wrapper b-b ng-binding">
-      <img ng-src="img/a9.jpg" class="img-circle thumb-xs m-r-sm" src="img/a9.jpg">
-      from <a href="" class="ng-binding">james@gmail.com</a> on 12:20 7/23/2014
+    <div class="wrapper b-b">
+      <a href="">{{name}}</a> 发布于{{ctime}}
     </div>
-    <div class="wrapper ng-binding">
-      Retur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper Neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat.
+    <div class="wrapper" style="padding: 0 35px;">
+      {% autoescape false %}{{ mdRender }}{% endautoescape %}
     </div>
     <div class="wrapper">
       <!-- ngRepeat: attach in mail.attach -->
@@ -195,4 +198,11 @@
 </div>
 
 
+{% endblock %}
+{% block loadjs %}
+  <script>
+     require(['hljs'],function(hljs){
+         hljs.initHighlightingOnLoad();
+     });
+  </script>
 {% endblock %}
