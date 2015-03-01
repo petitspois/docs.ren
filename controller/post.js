@@ -3,6 +3,7 @@
  */
 
 var model = require('../model/').post;
+    userModel = require('../model/').user;
 
 module.exports = function () {
     var post = {};
@@ -36,6 +37,8 @@ module.exports = function () {
             });
         }
 
+        var userId =  this.session.user._id || (yield userModel.get({email:this.session.user.email}))._id;
+
         var newPost = {
             title: title,
             content: content,
@@ -43,7 +46,7 @@ module.exports = function () {
             tags: fineTags,
             category: category,
             name: this.session.user.nickname,
-            author: this.session.user._id
+            author: userId
         }
 
         var post = yield model.add(newPost);
@@ -59,9 +62,14 @@ module.exports = function () {
 
     //post detail
     post.post = function* () {
-        var id = this.params.id,
+        var data = {},
+            id = this.params.id,
             posts = yield model.get({_id: id});
-        this.body = yield this.render('post', posts);
+            data.posts = posts;
+            if(this.session.user){
+                data.user = this.session.user;
+            }
+        this.body = yield this.render('post', data);
     }
 
 

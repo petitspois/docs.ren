@@ -24,7 +24,11 @@ for (var key in models) {
     });
 
     'post' == key && schema.static('getAll',function(query){
-        return this.find(query).sort('-createtime').lean().exec();
+        return this.find(query).sort('-createtime').exec();
+    });
+
+    'post' == key && schema.static('getAvatar',function(query){
+        return this.findOne(query).populate('author').exec();
     });
 
     schema.static('update',function(conditions,update){

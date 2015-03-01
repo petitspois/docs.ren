@@ -10,8 +10,7 @@
     <div class="wrapper b-b bg">
       <button class="btn btn-sm btn-default pull-right visible-sm visible-xs" ui-toggle-class="show"
               target="#email-menu"><i class="fa fa-bars"></i></button>
-      <a ui-sref="app.mail.compose" class="btn btn-sm btn-danger w-xs font-bold"
-         href="#/app/mail/compose">Compose</a>
+      <a class="btn btn-sm btn-danger w-xs font-bold" href="/publish">发布文章</a>
     </div>
     <div class="wrapper hidden-sm hidden-xs" id="email-menu">
       <ul class="nav nav-pills nav-stacked nav-sm">
@@ -161,36 +160,61 @@
 
     <!-- / header -->
     <div class="wrapper b-b">
-      <h2 class="font-thin m-n ng-binding">{{title}}</h2>
+      <h2 class="font-thin m-n ng-binding">{{posts.title}}</h2>
     </div>
     <div class="wrapper b-b">
-      <a href="">{{name}}</a> 发布于{{ctime}}
+      <a href="">{{posts.name}}</a> 发布于{{posts.ctime}}
     </div>
-    <div class="wrapper" style="padding: 0 35px;">
-      {% autoescape false %}{{ mdRender }}{% endautoescape %}
+    <div class="wrapper clearfix" style="padding: 20px 35px;">
+      {% autoescape false %}{{ posts.mdRender }}{% endautoescape %}
+    </div>
+    <div class="wrapper b-b b-t margin10-tb">
+      <i class="fa fa-comments-o"></i>
+      <span>评论与回复</span>- 1个回复
     </div>
     <div class="wrapper">
-      <!-- ngRepeat: attach in mail.attach -->
+
+      <div class="each-comments">
+        <a class="pull-left thumb-sm">
+          <img src="http://flatfull.com/themes/angulr/angular/img/a0.jpg" class="img-circle">
+        </a>
+        <div class="m-l-xxl m-b">
+          <div>
+            <a href=""><strong>John smith</strong></a>
+            <label class="label bg-info m-l-xs">Editor</label>
+              <span class="text-muted text-xs block m-t-xs">
+                24 minutes ago
+              </span>
+          </div>
+          <div class="m-t-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum.</div>
+        </div>
+      </div>
+
+      <!--<div class="text-center">暂无评论</div>-->
+
     </div>
+
+
     <div class="wrapper">
       <div class="panel b-a">
-        <div class="panel-heading ng-show" ng-hide="reply">
-          <div class="m-b-lg">
-            Click here to <a href="" class="text-u-l" ng-click="reply=!reply">Reply</a> or <a href="" class="text-u-l" ng-click="reply=!reply">Forward</a>
-          </div>
-        </div>
-        <div class="ng-hide" ng-show="reply">
-          <div class="panel-heading b-b b-light ng-binding">
-            james@gmail.com
-          </div>
+        <div class="ng-hide">
+          <!--<div class="panel-heading b-b b-light ng-binding">-->
+            <!--james@gmail.com-->
+          <!--</div>-->
           <div class="wrapper" contenteditable="true" style="min-height:100px"></div>
           <div class="panel-footer bg-light lt">
-            <button class="btn btn-link pull-right" ng-click="reply=!reply"><i class="fa fa-trash-o"></i></button>
-            <button class="btn btn-info w-xs font-bold">Send</button>
+            <button class="btn btn-success w-xs font-bold">发表回复</button>
+            <div class="btn pull-right"><a href="">支持Github风格的Markdown语法</a></div>
           </div>
         </div>
       </div>
     </div>
+
+
+
+
+
+
   </div></div>
   </div>
 

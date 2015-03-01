@@ -73,8 +73,5 @@ post.virtual('mdRender').get(function(){
     return marked(this.content);
 });
 
-post.static('getAvatar',function(query, name){
-     return this.findOne(query).populate('author').exec();
-});
 
 module.exports = post;
