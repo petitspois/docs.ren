@@ -314,10 +314,7 @@ typeof function () {
                 opts.url += (~opts.url.indexOf('?') ? '&' : '?') + param(opts.data);
                 opts.data = null;
             } else {
-                console.log(opts.data)
                 opts.data = opts.contentType ? param(opts.data):opts.data;
-                console.log(opts.data)
-
             }
         }
 
