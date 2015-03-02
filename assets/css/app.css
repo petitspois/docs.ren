@@ -4106,6 +4106,14 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     -webkit-overflow-scrolling: touch
 }
 
+.navbar-github{
+    margin:14px 0;
+    padding:0;
+    width:80px;
+    height: 20px;
+    border: 0;
+}
+
 .navbar-collapse.in {
     overflow-y: auto
 }
@@ -9698,7 +9706,9 @@ body {
     background-color: #f05050;
     border-color: #f05050
 }
-
+.height50{
+    height:50px !important;
+}
 .btn-dark {
     color: #fff !important;
     background-color: #3a3f51;

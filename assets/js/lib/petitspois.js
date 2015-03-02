@@ -314,7 +314,10 @@ typeof function () {
                 opts.url += (~opts.url.indexOf('?') ? '&' : '?') + param(opts.data);
                 opts.data = null;
             } else {
-                opts.data = opts.contentType? param(opts.data):opts.data;
+                console.log(opts.data)
+                opts.data = opts.contentType ? param(opts.data):opts.data;
+                console.log(opts.data)
+
             }
         }
 
@@ -325,6 +328,7 @@ typeof function () {
         if (opts.contentType && opts.dataType && opts.accepts[opts.dataType]) {
             xhr.setRequestHeader('Accept', opts.accepts[opts.dataType]);
         }
+
         pms = new Promise(function (resolve, reject) {
             if (opts.async) {
                 xhr.onload = ready.apply(xhr, arguments);

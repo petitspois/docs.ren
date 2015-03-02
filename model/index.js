@@ -8,7 +8,8 @@ var mongoose = require('mongoose'),
 
     models = {
         user: require('./user'),
-        post:require('./post')
+        post:require('./post'),
+        comment:require('./comments')
     };
 
 for (var key in models) {
@@ -23,11 +24,11 @@ for (var key in models) {
         return this.findOne(data, name).exec();
     });
 
-    'post' == key && schema.static('getAll',function(query){
-        return this.find(query).sort('-createtime').exec();
+    schema.static('getAll',function(query){
+        return this.find(query).sort('-createtime').lean().exec();
     });
 
-    'post' == key && schema.static('getAvatar',function(query){
+    schema.static('getAvatar',function(query){
         return this.findOne(query).populate('author').exec();
     });
 
