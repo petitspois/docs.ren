@@ -10,7 +10,9 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
@@ -15671,3 +15673,18 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     color: #aaa;
 }
 
+#comment-content{
+    border:none;
+    min-height:100px;
+    resize:none !important;
+    padding:10px;
+}
+.markSyn{
+    font-size:12px;
+    color:#0086b3;
+    font-weight: 500;
+}
+
+.each-comments a:hover{
+    color: #428bca;
+}

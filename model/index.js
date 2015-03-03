@@ -24,8 +24,8 @@ for (var key in models) {
         return this.findOne(data, name).exec();
     });
 
-    schema.static('getAll',function(query){
-        return this.find(query).sort('-createtime').lean().exec();
+    schema.static('getAll',function(query, sort){
+        return this.find(query).sort(sort).lean().exec();
     });
 
     schema.static('getAvatar',function(query){

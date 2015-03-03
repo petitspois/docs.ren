@@ -5,6 +5,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
+
 var comments = new Schema({
     pid: {
         type: Schema.Types.ObjectId,
@@ -37,5 +38,8 @@ var comments = new Schema({
     toJSON: {getters: true, virtuals: true}
 });
 
+comments.virtual('mdRenderComments').get(function(){
+    return marked(this.comment);
+});
 
 module.exports = comments;

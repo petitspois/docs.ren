@@ -17,7 +17,7 @@ module.exports = function(){
     //index
     fusion.getHome = function* (){
 
-        var posts = yield postModel.getAll({});
+        var posts = yield postModel.getAll({},'-createtime');
 
         for(var i = 0;i<posts.length;i++){
             posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;

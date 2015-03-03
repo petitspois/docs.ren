@@ -157,6 +157,9 @@ typeof function () {
                 me[0].innerHTML = responseText;
                 cb();
             },function(){});
+        },
+        attr:function(attribute){
+
         }
     }
 
