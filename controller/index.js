@@ -6,6 +6,7 @@ module.exports = function () {
     return {
         fusion:require('./fusion')(),
         user: require('./user')(),
-        post:require('./post')()
+        post:require('./post')(),
+        notification:require('./notification')()
     };
 };

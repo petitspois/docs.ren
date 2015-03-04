@@ -18,6 +18,8 @@ module.exports = function(app, control){
     app.get('/profile',control.fusion.profile);
     //publish
     app.get('/publish',control.fusion.publish);
+    //notifications
+    app.get('/notifications', control.notification.all);
 
 
 }

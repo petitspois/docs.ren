@@ -4897,9 +4897,6 @@ a.label:hover, a.label:focus {
     border-radius: 10px
 }
 
-.badge:empty {
-    display: none
-}
 
 .btn .badge {
     position: relative;
@@ -7859,7 +7856,7 @@ small, .small {
 }
 
 .badge {
-    background-color: #cfdadd
+    background-color: #f05050
 }
 
 .badge.up {
@@ -15687,4 +15684,23 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .each-comments a:hover{
     color: #428bca;
+}
+
+.not-icon{
+    font-size: 16px;
+}
+.not-icon-msg{
+    position: absolute;
+    background-color: #f05050;
+    top: 13px;
+    left: 24px;
+    width: 8px;
+    height: 8px;
+    display: block;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+.bg1{
+    background: #dde6e9;
 }

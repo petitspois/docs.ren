@@ -20,6 +20,8 @@
     "co-fs":"*",
     "mongoose": "^3.8.19",
     "moment": "^2.8.4",
-    "xss": "*"
+    "xss": "*",
+    "lodash":"3.3.1",
+    "validator": "3.22.1"
   }
 }
