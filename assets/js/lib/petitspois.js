@@ -184,6 +184,12 @@ typeof function () {
         },
         attr: function (attribute) {
             return this[0].getAttribute(attribute);
+        },
+        remove: function(){
+            var parent = this[0].parentNode;
+            if(parent){
+                parent.removeChild(this[0]);
+            }
         }
     }
 

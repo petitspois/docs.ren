@@ -36,10 +36,6 @@ for (var key in models) {
         return this.findOne(query).populate('author').exec();
     });
 
-    schema.static('getAvatar',function(query){
-        return this.findOne(query).populate('author').exec();
-    });
-
 
     //update
     schema.static('update',function(conditions,update){
@@ -48,8 +44,8 @@ for (var key in models) {
 
 
     //remove
-    schema.static('findByIdAndRemove',function(query){
-        return this.findOne(query).populate('author').exec();
+    schema.static('byidRemove',function(id){
+        return this.findByIdAndRemove(id).exec();
     });
 
 

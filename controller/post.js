@@ -83,7 +83,7 @@ module.exports = function () {
             comments = yield commentModel.getAll({pid: id},'createtime');
         //comments data
         for (var i = 0; i < comments.length; i++) {
-            comments[i].avatar = (yield commentModel.getAvatar({name: comments[i].name})).author.avatar;
+            comments[i].author = (yield commentModel.getAvatar({name: comments[i].name})).author;
             comments[i].createtime = formatDate(comments[i].createtime, true);
             comments[i].comment = marked(comments[i].comment);
             comments[i].cid = String(comments[i]._id);
@@ -93,7 +93,7 @@ module.exports = function () {
         data.posts = posts;
         data.user = this.session.user;
         if (data.user) {
-            data.user = yield userModel.get({email: data.user.email}) || data.user;
+            data.user = yield userModel.get({email: data.user.email});
         }
         this.body = yield this.render('post', data);
     }

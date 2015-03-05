@@ -18,7 +18,7 @@
     "co":"~4.1.0",
     "co-views":"*",
     "co-fs":"*",
-    "mongoose": "^3.8.19",
+    "mongoose": "^3.8.24",
     "moment": "^2.8.4",
     "xss": "*",
     "lodash":"3.3.1",

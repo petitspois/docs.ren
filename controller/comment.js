@@ -77,8 +77,18 @@ module.exports = function () {
         var body = this.request.body,
             cid = body.cid;
         if(cid){
-            var cData = commentModel.get({_id:cid});
-            console.log(cData);
+            var cData = yield commentModel.byidRemove(cid);
+            if(cData){
+                 this.body = {
+                     msg:'删除成功',
+                     status:1
+                 }
+            }else{
+                this.body = {
+                    msg:'删除失败',
+                    status:0
+                }
+            }
         }else{
             this.body = {
                 msg:'cid不存在',
