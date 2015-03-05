@@ -11576,7 +11576,7 @@ a.text-#000000:hover {
 }
 
 .text-xs {
-    font-size: 12px
+    font-size: 12px !important;
 }
 
 .text-xxs {

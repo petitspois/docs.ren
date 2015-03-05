@@ -7,7 +7,7 @@ define(['petitspois'],function($){
     try{
 
         //nav右侧user切换
-        $('.nav-dropdown-toggle').on('click',function(){
+        $('.nav-dropdown-toggle,.dropdown').on('click',function(){
             $(this).addClass('open');
         }).on('mouseleave',function(){
             $(this).removeClass('open');
