@@ -15670,7 +15670,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     color: #aaa;
 }
 
-#comment-content{
+.comment-content{
     border:none;
     min-height:100px;
     resize:none !important;
