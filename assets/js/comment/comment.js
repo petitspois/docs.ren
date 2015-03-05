@@ -63,4 +63,12 @@ define(['petitspois', 'loadin'], function ($, loadin) {
             })
         }
     })
+
+    //回复
+    $('#reply-comment').on('click',function(){
+          var $reply = $(this).parent().siblings().siblings();
+          $reply.removeClass('hide').addClass('ng-enter');
+    });
+
+
 })
