@@ -17,7 +17,7 @@ typeof function (window) {
                     'loadin':'effect/loading',
                     'profile':'profile/index',
                     'upload':'upload/upload',
-                    'hljs':'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min'
+                    'hljs':'lib/highlight.min'
                 },
                 urlArgs: "petitspois=" +  (new Date()).getTime()
             });

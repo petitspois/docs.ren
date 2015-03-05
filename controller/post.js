@@ -88,56 +88,15 @@ module.exports = function () {
             comments[i].comment = marked(comments[i].comment);
             comments[i].cid = String(comments[i]._id);
         }
-        console.log(comments)
+
         data.comments = comments;
         data.posts = posts;
         data.user = this.session.user;
-        if (this.session.user) {
-            data.user = yield userModel.get({email: this.session.user.email}) || this.session.user;
+        if (data.user) {
+            data.user = yield userModel.get({email: data.user.email}) || data.user;
         }
         this.body = yield this.render('post', data);
     }
-
-    //post comment
-    post.comment = function* () {
-        var body = this.request.body,
-            comment = body.comment,
-            pid = body.pid;
-
-        if (!comment) {
-            this.body = {
-                msg: '评论内容不能为空',
-                status: 0
-            }
-        }
-
-        var userId = this.session.user._id || (yield userModel.get({email: this.session.user.email}))._id;
-
-        var commentData = {
-            pid: pid,
-            name: this.session.user.nickname,
-            email: this.session.user.email,
-            comment: comment,
-            author: userId
-        }
-
-        var commented = yield commentModel.add(commentData);
-
-        if (commented) {
-            this.body = {
-                msg: '发布成功',
-                status: 1,
-                data: {
-                    name:this.session.user.nickname,
-                    createtime:'即将',
-                    comment:marked(comment),
-                    avatar:(yield userModel.get({email:this.session.user.email}, 'avatar')).avatar
-                }
-            }
-        }
-
-    }
-
 
     return post;
 }

@@ -15,6 +15,8 @@ module.exports = function(app){
 
     require('./post')(app, ctrl);
 
+    require('./comment')(app, ctrl);
+
     //404
     app.use(function* (){
         var data;

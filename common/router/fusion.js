@@ -15,11 +15,11 @@ module.exports = function(app, control){
     //forgot
     app.get('/forgat',control.fusion.forgat);
     //profile
-    app.get('/profile',control.fusion.profile);
+    app.get('/profile',control.user.checkNotLogin, control.fusion.profile);
     //publish
-    app.get('/publish',control.fusion.publish);
+    app.get('/publish',control.user.checkNotLogin, control.fusion.publish);
     //notifications
-    app.get('/notifications', control.notification.all);
+    app.get('/notifications', control.user.checkNotLogin, control.notification.all);
 
 
 }

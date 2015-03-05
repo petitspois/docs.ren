@@ -2,15 +2,28 @@
  * Created by petitspois on 15/3/2.
  */
 define(['petitspois','loadin'], function ($, loadin) {
+
+    //提交评论
     $('#comment-btn').on('click', function () {
         var content = document.getElementById('comment-content').value || '',
             pathname = location.pathname,
             pid = pathname.slice(pathname.lastIndexOf('/')+1) || -1;
             loadin.show('load');
+
         $.ajax({url: '/comment', type: 'POST', data: {comment:content,pid:pid}}).then(function (ret) {
             var strArr = [];
             ret = JSON.parse(ret);
             if(ret.status){
+
+                //not signin
+                if(2 === ret.status){
+                    loadin.show('alert',ret.msg, 'success');
+                    setTimeout(function(){
+                        location.pathname = '/signin';
+                    },700)
+                    return;
+                }
+                //插入即将
                 var wrap = document.createElement('div');
                 wrap.className = 'each-comments';
                 strArr.push('<a class="pull-left thumb-sm">');
@@ -28,10 +41,18 @@ define(['petitspois','loadin'], function ($, loadin) {
             }
 
         }, function () {})
+
     });
 
+    //评论删除
     var $del = $('#delete-comment');
     $del.on('click',function(){
-         console.log($(this).parent().parent().parent().attr())
+         var cid = $(this).parent('each-comments').attr('comment_id') || 0;
+         if(cid){
+             loadin.show('load');
+             $.ajax({url:'/removeComment', type:'POST', data:{cid:cid}}).then(function(ret){
+
+             },function(){})
+         }
     })
 })

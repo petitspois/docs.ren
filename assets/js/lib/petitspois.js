@@ -29,14 +29,14 @@ typeof function () {
         each: function (obj, cb) {
             var i = 0,
                 value;
-            if('function' == typeof obj){
+            if ('function' == typeof obj) {
                 var cb = obj,
                     len = this.length;
                 for (; i < len; i++) {
                     value = cb.apply((this[i] ), [i, this[i]]);
                     if (value === false)break;
                 }
-            }else{
+            } else {
                 var len = obj.length;
                 for (; i < len; i++) {
                     value = cb.apply(( obj[i] ), [i, obj[i]]);
@@ -47,10 +47,10 @@ typeof function () {
         on: function (type, cb, bubble) {
             bubble = bubble || false;
             var value;
-            petitspois.prototype.each(this,function(){
-                this['addEventListener'](type, function(e){
-                    value = cb.call(this,e);
-                    if(!value){
+            petitspois.prototype.each(this, function () {
+                this['addEventListener'](type, function (e) {
+                    value = cb.call(this, e);
+                    if (!value) {
                         //e.preventDefault();
                         e.stopPropagation();
                         e.stopImmediatePropagation();
@@ -134,32 +134,56 @@ typeof function () {
             this.length = len;
             return this;
         },
-        parent: function () {
-            this[0] = this[0].parentNode;
-            this.length = 1;
-            return this;
+        parent: function (selector) {
+
+            var node = this[0];
+
+            var parent = this[0] = node.parentNode;
+
+            if (selector && parent) {
+
+                if (parent.className && -1 != parent.className.indexOf(selector)) {
+                    this[0] = parent;
+                    this.length = 1;
+                    return this;
+                } else if('BODY' == parent.nodeName){
+                    this[0] = parent;
+                    this.length = 1;
+                    return this;
+                } else {
+                    return this.parent(selector);
+                }
+
+            } else {
+                this[0] = parent;
+                this.length = 1;
+                return this;
+            }
+
         },
-        siblings:function(){
+
+        siblings: function () {
             this[0] = this[0].nextElementSibling;
-            this.length =1;
+            this.length = 1;
             return this;
         },
         end: function () {
             petitspois.mixIn(this, this.ancestor);
             return this;
         },
-        load:function(url, cb){
+        load: function (url, cb) {
             var me = this;
             petitspois.ajax({
-                url:url,
-                dataType:'html'
-            }).then(function(responseText){
+                url: url,
+                dataType: 'html'
+            }).then(function (responseText) {
                 me[0].innerHTML = responseText;
                 cb();
-            },function(){});
+            }, function () {
+            });
         },
-        attr:function(attribute){
-
+        attr: function (attribute) {
+            return this[0].getAttribute(attribute);
         }
     }
 
@@ -317,7 +341,7 @@ typeof function () {
                 opts.url += (~opts.url.indexOf('?') ? '&' : '?') + param(opts.data);
                 opts.data = null;
             } else {
-                opts.data = opts.contentType ? param(opts.data):opts.data;
+                opts.data = opts.contentType ? param(opts.data) : opts.data;
             }
         }
 

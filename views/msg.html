@@ -6,7 +6,8 @@
 {% endblock %}
 {% block commonloadjs %}
 <script>
-    var time = {{time}}
+    var time = {{time}},
+        url = '{{url}}' || '/'
     ,skip = function(){
         --time;
         document.getElementById('time').innerHTML = time;
@@ -27,7 +28,7 @@
     cskip = setTimeout(skip, 1000);
 
     function _skipclick(){
-        location.replace('/');
+        location.replace(url);
     }
 </script>
 {% endblock%}

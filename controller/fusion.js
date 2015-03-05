@@ -67,8 +67,6 @@ module.exports = function(){
                 title:'个人中心',
                 user:yield userModel.get({email:this.session.user.email})
             });
-        }else{
-            this.redirect('/signin');
         }
     }
     //publish
@@ -79,13 +77,8 @@ module.exports = function(){
                 secondtitle:'发布文章',
                 user:yield userModel.get({email:this.session.user.email})
             });
-        }else{
-            this.redirect('/signin');
         }
     }
-
-
-
 
 
     return fusion;

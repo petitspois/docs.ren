@@ -101,6 +101,15 @@ module.exports = function () {
         }
     }
 
+    //checklogin
+    user.checkNotLogin = function* (next) {
+        if (!this.session.user) {
+            this.body = yield this.msg('/signin','未登陆','未登陆');
+        }else{
+            yield next;
+        }
+    }
+
     //profile
     user.profile = function* (){
         var body = this.request.body,

@@ -16,10 +16,14 @@ for (var key in models) {
 
     var schema = models[key];
 
+
+    //create
     schema.static('add', function(data){
         return this.create(data);
     });
 
+
+    //get
     schema.static('get',function(data, name){
         return this.findOne(data, name).exec();
     });
@@ -32,8 +36,20 @@ for (var key in models) {
         return this.findOne(query).populate('author').exec();
     });
 
+    schema.static('getAvatar',function(query){
+        return this.findOne(query).populate('author').exec();
+    });
+
+
+    //update
     schema.static('update',function(conditions,update){
         return this.findOneAndUpdate(conditions,update).exec();
+    });
+
+
+    //remove
+    schema.static('findByIdAndRemove',function(query){
+        return this.findOne(query).populate('author').exec();
     });
 
 

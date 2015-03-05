@@ -52,8 +52,8 @@ module.exports = function(){
     //init methods
     app.context.render = render = views(conf.views, { map:{ html:'swig' } });
 
-    app.context.msg = function(val,title){
-        return render('msg',{msg:val,secondtitle:title,time:5});
+    app.context.msg = function(url, val, title){
+        return render('msg',{url:url,msg:val,secondtitle:title,time:5});
     };
 
     //routers

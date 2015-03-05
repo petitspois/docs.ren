@@ -2773,7 +2773,7 @@ var rootjQuery,
 					}
 
 					return this;
-					alert(555)
+
 				// HANDLE: $(#id)
 				} else {
 					elem = document.getElementById( match[2] );

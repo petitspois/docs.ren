@@ -9,8 +9,5 @@ module.exports = function(app, control){
     //post
     app.get('/post/:id', control.post.post);
 
-    //comments
-    app.post('/comment', control.post.comment);
-
 
 }
