@@ -13,7 +13,7 @@
     "koa-router":"3.8.0",
     "koa-logger": "1.2.2",
     "koa-session": "3.1.0",
-    "koa-static-cache":"~3.0.1",
+    "koa-static-cache":"*",
     "koa-bodyparser": "1.0.1",
     "co":"~4.1.0",
     "co-views":"*",

@@ -128,7 +128,7 @@ module.exports = function () {
             if(/custom/.test(imgName.avatar)){
                 imgName = 'assets'+imgName.avatar;
             }else{
-                imgName = 'assets/customavatar/petitspois:'+(+new Date)+(Math.random()*1000|0)+'.png';
+                imgName = 'assets/customavatar/petitspois'+(+new Date)+(Math.random()*1000|0)+'.png';
             }
 
             yield fs.writeFile(imgName,imgbuffer);

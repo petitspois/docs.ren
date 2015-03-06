@@ -3,7 +3,7 @@
 const ROOT = module.exports = __dirname;
 
 //调用index bootstrap
-require(ROOT+'/common')();
+require(ROOT+'/server')();
 
 
 
