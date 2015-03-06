@@ -179,7 +179,10 @@
                                 <a id="delete-comment" class="btn-xs" href="javascript:;"><i class="fa fa-trash-o"></i></a>
                                 {% endif %}
 
-                                <a id="reply-comment" class="btn-xs pull-right" href="javascript:;"><i class="fa fa-reply"></i></a>
+                                {% if comment.name != user.nickname %}
+                                    <a id="reply-comment" class="btn-xs pull-right" href="javascript:;"><i class="fa fa-reply"></i></a>
+                                {% endif %}
+
 
                                 {% if 2 == comment.author.role %}
                                 <label class="label bg-dark m-l-xs">Admin</label>
@@ -194,25 +197,29 @@
                                     {{comment.createtime}}
                                   </span>
                             </div>
-                            <div class="m-t-sm">
+                            <div class="m-t-sm reply-wrap">
+                                {% if comment.reply %}
+                                    <a href="">@{{comment.reply}}</a>&nbsp;&nbsp;
+                                {% endif %}
                                 {% autoescape false %}
                                 {{comment.comment}}
                                 {% endautoescape %}
                             </div>
 
                             <!--reply-->
+                            {% if comment.name != user.nickname %}
                                 <div class="reply panel b-a fade-in-down hide">
-                                    <div class="panel-heading b-b b-light">
+                                    <div class="panel-heading b-b b-light" reply-name="{{comment.name}}">
                                         @{{comment.name}}
                                     </div>
                                     <textarea class="comment-content form-control" rows="1" placeholder="评论说点什么吧"></textarea>
                                     <div class="panel-footer bg-light lt">
-                                        <button id="comment-btn" class="btn btn-success w-xs font-bold">发表回复</button>
+                                        <button id="reply-btn" class="btn btn-success w-xs font-bold">发表回复</button>
                                         <div class="btn pull-right"><a href="" class="markSyn">支持Github风格的Markdown语法</a>
                                         </div>
                                     </div>
-
                                 </div>
+                            {% endif %}
                             <!--end reply-->
                         </div>
                     </div>

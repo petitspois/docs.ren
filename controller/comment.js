@@ -26,7 +26,8 @@ module.exports = function () {
     comment.comment = function* () {
         var body = this.request.body,
             comment = body.comment,
-            pid = body.pid;
+            pid = body.pid,
+            reply = body.reply;
 
         if(!this.session.user){
             this.body = {
@@ -54,18 +55,28 @@ module.exports = function () {
             author: userId
         }
 
+        if(reply){
+            commentData.reply = reply;
+        }
+
         var commented = yield commentModel.add(commentData);
+
+        var backData = {
+            name:this.session.user.nickname,
+            createtime:'即将',
+            comment:marked(comment),
+            avatar:(yield userModel.get({email:this.session.user.email}, 'avatar')).avatar
+        }
+
+        if(reply){
+            backData.reply = reply;
+        }
 
         if (commented) {
             this.body = {
                 msg: '发布成功',
                 status: 1,
-                data: {
-                    name:this.session.user.nickname,
-                    createtime:'即将',
-                    comment:marked(comment),
-                    avatar:(yield userModel.get({email:this.session.user.email}, 'avatar')).avatar
-                }
+                data: backData
             }
         }
 

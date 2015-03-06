@@ -15704,3 +15704,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .bg1{
     background: #dde6e9;
 }
+.reply-wrap a{
+    font-weight: bold;
+    color:#428bca;
+}
+
+.reply-wrap a:hover{
+    color:#08c;
+}
+.reply-wrap p {
+    display:inline;
+}

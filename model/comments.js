@@ -23,6 +23,10 @@ var comments = new Schema({
         type: String,
         required: false
     }
+    , reply:{
+        type: String,
+        required: false
+    }
     , createtime: {
         type: Date,
         required: false,

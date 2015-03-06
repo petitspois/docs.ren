@@ -286,6 +286,10 @@ typeof function () {
         return target;
     }
 
+    petitspois.trim = function(str){
+        return str.replace(/^\s+|\s+$/g, '');
+    }
+
     var settings = {
         url: '',
         type: 'GET',
