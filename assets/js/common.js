@@ -27,12 +27,18 @@ typeof function (window) {
 
             //nav
             me.loadNav();
+
+            //check notifications
+            me.checkNotice();
         },
         showHideAside: function () {
             require(['effect/showhideaside']);
         },
         loadNav:function(){
             require(['nav']);
+        },
+        checkNotice:function(){
+            require(['notification/notification']);
         }
     }
 

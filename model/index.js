@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
     models = {
         user: require('./user'),
         post:require('./post'),
-        comment:require('./comments')
+        comment:require('./comments'),
+        notification:require('./notification')
     };
 
 for (var key in models) {
@@ -36,6 +37,9 @@ for (var key in models) {
         return this.findOne(query).populate('author').exec();
     });
 
+    schema.static('byId',function(id){
+        return this.findById(id).exec();
+    });
 
     //update
     schema.static('update',function(conditions,update){

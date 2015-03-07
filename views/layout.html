@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="/css/app.css" type="text/css">
     {% block style %}
     {% endblock %}
+    <script>
+        var USER = '{{user.sex}}';
+    </script>
 </head>
 <body>
 <div class="app app-header-fixed app-aside-folded" id="app">
@@ -107,7 +110,7 @@
                 <li class="nav-dropdown-toggle">
                     <a href="/notifications">
                         <i class="not-icon fa fa-inbox"></i>
-                        <span class="not-icon-msg"></span>
+                        <span class="not-icon-msg hide fade-in-left ng-enter"></span>
                     </a>
                 </li>
 

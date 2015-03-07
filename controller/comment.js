@@ -5,6 +5,7 @@
 var model = require('../model/').post,
     userModel = require('../model/').user,
     commentModel = require('../model/').comment,
+    notificationModel = require('../model/').notification,
     marked = require('../assets/js/editor/marked');
     marked.setOptions({
         renderer: new marked.Renderer(),
@@ -57,6 +58,17 @@ module.exports = function () {
 
         if(reply){
             commentData.reply = reply;
+
+            //notification
+            var notificationData = {
+                type:'post',
+                source:this.session.user._id || (yield userModel.get({email:this.session.user.email},'_id'))._id,
+                target:(yield userModel.get({nickname:reply},'_id'))._id,
+                resource:pid
+            }
+
+            yield notificationModel.add(notificationData);
+
         }
 
         var commented = yield commentModel.add(commentData);

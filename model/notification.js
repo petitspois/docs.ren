@@ -13,13 +13,13 @@ var notification = new Schema({
         required: true
     },
     // 来源
-    who: {
+    source: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'user'
     },
     // 目标
-    me: {
+    target: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'user'
@@ -28,6 +28,11 @@ var notification = new Schema({
     resource: {
         type: mongoose.Schema.Types.ObjectId,
         required: false
+    },
+    //是否已读
+    hasRead:{
+        type:Boolean,
+        default:false
     },
     // 激活时间
     noticeAt: {

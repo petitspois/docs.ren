@@ -17,6 +17,8 @@ module.exports = function(app){
 
     require('./comment')(app, ctrl);
 
+    require('./notification')(app, ctrl);
+
     //404
     app.use(function* (){
         var data;
