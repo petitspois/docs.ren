@@ -79,27 +79,26 @@
 
 
 
-                <div class="panel tab-pane active " id="activities">
+                <!--<div class="panel tab-pane active " id="activities">-->
                     <ul class="list-group alt">
-
-
-                        <li class="list-group-item">
-                            <a href="#" class="thumb-sm pull-left m-r-sm">
-                                <img src="images/a0.png" class="img-circle">
+                        {% if !notices.length %}
+                             <li class="list-group-item text-center">无数据</li>
+                        {% endif %}
+                        {% for notice in notices%}
+                            {% if notice.hasRead %}
+                             <li class="list-group-item read" notice_id="{{notice.id}}">
+                            {% else %}
+                            <li class="list-group-item" notice_id="{{notice.id}}">
+                            {% endif %}
+                            <a pp-href="/{{notice.type}}/{{notice.rid}}" class="already clear">
+                                <small class="pull-right">{{notice.noticeAt}}</small>
+                                <small><span class="text-info">{{notice.source}}</span> 在你的《{{notice.operate}}》上有了新回复。</small>
                             </a>
-                            <a href="#" class="clear">
-                            <small class="pull-right">3 minuts ago</small>
-                            <small><span class="text-info">云淡然</span> 在你的《路由中加入参数后，static 目录失效？》上回复道：“写绝对路径” ...</small>
-                        </a>
                         </li>
-
+                        {% endfor %}
 
                     </ul>
-                </div>
-
-
-
-
+                <!--</div>-->
 
 
 
@@ -111,4 +110,10 @@
     </div>
 
 
+{% endblock %}
+{% block loadjs %}
+<script>
+    //already
+    require(['notification/noticecore']);
+</script>
 {% endblock %}

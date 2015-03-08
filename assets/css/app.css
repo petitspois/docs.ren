@@ -15715,3 +15715,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .reply-wrap p {
     display:inline;
 }
+.read{
+    background: #f1f1f1;
+}
+.read a{
+    color:#aaa;
+}
