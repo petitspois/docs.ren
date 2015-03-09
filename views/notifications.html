@@ -90,9 +90,13 @@
                             {% else %}
                             <li class="list-group-item" notice_id="{{notice.id}}">
                             {% endif %}
-                            <a pp-href="/{{notice.type}}/{{notice.rid}}" class="already clear">
+                            <a pp-href="/{{notice.type}}/{{notice.rid}}#{{notice.location}}" class="already clear">
                                 <small class="pull-right">{{notice.noticeAt}}</small>
-                                <small><span class="text-info">{{notice.source}}</span> 在你的《{{notice.operate}}》上有了新回复。</small>
+                                {% if notice.hasReply %}
+                                    <small><span class="text-info">{{notice.source}}</span> 在《{{notice.operate}}》上@了你。</small>
+                                {% else %}
+                                    <small><span class="text-info">{{notice.source}}</span> 在你的《{{notice.operate}}》上有了新回复。</small>
+                                {% endif %}
                             </a>
                         </li>
                         {% endfor %}

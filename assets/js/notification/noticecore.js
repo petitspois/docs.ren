@@ -7,9 +7,9 @@ define(['petitspois','vue'],function($, Vue){
         var nid = $(this).parent().attr('notice_id') || -1,
             skip = $(this).attr('pp-href');
         $.ajax({url:'/already',type:'POST',data:{nid:nid}}).then(function(){
-            location.pathname = skip;
+            location.href = decodeURIComponent(skip);
         },function(){
-            location.pathname = skip;
+            location.href = decodeURIComponent(skip);
         });
     });
 })

@@ -56,23 +56,31 @@ module.exports = function () {
             author: userId
         }
 
-        if(reply){
-            commentData.reply = reply;
+        reply && (commentData.reply = reply);
 
-            //notification
-            var notificationData = {
-                type:'post',
-                source:this.session.user._id || (yield userModel.get({email:this.session.user.email},'_id'))._id,
-                target:(yield userModel.get({nickname:reply},'_id'))._id,
-                resource:pid
-            }
-
-            yield notificationModel.add(notificationData);
-
-        }
-
+        //save commentData
         var commented = yield commentModel.add(commentData);
 
+        //notification
+        var notificationData = {
+            type:'post',
+            source:this.session.user._id || (yield userModel.get({email:this.session.user.email},'_id'))._id,
+            resource:pid,
+            location:(yield commentModel.get({name:commentData.name},'','-createtime'))._id
+        }
+
+        if(reply){
+            notificationData.hasReply = true;
+            notificationData.target = (yield userModel.get({nickname:reply},'_id'))._id;
+        }else{
+            notificationData.target = (yield model.get({_id:pid})).author;
+        }
+
+        //save notifications
+        yield notificationModel.add(notificationData);
+
+
+        //async callbacks
         var backData = {
             name:this.session.user.nickname,
             createtime:'即将',
@@ -80,9 +88,7 @@ module.exports = function () {
             avatar:(yield userModel.get({email:this.session.user.email}, 'avatar')).avatar
         }
 
-        if(reply){
-            backData.reply = reply;
-        }
+        reply && (backData.reply = reply);
 
         if (commented) {
             this.body = {

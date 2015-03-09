@@ -16,7 +16,7 @@ define(['petitspois', 'loadin'], function ($, loadin) {
     var $del = $('#delete-comment');
     $del.on('click', function () {
         var $delNode = $(this).parent('each-comments'),
-            cid = $delNode.attr('comment_id') || 0;
+            cid = $delNode.attr('id') || 0;
         if (cid) {
             loadin.show('load');
             $.ajax({url: '/removecomment', type: 'POST', data: {cid: cid}}).then(function (ret) {
@@ -47,6 +47,13 @@ define(['petitspois', 'loadin'], function ($, loadin) {
              replyName = $topNode.previousElementSibling.getAttribute('reply-name'),
              pid = location.pathname.slice(location.pathname.lastIndexOf('/') + 1) || -1;
              pushComment({comment: replyContent,pid:pid,reply:replyName});
+             setTimeout(function(){
+                   $('.reply').each(function(){
+                       if($(this).hasClass('ng-enter')){
+                            $(this).remove('ng-enter');
+                       }
+                   });
+             })
     });
 
 

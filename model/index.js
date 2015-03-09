@@ -25,8 +25,8 @@ for (var key in models) {
 
 
     //get
-    schema.static('get',function(data, name){
-        return this.findOne(data, name).exec();
+    schema.static('get',function(data, name, sort){
+        return this.findOne(data, name).sort(sort).exec();
     });
 
     schema.static('getAll',function(query, sort){

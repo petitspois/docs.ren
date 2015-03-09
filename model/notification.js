@@ -29,6 +29,16 @@ var notification = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: false
     },
+    //定位object
+    location:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: false
+    },
+    //是否已读
+    hasReply:{
+        type:Boolean,
+        default:false
+    },
     //是否已读
     hasRead:{
         type:Boolean,

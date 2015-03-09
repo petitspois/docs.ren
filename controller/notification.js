@@ -30,6 +30,7 @@ module.exports = function(){
                 item.source = (yield userModel.byId(item.source)).nickname;
                 item.rid = String(item.resource);
                 item.id = String(item._id);
+                item.location = String(item.location);
                 if('post' == item.type ) {
                     item.operate = (yield postModel.byId(item.resource)).title;
                 }
