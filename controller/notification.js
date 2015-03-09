@@ -12,15 +12,45 @@ module.exports = function(){
     var notification = {};
 
     notification.all = function* (){
-        var data = {};
+
+        var type = this.request.body && (this.request.body.type || 'all'),
+
+            sortNotice = 'hasRead -noticeAt',
+
+            data = {},
+
+            query = {};
+
         //title
         data.title = '通知中心';
         //user
         if(this.session.user){
             data.user = yield userModel.get({email:this.session.user.email});
         }
+
+        switch (type){
+            case 'all':
+                query.target = this.session.user._id;
+                break;
+            case 'unread':
+                query.target = this.session.user._id;
+                query.hasRead = false;
+                sortNotice = '-noticeAt';
+                break;
+            case 'at':
+                noticeGet({url:'/notification',type:'POST',data:{type:'at'}});
+                break;
+            case 'comment':
+                noticeGet({url:'/notification',type:'POST',data:{type:'comment'}});
+                break;
+            case 'system':
+                noticeGet({url:'/notification',type:'POST',data:{type:'system'}});
+                break;
+        }
+
+
         //notice
-        var notice = yield notificationModel.getAll({target:this.session.user._id},'hasRead -noticeAt'),
+        var notice = yield notificationModel.getAll(query, sortNotice),
             noticeLen = notice.length
 
         if(noticeLen){
@@ -41,7 +71,14 @@ module.exports = function(){
 
         }
 
-        this.body = yield this.render('notifications',data);
+        console.log(notice)
+
+        if(type){
+            this.body = data;
+        }else{
+            this.body = yield this.render('notifications',data);
+        }
+
     }
 
     notification.unread = function* (){

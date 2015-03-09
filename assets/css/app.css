@@ -15721,3 +15721,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .read a{
     color:#aaa;
 }
+#notice-content li{
+    cursor:pointer;
+}

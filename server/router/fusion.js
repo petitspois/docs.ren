@@ -21,5 +21,4 @@ module.exports = function(app, control){
     //notifications
     app.get('/notifications', control.user.checkNotLogin, control.notification.all);
 
-
 }

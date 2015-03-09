@@ -9,6 +9,7 @@ module.exports = function(app, control){
     //already
     app.post('/already',control.notification.already);
 
-
+    //all
+    app.post('/notification',control.notification.all);
 
 }

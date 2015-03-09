@@ -5,12 +5,12 @@
 {% block content %}
 
 
-    <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
+    <div id="notice" class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
         <!-- main -->
         <div class="col w bg-light dker bg-auto">
             <h4 class="m-n wrapper">通知中心</h4>
-            <ul class="list-group no-radius no-border no-bg list-group-lg">
-                <li class="list-group-item active">
+            <ul id="notice-content" class="list-group no-radius no-border no-bg list-group-lg">
+                <li v-on="click:noticedata('all',$event)" class="list-group-item active">
                     <a class="m-r-sm pull-left">
                         <i class="fa fa-inbox"></i>
                     </a>
@@ -20,7 +20,7 @@
                         <span class="text-muted"> -- 04:35</span>
                     </div>
                 </li>
-                <li class="list-group-item">
+                <li v-on="click:noticedata('unread',$event)" class="list-group-item">
                     <a class="m-r-sm pull-left">
                         <i class="fa fa-envelope"></i>
                     </a>
@@ -30,7 +30,7 @@
                         <span class="text-muted"> -- 04:15</span>
                     </div>
                 </li>
-                <li class="list-group-item">
+                <li v-on="click:noticedata('at',$event)" class="list-group-item">
                     <a class="m-r-sm pull-left">
                         <i class="fa fa-heart"></i>
                     </a>
@@ -40,7 +40,7 @@
                         <span class="text-muted"> -- 02:25</span>
                     </div>
                 </li>
-                <li class="list-group-item">
+                <li v-on="click:noticedata('comment',$event)" class="list-group-item">
                     <a class="m-r-sm pull-left">
                         <i class="fa fa-comment"></i>
                     </a>
@@ -50,7 +50,7 @@
                         <span class="text-muted"> -- 05:00</span>
                     </div>
                 </li>
-                <li class="list-group-item">
+                <li v-on="click:noticedata('system', $event)" class="list-group-item">
                     <a class="m-r-sm pull-left">
                         <i class="fa fa-bell"></i>
                     </a>
@@ -79,30 +79,20 @@
 
 
 
-                <!--<div class="panel tab-pane active " id="activities">-->
-                    <ul class="list-group alt">
-                        {% if !notices.length %}
-                             <li class="list-group-item text-center">无数据</li>
-                        {% endif %}
-                        {% for notice in notices%}
-                            {% if notice.hasRead %}
-                             <li class="list-group-item read" notice_id="{{notice.id}}">
-                            {% else %}
-                            <li class="list-group-item" notice_id="{{notice.id}}">
-                            {% endif %}
-                            <a pp-href="/{{notice.type}}/{{notice.rid}}#{{notice.location}}" class="already clear">
-                                <small class="pull-right">{{notice.noticeAt}}</small>
-                                {% if notice.hasReply %}
-                                    <small><span class="text-info">{{notice.source}}</span> 在《{{notice.operate}}》上@了你。</small>
-                                {% else %}
-                                    <small><span class="text-info">{{notice.source}}</span> 在你的《{{notice.operate}}》上有了新回复。</small>
-                                {% endif %}
+                    <ul id="notice-wrap" class="list-group alt">
+                        <li v-if="!notices.length" class="list-group-item text-center">无数据</li>
+
+
+                             <li v-repeat="notice:notices" class="list-group-item (% notice.hasRead ? 'read':'' %)" notice_id="(% notice.id %)">
+
+                            <a pp-href="/(% notice.type %)/(% notice.rid %)#(% notice.location %)" class="already clear">
+                                    <small class="pull-right" v-text="notice.noticeAt"></small>
+                                    <small v-if="notice.hasReply" ><span class="text-info" v-text="notice.source"></span> 在《(%notice.operate%)》上@了你。</small>
+                                    <small v-if="!notice.hasReply"><span class="text-info" v-text="notice.source"></span> 在你的《(%notice.operate%)》上有了新回复。</small>
                             </a>
                         </li>
-                        {% endfor %}
 
                     </ul>
-                <!--</div>-->
 
 
 

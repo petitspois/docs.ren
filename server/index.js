@@ -56,13 +56,14 @@ module.exports = function(){
         return render('msg',{url:url,msg:val,secondtitle:title,time:5});
     };
 
-    app.use(function* (next) {
-        try {
-            yield next;
-        } catch (err) {
-            this.redirect('/404');
-        }
-    });
+    //Error Handling
+    //app.use(function* (next) {
+    //    try {
+    //        yield next;
+    //    } catch (err) {
+    //        this.redirect('/404');
+    //    }
+    //});
 
     //routers
     router(app);
