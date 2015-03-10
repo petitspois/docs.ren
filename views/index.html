@@ -109,10 +109,9 @@
     <div class="col">
         <div class="wrapper bg-light lter b-b">
             <div class="btn-group pull-right">
-                <button type="button" class="btn btn-sm btn-bg btn-default"><i class="fa fa-chevron-left"></i>
-                </button>
-                <button type="button" class="btn btn-sm btn-bg btn-default"><i class="fa fa-chevron-right"></i>
-                </button>
+                <button class="btn btn-sm btn-bg btn-default disabled">{{page.page}}</button>
+                <a href="/?p={{page.page-1}}" class="btn btn-sm btn-bg btn-default {% if 1 == page.page %}disabled{% endif %}"><i class="fa fa-chevron-left"></i></a>
+                <a href="/?p={{page.page+1}}" class="btn btn-sm btn-bg btn-default {% if page.total == page.page %}disabled{% endif %}"><i class="fa fa-chevron-right"></i></a>
             </div>
             <div class="btn-toolbar">
                 <div class="btn-group dropdown">

@@ -17,7 +17,9 @@ module.exports = function(){
     //index
     fusion.getHome = function* (){
 
-        var posts = yield postModel.getAll({},'-createtime');
+        var page = parseInt(this.query.p) ? Math.abs(parseInt(this.query.p)) : 1,
+            posts = yield postModel.getAll({},'-createtime',page, 10),
+            total = Math.ceil((yield postModel.querycount({}))/10);
 
         for(var i = 0;i<posts.length;i++){
             posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;
@@ -31,10 +33,21 @@ module.exports = function(){
             this.body = yield this.render('index',{
                 title:'首页',
                 user:yield userModel.get({email:this.session.user.email}),
-                posts:posts
+                posts:posts,
+                page:{
+                    total:total,
+                    page:page
+                }
             });
         }else{
-            this.body = yield this.render('index',{title:'首页',posts:posts});
+            this.body = yield this.render('index',{
+                title:'首页',
+                posts:posts,
+                page:{
+                    total:total,
+                    page:page
+                }
+            });
         }
 
     }

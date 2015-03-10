@@ -29,8 +29,8 @@ for (var key in models) {
         return this.findOne(data, name).sort(sort).exec();
     });
 
-    schema.static('getAll',function(query, sort){
-        return this.find(query).sort(sort).lean().exec();
+    schema.static('getAll',function(query, sort, skip, limit){
+        return this.find(query).skip((skip-1)*limit).limit(limit).sort(sort).lean().exec();
     });
 
     schema.static('getAvatar',function(query){
@@ -50,6 +50,11 @@ for (var key in models) {
     //remove
     schema.static('byidRemove',function(id){
         return this.findByIdAndRemove(id).exec();
+    });
+
+    //count
+    schema.static('querycount',function(query){
+        return this.count(query).exec();
     });
 
 

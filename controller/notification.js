@@ -74,7 +74,6 @@ module.exports = function(){
                 notice = yield filter(notice, function* (item){
                     return  (yield userModel.get({nickname:item.source},'role')).role>1;
                 })
-                console.log(notice)
             }
 
             data.notices = notice;
