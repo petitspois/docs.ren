@@ -10,7 +10,7 @@
         <div class="col w bg-light dker bg-auto">
             <h4 class="m-n wrapper">通知中心</h4>
             <ul id="notice-content" class="list-group no-radius no-border no-bg list-group-lg">
-                <li v-on="click:noticedata('all',$event)" class="list-group-item active">
+                <li id="triggle-all" v-on="click:noticedata('all',$event)" class="list-group-item active">
                     <a class="m-r-sm pull-left">
                         <i class="fa fa-inbox"></i>
                     </a>
@@ -79,17 +79,18 @@
 
 
 
-                    <ul id="notice-wrap" class="list-group alt">
-                        <li v-if="!notices.length" class="list-group-item text-center">无数据</li>
+                    <ul class="list-group alt">
+                        <li v-if="!notices" class="list-group-item text-center" style="background: none;border: none">无数据</li>
 
 
-                             <li v-repeat="notice:notices" class="list-group-item (% notice.hasRead ? 'read':'' %)" notice_id="(% notice.id %)">
+                        <li v-repeat="notice:notices" class="list-group-item (% notice.hasRead ? 'read':'' %)" notice_id="(% notice.id %)">
 
-                            <a pp-href="/(% notice.type %)/(% notice.rid %)#(% notice.location %)" class="already clear">
+                            <a v-on="click:already" pp-href="/(% notice.type %)/(% notice.rid %)#(% notice.location %)" class="already clear">
                                     <small class="pull-right" v-text="notice.noticeAt"></small>
                                     <small v-if="notice.hasReply" ><span class="text-info" v-text="notice.source"></span> 在《(%notice.operate%)》上@了你。</small>
                                     <small v-if="!notice.hasReply"><span class="text-info" v-text="notice.source"></span> 在你的《(%notice.operate%)》上有了新回复。</small>
                             </a>
+
                         </li>
 
                     </ul>

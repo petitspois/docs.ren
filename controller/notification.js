@@ -5,7 +5,8 @@
 var userModel = require('../model/').user,
     notificationModel = require('../model/').notification,
     postModel = require('../model/').post,
-    formatDate = require('../lib/format');
+    formatDate = require('../lib/format'),
+    filter = require('co-filter');
 
 module.exports = function(){
 
@@ -38,13 +39,15 @@ module.exports = function(){
                 sortNotice = '-noticeAt';
                 break;
             case 'at':
-                noticeGet({url:'/notification',type:'POST',data:{type:'at'}});
+                query.target = this.session.user._id;
+                query.hasReply = true;
                 break;
             case 'comment':
-                noticeGet({url:'/notification',type:'POST',data:{type:'comment'}});
+                query.target = this.session.user._id;
+                query.hasReply = false;
                 break;
             case 'system':
-                noticeGet({url:'/notification',type:'POST',data:{type:'system'}});
+                query.target = this.session.user._id;
                 break;
         }
 
@@ -67,11 +70,16 @@ module.exports = function(){
                 return item;
             });
 
+            if('system' == type){
+                notice = yield filter(notice, function* (item){
+                    return  (yield userModel.get({nickname:item.source},'role')).role>1;
+                })
+                console.log(notice)
+            }
+
             data.notices = notice;
 
         }
-
-        console.log(notice)
 
         if(type){
             this.body = data;

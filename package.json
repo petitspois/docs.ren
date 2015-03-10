@@ -18,6 +18,7 @@
     "co":"~4.1.0",
     "co-views":"*",
     "co-fs":"*",
+    "co-filter":"*",
     "mongoose": "^3.8.24",
     "moment": "^2.8.4",
     "xss": "*",
