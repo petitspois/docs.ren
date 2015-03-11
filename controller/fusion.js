@@ -93,6 +93,17 @@ module.exports = function(){
         }
     }
 
+    fusion.user = function* (){
+        var username = this.params;
+
+        this.body = yield this.render('user',{
+            title:'用户',
+            user:yield userModel.get({email:this.session.user.email})
+        });
+
+    }
+
+
 
     return fusion;
 

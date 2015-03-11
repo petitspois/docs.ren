@@ -15724,3 +15724,27 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 #notice-content li{
     cursor:pointer;
 }
+.avatar-user{
+    position: relative;
+
+}
+.avatar-user >div{
+    opacity:0;
+    width: 96px;
+    height:96px;
+    line-height: 96px;
+    position:absolute;
+    background:rgba(0,0,0,.9);
+    top:0;
+    color:white;
+    font-size:50px;
+    text-align: center;
+    -webkit-transition: opacity .25s ease-out;
+    -moz-transition: opacity .25s ease-out;
+    -ms-transition: opacity .25s ease-out;
+    transition: opacity .25s ease-out;
+}
+
+.avatar-user:hover div{
+    opacity: 1;
+}

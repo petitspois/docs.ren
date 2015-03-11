@@ -93,7 +93,7 @@ module.exports = function () {
         data.comments = comments;
         data.posts = posts;
         data.user = this.session.user;
-        console.log(posts)
+
         if (data.user) {
             data.user = yield userModel.get({email: data.user.email});
         }

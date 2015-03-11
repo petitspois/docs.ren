@@ -20,5 +20,7 @@ module.exports = function(app, control){
     app.get('/publish',control.user.checkNotLogin, control.fusion.publish);
     //notifications
     app.get('/notifications', control.user.checkNotLogin, control.notification.all);
+    //user
+    app.get('/user/:name', control.fusion.user);
 
 }
