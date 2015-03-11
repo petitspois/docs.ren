@@ -89,13 +89,63 @@ module.exports = function () {
             comments[i].cid = String(comments[i]._id);
         }
 
+        posts.role = (yield userModel.byId(posts.author)).role;
         data.comments = comments;
         data.posts = posts;
         data.user = this.session.user;
+        console.log(posts)
         if (data.user) {
             data.user = yield userModel.get({email: data.user.email});
         }
         this.body = yield this.render('post', data);
+    }
+
+    //edit
+    post.edit = function* (){
+        var id = this.params.id,
+            post = yield model.byId(id),
+            user = yield userModel.byId(this.session.user._id);
+        this.body = yield this.render('publish', {post:post,user:user,edit:post.id});
+    }
+
+    //post edit
+    post.postedit = function* (){
+        var body = this.request.body,
+            title = body.title,
+            content = body.content,
+            category = body.category,
+            tags = body.tags,
+            edit = body.edit;
+
+        if(edit){
+
+            var fineTags = [];
+
+            if (tags) {
+                tags.split(',').forEach(function (item, index) {
+                    if (item)fineTags.push(item);
+                });
+            }
+
+            var alterPost = {
+                title: title,
+                content: content,
+                description: content.slice(0, 80),
+                tags: fineTags,
+                category: category,
+                updatetime:Date.now()
+            }
+            yield model.update({_id:edit},{$set:alterPost});
+            this.body = {
+                msg: '更改成功',
+                status: 1
+            }
+        }else{
+            this.body = {
+                msg:'更新失败',
+                status:0
+            }
+        }
     }
 
     return post;

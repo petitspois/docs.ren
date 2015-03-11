@@ -17,7 +17,8 @@ define(['petitspois', 'vue', 'vueValidator','loadin', 'editor/editor'], function
                     title: '',
                     tags: '',
                     category: '',
-                    content: ''
+                    content: '',
+                    edit:''
                 }
             },
             methods: {
@@ -29,8 +30,11 @@ define(['petitspois', 'vue', 'vueValidator','loadin', 'editor/editor'], function
                     }else{
                         loadin.show('alert', '文章内容不能为空', 'danger');
                     }
+
+                    var url = this.post.edit ? '/postedit':'/publish';
+
                     loadin.show('load');
-                    $.ajax({type:'POST',url:'/publish',data:this.$data.post}).then(function(ret){
+                    $.ajax({type:'POST',url: url,data:this.$data.post}).then(function(ret){
                         ret = JSON.parse(ret);
                         if(ret.status){
                             location.href = '/';

@@ -3,7 +3,7 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="css/editor.css" type="text/css">
+    <link rel="stylesheet" href="/css/editor.css" type="text/css">
 {% endblock%}
 {% block secondtitle %}{{secondtitle}}{% endblock %}
 
@@ -22,7 +22,7 @@
                         <label class="col-sm-2 control-label">标题</label>
 
                         <div class="col-sm-10">
-                            <input type="text" v-model="post.title" v-validate="minLength:10" class="form-control" autofocus placeholder="标题字数 10 字以上">
+                            <input type="text" v-model="post.title" v-validate="minLength:10" class="form-control" autofocus placeholder="标题字数 10 字以上" value="{{post.title}}">
                         </div>
                     </div>
 
@@ -33,7 +33,7 @@
                         <label class="col-sm-2 control-label">标签</label>
 
                         <div class="col-sm-10">
-                            <input type="text" v-model="post.tags" class="form-control" placeholder="tag:多个标签请用英文逗号（,）分开">
+                            <input type="text" v-model="post.tags" class="form-control" placeholder="tag:多个标签请用英文逗号（,）分开" value="{{post.tags}}">
                         </div>
                     </div>
 
@@ -56,16 +56,22 @@
                         <label class="col-sm-2 control-label" style="padding-top: 15px;">文章内容</label>
 
                         <div class="col-sm-10">
-                            <textarea id="editor" v-model="post.content" placeholder="Content here ...."></textarea>
+                            <textarea id="editor" v-model="post.content" placeholder="Content here ....">{{post.content}}</textarea>
                         </div>
                     </div>
-
+                    <input type="hidden" v-model="post.edit" value="{{edit}}"/>
                     <!-- end editor -->
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
 
-                            <button type="submit" v-attr="disabled:!valid" v-on="click:submit" class="btn btn-primary">发 布</button>
+                            <button type="submit" v-attr="disabled:!valid" v-on="click:submit" class="btn btn-primary">
+                                {% if edit %}
+                                    更 改
+                                {% else %}
+                                    发 布
+                                {% endif %}
+                            </button>
                         </div>
                     </div>
                 </form>
