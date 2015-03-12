@@ -28,11 +28,18 @@ module.exports = function () {
             return;
         }
 
-        var user = yield model.get({email: email}, 'email');
+        var userEmail = yield model.get({email: email},'email'),
+            userNickname = yield model.get({nickname: name},'name');
 
-        if (user) {
+        if (userEmail) {
             this.body = {
                 msg: 'Email已经存在。',
+                status: 0
+            };
+            return;
+        }else if(userNickname){
+            this.body = {
+                msg: '用户名已经存在。',
                 status: 0
             };
             return;

@@ -12,4 +12,7 @@ module.exports = function(app, control){
     //profile
     app.post('/profile', control.user.profile);
 
+    //user
+    app.post('/user/:name', control.fusion.user);
+
 }

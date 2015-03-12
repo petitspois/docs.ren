@@ -94,12 +94,47 @@ module.exports = function(){
     }
 
     fusion.user = function* (){
-        var username = this.params;
+        var data = {},
+            username = this.params.name,
+            oppositeUser = yield userModel.get({nickname:username},'-password'),
+            page = parseInt(this.request.body && this.request.body.page) ? Math.abs(parseInt(this.request.body.page)) : 1,
+            posts = yield postModel.getAll({},'-createtime',page, 10),
+            poststotal = yield postModel.querycount({}),
+            remain = poststotal-page*10;
 
-        this.body = yield this.render('user',{
-            title:'用户',
-            user:yield userModel.get({email:this.session.user.email})
-        });
+            //title
+            data.title = username;
+
+
+            //user
+            if(this.session.user){
+                data.user = yield userModel.get({email:this.session.user.email}, '-password');
+            }
+
+            data.opposite = oppositeUser;
+
+
+             //posts
+            for(var i = 0;i<posts.length;i++){
+                posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;
+                posts[i].createtime = formatDate(posts[i].createtime, true);
+                posts[i].updatetime = formatDate(posts[i].updatetime, true);
+                posts[i].sex = (yield postModel.getAvatar({name:posts[i].name})).author.sex;
+                posts[i].flag = posts[i]['_id'].toString();
+            }
+
+            data.poststotal = poststotal;
+            data.oppositeposts = posts;
+
+
+        if(this.request.body && this.request.body.page){
+            this.body = {
+                data:data.oppositeposts,
+                extra:remain
+            };
+        }else{
+            this.body = yield this.render('user',data);
+        }
 
     }
 

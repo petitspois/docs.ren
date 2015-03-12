@@ -26,7 +26,7 @@ module.exports = function(){
         data.title = '通知中心';
         //user
         if(this.session.user){
-            data.user = yield userModel.get({email:this.session.user.email});
+            data.user = yield userModel.get({email:this.session.user.email},'-password');
         }
 
         switch (type){
@@ -54,7 +54,7 @@ module.exports = function(){
 
         //notice
         var notice = yield notificationModel.getAll(query, sortNotice),
-            noticeLen = notice.length
+            noticeLen = notice.length;
 
         if(noticeLen){
 
@@ -79,6 +79,7 @@ module.exports = function(){
             data.notices = notice;
 
         }
+
 
         if(type){
             this.body = data;

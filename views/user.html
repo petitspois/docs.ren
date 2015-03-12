@@ -5,29 +5,27 @@
     <div class="fade-in-down">
         <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
             <div class="col">
-                <div style="background:url({{user.cover}}) center center; background-size:cover">
+                <div style="background:url({{opposite.cover}}) center center; background-size:cover">
                     <div class="wrapper-lg bg-white-opacity">
                         <div class="row m-t">
                             <div class="col-sm-7">
                                 <a href="" class="thumb-lg pull-left m-r avatar-user">
-                                    <img src="{{user.avatar}}" class="img-circle">
+                                    <img src="{{opposite.avatar}}" class="img-circle">
+
                                     <div class="img-circle" title="1号会员">1</div>
                                 </a>
-
 
 
                                 <div class="clear m-b">
 
 
                                     <div class="m-b m-t-sm">
-                                        <span class="h3 text-black">{{user.nickname}}</span>
+                                        <span class="h3 text-black">{{opposite.nickname}}</span>
                                         <small class="m-l">{{user.location}}</small>
                                     </div>
                                     <p class="m-b">
-                                        <a href="{{user.github}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon">
-                                            <i class="fa fa-github"></i></a>
-                                        <a href="{{user.weibo}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i
-                                                class="fa fa-weibo"></i></a>
+                                        <a href="{{opposite.github}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon {% if !opposite.github %}disabled{% endif %}" target="_blank"><i class="fa fa-github"></i></a>
+                                        <a href="{{opposite.weibo}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon {% if !opposite.weibo %}disabled{% endif %}" target="_blank"><i class="fa fa-weibo"></i></a>
                                     </p>
                                     <a href="" class="btn btn-sm btn-success btn-rounded">Follow</a>
                                 </div>
@@ -51,23 +49,89 @@
                 </div>
 
 
-
                 <div class="wrapper bg-white b-b text-center">
                     <div id="tab-user" class="btn-group">
-                        <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty active"><i class="fa fa-check text-active"></i> petitspois的主题</label>
-                        <label class="btn btn-sm btn-success ng-untouched ng-valid ng-dirty"><i class="fa fa-check text-active"></i> petitspois的回复</label>
-                        <label class="btn btn-sm btn-primary ng-untouched ng-valid ng-dirty"><i class="fa fa-check text-active"></i> petitspois的关注</label>
+                        <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty active"><i
+                                class="fa fa-check text-active"></i> petitspois的主题</label>
+                        <label class="btn btn-sm btn-success ng-untouched ng-valid ng-dirty"><i
+                                class="fa fa-check text-active"></i> petitspois的回复</label>
+                        <label class="btn btn-sm btn-primary ng-untouched ng-valid ng-dirty"><i
+                                class="fa fa-check text-active"></i> petitspois的关注</label>
                     </div>
                 </div>
-
 
 
                 <div class="profile-sh fade-in-down show padder">
 
                 </div>
 
+                <script>
+                    var remain = {{poststotal-10}}
+                </script>
+
+
+                <div id="v-more" class="wrapper panel">
+
+                    <div class="panel-heading b-b b-light">
+                        <span class="badge bg-warning pull-right">{{poststotal}}</span>
+                        <a href="" class="font-bold">主题</a>
+                    </div>
+
+
+
+                    <ul class="list-group list-group-lg no-bg auto">
+
+                        {% for oppositepost in oppositeposts %}
+                        <li class="list-group-item clearfix">
+                            <div class="pull-right text-sm text-muted">
+                                <span class="hidden-xs ng-binding">{{oppositepost.createtime}}</span>
+                                <i class="fa fa-clock-o m-l-xs"></i>
+                            </div>
+                            <span class="pull-left thumb-sm avatar m-r">
+                              <img src="{{oppositepost.avatar}}" alt="...">
+                            </span>
+                            <span class="clear">
+                              <span>{{oppositepost.title}}</span>
+                              <small class="text-muted clear text-ellipsis">{{oppositepost.description}}</small>
+                            </span>
+
+                        </li>
+                        {% endfor%}
+
+                        <li v-repeat="op:ops" class="list-group-item clearfix">
+                            <div class="pull-right text-sm text-muted">
+                                <span class="hidden-xs ng-binding">(%op.createtime%)</span>
+                                <i class="fa fa-clock-o m-l-xs"></i>
+                            </div>
+                            <span class="pull-left thumb-sm avatar m-r">
+                              <img src="(%op.avatar%)" alt="...">
+                            </span>
+                            <span class="clear">
+                              <span>(%op.title%)</span>
+                              <small class="text-muted clear text-ellipsis">(%op.description%)</small>
+                            </span>
+
+                        </li>
+
+
+                    </ul>
+
+                    <div v-if="!!(extra>0)" class="clearfix panel-footer text-center">
+                        <a href="javascript:;" class="auto" v-on="click:more">
+
+                            <b v-if="!!(extra>0)" class="badge bg-info pull-right">(%extra%)</b>
+
+                            <i class="fa fa-angle-double-down"></i>
+
+                            <span>更多主题</span>
+                        </a>
+                    </div>
+                </div>
+
 
             </div>
+
+
 
 
 
@@ -82,7 +146,7 @@
                         <ul class="list-group no-bg no-borders ">
                             <li class="list-group-item">
                                 <a herf="" class="pull-left thumb-sm avatar m-r">
-                                    <img src="./assets/a4.jpg" alt="..."
+                                    <img src="/customavatar/petitspois142563129953387.png" alt="..."
                                          class="img-circle">
                                     <i class="on b-white bottom"></i>
                                 </a>
@@ -94,7 +158,7 @@
                             </li>
                             <li class="list-group-item">
                                 <a herf="" class="pull-left thumb-sm avatar m-r">
-                                    <img src="./assets/a5.jpg" alt="..."
+                                    <img src="/customavatar/petitspois142563129953387.png" alt="..."
                                          class="img-circle">
                                     <i class="on b-white bottom"></i>
                                 </a>
@@ -106,7 +170,7 @@
                             </li>
                             <li class="list-group-item">
                                 <a herf="" class="pull-left thumb-sm avatar m-r">
-                                    <img src="./assets/a6.jpg" alt="..."
+                                    <img src="/customavatar/petitspois142563129953387.png" alt="..."
                                          class="img-circle">
                                     <i class="busy b-white bottom"></i>
                                 </a>
@@ -118,7 +182,7 @@
                             </li>
                             <li class="list-group-item">
                                 <a herf="" class="pull-left thumb-sm avatar m-r">
-                                    <img src="./assets/a7.jpg" alt="..."
+                                    <img src="/customavatar/petitspois142563129953387.png" alt="..."
                                          class="img-circle">
                                     <i class="away b-white bottom"></i>
                                 </a>

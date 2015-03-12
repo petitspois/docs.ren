@@ -82,11 +82,11 @@
 
 
 
-                    <ul class="list-group alt">
+                    <ul v-cloak class="list-group alt">
                         <li v-if="!notices" class="list-group-item text-center" style="background: none;border: none">无数据</li>
 
 
-                        <li v-repeat="notice:notices" class="list-group-item (% notice.hasRead ? 'read':'' %)" notice_id="(% notice.id %)">
+                        <li  v-repeat="notice:notices" class="list-group-item (% notice.hasRead ? 'read':'' %)" notice_id="(% notice.id %)">
 
                             <a v-on="click:already" pp-href="/(% notice.type %)/(% notice.rid %)#(% notice.location %)" class="already clear">
                                     <small class="pull-right" v-text="notice.noticeAt"></small>
