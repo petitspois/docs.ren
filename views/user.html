@@ -71,10 +71,6 @@
 
                 </div>
 
-                <script>
-                    var remain = {{poststotal-10}}
-                </script>
-
 
                 <div id="v-more" class="wrapper panel">
 
@@ -86,37 +82,42 @@
 
 
                     <ul class="list-group list-group-lg no-bg auto">
+                        {% if !oppositeposts.length %}
+                             <div class="wrapper-lg text-center">无数据</div>
+                        {% endif %}
 
                         {% for oppositepost in oppositeposts %}
                         <li class="list-group-item clearfix">
-                            <div class="pull-right text-sm text-muted">
-                                <span class="hidden-xs ng-binding">{{oppositepost.createtime}}</span>
-                                <i class="fa fa-clock-o m-l-xs"></i>
-                            </div>
-                            <span class="pull-left thumb-sm avatar m-r">
-                              <img src="{{oppositepost.avatar}}" alt="...">
-                            </span>
-                            <span class="clear">
-                              <span>{{oppositepost.title}}</span>
-                              <small class="text-muted clear text-ellipsis">{{oppositepost.description}}</small>
-                            </span>
-
+                            <a href="{{oppositepost.url}}">
+                                <div class="pull-right text-sm text-muted">
+                                    <span class="hidden-xs ng-binding">{{oppositepost.createtime}}</span>
+                                    <i class="fa fa-clock-o m-l-xs"></i>
+                                </div>
+                                <span class="pull-left thumb-sm avatar m-r">
+                                  <img src="{{oppositepost.avatar}}" alt="...">
+                                </span>
+                                <span class="clear">
+                                  <span>{{oppositepost.title}}</span>
+                                  <small class="text-muted clear text-ellipsis">{{oppositepost.description}}</small>
+                                </span>
+                            </a>
                         </li>
                         {% endfor%}
 
                         <li v-repeat="op:ops" class="list-group-item clearfix">
-                            <div class="pull-right text-sm text-muted">
-                                <span class="hidden-xs ng-binding">(%op.createtime%)</span>
-                                <i class="fa fa-clock-o m-l-xs"></i>
-                            </div>
-                            <span class="pull-left thumb-sm avatar m-r">
-                              <img src="(%op.avatar%)" alt="...">
-                            </span>
-                            <span class="clear">
-                              <span>(%op.title%)</span>
-                              <small class="text-muted clear text-ellipsis">(%op.description%)</small>
-                            </span>
-
+                            <a href="(%op.url%)">
+                                <div class="pull-right text-sm text-muted">
+                                    <span class="hidden-xs ng-binding">(%op.createtime%)</span>
+                                    <i class="fa fa-clock-o m-l-xs"></i>
+                                </div>
+                                <span class="pull-left thumb-sm avatar m-r">
+                                  <img src="(%op.avatar%)" alt="...">
+                                </span>
+                                <span class="clear">
+                                  <span>(%op.title%)</span>
+                                  <small class="text-muted clear text-ellipsis">(%op.description%)</small>
+                                </span>
+                            </a>
                         </li>
 
 
@@ -245,6 +246,9 @@
 {% endblock%}
 {% block loadjs %}
 <script>
+    var remain = {{poststotal-10}},
+        dataurl = '{{opposite.nickname}}';
+
     //comments
     require(['user/user']);
 </script>

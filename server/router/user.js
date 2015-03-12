@@ -15,4 +15,7 @@ module.exports = function(app, control){
     //user
     app.post('/user/:name', control.fusion.user);
 
+    //user reply
+    app.post('/user/:name/reply', control.fusion.reply);
+
 }

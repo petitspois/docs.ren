@@ -100,8 +100,8 @@ module.exports = function(){
             username = this.params.name,
             oppositeUser = yield userModel.get({nickname:username},'-password'),
             page = parseInt(this.request.body && this.request.body.page) ? Math.abs(parseInt(this.request.body.page)) : 1,
-            posts = yield postModel.getAll({},'-createtime',page, 10),
-            poststotal = yield postModel.querycount({}),
+            posts = yield postModel.getAll({author:oppositeUser._id},'-createtime',page, 10),
+            poststotal = yield postModel.querycount({author:oppositeUser._id}),
             remain = poststotal-page*10;
 
             //title
@@ -120,9 +120,7 @@ module.exports = function(){
             for(var i = 0;i<posts.length;i++){
                 posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;
                 posts[i].createtime = formatDate(posts[i].createtime, true);
-                posts[i].updatetime = formatDate(posts[i].updatetime, true);
-                posts[i].sex = (yield postModel.getAvatar({name:posts[i].name})).author.sex;
-                posts[i].flag = posts[i]['_id'].toString();
+                posts[i].url = '/'+(posts[i].type ||'post')+'/'+posts[i]._id;
             }
 
             data.poststotal = poststotal;
@@ -175,8 +173,6 @@ module.exports = function(){
             }
             comments[i].description = comments[i].comment;
             comments[i].createtime = formatDate(comments[i].createtime, true);
-
-
         }
 
         data.poststotal = poststotal;

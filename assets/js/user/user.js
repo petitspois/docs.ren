@@ -27,7 +27,7 @@ define(['petitspois','vue','loadin'],function($, Vue, loadin){
             more:function(e){
                 var me = this;
                 loadin.show('load');
-                var url = location.pathname.slice(location.pathname.lastIndexOf('/')+1);
+                var url = dataurl;
                 if(url){
                     page++;
                     $.ajax({url:'/user/'+ url,type:'POST',data:{page:page}}).then(function(ret){
