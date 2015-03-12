@@ -6,6 +6,8 @@ var userModel = require('../model/').user,
 
     postModel = require('../model/').post,
 
+    commentModel = require('../model/').comment,
+
     formatDate = require('../lib/format');
 
 //get request
@@ -138,7 +140,58 @@ module.exports = function(){
 
     }
 
+    fusion.reply = function* (){
 
+        var data = {},
+            username = this.params.name,
+            oppositeUser = yield userModel.get({nickname:username},'-password'),
+            page = parseInt(this.request.body && this.request.body.page) ? Math.abs(parseInt(this.request.body.page)) : 1,
+            comments = yield commentModel.getAll({author:oppositeUser._id},'-createtime',page, 10),
+            poststotal = yield commentModel.querycount({author:oppositeUser._id}),
+            remain = poststotal-page*10;
+
+        //title
+        data.title = username;
+
+
+        //user
+        if(this.session.user){
+            data.user = yield userModel.get({email:this.session.user.email}, '-password');
+        }
+
+        data.opposite = oppositeUser;
+
+
+        //posts
+        for(var i = 0;i<comments.length;i++){
+            if(comments[i].reply){
+                comments[i].avatar = (yield userModel.get({nickname:comments[i].reply},'avatar')).avatar;
+                comments[i].obj = comments[i].reply;
+                comments[i].url = ('/'+(yield postModel.get({_id:comments[i].pid})).type ||'/post')+ '/'+comments[i].pid+'/#'+comments[i]._id;
+            }else{
+                comments[i].avatar = (yield postModel.getAvatar({_id:comments[i].pid})).author.avatar;
+                comments[i].obj = (yield postModel.get({_id:comments[i].pid})).title;
+                comments[i].url = ('/'+(yield postModel.get({_id:comments[i].pid})).type ||'/post')+ '/'+comments[i].pid;
+            }
+            comments[i].description = comments[i].comment;
+            comments[i].createtime = formatDate(comments[i].createtime, true);
+
+
+        }
+
+        data.poststotal = poststotal;
+        data.oppositeposts = comments;
+
+
+        if(this.request.body && this.request.body.page){
+            this.body = {
+                data:data.oppositeposts,
+                extra:remain
+            };
+        }else{
+            this.body = yield this.render('userreply',data);
+        }
+    }
 
     return fusion;
 

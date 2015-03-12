@@ -134,7 +134,7 @@
                         {% endif %}
                         <!--tags-->
                         <div class="btn-group dropdown">
-                            <button class="btn btn-sm btn-default w-xxs w-auto-xs dropdown-toggle" tooltip="Move to"><i
+                            <button class="btn btn-sm btn-default w-xxs w-auto-xs dropdown-toggle"><i
                                     class="fa fa-fw fa-tag"></i> <span class="caret"></span></button>
                             <ul class="dropdown-menu">
 
@@ -172,7 +172,7 @@
 
                     {% for comment in comments %}
                     <div class="each-comments" id="{{comment.cid}}">
-                        <a class="pull-left thumb-sm">
+                        <a href="/user/{{comment.name}}" class="pull-left thumb-sm">
                             <img src="{{comment.author.avatar}}" class="img-circle">
                         </a>
 

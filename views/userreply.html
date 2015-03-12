@@ -51,11 +51,11 @@
 
                 <div class="wrapper bg-white b-b text-center">
                     <div id="tab-user" class="btn-group">
-                        <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty active">
+                        <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty">
                             <i class="fa fa-check text-active"></i>
                             <a href="/user/{{opposite.nickname}}">{{opposite.nickname}}的主题</a>
                         </label>
-                        <label class="btn btn-sm btn-success ng-untouched ng-valid ng-dirty">
+                        <label class="btn btn-sm btn-success ng-untouched ng-valid ng-dirty active">
                             <i class="fa fa-check text-active"></i>
                             <a href="/user/{{opposite.nickname}}/reply">{{opposite.nickname}}的回复</a>
                         </label>
@@ -80,7 +80,7 @@
 
                     <div class="panel-heading b-b b-light">
                         <span class="badge bg-warning pull-right">{{poststotal}}</span>
-                        <a href="" class="font-bold">主题</a>
+                        <a href="" class="font-bold">回复</a>
                     </div>
 
 
@@ -89,18 +89,19 @@
 
                         {% for oppositepost in oppositeposts %}
                         <li class="list-group-item clearfix">
-                            <div class="pull-right text-sm text-muted">
-                                <span class="hidden-xs ng-binding">{{oppositepost.createtime}}</span>
-                                <i class="fa fa-clock-o m-l-xs"></i>
-                            </div>
-                            <span class="pull-left thumb-sm avatar m-r">
-                              <img src="{{oppositepost.avatar}}" alt="...">
-                            </span>
-                            <span class="clear">
-                              <span>{{oppositepost.title}}</span>
-                              <small class="text-muted clear text-ellipsis">{{oppositepost.description}}</small>
-                            </span>
-
+                            <a href="{{oppositepost.url}}">
+                                <div class="pull-right text-sm text-muted">
+                                    <span class="hidden-xs ng-binding">{{oppositepost.createtime}}</span>
+                                    <i class="fa fa-clock-o m-l-xs"></i>
+                                </div>
+                                <span class="pull-left thumb-sm avatar m-r">
+                                  <img src="{{oppositepost.avatar}}" alt="...">
+                                </span>
+                                <span class="clear">
+                                  <span><span class="text-info">{{opposite.nickname}}</span>&nbsp;&nbsp;回复&nbsp;&nbsp;<span class="text-info">{{oppositepost.obj}}</span></span>
+                                  <small class="text-muted clear text-ellipsis">{{oppositepost.description}}</small>
+                                </span>
+                            </a>
                         </li>
                         {% endfor%}
 

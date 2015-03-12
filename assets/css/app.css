@@ -15750,3 +15750,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 [v-cloak] { display: none }
+
+#tab-user a{
+    color:white;
+}
