@@ -11,11 +11,15 @@ module.exports = function(app, control){
 
     //profile
     app.post('/profile', control.user.profile);
+    ///prefile cover
+    app.post('/cover', control.user.cover);
+
 
     //user
     app.post('/user/:name', control.fusion.user);
 
     //user reply
     app.post('/user/:name/reply', control.fusion.reply);
+
 
 }

@@ -6,7 +6,7 @@
         <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
             <div class="col">
                 <div style="background:url({{user.cover}}) center center; background-size:cover">
-                    <div class="wrapper-lg bg-white-opacity">
+                    <div class="wrapper-lg bg-white-opacity" style="position: relative;">
                         <div class="row m-t">
                             <div class="col-sm-7">
                                 <a href="/user/{{user.nickname}}" class="thumb-lg pull-left m-r">
@@ -17,6 +17,7 @@
                                     <div class="m-b m-t-sm">
                                         <span class="h3 text-black">{{user.nickname}}</span>
                                         <small class="m-l">{{user.location}}</small>
+                                        <small class="m-l">{{user.company}}</small>
                                     </div>
                                     <p class="m-b">
                                         <a href="{{user.github}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon">
@@ -39,6 +40,10 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="set-cover">
+                            <input type="file" id="cover" class="no-show"/>
+                            <i title="点击上传封面" class="not-icon fa fa-gear" onclick="document.querySelector('#cover').click();"></i>
                         </div>
                     </div>
                 </div>
@@ -228,7 +233,7 @@
 
                                 <!--花名-->
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">花名</label>
+                                    <label class="col-sm-2 control-label">用户名</label>
 
                                     <div class="col-sm-10">
                                         <input name="nickname" v-model="profile.nickname" type="text" class="form-control" value="{{user.nickname}}">
@@ -267,23 +272,10 @@
                                     <label class="col-sm-2 control-label">用户组</label>
 
                                     <div class="col-sm-10">
-                                        <input id="show-role" type="text" class="form-control color999" disabled>
+                                        <input id="show-role" type="text" class="form-control color999" value="{% if 1 == user.role%}会员{% elseif 2==user.role %}管理员{% else %}Boss{%endif%}"disabled>
                                     </div>
 
                                 </div>
-                                <script>
-//                                    var role = {{user.role}};
-//                                    switch(role){
-//                                        case 1:
-//                                            document.getElementById('show-role').value = '会员';
-//                                            break;
-//                                        case 2:
-//                                            document.getElementById('show-role').value = '管理员';
-//                                            break;
-//                                        default:
-//                                            document.getElementById('show-role').value = 'Boss';
-//                                    }
-                                </script>
                                 <div class="line line-dashed b-b line-lg "></div>
 
                                 <!--所在公司-->
@@ -292,6 +284,17 @@
 
                                     <div class="col-sm-10">
                                         <input type="text" v-model="profile.company" class="form-control" value="{{user.company}}"/>
+                                    </div>
+                                </div>
+
+                                <div class="line line-dashed b-b line-lg "></div>
+
+                                <!--地址-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">地址</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" v-model="profile.location" class="form-control" value="{{user.location}}"/>
                                     </div>
                                 </div>
 

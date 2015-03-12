@@ -15754,3 +15754,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 #tab-user a{
     color:white;
 }
+
+.set-cover{
+    position:absolute;
+    right:15px;
+    bottom:10px;
+    cursor: pointer;
+}

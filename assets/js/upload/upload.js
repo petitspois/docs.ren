@@ -5,7 +5,7 @@ define(['petitspois','loadin'],function($, loadin){
     return {
         preview:function(node, preNode, cb){
             var $node = $('#'+node),
-                $preNode = $('#'+preNode);
+                $preNode = preNode ? $('#'+preNode) : '';
 
             $node.on('change',function(event){
                 var file = event.target.files[0],
@@ -24,8 +24,8 @@ define(['petitspois','loadin'],function($, loadin){
                 reader.onload = function(){
                     var img = document.createElement('img');
                     img.id = 'preview-avatar-img';
-                    $preNode[0].innerHTML = '';
-                    $preNode[0].appendChild(img);
+                    $preNode && ($preNode[0].innerHTML = '');
+                    $preNode && ($preNode[0].appendChild(img));
                     $('#wrap-progress').removeClass('no-show');
                     img.src= reader.result;
                     cb(reader.result);

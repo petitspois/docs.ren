@@ -34,6 +34,10 @@ var mongoose = require('mongoose'),
         weibo:{
             type:String
         },
+        location:{
+            type:String,
+            required:false
+        },
         avatar:{
             type:String,
             required:true

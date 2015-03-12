@@ -123,10 +123,12 @@ module.exports = function () {
             nickname = body.nickname,
             sex = body.sex,
             company=body.company,
+            locationp =body.location,
             avatar = body.avatar,
             description= body.description,
             github=body.github,
             weibo = body.weibo;
+
 
         if(avatar){
             var imgbuffer = new Buffer(avatar,'base64');
@@ -146,6 +148,7 @@ module.exports = function () {
             nickname:nickname,
             sex: sex,
             company:company,
+            location:locationp,
             description:description,
             github:github,
             weibo:weibo

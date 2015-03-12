@@ -27,6 +27,16 @@ define(['petitspois', 'vue','upload','loadin'],function($, Vue, upload, loadin){
         $('#profile-tab').children().eq(1).trigger('click');
     }
 
+    //cover
+    upload.preview('cover','',function(data){
+       var coverData = coverData.replace(/^data:image\/\w+;base64,/,'') || '';
+
+        coverData && $.ajax({url:'/cover', type:'POST',data:{coverData:coverData}}).then(function(ret){
+
+        },function(){});
+    });
+
+
     //profile settings
     var avatarData = '';
     upload.preview('avatar','preview-avatar',function(data){
@@ -40,6 +50,7 @@ define(['petitspois', 'vue','upload','loadin'],function($, Vue, upload, loadin){
                 nickname:'',
                 sex:profileSex,
                 company:'',
+                location:'',
                 avatar:'',
                 description:'',
                 github:'',
@@ -52,7 +63,7 @@ define(['petitspois', 'vue','upload','loadin'],function($, Vue, upload, loadin){
                 loadin.show('load');
                 var profileData = this.$data.profile;
                 if(avatarData){
-                    avatarData = avatarData.replace(/^data:image\/\w+;base64,/,'');
+                    avatarData = avatarData.replace(/^data:image\/\w+;base64,/,'') || '';
                 }
                 profileData.avatar = avatarData;
                 $.ajax({type:'POST',url:'/profile',data:profileData}).then(function(ret){
