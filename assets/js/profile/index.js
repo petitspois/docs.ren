@@ -29,10 +29,16 @@ define(['petitspois', 'vue','upload','loadin'],function($, Vue, upload, loadin){
 
     //cover
     upload.preview('cover','',function(data){
-       var coverData = coverData.replace(/^data:image\/\w+;base64,/,'') || '';
-
+       var coverData = data.replace(/^data:image\/\w+;base64,/,'') || '';
+        loadin.show('load');
         coverData && $.ajax({url:'/cover', type:'POST',data:{coverData:coverData}}).then(function(ret){
-
+            ret = JSON.parse(ret);
+            if(ret.status){
+                loadin.show('alert',ret.msg,'success');
+                setTimeout(function(){
+                    location.reload();
+                },1000);
+            }
         },function(){});
     });
 

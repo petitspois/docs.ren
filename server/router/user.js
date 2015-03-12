@@ -14,7 +14,6 @@ module.exports = function(app, control){
     ///prefile cover
     app.post('/cover', control.user.cover);
 
-
     //user
     app.post('/user/:name', control.fusion.user);
 

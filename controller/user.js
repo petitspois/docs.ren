@@ -168,5 +168,34 @@ module.exports = function () {
 
     }
 
+    user.cover = function* (){
+        var body =this.request.body,
+            coverData = body.coverData || '';
+        if(coverData){
+
+            var imgbuffer = new Buffer(coverData,'base64');
+
+            var imgName = yield model.get({email:this.session.user.email},'cover');
+
+            if(/assets/.test(imgName.cover)){
+                imgName = 'assets'+imgName.cover;
+            }else{
+                imgName = 'assets/cover/petitspois'+(+new Date)+(Math.random()*1000|0)+'.png';
+            }
+
+            yield fs.writeFile(imgName, imgbuffer);
+        }
+
+
+        var update =  yield model.update({email:this.session.user.email},{$set:{cover:imgName.slice(6)}});
+
+        update && (this.body = {
+            msg:'上传成功',
+            status:1
+        });
+
+    }
+
+
     return user;
 }
