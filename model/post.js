@@ -54,6 +54,11 @@ var post = new Schema({
         type: String,
         required: false
     }
+    //封面
+    , cover:{
+        type:String,
+        required:false
+    }
     //创建时间
     , createtime: {
         type: Date,

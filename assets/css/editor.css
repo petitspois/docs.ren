@@ -419,3 +419,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 .editor-preview > p {
   margin-top: 0;
 }
+.CodeMirror-scroll pre{
+   box-shadow: none;
+}

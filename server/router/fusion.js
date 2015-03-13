@@ -26,5 +26,6 @@ module.exports = function(app, control){
     app.get('/user/:name/reply', control.fusion.reply);
     //docs
     app.get('/docs', control.fusion.docs);
+    app.get('/create', control.user.checkNotLogin, control.fusion.create);
 
 }

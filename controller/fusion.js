@@ -193,6 +193,10 @@ module.exports = function(){
     fusion.docs = function* (){
         this.body = yield this.render('docs',{title:'文档',user:this.session.user});
     }
+    //docs create
+    fusion.create = function* (){
+        this.body = yield this.render('create',{title:'创建文档',secondtitle:'创建文档',user:this.session.user});
+    }
 
     return fusion;
 

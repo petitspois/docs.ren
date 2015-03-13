@@ -7538,7 +7538,7 @@ define(['editor/marked'],function(marked) {
         }
       }
 
-      el.className = options.className || 'icon-' + name;
+      el.className = options.className || 'fa fa-' + name;
       return el;
     }
 
@@ -7857,18 +7857,15 @@ define(['editor/marked'],function(marked) {
       {name: 'italic', action: toggleItalic},
       '|',
 
-      {name: 'quote', action: toggleBlockquote},
-      {name: 'unordered-list', action: toggleUnOrderedList},
-      {name: 'ordered-list', action: toggleOrderedList},
+      {name: 'quote-left', action: toggleBlockquote},
+      {name: 'list-ul', action: toggleUnOrderedList},
+      {name: 'list-ol', action: toggleOrderedList},
       '|',
 
       {name: 'link', action: drawLink},
-      {name: 'image', action: drawImage},
+      {name: 'picture-o', action: drawImage},
       '|',
-
-      {name: 'info', action: 'http://lab.lepture.com/editor/markdown'},
-      {name: 'preview', action: togglePreview},
-      {name: 'fullscreen', action: toggleFullScreen}
+      {name: 'preview', action: togglePreview}
     ];
 
     /**
@@ -7978,6 +7975,7 @@ define(['editor/marked'],function(marked) {
       var self = this;
 
       var el;
+
       self.toolbar = {};
 
       for (var i = 0; i < items.length; i++) {
