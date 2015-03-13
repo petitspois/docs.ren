@@ -24,5 +24,7 @@ module.exports = function(app, control){
     app.get('/user/:name', control.fusion.user);
     //reply
     app.get('/user/:name/reply', control.fusion.reply);
+    //docs
+    app.get('/docs', control.fusion.docs);
 
 }

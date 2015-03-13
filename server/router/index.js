@@ -19,6 +19,8 @@ module.exports = function(app){
 
     require('./notification')(app, ctrl);
 
+    require('./docs')(app, ctrl);
+
     //404
     app.use(function* (){
         var data;

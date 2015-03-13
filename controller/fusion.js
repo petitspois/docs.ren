@@ -189,6 +189,11 @@ module.exports = function(){
         }
     }
 
+    //docs
+    fusion.docs = function* (){
+        this.body = yield this.render('docs',{title:'文档',user:this.session.user});
+    }
+
     return fusion;
 
 }
