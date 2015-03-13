@@ -8,6 +8,7 @@ module.exports = function () {
         user: require('./user')(),
         post:require('./post')(),
         comment:require('./comment')(),
-        notification:require('./notification')()
+        notification:require('./notification')(),
+        docs:require('./docs')()
     };
 };

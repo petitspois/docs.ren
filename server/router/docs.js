@@ -4,7 +4,7 @@
 module.exports = function(app, control){
 
     //comments
-    app.post('/comment', control.comment.comment);
+    app.get('/doc/:id', control.docs.detail);
 
 
 }
