@@ -77,6 +77,12 @@ var post = new Schema({
         require:true,
         default:true
     },
+    //是否置顶
+    istop:{
+        type:Boolean,
+        require:true,
+        default:false
+    },
     //状态? 0,草稿 1,已发布
     status:{
         type:Number,
