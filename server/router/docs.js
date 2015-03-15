@@ -7,4 +7,8 @@ module.exports = function(app, control){
     app.get('/doc/:id', control.docs.detail);
 
 
+    //upload cover
+    app.post('/docscover', control.docs.cover);
+
+
 }

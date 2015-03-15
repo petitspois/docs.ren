@@ -24,19 +24,19 @@ define(['petitspois','loadin'],function($, loadin){
                 reader.onload = function(){
                     var img = document.createElement('img');
                     img.id = 'preview-avatar-img';
-                    $preNode && ($preNode[0].innerHTML = '');
-                    $preNode && ($preNode[0].appendChild(img));
+                    !!$preNode && ($preNode[0].innerHTML = '');
+                    !!$preNode && ($preNode[0].appendChild(img));
                     $('#wrap-progress').removeClass('no-show');
                     img.src= reader.result;
                     cb(reader.result);
                  }
 
-                reader.onprogress = function(event){
+                !!$preNode && (reader.onprogress = function(event){
                     if(event.lengthComputable){
                         var progress = parseInt( ((event.loaded / event.total) * 100), 10 );
                         $('#show-precent').text(progress+'%');
                     }
-                }
+                });
 
                 reader.readAsDataURL(file);
 
