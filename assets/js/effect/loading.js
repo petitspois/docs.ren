@@ -35,6 +35,9 @@ define(['petitspois'],function($){
                  $('#alert').hasClass('alert-danger') && $('#alert').removeClass('alert-danger');
                  $('#alert').hasClass('alert-success') && $('#alert').removeClass('alert-success');
                  $('#alert').hasClass('alert-info') && $('#alert').removeClass('alert-info');
+                 if(!$('#alert').hasClass('no-show')){
+                     $('#alert').addClass('no-show');
+                 }
              }, time)
          }
      }

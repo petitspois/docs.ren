@@ -79,12 +79,12 @@
 
                         <!--编辑-->
 
-                        {% if posts.name == user.nickname || user.role > posts.role %}
-                        <a href="/post/{{posts.id}}/edit" class="btn btn-sm btn-default w-xxs w-auto-xs"><i class="fa fa-edit"></i></a>
+                        {% if docs.name == user.nickname || user.role > docs.role %}
+                        <a href="/doc/{{docs.id}}/edit" class="btn btn-sm btn-default w-xxs w-auto-xs"><i class="fa fa-edit"></i></a>
                         {% endif %}
 
                         <!--删除-->
-                        {% if posts.name == user.nickname || user.role > posts.role %}
+                        {% if docs.name == user.nickname || user.role > docs.role %}
                         <button class="btn btn-sm btn-default w-xxs w-auto-xs"><i class="fa fa-trash-o"></i></button>
                         {% endif %}
                         <!--tags-->
@@ -93,7 +93,7 @@
                                     class="fa fa-fw fa-tag"></i> <span class="caret"></span></button>
                             <ul class="dropdown-menu">
 
-                                {% for tag in posts.tags %}
+                                {% for tag in docs.tags %}
                                 <li>
                                     <a href="" class="ng-binding">
                                         <i class="fa fa-fw fa-circle text-xs"></i>
@@ -109,12 +109,105 @@
                 </div>
 
 
-                <!-- / header -->
-                <div class="col">
                     <div class="clearfix padder-md">
-                        {% autoescape %}{{docs.content}}{% endautoescape %}
+                        {% autoescape %}{{docs.mdRender||docs.content}}{% endautoescape %}
                     </div>
-                </div>
+{% if docs.iscomment %}
+                    <div class="wrapper b-b b-t margin10-tb">
+                        <i class="fa fa-comments-o"></i>
+                        <span>评论与回复</span>- 1个回复
+                    </div>
+
+                    <div id="wrap-comments" class="wrapper">
+
+
+                        {% for comment in comments %}
+                        <div class="each-comments" id="{{comment.cid}}">
+                            <a href="/user/{{comment.name}}" class="pull-left thumb-sm">
+                                <img src="{{comment.author.avatar}}" class="img-circle">
+                            </a>
+
+                            <div class="m-l-xxl m-b">
+                                <div>
+                                    <a href=""><strong>{{comment.name}}</strong></a>
+
+                                    {% if comment.name == user.nickname || user.role > comment.author.role %}
+                                    <a id="delete-comment" class="btn-xs" href="javascript:;"><i class="fa fa-trash-o"></i></a>
+                                    {% endif %}
+
+                                    {% if comment.name != user.nickname %}
+                                    <a id="reply-comment" class="btn-xs pull-right" href="javascript:;"><i class="fa fa-reply"></i></a>
+                                    {% endif %}
+
+
+                                    {% if 2 == comment.author.role %}
+                                    <label class="label bg-dark m-l-xs">Admin</label>
+                                    {% endif %}
+
+                                    {% if 3 == comment.author.role %}
+                                    <label class="label bg-danger m-l-xs">SuperAdmin</label>
+                                    {% endif %}
+
+
+                                  <span class="text-muted text-xs block m-t-xs">
+                                    {{comment.createtime}}
+                                  </span>
+                                </div>
+                                <div class="m-t-sm reply-wrap">
+                                    {% if comment.reply %}
+                                    <a href="">@{{comment.reply}}</a>&nbsp;&nbsp;
+                                    {% endif %}
+                                    {% autoescape false %}
+                                    {{comment.comment}}
+                                    {% endautoescape %}
+                                </div>
+
+                                <!--reply-->
+                                {% if comment.name != user.nickname %}
+                                <div class="reply panel b-a fade-in-down hide">
+                                    <div class="panel-heading b-b b-light" reply-name="{{comment.name}}">
+                                        @{{comment.name}}
+                                    </div>
+                                    <textarea class="comment-content form-control" rows="1" placeholder="评论说点什么吧"></textarea>
+                                    <div class="panel-footer bg-light lt">
+                                        <button id="reply-btn" class="btn btn-success w-xs font-bold">发表回复</button>
+                                        <div class="btn pull-right"><a href="" class="markSyn">支持Github风格的Markdown语法</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <!--end reply-->
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        {% if !comments.length %}
+                        <div class="text-center">暂无评论</div>
+                        {% endif%}
+
+                    </div>
+
+
+                    <div class="wrapper">
+                        <div class="panel b-a">
+                            <div class="ng-hide">
+                                <!--<div class="panel-heading b-b b-light ng-binding">-->
+                                <!--james@gmail.com-->
+                                <!--</div>-->
+                                <!--<div id="comment-content" class="wrapper" contenteditable="true" style="min-height:100px"></div>-->
+                                <textarea id="comment-content" class="form-control comment-content" rows="5"
+                                          placeholder="评论说点什么吧"></textarea>
+
+                                <div class="panel-footer bg-light lt">
+                                    <button id="comment-btn" class="btn btn-success w-xs font-bold">发表回复</button>
+                                    <div class="btn pull-right"><a href="" class="markSyn">支持Github风格的Markdown语法</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+{% endif %}
+
 
 
 </div>
@@ -124,9 +217,15 @@
 {% endblock %}
 {% block loadjs %}
 <script>
+
     //hljs
-    require(['hljs'], function (hljs) {
-        hljs.initHighlightingOnLoad();
+    require(['jquery','lib/highlight.min'], function ($, hljs) {
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
     });
+
+    //comments
+    require(['comment/comment']);
 </script>
 {% endblock %}

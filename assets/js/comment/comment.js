@@ -22,7 +22,7 @@ define(['petitspois', 'loadin'], function ($, loadin) {
             $.ajax({url: '/removecomment', type: 'POST', data: {cid: cid}}).then(function (ret) {
                 ret = JSON.parse(ret);
                 if(ret.status){
-                    loadin.hide();
+                    loadin.show('alert','删除成功','success');
                     $delNode.remove();
                 }else{
                     loadin.show('alert',ret.msg, 'danger');

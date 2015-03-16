@@ -268,8 +268,10 @@
 {% block loadjs %}
 <script>
     //hljs
-    require(['hljs'], function (hljs) {
-        hljs.initHighlightingOnLoad();
+    require(['jquery','lib/highlight.min'], function ($, hljs) {
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
     });
     //comments
     require(['comment/comment']);

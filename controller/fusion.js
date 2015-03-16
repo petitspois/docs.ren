@@ -20,8 +20,8 @@ module.exports = function(){
     fusion.getHome = function* (){
 
         var page = parseInt(this.query.p) ? Math.abs(parseInt(this.query.p)) : 1,
-            posts = yield postModel.getAll({},'-createtime',page, 10),
-            total = Math.ceil((yield postModel.querycount({}))/10);
+            posts = yield postModel.getAll({status:1},'-istop -createtime',page, 10),
+            total = Math.ceil((yield postModel.querycount({status:1}))/10);
 
         for(var i = 0;i<posts.length;i++){
             posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;
@@ -191,7 +191,25 @@ module.exports = function(){
 
     //docs
     fusion.docs = function* (){
-        this.body = yield this.render('docs',{title:'文档',user:this.session.user});
+
+        //new data
+        //类型为文档，状态为已发布，按时间倒序
+        var newData = yield postModel.getAll({type:'doc',status:true},'-createtime',1,8);
+
+        newData.map(function(item){
+            item.id = item._id + '';
+            return item;
+        });
+
+
+        //return
+        this.body = yield this.render('docs',
+            {
+                title:'文档专辑',
+                user:this.session.user,
+                docsNew:newData
+            }
+        );
     }
     //docs create
     fusion.create = function* (){

@@ -23,8 +23,8 @@
                             <label class="col-sm-2 control-label">标题</label>
 
                             <div class="col-sm-10">
-                                <input type="text" name="title" v-model="post.title" v-validate="minLength:10" class="form-control"
-                                       autofocus placeholder="title:标题字数 10 字以上" value="{{post.title}}">
+                                <input type="text" name="title" v-model="docs.title" v-validate="minLength:10" class="form-control"
+                                       autofocus placeholder="title:标题字数 10 字以上" value="{{docs.title}}">
                             </div>
                         </div>
 
@@ -35,8 +35,8 @@
                             <label class="col-sm-2 control-label">标签</label>
 
                             <div class="col-sm-10">
-                                <input type="text" name="tags" v-model="post.tags" class="form-control"
-                                       placeholder="tag:多个标签请用英文逗号（,）分开" value="{{post.tags}}">
+                                <input type="text" name="tags" v-model="docs.tags" class="form-control"
+                                       placeholder="tag:多个标签请用英文逗号（,）分开" value="{{docs.tags}}">
                             </div>
                         </div>
 
@@ -47,8 +47,7 @@
                             <label class="col-sm-2 control-label">github</label>
 
                             <div class="col-sm-10">
-                                <input type="text" name="github" v-model="post.github" class="form-control" placeholder="link:请输入相关网址"
-                                       value="{{post.tags}}">
+                                <input type="text" name="github" v-model="docs.github" class="form-control" placeholder="link:请输入相关网址" value="{{docs.github}}">
                             </div>
                         </div>
 
@@ -60,7 +59,7 @@
                             <label class="col-sm-2 control-label">分类目录</label>
 
                             <div class="col-sm-10">
-                                <select v-model="post.category" name="category" class="form-control">
+                                <select v-model="docs.category" name="category" class="form-control">
                                     <option value="default" selected>默认</option>
                                 </select>
                             </div>
@@ -72,7 +71,7 @@
                             <label class="col-sm-2 control-label">介绍</label>
 
                             <div class="col-sm-10">
-                                <textarea name="description" class="form-control" rows="3" placeholder="description:文档相关介绍"></textarea>
+                                <textarea v-model="docs.description" name="description" class="form-control" rows="3" placeholder="description:文档相关介绍">{{docs.description}}</textarea>
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -106,17 +105,25 @@
                             <label class="col-sm-2 control-label" style="padding-top: 15px;">文档内容</label>
 
                             <div class="col-sm-10">
-                                <textarea id="editor" v-model="" name="content" placeholder="Content here ...."></textarea>
+                                <textarea id="editor" name="content" placeholder="Content here ....">{{docs.content}}</textarea>
                             </div>
                         </div>
-                        <input type="hidden" v-model="post.edit" value="{{edit}}"/>
+                        <input type="hidden" v-model="docs.edit" value="{{edit}}"/>
                         <!-- end editor -->
 
 
                     </div>
                 </div>
             </div>
-
+            {% if edit %}
+                <script>
+                    var istop = {{docs.istop}}, iscomment = {{docs.iscomment}}, cstatus = {{docs.status}};
+                </script>
+            {% else %}
+                <script>
+                    var istop = false, iscomment = true, cstatus = true;
+                </script>
+            {%endif%}
 
             <div class="col-sm-3">
                 <div class="panel b-a">
@@ -124,36 +131,36 @@
                     <div class="panel-body">
                         <div class="checkbox">
                             <label class="i-checks">
-                                <input type="checkbox" value="">
+                                <input type="checkbox" value="" v-model="docs.istop" />
                                 <i></i>
                                 对文档置顶操作
                             </label>
                         </div>
                         <div class="checkbox">
                             <label class="i-checks">
-                                <input type="checkbox" value="" checked>
+                                <input type="checkbox" value="" v-model="docs.iscomment" >
                                 <i></i>
                                 是否支持评论功能
                             </label>
                         </div>
                         <div class="radio">
                             <label class="i-checks">
-                                <input type="radio" name="a" value="option1" checked>
+                                <input type="radio" name="status" value="1" v-model="docs.cstatus" />
                                 <i></i>
                                 发布
                             </label>
                         </div>
                         <div class="radio">
                             <label class="i-checks">
-                                <input type="radio" name="a" value="option1">
+                                <input type="radio" name="status" value="0"  v-model="docs.cstatus" />
                                 <i></i>
                                 草稿
                             </label>
                         </div>
                     </div>
                     <div class="b-t panel-body">
-                        <button type="submit" class="btn btn-default" for="docs-form">预览</button>
-                        <button type="submit" class="btn btn-primary pull-right" for="docs-form" v-on="click:submit">
+                        <button type="submit" class="btn btn-default">预览</button>
+                        <button type="submit" class="btn btn-primary pull-right" v-attr="disabled:!valid" v-on="click:submit">
                             保存
                         </button>
                     </div>
@@ -169,7 +176,6 @@
 
 {% block loadjs %}
 <script type="text/javascript">
-    require(['publish/index']);
     require(['docs/doc']);
 </script>
 {% endblock %}

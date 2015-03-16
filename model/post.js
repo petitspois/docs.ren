@@ -83,11 +83,17 @@ var post = new Schema({
         require:true,
         default:false
     },
-    //状态? 0,草稿 1,已发布
+    //状态? 默认发布
     status:{
-        type:Number,
+        type:Boolean,
         required:false,
-        default :1
+        default :true
+    },
+    //审核状态
+    audit:{
+        type:Boolean,
+        required:false,
+        default :false
     }
     //作者相关
     , author: {
