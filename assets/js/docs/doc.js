@@ -23,7 +23,7 @@ define(['petitspois', 'vue', 'vueValidator', 'upload','loadin'], function ($, Vu
 
     var publishForm = new Vue({
         data: {
-            post:{
+            docs:{
                 title: '',
                 tags: '',
                 category: '',
@@ -36,8 +36,6 @@ define(['petitspois', 'vue', 'vueValidator', 'upload','loadin'], function ($, Vu
         methods: {
             submit: function (e) {
                 e.preventDefault();
-                console.log(this.$data.post)
-                return
                 //get editor value
                 if(!!editor.codemirror.getValue()){
                     this.post.content = editor.codemirror.getValue();

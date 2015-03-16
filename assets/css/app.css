@@ -15540,7 +15540,7 @@ a.text-#000000:hover {
 .profile-sh{
     display:none;
 }
-#publish-form .form-group{
+#publish-form .form-group,#docs-form .form-group{
     margin-left: -110px;
     margin-right: 0;
 }

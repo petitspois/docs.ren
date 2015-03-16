@@ -10,5 +10,8 @@ module.exports = function(app, control){
     //upload cover
     app.post('/docscover', control.docs.cover);
 
+    //doc preview
+    app.post('/preview', control.docs.preview);
+
 
 }

@@ -50,5 +50,23 @@ module.exports = function () {
 
     }
 
+
+    docs.preview = function* (){
+        var body = this.request.body,
+            title = body.title,
+            content = body.content;
+
+        this.body = yield this.render('doc',{docs:{
+            title:title,
+            content:marked(content),
+            preview:true
+        }});
+
+    }
+
+
+
+
+
     return docs;
 }
