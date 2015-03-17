@@ -17,7 +17,8 @@ typeof function (window) {
                     'loadin':'effect/loading',
                     'profile':'profile/index',
                     'upload':'upload/upload',
-                    'hljs':'lib/highlight.min'
+                    'hljs':'lib/highlight.min',
+                    'waypoints':'lib/waypoints'
                 },
                 urlArgs: "petitspois=" +  (new Date()).getTime()
             });

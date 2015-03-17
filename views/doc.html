@@ -6,60 +6,31 @@
 
 
 <div class="hbox hbox-auto-xs hbox-auto-sm">
-    <div class="col w w-auto-xs bg-light inherit dk b-r">
+
+
+
+    <div id="doc-left-sidebar" class="col w w-auto-xs bg-light inherit dk b-r">
         <div class="wrapper b-b bg">
             <button class="btn btn-sm btn-default pull-right visible-sm visible-xs"><i class="fa fa-bars"></i></button>
             <a class="btn btn-sm btn-success w-xs font-bold" href="/create">创建文档</a>
         </div>
 
-
+        <div>
             <div class="wrapper-md b-b">
-                <a class="btn btn-link pull-right m-t-n-xs m-r-n-sm visible-sm visible-xs" ui-toggle-class="show" data-target="#nav-docs">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <span class="h4">Documents</span>
+                <span id="nav-title" class="h4">Documents</span>
             </div>
             <div class="hidden-sm hidden-xs" id="nav-docs">
                 <ul class="nav">
-                    <li class="padder b-b l-h-2x bg text-info"><em>Build</em></li>
-                    <li><a ui-scroll-to="node-req">Requirements</a></li>
-                    <li><a ui-scroll-to="bower">Bower</a></li>
-                    <li><a ui-scroll-to="grunt">Grunt</a></li>
-                    <li><a ui-scroll-to="dev-server">Local Server</a></li>
 
-                    <li class="padder b-b l-h-2x bg text-success"><em>CSS</em></li>
-                    <li><a ui-scroll-to="bootstrap">Bootstrap</a></li>
-                    <li><a ui-scroll-to="icons">Icons</a></li>
-                    <li><a ui-scroll-to="animate">Animate</a></li>
-                    <li><a ui-scroll-to="colors">Colors</a></li>
-                    <li><a ui-scroll-to="layout">Layout</a></li>
-                    <li><a ui-scroll-to="utilities">Utilities</a></li>
-
-                    <li ui-scroll-to="core" class="padder b-b b-t l-h-2x bg text-danger"><em>Core</em></li>
-                    <li><a ui-scroll-to="ui-router">ui-router</a></li>
-                    <li><a ui-scroll-to="ui-load">ui-load</a></li>
-                    <li><a ui-scroll-to="ui-jq">ui-jq</a></li>
-                    <li><a ui-scroll-to="ui-module">ui-module</a></li>
-                    <li><a ui-scroll-to="ui-validate">ui-validate</a></li>
-
-                    <li ui-scroll-to="directives" class="padder b-b b-t l-h-2x bg text-primary"><em>Directives</em></li>
-                    <li><a ui-scroll-to="ui-toggle-class">ui-toggle-class</a></li>
-                    <li><a ui-scroll-to="ui-shift">ui-shift</a></li>
-                    <li><a ui-scroll-to="ui-scroll-to">ui-scroll-to</a></li>
-                    <li><a ui-scroll-to="ui-fullscreen">ui-fullscreen</a></li>
-
-                    <li ui-scroll-to="plugins" class="padder b-b b-t l-h-2x bg text-info"><em>Plugins</em></li>
-                    <li><a ui-scroll-to="plugins">Plugins docs</a></li>
                 </ul>
             </div>
-
-
+        </div>
 
     </div>
 
 
     <!--index right-->
-    <div class="col">
+    <div id="doc-left-content" class="col">
         <!-- uiView:  -->
             <div>
                 <!-- header -->
@@ -109,7 +80,7 @@
                 </div>
 
 
-                    <div class="clearfix padder-md">
+                    <div id="doc-content" class="clearfix padder-md">
                         {% autoescape %}{{docs.mdRender||docs.content}}{% endautoescape %}
                     </div>
 {% if docs.iscomment %}
@@ -224,8 +195,12 @@
             hljs.highlightBlock(block);
         });
     });
+    {% if docs.iscomment %}
+        //comments
+        require(['comment/comment']);
+    {% endif %}
 
-    //comments
-    require(['comment/comment']);
+    require(['docs/supervisor']);
+
 </script>
 {% endblock %}

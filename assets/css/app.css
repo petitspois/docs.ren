@@ -8960,6 +8960,18 @@ body {
     .app.container.app-aside-dock .app-footer-fixed {
         max-width: 1170px
     }
+
+    #doc-left-sidebar{
+        position:fixed;
+        overflow: scroll;
+        padding-bottom: 50px;
+    }
+
+    #doc-left-content{
+        display: block;
+        padding-left: 200px;
+    }
+
 }
 
 .nav-sub {
@@ -15761,3 +15773,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     bottom:10px;
     cursor: pointer;
 }
+
+#doc-content h2,h3{padding-top: 55px;margin-top:-55px;}
+

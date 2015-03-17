@@ -300,7 +300,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <img src="{{docNew.cover}}" class="img-full r r-2x">
+                                <img src="{% if docNew.cover %}{{docNew.cover}}{% else %}/img/doccover.png{% endif %}" class="img-full r r-2x">
                             </div>
                             <div class="padder-v">
                                 <a class="text-ellipsis" href="#/music/detail">{{docNew.title}}</a>
