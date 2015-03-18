@@ -196,6 +196,40 @@ module.exports = function () {
 
     }
 
+    user.watch = function* (){
+        var body = this.request.body,
+            type = body.type,
+            oid = body.oid,
+            nid = this.session.user._id || (yield model.get({email: this.session.user.email}))._id;
+
+
+        if('true' === type){
+            //取消关注
+            /// youwatch 删除 对方id
+            yield  model.update({_id:nid},{$pull:{youwatch:oid}});
+            /// watchyou 删除 我的id
+            yield model.update({_id:oid},{$pull:{watchyou:nid}});
+
+            this.body = {
+                msg:'关注',
+                status:1
+            }
+
+        }else{
+            //关注
+            ///youwatch 添加 对方id
+            yield model.update({_id:nid},{$addToSet:{youwatch:oid}});
+            ///watchyou 在对方添加自己id
+            yield model.update({_id:oid},{$addToSet:{watchyou:nid}});
+
+            this.body = {
+                msg:'已关注',
+                status:1
+            }
+
+        }
+    }
+
 
     return user;
 }

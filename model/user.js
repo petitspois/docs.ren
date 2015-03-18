@@ -40,11 +40,19 @@ var mongoose = require('mongoose'),
         },
         avatar:{
             type:String,
-            required:true
+            required:false
         },
         cover:{
             type:String,
             required:true
+        },
+        youwatch:{
+            type:[],
+            required:false
+        },
+        watchyou:{
+            type:[],
+            required:false
         },
         role: {
             type: Number,

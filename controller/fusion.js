@@ -100,17 +100,19 @@ module.exports = function(){
             username = this.params.name,
             oppositeUser = yield userModel.get({nickname:username},'-password'),
             page = parseInt(this.request.body && this.request.body.page) ? Math.abs(parseInt(this.request.body.page)) : 1,
-            posts = yield postModel.getAll({author:oppositeUser._id},'-createtime',page, 10),
-            poststotal = yield postModel.querycount({author:oppositeUser._id}),
+            posts = yield postModel.getAll({name:username},'-createtime',page, 10),
+            poststotal = yield postModel.querycount({name:username}),
             remain = poststotal-page*10;
 
             //title
             data.title = username;
 
-
             //user
             if(this.session.user){
                 data.user = yield userModel.get({email:this.session.user.email}, '-password');
+                //是否已经关注
+                data.iswatch = ~data.user.youwatch.indexOf(oppositeUser._id);
+
             }
 
             data.opposite = oppositeUser;
@@ -123,6 +125,7 @@ module.exports = function(){
                 posts[i].url = '/'+(posts[i].type ||'post')+'/'+posts[i]._id;
             }
 
+            //data.iswatch =
             data.poststotal = poststotal;
             data.oppositeposts = posts;
 

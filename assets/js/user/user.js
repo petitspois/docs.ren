@@ -21,7 +21,8 @@ define(['petitspois','vue','loadin'],function($, Vue, loadin){
         el:'#v-more',
         data:{
             ops:[],
-            extra:remain
+            extra:remain,
+            isimg:false
         },
         methods:{
             more:function(e){
