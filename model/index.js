@@ -10,7 +10,8 @@ var mongoose = require('mongoose'),
         user: require('./user'),
         post:require('./post'),
         comment:require('./comments'),
-        notification:require('./notification')
+        notification:require('./notification'),
+        action:require('./action')
     };
 
 for (var key in models) {
