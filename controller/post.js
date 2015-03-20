@@ -5,6 +5,7 @@
 var model = require('../model/').post,
     userModel = require('../model/').user,
     commentModel = require('../model/').comment,
+    actionModel = require('../model/').action,
     formatDate = require('../lib/format'),
     marked = require('../assets/js/editor/marked');
     marked.setOptions({
@@ -64,14 +65,21 @@ module.exports = function () {
             author: userId
         }
 
-        var post = yield model.add(newPost);
+        //文章表
+        yield model.add(newPost);
+        //动态
+        yield actionModel.add({
+            title:title,
+            description:newPost.description,
+            name:newPost.name,
+            uid:newPost.author
+        });
 
-        if (post) {
+
             this.body = {
                 msg: '发布成功',
                 status: 1
             }
-        }
 
     }
 

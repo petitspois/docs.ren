@@ -27,11 +27,6 @@ var action = new Schema({
         type: String,
         required: false
     }
-    ///回复的内容
-    , reply:{
-        type: String,
-        required: false
-    }
     //文章相关
     ,title:{
         type:String,

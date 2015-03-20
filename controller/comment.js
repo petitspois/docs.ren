@@ -5,6 +5,7 @@
 var model = require('../model/').post,
     userModel = require('../model/').user,
     commentModel = require('../model/').comment,
+    actionModel = require('../model/').action,
     notificationModel = require('../model/').notification,
     marked = require('../assets/js/editor/marked');
     marked.setOptions({
@@ -79,6 +80,13 @@ module.exports = function () {
         //save notifications
         yield notificationModel.add(notificationData);
 
+        //save actionData
+        yield actionModel.add({
+            uid:commentData.author,
+            name:commentData.name,
+            rid:notificationData.target,
+            comment:commentData.comment
+        });
 
         //async callbacks
         var backData = {
