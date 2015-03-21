@@ -6,6 +6,7 @@ var fs =require('co-fs'),
     formatDate = require('../lib/format'),
     model = require('../model/').post,
     userModel = require('../model/').user,
+    actionModel = require('../model/').action,
     commentModel = require('../model/').comment,
     notificationModel = require('../model/').notification,
     marked = require('../assets/js/editor/marked');
@@ -78,7 +79,17 @@ module.exports = function () {
             author: userId
         }
 
-        yield model.add(newDocs);
+        var doctable = yield model.add(newDocs);
+
+        //动态
+        yield actionModel.add({
+            pid:doctable._id,
+            type:'doc',
+            title:title,
+            description:newDocs.description,
+            name:newDocs.name,
+            uid:newDocs.author
+        });
 
         this.body = {
             msg: '发布成功',

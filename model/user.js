@@ -48,11 +48,13 @@ var mongoose = require('mongoose'),
         },
         youwatch:{
             type:[],
-            required:false
+            required:false,
+            default :[]
         },
         watchyou:{
             type:[],
-            required:false
+            required:false,
+            default :[]
         },
         role: {
             type: Number,

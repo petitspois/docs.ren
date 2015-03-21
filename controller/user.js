@@ -4,6 +4,12 @@
 
 var model = require('../model/').user,
 
+    actionModel = require('../model/').action,
+
+    postModel = require('../model/').post,
+
+    formatDate = require('../lib/format'),
+
     fs =require('co-fs'),
 
     md5 = require('../lib/md5');
@@ -230,6 +236,47 @@ module.exports = function () {
         }
     }
 
+    user.action = function* (){
+         if(this.session.user){
+              var youwatch = (yield model.get({email:this.session.user.email},'youwatch')).youwatch;
+              if(youwatch.length){
+                  var watchlist = yield actionModel.getAll({uid:{$in:youwatch}},'-createtime');
+                  yield watchlist.map(function* (item){
+                      item.avatar = (yield model.get({_id:item.uid},'avatar')).avatar;
+                      item.createtime = formatDate(item.createtime, true);
+                      item.pid = String(item.pid);
+                      if('comment'==item.type){
+                          var postdata = yield postModel.get({_id:item.rid});
+                          item.title = postdata.title;
+                          item.articleType = postdata.type;
+                      }
+                      if('reply'==item.type){
+                          item.atuser = (yield model.get({_id:item.rid},'nickname')).nickname;
+                      }
+                      return item;
+                  })
+                  if(watchlist.length){
+                      this.body = {
+                          msg:'成功',
+                          status:1,
+                          data:watchlist
+                      };
+                  }else{
+                      this.body={
+                          msg:'无数据',
+                          status:0
+                      }
+                  }
+              }else{
+                  this.body={
+                      msg:'您还没有关注的人',
+                      status:0
+                  }
+              }
+         }else{
+
+         }
+    }
 
     return user;
 }

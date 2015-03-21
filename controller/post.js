@@ -66,9 +66,12 @@ module.exports = function () {
         }
 
         //文章表
-        yield model.add(newPost);
+        var posttable = yield model.add(newPost);
+
         //动态
         yield actionModel.add({
+            pid:posttable._id,
+            type:'post',
             title:title,
             description:newPost.description,
             name:newPost.name,

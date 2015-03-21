@@ -15,7 +15,6 @@ typeof function (window) {
                     'msg':'effect/msg',
                     'nav':'effect/nav',
                     'loadin':'effect/loading',
-                    'profile':'profile/index',
                     'upload':'upload/upload',
                     'hljs':'lib/highlight.min',
                     'waypoints':'lib/waypoints'

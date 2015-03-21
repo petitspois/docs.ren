@@ -23,4 +23,7 @@ module.exports = function(app, control){
     //watch
     app.post('/watch', control.user.checkNotLogin, control.user.watch);
 
+    //action
+    app.post('/action', control.user.action);
+
 }

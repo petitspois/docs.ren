@@ -60,7 +60,7 @@ module.exports = function () {
         reply && (commentData.reply = reply);
 
         //save commentData
-        var commented = yield commentModel.add(commentData);
+        var commented = yield commentModel.add(commentData),actionTarget='';
 
         //notification
         var notificationData = {
@@ -73,8 +73,10 @@ module.exports = function () {
         if(reply){
             notificationData.hasReply = true;
             notificationData.target = (yield userModel.get({nickname:reply},'_id'))._id;
+            actionTarget = notificationData.target;
         }else{
             notificationData.target = (yield model.get({_id:pid})).author;
+            actionTarget = pid;
         }
 
         //save notifications
@@ -82,9 +84,10 @@ module.exports = function () {
 
         //save actionData
         yield actionModel.add({
+            type:reply?'reply':'comment',
             uid:commentData.author,
             name:commentData.name,
-            rid:notificationData.target,
+            rid:actionTarget,
             comment:commentData.comment
         });
 

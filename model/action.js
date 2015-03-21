@@ -16,6 +16,10 @@ var action = new Schema({
     , name: {
         type: String,
         required: true
+    },
+    type: {
+        type: String,
+        required: true
     }
     ///回复id
     , rid: {
@@ -28,6 +32,10 @@ var action = new Schema({
         required: false
     }
     //文章相关
+    ,pid:{
+        type: Schema.Types.ObjectId,
+        required: false
+    }
     ,title:{
         type:String,
         required:false
