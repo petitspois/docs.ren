@@ -65,8 +65,7 @@
 
                         <div v-if="!extra.status" class="wrapper text-center" v-text="extra.msg"></div>
                             <div class="m-b-lg" v-repeat="ac:useraction">
-                                <a class="pull-left thumb-sm avatar m-l-n-md">
-
+                                <a href="/user/(%ac.name%)" class="pull-left thumb-sm avatar m-l-n-md">
                                     <img v-attr="src:ac.avatar" alt="...">
                                 </a>
                                 <div class="m-l-lg bg-white">
@@ -95,7 +94,14 @@
                         </div>
 
                     </div>
+
                     <div class="loader wrapper text-center"><img src="/img/flickr.svg"/></div>
+                    <div v-if="page.page*10<page.total" class="clearfix text-center">
+                        <a href="javascript:;" class="auto" v-on="click:eachdata()">
+                            <i class="fa fa-angle-double-down"></i>
+                            <span>更多主题</span>
+                        </a>
+                    </div>
 
                 </div>
                 <script>

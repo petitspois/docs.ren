@@ -237,10 +237,17 @@ module.exports = function () {
     }
 
     user.action = function* (){
+
          if(this.session.user){
+              var page = this.request.body.page || 1;
               var youwatch = (yield model.get({email:this.session.user.email},'youwatch')).youwatch;
+
               if(youwatch.length){
-                  var watchlist = yield actionModel.getAll({uid:{$in:youwatch}},'-createtime');
+
+                  var watchlist = yield actionModel.getAll({uid:{$in:youwatch}},'-createtime',page, 10),
+                      total = yield actionModel.querycount({uid:{$in:youwatch}});
+
+
                   yield watchlist.map(function* (item){
                       item.avatar = (yield model.get({_id:item.uid},'avatar')).avatar;
                       item.createtime = formatDate(item.createtime, true);
@@ -255,11 +262,17 @@ module.exports = function () {
                       }
                       return item;
                   })
+
+
                   if(watchlist.length){
                       this.body = {
                           msg:'成功',
                           status:1,
-                          data:watchlist
+                          data:watchlist,
+                          page:{
+                              page:parseInt(page),
+                              total:total
+                          }
                       };
                   }else{
                       this.body={
@@ -267,12 +280,14 @@ module.exports = function () {
                           status:0
                       }
                   }
+
               }else{
                   this.body={
                       msg:'您还没有关注的人',
                       status:0
                   }
               }
+
          }else{
 
          }
