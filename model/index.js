@@ -30,8 +30,8 @@ for (var key in models) {
         return this.findOne(data, name).sort(sort).exec();
     });
 
-    schema.static('getAll',function(query, sort, skip, limit){
-        return this.find(query).skip((skip-1)*limit).limit(limit).sort(sort).lean().exec();
+    schema.static('getAll',function(query, sort, skip, limit, select){
+        return this.find(query).select(select).skip((skip-1)*limit).limit(limit).sort(sort).lean().exec();
     });
 
     schema.static('getAvatar',function(query){

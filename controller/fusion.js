@@ -80,7 +80,7 @@ module.exports = function(){
         if(this.session.user){
             this.body = yield this.render('profile',{
                 title:'个人中心',
-                user:yield userModel.get({email:this.session.user.email})
+                user:yield userModel.get({email:this.session.user.email},'-password')
             });
         }
     }

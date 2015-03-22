@@ -31,12 +31,12 @@
                             <div class="col-sm-5">
                                 <div class="pull-right pull-none-xs text-center">
                                     <a href="" class="m-b-md inline m">
-                                        <span class="h3 block font-bold">2k</span>
-                                        <small>Followers</small>
+                                        <span class="h3 block font-bold">{{user.watchyou.length}}</span>
+                                        <small>关注我的</small>
                                     </a>
                                     <a href="" class="m-b-md inline m">
-                                        <span class="h3 block font-bold">250</span>
-                                        <small>Following</small>
+                                        <span class="h3 block font-bold">{{user.youwatch.length}}</span>
+                                        <small>我关注的</small>
                                     </a>
                                 </div>
                             </div>
@@ -54,6 +54,10 @@
                     <ul id="profile-tab" class="nav nav-pills nav-sm">
                         <li class="active"><a href="javascript:;">动态</a></li>
                         <li><a href="javascript:;">个人信息</a></li>
+                        <li><a v-on="click:loadwatchyou()" href="javascript:;">关注我的人</a></li>
+                        <li><a href="javascript:;">我关注的人</a></li>
+                        <li><a href="javascript:;">密码修改</a></li>
+                        <li><a href="javascript:;">网站设置</a></li>
                     </ul>
                 </div>
 
@@ -107,6 +111,8 @@
                 <script>
                     var profileSex = '{{user.sex}}' || 'man';
                 </script>
+
+
                 <div class="profile-sh fade-in-down margin5">
                     <div class="panel">
                         <div class="panel-body" style="padding: 50px;">
@@ -253,6 +259,62 @@
                     </div>
                 </div>
 
+                <!--关注我的人-->
+                <div id="watch-you" class="profile-sh fade-in-down wrapper panel clearfix">
+                    <div class="panel-heading b-b b-light">
+                        <span class="badge bg-warning pull-right">{{user.watchyou.length}}</span>
+                        <a href="" class="font-bold">关注我的人</a>
+                    </div>
+                    <div class="watchyouloader wrapper text-center"><img src="/img/flickr.svg"/></div>
+                    <div v-if="!extra.status" class="wrapper text-center" v-text="extra.msg"></div>
+
+                    <ul class="list-group no-borders">
+                        <li v-repeat="watchyouuser:watchyouusers" class="list-group-item col-sm-3">
+
+                            <a href="/user/(%watchyouuser.nickname%)" class="pull-left thumb-sm m-r">
+                                <img v-attr="src:watchyouuser.avatar" class="r">
+                            </a>
+                            <div class="clear">
+                                <div><a href="/user/(%watchyouuser.nickname%)">(%watchyouuser.nickname%)</a></div>
+                                <small class="text-muted">
+                                    <a href="javascript:;" v-on="click:watch()" class="btn btn-primary btn-xs (%!!watchyouuser.iswatch && 'disabled'%)"><i class="fa fa-plus"></i>&nbsp;&nbsp;(%!!watchyouuser.iswatch?'已关注':'关注'%)</a>
+                                </small>
+                            </div>
+
+                        </li>
+                    </ul>
+                 </div>
+
+
+                <!--我关注的人-->
+                <div id="you-watch" class="profile-sh fade-in-down wrapper panel clearfix">
+                    <div class="panel-heading b-b b-light">
+                        <span class="badge bg-warning pull-right">{{user.youwatch.length}}</span>
+                        <a href="" class="font-bold">我关注的人</a>
+                    </div>
+
+                    <div v-if="!extra.status" class="wrapper text-center" v-text="extra.msg"></div>
+
+                    <ul class="list-group no-borders">
+                        <li v-repeat="watchyouuser:watchyouusers" class="list-group-item col-sm-3">
+
+                            <a href="/user/(%watchyouuser.nickname%)" class="pull-left thumb-sm m-r">
+                                <img v-attr="src:watchyouuser.avatar" class="r">
+                            </a>
+                            <div class="clear">
+                                <div><a href="/user/(%watchyouuser.nickname%)">(%watchyouuser.nickname%)</a></div>
+                                <small class="text-muted">
+
+                                    <a href="" class="btn btn-primary btn-xs"><i class="fa fa-minus"></i>&nbsp;&nbsp;取消关注</a>
+                                </small>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
+
+
 
 
             </div>
@@ -363,6 +425,6 @@
 {% endblock%}
 {% block loadjs %}
 <script>
-    require(['profile/index','profile/useraction']);
+    require(['profile/index','profile/useraction','profile/watch']);
 </script>
 {% endblock %}

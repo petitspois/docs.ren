@@ -293,5 +293,36 @@ module.exports = function () {
          }
     }
 
+    user.watchlist = function* (){
+        var type = this.request.body.type,
+            alldata = (yield model.get({email:this.session.user.email},'watchyou youwatch'));
+
+        if('watchyou' == type){
+            data = alldata.watchyou;
+        }else if('youwatch' == type){
+            data = alldata.youwatch;
+        }
+
+        if(data.length){
+            var userdata = yield model.getAll({_id:{$in:data}},'',0,0,'-password -role');
+            yield userdata.map(function* (item){
+                item.iswatch = ~alldata.youwatch.indexOf(item._id);
+                return item;
+            });
+            this.body = {
+                msg:'成功',
+                status:1,
+                data:userdata
+            }
+        }else{
+            var msg = 'watchyou' == type ? '您还没有关注任何人' : '还没有任何人关注你';
+            this.body = {
+                msg:msg,
+                status:0
+            }
+        }
+
+    }
+
     return user;
 }

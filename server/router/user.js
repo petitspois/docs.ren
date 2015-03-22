@@ -26,4 +26,7 @@ module.exports = function(app, control){
     //action
     app.post('/action', control.user.action);
 
+    //profile watchyou
+    app.post('/watchlist', control.user.checkNotLogin, control.user.watchlist);
+
 }

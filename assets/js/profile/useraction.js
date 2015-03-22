@@ -25,7 +25,7 @@ define(['petitspois','vue'],function($, Vue){
                 if($('.loader').hasClass('hide')){$('.loader').removeClass('hide')};
                 $.ajax({url:'/action',type:'POST',data:{page:page}}).then(function(ret){
                     ret = JSON.parse(ret);
-                    me.useraction =  me.useraction.concat(ret.data);
+                    ret.data && (me.useraction =  me.useraction.concat(ret.data));
                     me.extra = ret;
                     me.page = ret.page;
                     if(!$('.loader').hasClass('hide')){$('.loader').addClass('hide')};

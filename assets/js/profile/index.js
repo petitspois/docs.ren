@@ -1,7 +1,7 @@
 /**
  * Created by petitspois on 15/2/15.
  */
-define(['petitspois', 'vue','upload','loadin'],function($, Vue, upload, loadin){
+define(['petitspois', 'vue','upload','loadin','profile/watch'],function($, Vue, upload, loadin, watch){
 
     var urlHash = location.hash;
 
@@ -20,6 +20,11 @@ define(['petitspois', 'vue','upload','loadin'],function($, Vue, upload, loadin){
              });
              $(this).addClass('active');
              $('.profile-sh').eq(k).addClass('show ng-enter');
+             if(2==k){
+                 watch.watchme.loadwatchyou();
+             }else if(3==k){
+                 watch.mewatch.loadyouwatch();
+             }
          })
     });
 
@@ -48,6 +53,8 @@ define(['petitspois', 'vue','upload','loadin'],function($, Vue, upload, loadin){
     upload.preview('avatar','preview-avatar',function(data){
         avatarData = data;//base64
     });
+
+    Vue.config.delimiters = ['(%', '%)'];
 
     new Vue({
         el:'#profile-form',
