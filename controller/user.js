@@ -208,7 +208,6 @@ module.exports = function () {
             oid = body.oid,
             nid = this.session.user._id || (yield model.get({email: this.session.user.email}))._id;
 
-
         if('true' === type){
             //取消关注
             /// youwatch 删除 对方id
@@ -296,14 +295,14 @@ module.exports = function () {
     user.watchlist = function* (){
         var type = this.request.body.type,
             alldata = (yield model.get({email:this.session.user.email},'watchyou youwatch'));
-
+        console.log(alldata);
         if('watchyou' == type){
             data = alldata.watchyou;
         }else if('youwatch' == type){
             data = alldata.youwatch;
         }
 
-        if(data.length){
+        if(data.length && null!==data[0]){
             var userdata = yield model.getAll({_id:{$in:data}},'',0,0,'-password -role');
             yield userdata.map(function* (item){
                 item.iswatch = ~alldata.youwatch.indexOf(item._id);
@@ -315,7 +314,7 @@ module.exports = function () {
                 data:userdata
             }
         }else{
-            var msg = 'watchyou' == type ? '您还没有关注任何人' : '还没有任何人关注你';
+            var msg = 'watchyou' != type ? '您还没有关注任何人' : '还没有任何人关注你';
             this.body = {
                 msg:msg,
                 status:0

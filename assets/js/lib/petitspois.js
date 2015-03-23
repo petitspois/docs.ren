@@ -141,8 +141,7 @@ typeof function () {
             var parent = this[0] = node.parentNode;
 
             if (selector && parent) {
-
-                if (parent.className && -1 != parent.className.indexOf(selector)) {
+                if (parent.className && ~parent.className.indexOf(selector)) {
                     this[0] = parent;
                     this.length = 1;
                     return this;

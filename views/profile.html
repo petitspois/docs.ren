@@ -277,7 +277,7 @@
                             <div class="clear">
                                 <div><a href="/user/(%watchyouuser.nickname%)">(%watchyouuser.nickname%)</a></div>
                                 <small class="text-muted">
-                                    <a href="javascript:;" v-on="click:watch()" class="btn btn-primary btn-xs (%!!watchyouuser.iswatch && 'disabled'%)"><i class="fa fa-plus"></i>&nbsp;&nbsp;(%!!watchyouuser.iswatch?'已关注':'关注'%)</a>
+                                    <a href="javascript:;" v-on="click:watch($event, watchyouuser._id)" class="btn btn-primary btn-xs (%!!watchyouuser.iswatch && 'disabled'%)"><i class="fa fa-plus"></i>&nbsp;&nbsp;(%!!watchyouuser.iswatch?'已关注':'关注'%)</a>
                                 </small>
                             </div>
 
@@ -305,7 +305,8 @@
                                 <div><a href="/user/(%watchyouuser.nickname%)">(%watchyouuser.nickname%)</a></div>
                                 <small class="text-muted">
 
-                                    <a href="" class="btn btn-primary btn-xs"><i class="fa fa-minus"></i>&nbsp;&nbsp;取消关注</a>
+                                    <a href="javascript:;" v-on="click:watch($event, watchyouuser._id)" class="btn btn-primary btn-xs"><i class="fa fa-minus"></i>&nbsp;&nbsp;取消关注</a>
+
                                 </small>
                             </div>
 
