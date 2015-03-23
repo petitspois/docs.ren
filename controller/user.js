@@ -295,7 +295,7 @@ module.exports = function () {
     user.watchlist = function* (){
         var type = this.request.body.type,
             alldata = (yield model.get({email:this.session.user.email},'watchyou youwatch'));
-        console.log(alldata);
+
         if('watchyou' == type){
             data = alldata.watchyou;
         }else if('youwatch' == type){

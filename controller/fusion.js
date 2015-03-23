@@ -18,7 +18,6 @@ module.exports = function(){
 
     //index
     fusion.getHome = function* (){
-
         var page = parseInt(this.query.p) ? Math.abs(parseInt(this.query.p)) : 1,
             posts = yield postModel.getAll({status:1},'-istop -createtime',page, 10),
             total = Math.ceil((yield postModel.querycount({status:1}))/10);
@@ -29,7 +28,6 @@ module.exports = function(){
             posts[i].updatetime = formatDate(posts[i].updatetime, true);
             posts[i].flag = posts[i]['_id'].toString();
         }
-
         //signed
         if(this.session.user){
             this.body = yield this.render('index',{

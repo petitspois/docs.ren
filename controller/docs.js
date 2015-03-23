@@ -106,7 +106,7 @@ module.exports = function () {
             comments = yield commentModel.getAll({pid: id},'createtime');
         //comments data
         for (var i = 0; i < comments.length; i++) {
-            comments[i].author = (yield commentModel.getAvatar({name: comments[i].name})).author;
+            comments[i].author = yield userModel.get({nickname: comments[i].name});
             comments[i].createtime = formatDate(comments[i].createtime, true);
             comments[i].comment = marked(comments[i].comment);
             comments[i].cid = String(comments[i]._id);
