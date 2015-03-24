@@ -15777,3 +15777,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 #doc-content h2,#doc-content h3{padding-top: 55px;margin-top:-55px;}
 
 .outline{border-right-color:white !important;}
+
+.gitsize{font-size:40px;}
+
+.gitsize:hover{color:#4183c4;}
+
+
