@@ -333,7 +333,7 @@ module.exports = function () {
             path += '?client_id=' + conf.oauth.id;
             path += '&redirect_uri='+ conf.docsdomian +'/oauth/github/callback&response_type=code';
             path += '&state=' + state;
-            this.redirect(path);
+            this.body = path;
         }else if('callback' == params.type){
             console.log(this.search)
         }

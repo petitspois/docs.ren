@@ -40,7 +40,9 @@ define(['petitspois','vue', 'vueValidator', 'loadin'],function($, Vue, Valid, lo
                 });
             },
             oauth:function(){
-                $.ajax({type:'GET', url: '/oauth/github/login'}).then(function(){},function(){});
+                $.ajax({type:'GET', url: '/oauth/github/login'}).then(function(ret){
+                    self.location.href = ret;
+                },function(){});
             }
         }
     }).$mount('#login');
