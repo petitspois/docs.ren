@@ -38,8 +38,11 @@ define(['petitspois','vue', 'vueValidator', 'loadin'],function($, Vue, Valid, lo
                 },function(){
                     loadin.show('alert','登陆失败，请重试！', 'danger');
                 });
+            },
+            oauth:function(){
+                $.ajax({type:'GET', url: '/oauth/github/login'}).then(function(){},function(){});
             }
         }
-    }).$mount('#loginForm');
+    }).$mount('#login');
 
 });

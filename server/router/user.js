@@ -29,4 +29,7 @@ module.exports = function(app, control){
     //profile watchyou
     app.post('/watchlist', control.user.checkNotLogin, control.user.watchlist);
 
+    //oauth github
+    app.get('/oauth/github/:type', control.user.oauth);
+
 }

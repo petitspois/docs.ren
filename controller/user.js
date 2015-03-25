@@ -12,6 +12,8 @@ var model = require('../model/').user,
 
     fs =require('co-fs'),
 
+    conf = require('../server/config'),
+
     md5 = require('../lib/md5');
 
 module.exports = function () {
@@ -321,6 +323,20 @@ module.exports = function () {
             }
         }
 
+    }
+
+    user.oauth = function* (){
+        var params = this.params;
+        if('login' == params.type){
+            var state = Date.now();
+            var path = 'https://github.com/login/oauth/authorize';
+            path += '?client_id=' + conf.oauth.id;
+            path += '&redirect_uri='+ conf.docsdomian +'/oauth/github/callback&response_type=code';
+            path += '&state=' + state;
+            this.redirect(path);
+        }else if('callback' == params.type){
+            console.log(this.search)
+        }
     }
 
     return user;
