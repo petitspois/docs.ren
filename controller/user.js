@@ -2,7 +2,11 @@
  * Created by apple on 15/1/31.
  */
 
-var model = require('../model/').user,
+var qs = require('querystring'),
+
+    request = require('co-request'),
+
+    model = require('../model/').user,
 
     actionModel = require('../model/').action,
 
@@ -328,14 +332,50 @@ module.exports = function () {
     user.oauth = function* (){
         var params = this.params;
         if('login' == params.type){
-            var state = Date.now();
-            var path = 'https://github.com/login/oauth/authorize';
-            path += '?client_id=' + conf.oauth.id;
-            path += '&redirect_uri='+ conf.docsdomian +'/oauth/github/callback&response_type=code';
-            path += '&state=' + state;
-            this.body = path;
+            var requestUrl = 'https://github.com/login/oauth/authorize',
+                urlparams = {
+                    client_id:conf.oauth.id,
+                    redirect_uri:conf.docsdomian +'/oauth/github/callback',
+                    scope: 'user:email',
+                    state:md5(conf.oauthState)
+                };
+
+            this.body = requestUrl + '?' + qs.stringify(urlparams);
+
         }else if('callback' == params.type){
-            console.log(this.search)
+            var query = this.query,
+                code = query.code,
+                state = query.state,
+                accessToken;
+
+                //state diff handling
+                if(state !== md5(conf.oauthState)){
+                    this.throw(403, '非法授权操作');
+                }
+
+            //request access_token
+            var codeParams = {
+                client_id:conf.oauth.id,
+                client_secret:conf.oauth.secret,
+                code:code
+            }
+
+            var result = yield request({
+                uri: 'https://github.com/login/oauth/access_token'+ '?' +qs.stringify(codeParams),
+                method: 'POST'
+            });
+
+            accessToken = qs.parse(result.body).access_token || 0;
+
+            var gituser = accessToken && (yield request({
+                    url:'https://api.github.com/user?access_token='+accessToken,
+                    headers: {
+                        'User-Agent': 'docs.ren'
+                    }
+                }));
+
+            console.log(gituser.body)
+
         }
     }
 
