@@ -83,7 +83,8 @@ module.exports = function () {
             email = body.email,
             password = body.pwd;
 
-        var getData = yield model.get({email:email});
+        var getData = yield model.get({"$or":[{email:email},{nickname:email}]});
+
         if(!getData){
             this.body = {
                 msg:'用户名或密码输入错误',
