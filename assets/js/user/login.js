@@ -9,6 +9,7 @@ define(['petitspois','vue', 'vueValidator', 'loadin'],function($, Vue, Valid, lo
     var loginForm = new Vue({
         data: {
             user:{
+                bind:'',
                 email: '',
                 pwd: ''
             }
@@ -17,6 +18,10 @@ define(['petitspois','vue', 'vueValidator', 'loadin'],function($, Vue, Valid, lo
             submit: function (e) {
                 var user = this.$data.user;
                 e.preventDefault();
+                var bindEmail = document.getElementById('bind-email').title;
+                if(bindEmail && ~bindEmail.indexOf('@')){
+                    user.bind = bindEmail;
+                }
                 loadin.show('load');
                 $.ajax({type:'POST', url: '/signin', data:user}).then(function(ret){
                      ret = JSON.parse(ret);

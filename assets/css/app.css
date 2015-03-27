@@ -15782,4 +15782,17 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .gitsize:hover{color:#4183c4;}
 
-
+.link-css{
+    color:#dee5e7;
+    width: 35px;
+    height: 35px;
+    background: rgba(0,0,0,.7);
+    display: table;
+    margin: 10px auto;
+    border-radius: 50%;
+}
+.link-css:before{
+    display:table-cell;
+    vertical-align: middle;
+    padding-top:2px;
+}

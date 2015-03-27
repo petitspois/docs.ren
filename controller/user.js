@@ -81,10 +81,12 @@ module.exports = function () {
     user.signin = function* (){
         var body = this.request.body,
             email = body.email,
-            password = body.pwd;
+            password = body.pwd,
+            bindEmail = body.bind;
 
         var getData = yield model.get({"$or":[{email:email},{nickname:email}]});
 
+        //用户不存在
         if(!getData){
             this.body = {
                 msg:'用户名或密码输入错误',
@@ -93,6 +95,8 @@ module.exports = function () {
             return;
         }
         var getPwd = getData.password;
+
+        //密码错误
         if(getPwd){
             if(getPwd!==md5(password)){
                 this.body = {
@@ -102,11 +106,29 @@ module.exports = function () {
                 return;
             }
         }
+
+        //绑定处理
+        if(bindEmail){
+            var oauth = getData.oauth;
+            if(oauth){
+                this.body = {
+                    msg:'该账号已经绑定了其他github账号',
+                    status:0
+                }
+                return;
+            }
+            yield model.update({email:getData.email},{$set:{oauth:bindEmail}});
+        }
+
         getData = getData.toObject();
         delete getData.password;
+
+        yield model.update({email:email},{$set:{oauth:bindEmail}});
+
         this.session.user = getData;
+
         this.body = {
-            msg: '登陆成功',
+            msg: bindEmail? '绑定成功':'登陆成功',
             status: 1
         }
 
@@ -115,7 +137,7 @@ module.exports = function () {
     //checklogin
     user.checkLogin = function* (next) {
         if (this.session.user) {
-            this.body = yield this.msg('您已经登陆','已登陆');
+            this.body = yield this.msg('/','您已经登陆','已登陆');
         }else{
             yield next;
         }
@@ -336,8 +358,9 @@ module.exports = function () {
             var requestUrl = 'https://github.com/login/oauth/authorize',
                 urlparams = {
                     client_id:conf.oauth.id,
-                    redirect_uri:conf.docsdomian +'/oauth/github/callback',
                     scope: 'user:email',
+                    redirect_uri:conf.docsdomian +'/oauth/github/callback',
+                    response_type:'code',
                     state:md5(conf.oauthState)
                 };
 
@@ -375,7 +398,90 @@ module.exports = function () {
                     }
                 }));
 
-            console.log(gituser.body)
+            //获取数据失败
+            if(!gituser || !gituser.body){
+                this.body = yield this.msg('/signin','github数据解析失败');
+            }
+
+            //gituser.body content
+            //{
+            //    login: 'petitspois',
+            //    id: 3362033,
+            //    avatar_url: 'https://avatars.githubusercontent.com/u/3362033?v=3',
+            //    gravatar_id: '',
+            //    url: 'https://api.github.com/users/cloudcome',
+            //    html_url: 'https://github.com/cloudcome',
+            //    followers_url: 'https://api.github.com/users/cloudcome/followers',
+            //    following_url: 'https://api.github.com/users/cloudcome/following{/other_user}',
+            //    gists_url: 'https://api.github.com/users/cloudcome/gists{/gist_id}',
+            //    starred_url: 'https://api.github.com/users/cloudcome/starred{/owner}{/repo}',
+            //    subscriptions_url: 'https://api.github.com/users/cloudcome/subscriptions',
+            //    organizations_url: 'https://api.github.com/users/cloudcome/orgs',
+            //    repos_url: 'https://api.github.com/users/cloudcome/repos',
+            //    events_url: 'https://api.github.com/users/cloudcome/events{/privacy}',
+            //    received_events_url: 'https://api.github.com/users/cloudcome/received_events',
+            //    type: 'User',
+            //    site_admin: false,
+            //    name: '云淡然',
+            //    company: 'netease',
+            //    blog: 'http://ydr.me',
+            //    location: 'hangzhou',
+            //    email: 'cloudcome@163.com',
+            //    hireable: true,
+            //    bio: null,
+            //    public_repos: 41,
+            //    public_gists: 0,
+            //    followers: 18,
+            //    following: 4,
+            //    created_at: '2013-01-24T01:59:23Z',
+            //    updated_at: '2014-11-22T16:26:16Z'
+            // }
+
+            var gUser = JSON.parse(gituser.body);
+            //三种情况
+            var ret = {
+                email: gUser.email,
+                nickname: gUser.login,
+                avatar:gUser.avatar_url,
+                github:gUser.html_url,
+                location:gUser.location,
+                company:gUser.company
+            }
+
+            var userInfo = yield model.get({oauth:ret.email});
+
+            ///第一种 数据库无email and login, 直接注册登陆
+
+            ///第二种 数据库无email 有login, 返回到dom操作，进行更改login操作
+
+            ///第三种 数据库无login 有email, 返回到dom操作，进行绑定处理
+
+            //oauth 是否绑定
+            if(!userInfo){
+
+                var user = yield model.get({email:ret.email});
+
+                //是否存在用户
+                if(user){
+                    //存在进行绑定
+                    this.body = yield this.render('login',{
+                        title:'账号绑定',
+                        secondtitle:'"github" 账号 与 "docs.ren" 账号绑定',
+                        gitEmail:ret.email
+                    });
+                }else{
+                    //不存在，新建
+                }
+
+
+            }
+
+            console.log('您已绑定过了！')
+
+
+
+
+
 
         }
     }

@@ -56,6 +56,11 @@ var mongoose = require('mongoose'),
             required:false,
             default :[]
         },
+        oauth:{
+            type:String,
+            required:false,
+            default :''
+        },
         role: {
             type: Number,
             required: true,
