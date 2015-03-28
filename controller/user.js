@@ -403,6 +403,15 @@ module.exports = function () {
                 this.body = yield this.msg('/signin','github数据解析失败');
             }
 
+            var primaryEmail = yield request({
+                url:'https://api.github.com/user/emails?access_token='+accessToken,
+                headers: {
+                    'User-Agent': 'docs.ren'
+                }
+            });
+
+            console.log(primaryEmail)
+
             //gituser.body content
             //{
             //    login: 'petitspois',
@@ -438,6 +447,8 @@ module.exports = function () {
             // }
 
             var gUser = JSON.parse(gituser.body);
+
+
             //三种情况
             var ret = {
                 email: gUser.email,
@@ -445,7 +456,10 @@ module.exports = function () {
                 avatar:gUser.avatar_url,
                 github:gUser.html_url,
                 location:gUser.location,
-                company:gUser.company
+                company:gUser.company,
+                oauth:this.email,
+                cover:'/img/cover.jpg',
+                password:md5(String(Date.now()))
             }
 
             var userInfo = yield model.get({oauth:ret.email});
@@ -455,6 +469,7 @@ module.exports = function () {
             ///第二种 数据库无email 有login, 返回到dom操作，进行更改login操作
 
             ///第三种 数据库无login 有email, 返回到dom操作，进行绑定处理
+
 
             //oauth 是否绑定
             if(!userInfo){
@@ -471,6 +486,20 @@ module.exports = function () {
                     });
                 }else{
                     //不存在，新建
+                    ///nickname 是否存在
+                    var nameExist = yield model.get({nickname:ret.nickname});
+
+                    if(nameExist){
+                        //更换nickname
+
+                    }else{
+                        //直接创建
+                        yield model.add(ret);
+                        delete ret.password;
+                        this.session.user = ret;
+                        this.redirect('/profile');
+                    }
+
                 }
 
 
