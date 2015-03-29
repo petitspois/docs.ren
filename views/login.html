@@ -21,7 +21,7 @@
             <form>
                 <div class="list-group list-group-sm">
                     <div class="list-group-item">
-                        <input v-model="user.email" v-validate="minLength: 3, maxLength: 16" value="{{gitEmail}}" placeholder="电子邮箱/个性域名" class="form-control no-border">
+                        <input v-model="user.email" v-validate="minLength: 3" value="{{gitEmail}}" placeholder="电子邮箱/个性域名" class="form-control no-border">
                     </div>
                     <div class="list-group-item">
                         <input v-model="user.pwd" v-validate="minLength: 6, maxLength: 16" type="password" placeholder="输入密码" class="form-control no-border">

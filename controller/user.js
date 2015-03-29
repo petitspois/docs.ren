@@ -30,7 +30,8 @@ module.exports = function () {
             name = body.name,
             email = body.email,
             password = body.pwd,
-            password_re = body.pwd_re;
+            password_re = body.pwd_re,
+            gavatar = body.avatar || '';
 
         if (password != password_re) {
             this.body = {
@@ -51,7 +52,7 @@ module.exports = function () {
             return;
         }else if(userNickname){
             this.body = {
-                msg: '用户名已经存在。',
+                msg: '个性域名已存在',
                 status: 0
             };
             return;
@@ -64,11 +65,17 @@ module.exports = function () {
             email: String(email),
             nickname: String(name),
             password: md5(String(password)),
-            avatar:avatar,
+            avatar:gavatar?gavatar:avatar,
             cover:'/img/cover.jpg'
         };
 
-        yield model.add(newUser);
+        //更新绑定关系
+
+
+        var nowData = yield model.add(newUser);
+
+        gavatar && (yield model.update({email:email},{$set:{oauth:email}}));
+
         delete newUser.password;
         this.session.user = newUser;
 
@@ -367,15 +374,23 @@ module.exports = function () {
             this.body = requestUrl + '?' + qs.stringify(urlparams);
 
         }else if('callback' == params.type){
+
             var query = this.query,
                 code = query.code,
                 state = query.state,
-                accessToken;
+                accessToken,
+                pE;
 
-                //state diff handling
-                if(state !== md5(conf.oauthState)){
-                    this.throw(403, '非法授权操作');
-                }
+            //当刷新页面直接skip
+            if(code == this.session.$status){
+                this.redirect('/signin');
+                return;
+            }
+
+            //state diff handling
+            if(state !== md5(conf.oauthState)){
+                this.throw(403, '非法授权操作');
+            }
 
             //request access_token
             var codeParams = {
@@ -389,6 +404,7 @@ module.exports = function () {
                 method: 'POST'
             });
 
+            //request profile
             accessToken = qs.parse(result.body).access_token || 0;
 
             var gituser = accessToken && (yield request({
@@ -403,14 +419,26 @@ module.exports = function () {
                 this.body = yield this.msg('/signin','github数据解析失败');
             }
 
-            var primaryEmail = yield request({
+            var gUser = JSON.parse(gituser.body);
+
+            //require primary email
+            var primaryEmail = (yield request({
                 url:'https://api.github.com/user/emails?access_token='+accessToken,
                 headers: {
                     'User-Agent': 'docs.ren'
                 }
-            });
+            })).body;
 
-            console.log(primaryEmail)
+            primaryEmail = JSON.parse(primaryEmail);
+
+            if(primaryEmail && primaryEmail.length){
+                primaryEmail.forEach(function(item, key){
+                     if(item.primary){
+                         pE = item.email;
+                     }
+                });
+            }
+
 
             //gituser.body content
             //{
@@ -446,21 +474,14 @@ module.exports = function () {
             //    updated_at: '2014-11-22T16:26:16Z'
             // }
 
-            var gUser = JSON.parse(gituser.body);
 
 
             //三种情况
             var ret = {
-                email: gUser.email,
+                email: pE,
                 nickname: gUser.login,
-                avatar:gUser.avatar_url,
-                github:gUser.html_url,
-                location:gUser.location,
-                company:gUser.company,
-                oauth:this.email,
-                cover:'/img/cover.jpg',
-                password:md5(String(Date.now()))
-            }
+                avatar:gUser.avatar_url
+            };
 
             var userInfo = yield model.get({oauth:ret.email});
 
@@ -470,6 +491,7 @@ module.exports = function () {
 
             ///第三种 数据库无login 有email, 返回到dom操作，进行绑定处理
 
+            this.session.$status = code;
 
             //oauth 是否绑定
             if(!userInfo){
@@ -484,36 +506,29 @@ module.exports = function () {
                         secondtitle:'"github" 账号 与 "docs.ren" 账号绑定',
                         gitEmail:ret.email
                     });
+                    return;
                 }else{
                     //不存在，新建
-                    ///nickname 是否存在
-                    var nameExist = yield model.get({nickname:ret.nickname});
-
-                    if(nameExist){
-                        //更换nickname
-
-                    }else{
-                        //直接创建
-                        yield model.add(ret);
-                        delete ret.password;
-                        this.session.user = ret;
-                        this.redirect('/profile');
-                    }
-
+                    this.body = yield this.render('register',{
+                        title:'用户注册',
+                        secondtitle:'感谢您使用"GitHub"账号登录"docs.ren"请完成一下内容',
+                        gData:ret
+                    });
+                    return;
                 }
-
 
             }
 
-            console.log('您已绑定过了！')
-
-
-
-
-
+            ret.email = userInfo.email;
+            this.session.user = ret;
+            this.redirect('/profile');
 
         }
     }
+
+
+
+
 
     return user;
 }

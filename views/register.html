@@ -6,23 +6,32 @@
 
 {% block secondtitle %}{{secondtitle}}{% endblock %}
 {% block content %}
-
+<script>
+</script>
     <div class="fade-in-right-big smooth ">
         <div class="container w-xxl w-auto-xs">
             <a href="/" class="navbar-brand block m-t">Docs.ren</a>
-            <div class="m-b-lg">
+            <div id="registerForm" class="m-b-lg">
                 <div class="wrapper text-center">
-                    <a href="javascript:;"><i class="fa fa-github gitsize"></i></a>
+                    <a href="javascript:;" v-on="click:oauth" ><i class="fa fa-github gitsize"></i></a>
                 </div>
-                <form id="registerForm" name="userform" action="/signup" class="form-validation ng-pristine ng-invalid ng-invalid-required ng-valid-email" method="post">
+                <form  name="userform" action="/signup" class="form-validation ng-pristine ng-invalid ng-invalid-required ng-valid-email" method="post">
 
                     <div class="list-group list-group-sm">
+
+                        {% if gData %}
                         <div class="list-group-item">
-                            <input name="username" v-model="user.name" v-validate="required" placeholder="用户名" class="form-control no-border" />
+                            <input name="email" v-model="user.email" type="email" placeholder="电子邮箱" value="{{gData.email}}" class="form-control no-border" disabled />
                         </div>
+                        <input type="hidden" v-model="user.avatar" value="{{gData.avatar}}"/>
+                        {% else %}
+                        <div class="list-group-item">
+                            <input name="email" v-model="user.email" v-validate="email" type="email" placeholder="电子邮箱" class="form-control no-border" />
+                        </div>
+                        {% endif %}
 
                         <div class="list-group-item">
-                            <input name="email" v-model="user.email" v-validate="email" type="email" placeholder="邮箱" class="form-control no-border" />
+                            <input name="username" v-model="user.name" v-validate="required" placeholder="个性域名"  value={{gData.nickname}} class="form-control no-border" />
                         </div>
 
                         <div class="list-group-item">
@@ -34,7 +43,13 @@
                         </div>
 
                     </div>
-                    <button type="submit" v-attr="disabled:!valid" v-on="click:submit" class="btn btn-lg btn-primary btn-block">注 册</button>
+                    <button type="submit" v-attr="disabled:!valid" v-on="click:submit" class="btn btn-lg btn-primary btn-block">
+                        {% if gData %}
+                        完成
+                        {%else%}
+                        注 册
+                        {%endif%}
+                    </button>
                     <div class="line line-dashed"></div>
                     <p class="text-center">
                         <small>已有帐号，直接登录?</small>

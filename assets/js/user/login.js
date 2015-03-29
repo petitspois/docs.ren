@@ -18,7 +18,7 @@ define(['petitspois','vue', 'vueValidator', 'loadin'],function($, Vue, Valid, lo
             submit: function (e) {
                 var user = this.$data.user;
                 e.preventDefault();
-                var bindEmail = document.getElementById('bind-email').title;
+                var bindEmail = document.getElementById('bind-email') && document.getElementById('bind-email').title || '';
                 if(bindEmail && ~bindEmail.indexOf('@')){
                     user.bind = bindEmail;
                 }

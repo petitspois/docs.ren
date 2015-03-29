@@ -2,6 +2,8 @@ define(['petitspois', 'vue', 'vueValidator', 'loadin'], function ($, Vue, valid,
 
     Vue.use(valid);
 
+    Vue.config.delimiters = ['(%', '%)'];
+
     var registerForm = new Vue({
         validator: {
             validates: {
@@ -12,6 +14,7 @@ define(['petitspois', 'vue', 'vueValidator', 'loadin'], function ($, Vue, valid,
         },
         data: {
             user:{
+                avatar:'',
                 name: '',
                 email: '',
                 pwd: '',
@@ -22,6 +25,7 @@ define(['petitspois', 'vue', 'vueValidator', 'loadin'], function ($, Vue, valid,
             submit: function (e) {
                 var user = this.$data.user;
                 e.preventDefault();
+
                 if (user.pwd != user.pwd_re) {
                     loadin.show('alert', '两次密码输入不一致！', 'danger');
                     return;
@@ -39,6 +43,11 @@ define(['petitspois', 'vue', 'vueValidator', 'loadin'], function ($, Vue, valid,
                 },function(){
                     loadin.show('alert','注册失败，请重试！', 'danger');
                 });
+            },
+            oauth:function(){
+                $.ajax({type:'GET', url: '/oauth/github/login'}).then(function(ret){
+                    self.location.href = ret;
+                },function(){});
             }
         }
     }).$mount('#registerForm');
