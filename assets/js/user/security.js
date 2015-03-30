@@ -29,6 +29,20 @@ define(['petitspois','vue', 'vueValidator', 'gf'],function($, Vue, valid, gf){
                     gf('error','两次密码输入不一致');
                     return;
                 }
+
+                //数据提交
+                $.ajax({url:'/securityPwds', type:'POST', data:pwds}).then(function(ret){
+                    ret = JSON.parse(ret);
+                    if(ret.status){
+                        gf('success', ret.msg);
+                        setTimeout(function(){
+                            location.href = '/signin';
+                        }, 2000)
+                    }else{
+                        gf('error', ret.msg);
+                        return;
+                    }
+                },function(){});
             }
         }
     });

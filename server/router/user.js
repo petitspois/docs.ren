@@ -35,4 +35,6 @@ module.exports = function(app, control){
     //security
     app.get('/security', control.user.checkNotLogin, control.user.security);
 
+    app.post('/securityPwds', control.user.checkNotLogin, control.user.securityp);
+
 }

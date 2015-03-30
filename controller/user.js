@@ -535,6 +535,51 @@ module.exports = function () {
         });
     }
 
+    user.securityp = function* (){
+        var body = this.request.body,
+            old = body.old,
+            now = body.now,
+            repeatPwd = body.repeat,
+            email = yield model.get({email:this.session.user.email}) || body.email || '';
+
+        if(now === old){
+            this.body = {
+                msg:'新密码与旧密码相同',
+                status:0
+            };
+            return;
+        }
+
+        if(now !== repeatPwd){
+            this.body = {
+                msg:'两次密码输入不一致',
+                status:0
+            };
+            return;
+        }
+
+        var pwd = email.password || (yield model.get({email:email},'password')).password;
+
+        if(pwd !== md5(old)){
+            this.body = {
+                msg:'原密码输入错误',
+                status:0
+            }
+            return;
+        }
+
+        if(typeof email === 'object'){
+            email = email.email;
+        }
+
+        yield model.update({email:email},{$set:{password:md5(now)}});
+        this.session.user = null;
+        this.body = {
+            msg:'密码修改成功',
+            status:1
+        }
+
+    }
 
     return user;
 }
