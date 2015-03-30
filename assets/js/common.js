@@ -17,7 +17,8 @@ typeof function (window) {
                     'loadin':'effect/loading',
                     'upload':'upload/upload',
                     'hljs':'lib/highlight.min',
-                    'waypoints':'lib/waypoints'
+                    'waypoints':'lib/waypoints',
+                    'gf':'effect/globalflash'
                 },
                 urlArgs: "petitspois=" +  (new Date()).getTime()
             });

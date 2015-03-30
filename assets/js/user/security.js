@@ -1,0 +1,35 @@
+/**
+ * Created by petitspos on 3/30/15.
+ */
+define(['petitspois','vue', 'vueValidator', 'gf'],function($, Vue, valid, gf){
+
+    Vue.use(valid);
+
+    new Vue({
+        el:'#security-valid',
+        data:{
+            pwds:{
+                old:'',
+                now:'',
+                repeat:''
+            }
+        },
+        methods:{
+            submit:function(e){
+                e.preventDefault();
+                var pwds = this.$data.pwds;
+                //new and old
+                if(pwds.now === pwds.old){
+                    gf('error','新密码与旧密码相同');
+                    return;
+                }
+
+                //输入是否相等
+                if(pwds.now !== pwds.repeat){
+                    gf('error','两次密码输入不一致');
+                    return;
+                }
+            }
+        }
+    });
+});

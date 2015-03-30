@@ -32,4 +32,7 @@ module.exports = function(app, control){
     //oauth github
     app.get('/oauth/github/:type', control.user.oauth);
 
+    //security
+    app.get('/security', control.user.checkNotLogin, control.user.security);
+
 }

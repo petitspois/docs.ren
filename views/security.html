@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block title%}{{title}}{% endblock %}
+{% block secondtitle %}{{secondtitle}}{% endblock %}
+{% block content %}
+<div class="app app-header-fixed" id="app">
+    <div class="fade-in-right-big smooth ">
+        <div class="container w-xl w-auto-xs">
+            <a href="" class="navbar-brand block m-t ng-binding">Docs.ren</a>
+
+            <div id="security-valid" class="m-b-lg">
+                <div class="wrapper text-center">
+                    <strong>密码:6-16个字符，字母加数字或符号组合</strong>
+                </div>
+                <form name="reset" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+                    <div class="list-group list-group-sm">
+                        <div class="list-group-item">
+                            <input type="password" v-model="pwds.old" v-validate="minLength: 6, maxLength: 16" placeholder="当前的密码" class="form-control no-border">
+                        </div>
+                        <div class="list-group-item">
+                            <input type="password" v-model="pwds.now" v-validate="minLength: 6, maxLength: 16" placeholder="新密码6-16位" class="form-control no-border">
+                        </div>
+                        <div class="list-group-item">
+                            <input type="password" v-model="pwds.repeat" v-validate="minLength: 6, maxLength: 16" placeholder="确认密码" class="form-control no-border">
+                        </div>
+                    </div>
+                    <button type="submit" v-on="click:submit" v-attr="disabled:!valid" class="btn btn-lg btn-primary btn-block">确 定</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block loadjs %}
+<script>
+    require(['user/security']);
+</script>
+{% endblock %}

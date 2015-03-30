@@ -15796,3 +15796,71 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     vertical-align: middle;
     padding-top:2px;
 }
+
+#global-flash{
+    width: 300px;
+    font-size: 14px;
+    margin-left: -150px;
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    z-index: 9999;
+    background-color: #F4F4F4;
+    color: #666;
+    text-align: right;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-box-shadow: 2px 2px 7px #CCC;
+    -moz-box-shadow: 2px 2px 7px #CCC;
+    -ms-box-shadow: 2px 2px 7px #CCC;
+    -o-box-shadow: 2px 2px 7px #CCC;
+    box-shadow: 2px 2px 7px #CCC;
+    -webkit-transition: all linear .6s;
+    -moz-transition: all linear .6s;
+    -ms-transition: all linear .6s;
+    -o-transition: all linear .6s;
+    transition: all linear .6s;
+}
+
+#global-flash > i{
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#global-flash.active{
+    top:-20px;
+}
+
+#global-flash.show-close{
+    top:0;
+}
+
+#global-flash > .f-outer{
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-transition: 'margin-top' linear .2s;
+    -moz-transition: 'margin-top' linear .2s;
+    -ms-transition: 'margin-top' linear .2s;
+    -o-transition: 'margin-top' linear .2s;
+    transition: 'margin-top' linear .2s;
+}
+
+#global-flash>.f-outer>.g-msg{
+    opacity: 1;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+    word-break: break-all;
+}
+
+
+#global-flash >.f-outer>.success{
+    background-color: #DEFCD5;
+    color: #52A954;
+}
+
+#global-flash >.f-outer>.error{
+    background-color: #F1D7D7;
+    color: #A95252;
+}

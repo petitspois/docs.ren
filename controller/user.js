@@ -527,7 +527,13 @@ module.exports = function () {
     }
 
 
-
+    user.security = function* (){
+        this.body = yield this.render('security',{
+            title:'密码修改',
+            secondtitle:'密码修改',
+            user:this.session.user
+        });
+    }
 
 
     return user;
