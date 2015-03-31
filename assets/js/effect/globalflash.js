@@ -12,9 +12,11 @@ define(['petitspois'], function($){
         //添加内容
         $('.f-outer span').text(content);
         //颜色样式
-        !$('.g-msg').hasClass(type) && $('.g-msg').addClass(type);
+        $('.g-msg').removeClass('success');
+        $('.g-msg').removeClass('error');
+        $('.g-msg').addClass(type);
         //表情
-        $('.g-msg i')[0].className = 'success' === type ? 'fa fa-smile-o' : 'fa fa-frown-o';
+        $('.g-msg i')[0].className = 'success' == type ? 'fa fa-smile-o' : 'fa fa-frown-o';
         //显示信息
         !$('#global-flash').hasClass('active') && $('#global-flash').addClass('active');
 

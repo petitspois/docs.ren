@@ -1,7 +1,7 @@
 /**
  * Created by petitspois on 15/3/18.
  */
-define(['petitspois','loadin'], function($, loadin){
+define(['petitspois', 'gf'], function($, gf){
 
     var signing = !!USER,
         iswatch = !!parseInt($('#watch')[0].dataset.iswatch);
@@ -27,7 +27,7 @@ define(['petitspois','loadin'], function($, loadin){
                     }
                     iswatch = !iswatch;
                 }else{
-                    loadin.show('alert',ret.msg,'danger');
+                    gf('error', ret.msg);
                 }
             },function(){});
 

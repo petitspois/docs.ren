@@ -1,4 +1,4 @@
-define(['petitspois', 'vue', 'vueValidator', 'loadin'], function ($, Vue, valid, loadin) {
+define(['petitspois', 'vue', 'vueValidator', 'loadin', 'gf'], function ($, Vue, valid, loadin, gf) {
 
     Vue.use(valid);
 
@@ -27,21 +27,23 @@ define(['petitspois', 'vue', 'vueValidator', 'loadin'], function ($, Vue, valid,
                 e.preventDefault();
 
                 if (user.pwd != user.pwd_re) {
-                    loadin.show('alert', '两次密码输入不一致！', 'danger');
+                    gf('error', '两次密码输入不一致！');
                     return;
                 }
                 loadin.show();
                 $.ajax({type:'POST',dataType:'json', url:'/signup',data:user}).then(function(ret){
+                    loadin.hide();
                     if(!ret.status){
-                        loadin.show('alert',ret.msg, 'danger');
+                        gf('error', ret.msg);
                         return;
                     }
-                    loadin.show('alert', '注册成功！','success');
+                    gf('success', '注册成功！');
                     setTimeout(function(){
                         location.replace('/');
                     },1200)
                 },function(){
-                    loadin.show('alert','注册失败，请重试！', 'danger');
+                    loadin.hide();
+                    gf('error','注册失败，请重试！');
                 });
             },
             oauth:function(){
