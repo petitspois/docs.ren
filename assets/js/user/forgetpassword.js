@@ -21,7 +21,12 @@ define(['petitspois', 'vue', 'vueValidator', 'gf', 'loadin'], function ($, Vue, 
                 e.preventDefault();
                 loadin.show();
                 $.ajax({type:'POST',dataType:'json', url:'/resetmail',data:user}).then(function(ret){
-
+                    ret = JSON.parse(ret);
+                    if(ret.status){
+                        gf('success', ret.msg);
+                    }else{
+                        gf('error', ret.msg);
+                    }
                 }, function(){});
             }
 

@@ -23,17 +23,12 @@ typeof function (window) {
                 urlArgs: "petitspois=" +  (new Date()).getTime()
             });
 
-            //左侧拦显示或隐藏
-            me.showHideAside();
 
             //nav
             me.loadNav();
 
             //check notifications
             me.checkNotice();
-        },
-        showHideAside: function () {
-            require(['effect/showhideaside']);
         },
         loadNav:function(){
             require(['nav']);

@@ -529,21 +529,45 @@ module.exports = function () {
 
 
     user.security = function* () {
-        this.body = yield this.render('security', {
-            title: '密码修改',
-            secondtitle: '密码修改',
-            user: this.session.user
-        });
+        var ctx = this,
+            body = ctx.query,
+            email = body.email || '',
+            key = body.key || '';
+
+        if(ctx.session.user){
+            ctx.body = yield ctx.render('security', {
+                title: '密码修改',
+                secondtitle: '密码修改',
+                user: ctx.session.user
+            });
+            return;
+        }else if(email === ctx.session.sendemail && key === ctx.session.pwdKey){
+            ctx.body = yield ctx.render('security', {
+                title: '重置密码',
+                secondtitle: '重置密码',
+                resetpwd: email
+            });
+            return;
+        }else{
+            this.body = yield this.render('404');
+            return;
+        }
     }
 
     user.securityp = function* () {
         var body = this.request.body,
             old = body.old,
             now = body.now,
-            repeatPwd = body.repeat,
-            email = yield model.get({email: this.session.user.email}) || body.email || '';
+            resetemail = body.resetemail,
+            repeatPwd = body.repeat;
+           email = resetemail || (yield model.get({email: this.session.user.email}));
 
-        if (now === old) {
+
+        if(!resetemail || !this.session.user){
+            this.body = yield this.render('404');
+        }
+
+        if (!resetemail && (now === old)) {
             this.body = {
                 msg: '新密码与旧密码相同',
                 status: 0
@@ -559,14 +583,17 @@ module.exports = function () {
             return;
         }
 
-        var pwd = email.password || (yield model.get({email: email}, 'password')).password;
 
-        if (pwd !== md5(old)) {
-            this.body = {
-                msg: '原密码输入错误',
-                status: 0
+        if(!resetemail) {
+            var pwd = email.password || (yield model.get({email: email}, 'password')).password;
+
+            if (pwd !== md5(old)) {
+                this.body = {
+                    msg: '原密码输入错误',
+                    status: 0
+                }
+                return;
             }
-            return;
         }
 
         if (typeof email === 'object') {
@@ -574,6 +601,13 @@ module.exports = function () {
         }
 
         yield model.update({email: email}, {$set: {password: md5(now)}});
+
+        //清楚重置密码session
+        if(resetemail){
+            this.session.pwdKey = null;
+            this.session.sendemail = null;
+        }
+
         this.session.user = null;
         this.body = {
             msg: '密码修改成功',
@@ -593,14 +627,25 @@ module.exports = function () {
                     host:conf.docsdomian,
                     email:email,
                     key:md5('docs.ren'+Date.now()+'$$#@@#!@#')
-                },
+                };
 
-                ret = yield smtpMail({
+                smtpMail({
                     to: email,
                     html: yield ctx.render('smtp', content)
+                }).then(function(){
+                    ctx.session.pwdKey = content.key;
+                    ctx.session.sendemail = content.email;
+                    this.body = {
+                        msg:'邮件发送成功，请尽快查收，更改密码',
+                        status:1
+                    }
+                    return;
+                },function(){
+                    this.body = {
+                        msg:'邮件发送失败，检查网络并重试',
+                        status:0
+                    }
                 });
-
-            ctx.session.pwdKey = content.key;
 
         }
 

@@ -9,17 +9,19 @@ define(['petitspois','vue', 'vueValidator', 'gf'],function($, Vue, valid, gf){
         el:'#security-valid',
         data:{
             pwds:{
+                resetemail:'',
                 old:'',
                 now:'',
                 repeat:''
             }
         },
         methods:{
-            submit:function(e){
+            submit:function(e, resetpwd){
                 e.preventDefault();
                 var pwds = this.$data.pwds;
+
                 //new and old
-                if(pwds.now === pwds.old){
+                if(!pwds.resetemail && (pwds.now === pwds.old)){
                     gf('error','新密码与旧密码相同');
                     return;
                 }
@@ -33,6 +35,7 @@ define(['petitspois','vue', 'vueValidator', 'gf'],function($, Vue, valid, gf){
                 //数据提交
                 $.ajax({url:'/securityPwds', type:'POST', data:pwds}).then(function(ret){
                     ret = JSON.parse(ret);
+
                     if(ret.status){
                         gf('success', ret.msg);
                         setTimeout(function(){

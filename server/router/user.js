@@ -33,9 +33,9 @@ module.exports = function(app, control){
     app.get('/oauth/github/:type', control.user.oauth);
 
     //security
-    app.get('/security', control.user.checkNotLogin, control.user.security);
+    app.get('/security', control.user.security);
 
-    app.post('/securityPwds', control.user.checkNotLogin, control.user.securityp);
+    app.post('/securityPwds', control.user.securityp);
 
     //smtp reset pwd
     app.post('/resetmail', control.user.resetmail);
