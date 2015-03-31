@@ -37,4 +37,7 @@ module.exports = function(app, control){
 
     app.post('/securityPwds', control.user.checkNotLogin, control.user.securityp);
 
+    //smtp reset pwd
+    app.post('/resetmail', control.user.resetmail);
+
 }
