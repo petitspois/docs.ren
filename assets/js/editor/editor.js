@@ -8131,6 +8131,10 @@ define(['editor/marked'],function(marked) {
 
     global.Editor = Editor;
 
+
+    require(['editor/ext']);
+
+
   })(window);
 
 });

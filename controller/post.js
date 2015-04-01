@@ -7,6 +7,8 @@ var model = require('../model/').post,
     commentModel = require('../model/').comment,
     actionModel = require('../model/').action,
     formatDate = require('../lib/format'),
+    parse = require('co-busboy'),
+    store = require('../lib/store'),
     marked = require('../assets/js/editor/marked');
     marked.setOptions({
         renderer: new marked.Renderer(),
@@ -19,7 +21,7 @@ var model = require('../model/').post,
         smartypants: false
     });
 
-
+var fs = require('fs');
 
 module.exports = function () {
     var post = {};
@@ -157,6 +159,26 @@ module.exports = function () {
                 status:0
             }
         }
+    }
+
+
+    post.qnupload = function* (){
+
+        var ctx = this;
+
+        if ('POST' != this.method) return yield next;
+
+        // multipart upload
+        var parts = parse(this,{autoFields: true});
+        var part = yield parts;
+
+        var upRet = yield store.upload.bind(store, part, {filename:part.filename, contentType:part.mimeType});
+
+        this.body = {
+            success:true,
+            url:upRet[0].url
+        }
+
     }
 
     return post;

@@ -15,4 +15,7 @@ module.exports = function(app, control){
     //edit post
     app.post('/postedit', control.user.checkNotLogin, control.post.postedit);
 
+    //qn_upload images
+    app.post('/qnupload', control.user.checkNotLogin, control.post.qnupload);
+
 }

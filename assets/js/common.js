@@ -18,7 +18,9 @@ typeof function (window) {
                     'upload':'upload/upload',
                     'hljs':'lib/highlight.min',
                     'waypoints':'lib/waypoints',
-                    'gf':'effect/globalflash'
+                    'gf':'effect/globalflash',
+                    'WebUploader':'lib/webuploader.html5only.min',
+                    'bsm':'lib/bootstrap.min'
                 },
                 urlArgs: "petitspois=" +  (new Date()).getTime()
             });
