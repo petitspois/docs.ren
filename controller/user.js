@@ -654,7 +654,10 @@ module.exports = function () {
     }
 
     user.settings = function* (){
-        this.body  = yield this.render('settings');
+        this.body  = yield this.render('settings', {
+            title:'用户中心',
+            user:this.session.user
+        });
     }
 
     return user;

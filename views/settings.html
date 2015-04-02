@@ -6,395 +6,240 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
     <!-- right col -->
     <div class="col w bg-light dker bg-auto">
-        <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
+        <div id="set-tab" class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
             <a href="javascript:;" class="list-group-item">
                 <h4>操作中心</h4>
             </a>
             <a class="list-group-item active">
-                 基本设置
+                基本设置
             </a>
             <a class="list-group-item">
                 文章
             </a>
             <a class="list-group-item">
-                评论
+                分类管理
             </a>
         </div>
     </div>
     <!-- / right col -->
     <!-- main -->
-    <div class="col wrapper-lg">
-        <h3 class="font-thin m-t-n-xs m-b">Acoustic</h3>
-        <div class="row row-sm">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="top">
-                            <span class="badge bg-info m-l-sm m-t-sm">04:10</span>
-                        </div>
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b16.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Tempered Song</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Miaow</a>
-                    </div>
-                </div>
+    <div class="set-content col wrapper-lg">
+        <div></div>
+
+
+        <div class="panel panel-default fade-in-up ng-enter">
+            <div class="panel-heading font-bold">
+                基本设置
             </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
+            <div class="panel-body">
+                <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled"
+                      method="get">
+
+                    <!-- 网站描述 -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">网站描述</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="网站描述">
                         </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b17.jpg" alt="" class="img-full"></a>
                     </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vivamus vel tincidunt libero</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Lauren Taylor</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                    <!-- 网站关键字 -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">网站关键字</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="网站关键字">
                         </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b18.jpg" alt="" class="img-full"></a>
                     </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Morbi id neque quam liquam sollicitudin</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Allen JH</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                    <!-- 流量统计代码-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="padding-top: 15px;">流量统计代码</label>
+
+                        <div class="col-sm-10">
+                            <textarea style="resize:none;" class="form-control" rows="3"
+                                      placeholder="流量统计代码"></textarea>
                         </div>
-                        <div class="top w-full">
-              <span class="pull-right m-t-n-xs m-r-sm text-white">
-                <i class="fa fa-bookmark i-lg"></i>
-              </span>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                    <!-- save -->
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button type="submit" class="btn btn-primary">保存设置</button>
                         </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b19.jpg" alt="" class="img-full"></a>
                     </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Tincidunt libero</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Amanda Conlan</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b20.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Fermentum diam</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Nisa Colen</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="top w-full">
-                            <span class="pull-right m-t-sm m-r-sm badge bg-info">6</span>
-                        </div>
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b6.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Habitant</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Dan Doorack</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b7.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vivamus vel tincidunt libero</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Ligula H</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b8.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Aliquam sollicitudin venenati</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">James East</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <div class="top">
-                            <span class="badge bg-warning m-l-sm m-t-sm">03:10</span>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b9.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Lementum ligula vitae</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Lauren Taylor</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b10.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Egestas dui nec fermentum </a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Chris Fox</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b11.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Aliquam sollicitudin venenatis ipsum</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Jack Jason</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b12.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vestibulum ullamcorper</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">MM &amp; DD</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="bottom">
-                            <span class="badge m-l-sm m-b-sm">MTV</span>
-                        </div>
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b13.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Aliquam sollicitudin venenatis ipsum</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Jack Jason</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b14.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vestibulum ullamcorper</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">MM &amp; DD</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="top">
-                            <span class="badge bg-info m-l-sm m-t-sm">04:10</span>
-                        </div>
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b1.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Tempered Song</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Miaow</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b2.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vivamus vel tincidunt libero</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Lauren Taylor</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b3.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Morbi id neque quam liquam sollicitudin</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Allen JH</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <div class="top w-full">
-              <span class="pull-right m-t-n-xs m-r-sm text-white">
-                <i class="fa fa-bookmark i-lg"></i>
-              </span>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b4.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Tincidunt libero</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Amanda Conlan</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b5.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Fermentum diam</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Nisa Colen</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="top w-full">
-                            <span class="pull-right m-t-sm m-r-sm badge bg-info">6</span>
-                        </div>
-                        <div class="item-overlay bg-black-opacity">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="img/b6.jpg" alt="" class="img-full"></a>
-                    </div>
-                    <div class="wrapper bg-white m-b">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Habitant</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Dan Doorack</a>
-                    </div>
-                </div>
+
+                </form>
             </div>
         </div>
-        <ul class="pagination pagination">
-            <li><a ui-sref="music.detail" href="#/music/detail"><i class="fa fa-chevron-left"></i></a></li>
-            <li class="active"><a ui-sref="music.detail" href="#/music/detail">1</a></li>
-            <li><a ui-sref="music.detail" href="#/music/detail">2</a></li>
-            <li><a ui-sref="music.detail" href="#/music/detail">3</a></li>
-            <li><a ui-sref="music.detail" href="#/music/detail">4</a></li>
-            <li><a ui-sref="music.detail" href="#/music/detail">5</a></li>
-            <li><a ui-sref="music.detail" href="#/music/detail"><i class="fa fa-chevron-right"></i></a></li>
-        </ul>
+
+
+        <div class="panel panel-default hide fade-in-up ng-enter">
+
+            <div class="form-inline ng-pristine ng-valid">
+                <div class="panel-body">
+
+
+                        <div class="form-group">
+                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="文章标题">
+                        </div>
+                          <button class="btn btn-sm btn-success">搜索</button>
+
+                    <span class="form-group m-l">
+                            <a href="">全部</a>（389） | <a href="">已发布</a>（381） | <a href="">置顶</a>（4） | <a href="">草稿</a>（8）
+
+                    </span>
+
+                </div>
+            </div>
+
+
+            <div class="panel-heading font-bold">
+                文章
+            </div>
+
+
+            <table class="table table-bordered table-hover table-condensed bg-white-only">
+                <tr style="font-weight: bold">
+                    <td style="width:35%">标题</td>
+                    <td style="width:12%">作者</td>
+                    <td style="width:12%">分类目录</td>
+                    <td style="width:7%">评论</td>
+                    <td style="width:8%">状态</td>
+                    <td style="width:10%">日期</td>
+                    <td style="width:15%">操作</td>
+                </tr>
+
+
+
+
+                <!-- ngRepeat: user in users -->
+                <tr>
+
+                    <!-- 标题 -->
+                    <td class="v-middle">
+                        <a href="">Mac下用brew搭建PHP(LNMP/LAMP)开发环境</a>
+                    </td>
+
+                    <!-- 作者 -->
+                    <td class="v-middle">
+                        <a href="">petitspois</a>
+                    </td>
+
+                    <!--分类-->
+                    <td class="v-middle">
+                        <a href="">javascript</a>
+                    </td>
+
+                    <!--评论count-->
+                    <td class="v-middle">
+                        <a href="">12</a>
+                    </td>
+
+                    <!--状态-->
+                    <td class="v-middle">
+                        <a href="">已发布</a>
+                    </td>
+
+
+                    <!--日期-->
+                    <td class="v-middle">
+                        <a href="">2014-06-26</a>
+                    </td>
+
+                    <!-- 操作-->
+                    <td style="white-space: nowrap">
+                        <div class="buttons">
+                            <button class="btn btn-sm btn-info" ng-click="rowform.$show()">编辑</button>
+                            <button class="btn btn-sm btn-danger" ng-click="removeUser($index)">删除</button>
+                        </div>
+                    </td>
+
+                </tr>
+
+
+
+
+            </table>
+
+
+        </div>
+
+
+        <!-- 分类-->
+
+        <div class="panel panel-default hide fade-in-up ng-enter">
+
+            <div class="form-inline ng-pristine ng-valid">
+                <div class="panel-body">
+
+
+                    <div class="form-group">
+                        <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="文章标题">
+                    </div>
+                    <button class="btn btn-sm btn-success">添加分类</button>
+
+                    <span class="form-group m-l">
+                            全部（389）
+                    </span>
+
+                </div>
+            </div>
+
+
+            <div class="panel-heading font-bold">
+                分类
+            </div>
+
+
+            <table class="table table-bordered table-hover table-condensed bg-white-only">
+                <tr style="font-weight: bold">
+                    <td style="width:35%">名称</td>
+                    <td style="width:15%">操作</td>
+                </tr>
+
+
+                <!-- ngRepeat: user in users -->
+                <tr>
+
+                    <!-- 分类名 -->
+                    <td class="v-middle">
+                        <a href="">javascript</a>
+                    </td>
+
+
+                    <!-- 操作-->
+                    <td style="white-space: nowrap">
+                        <div class="buttons">
+                            <button class="btn btn-sm btn-info" ng-click="rowform.$show()">编辑</button>
+                            <button class="btn btn-sm btn-danger" ng-click="removeUser($index)">删除</button>
+                        </div>
+                    </td>
+
+                </tr>
+
+
+
+
+            </table>
+
+
+        </div>
+
+
     </div>
     <!-- / main -->
 </div>
 
+{% endblock %}
+{% block loadjs %}
+<script>
+    require(['user/settings']);
+</script>
 {% endblock %}
