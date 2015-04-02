@@ -21,8 +21,6 @@ var model = require('../model/').post,
         smartypants: false
     });
 
-var fs = require('fs');
-
 module.exports = function () {
     var post = {};
 

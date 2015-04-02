@@ -118,6 +118,12 @@ define(['jquery', 'WebUploader', 'bsm'], function($, WebUploader){
                 title: 'Images',
                 extensions: 'gif,jpg,jpeg,bmp,png',
                 mimeTypes: 'image/*'
+            },
+            compress:{
+                width:1070,
+                quality:80,
+                allowMagnify: false,
+                crop: false
             }
         });
 

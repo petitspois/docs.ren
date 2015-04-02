@@ -123,7 +123,6 @@
                     <div class="btn-group">
 
                         <!--编辑-->
-
                         {% if posts.name == user.nickname || user.role > posts.role %}
                             <a href="/post/{{posts.id}}/edit" class="btn btn-sm btn-default w-xxs w-auto-xs"><i class="fa fa-edit"></i></a>
                         {% endif %}

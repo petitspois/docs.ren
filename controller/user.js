@@ -492,6 +492,7 @@ module.exports = function () {
 
             ///第三种 数据库无login 有email, 返回到dom操作，进行绑定处理
 
+
             this.session.$status = code;
 
             //oauth 是否绑定
@@ -521,6 +522,7 @@ module.exports = function () {
             }
 
             ret.email = userInfo.email;
+            ret.nickname = userInfo.nickname;
             this.session.user = ret;
             this.redirect('/profile');
 
