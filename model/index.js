@@ -11,7 +11,8 @@ var mongoose = require('mongoose'),
         post:require('./post'),
         comment:require('./comments'),
         notification:require('./notification'),
-        action:require('./action')
+        action:require('./action'),
+        settings:require('./settings')
     };
 
 for (var key in models) {
