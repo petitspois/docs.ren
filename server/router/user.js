@@ -20,6 +20,9 @@ module.exports = function(app, control){
     //user reply
     app.post('/user/:name/reply', control.fusion.reply);
 
+    //user watch
+    app.post('/user/:name/follow', control.fusion.follow);
+
     //watch
     app.post('/watch', control.user.checkNotLogin, control.user.watch);
 

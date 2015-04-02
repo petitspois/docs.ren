@@ -29,15 +29,15 @@
                                         <a href="{{opposite.weibo}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon {% if !opposite.weibo %}disabled{% endif %}" target="_blank"><i class="fa fa-weibo"></i></a>
                                     </p>
                                     {% if user.nickname == opposite.nickname %}
-                                        <a data-iswatch="1" class="btn btn-sm btn-success btn-rounded disabled">已关注</a>
+                                    <a data-iswatch="1" class="btn btn-sm btn-success btn-rounded disabled">已关注</a>
                                     {% else %}
-                                        <a id="watch" data-iswatch="{{iswatch}}" data-oppositeuid="{{opposite.id}}" href="javascript:;" class="btn btn-sm btn-success btn-rounded">
-                                            {% if iswatch %}
-                                            已关注
-                                            {%else%}
-                                            关注
-                                            {%endif%}
-                                        </a>
+                                    <a id="watch" data-iswatch="{{iswatch}}" data-oppositeuid="{{opposite.id}}" href="javascript:;" class="btn btn-sm btn-success btn-rounded">
+                                        {% if iswatch %}
+                                        已关注
+                                        {%else%}
+                                        关注
+                                        {%endif%}
+                                    </a>
                                     {% endif %}
                                 </div>
 
@@ -62,7 +62,7 @@
 
                 <div class="wrapper bg-white b-b text-center">
                     <div id="tab-user" class="btn-group">
-                        <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty active">
+                        <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty">
                             <i class="fa fa-check text-active"></i>
                             <a href="/user/{{opposite.nickname}}">{{opposite.nickname}}的主题</a>
                         </label>
@@ -70,7 +70,7 @@
                             <i class="fa fa-check text-active"></i>
                             <a href="/user/{{opposite.nickname}}/reply">{{opposite.nickname}}的回复</a>
                         </label>
-                        <label class="btn btn-sm btn-primary ng-untouched ng-valid ng-dirty">
+                        <label class="btn btn-sm btn-primary ng-untouched ng-valid ng-dirty active">
                             <i class="fa fa-check text-active"></i>
                             <a href="/user/{{opposite.nickname}}/follow">{{opposite.nickname}}的关注</a>
                         </label>
@@ -94,7 +94,7 @@
 
                     <ul class="list-group list-group-lg no-bg auto">
                         {% if !oppositeposts.length %}
-                             <div class="wrapper-lg text-center">无数据</div>
+                        <div class="wrapper-lg text-center">无数据</div>
                         {% endif %}
 
                         {% for oppositepost in oppositeposts %}
@@ -257,14 +257,10 @@
 {% block loadjs %}
 <script>
     var remain = {{poststotal-10}},
-        dataurl = '{{opposite.nickname}}';
+    dataurl = '{{opposite.nickname}}'+'/follow';
 
     //comments
     require(['user/user']);
 
-    //watch
-    {% if user.nickname != opposite.nickname %}
-        require(['user/watch']);
-    {% endif %}
 </script>
 {% endblock %}

@@ -33,6 +33,8 @@ define(['petitspois','vue','loadin'],function($, Vue, loadin){
                     page++;
                     $.ajax({url:'/user/'+ url,type:'POST',data:{page:page}}).then(function(ret){
                         ret = JSON.parse(ret);
+
+                        console.log(ret)
                         me.ops = me.ops.concat(ret.data);
                         me.extra = ret.extra;
                         loadin.hide();

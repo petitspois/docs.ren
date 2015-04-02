@@ -24,6 +24,8 @@ module.exports = function(app, control){
     app.get('/user/:name', control.fusion.user);
     //reply
     app.get('/user/:name/reply', control.fusion.reply);
+    //user follow
+    app.get('/user/:name/follow', control.fusion.follow);
     //docs
     app.get('/docs', control.fusion.docs);
     app.get('/create', control.user.checkNotLogin, control.fusion.create);

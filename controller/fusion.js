@@ -190,6 +190,53 @@ module.exports = function(){
         }
     }
 
+
+    //user follow
+    fusion.follow = function* (){
+
+        var data = {},
+            username = this.params.name,
+            oppositeUser = yield userModel.get({nickname:username},'-password'),
+            page = parseInt(this.request.body && this.request.body.page) ? Math.abs(parseInt(this.request.body.page)) : 1,
+            watchs = yield postModel.getAll({'author':{'$in':oppositeUser.youwatch}},'-createtime',page, 10),
+            poststotal = yield postModel.querycount({'author':{'$in':oppositeUser.youwatch}}),
+            remain = poststotal-page*10;
+
+
+        //title
+        data.title = username;
+
+
+        //user
+        if(this.session.user){
+            data.user = yield userModel.get({email:this.session.user.email}, '-password');
+        }
+
+        data.opposite = oppositeUser;
+
+        //posts
+        for(var i = 0;i<watchs.length;i++){
+            watchs[i].avatar = (yield postModel.getAvatar({name:watchs[i].name})).author.avatar;
+            watchs[i].createtime = formatDate(watchs[i].createtime, true);
+            watchs[i].url = '/'+(watchs[i].type ||'post')+'/'+watchs[i]._id;
+        }
+
+        //data.iswatch =
+        data.poststotal = poststotal;
+        data.oppositeposts = watchs;
+
+
+        if(this.request.body && this.request.body.page){
+            this.body = {
+                data:data.oppositeposts,
+                extra:remain
+            };
+        }else{
+            this.body = yield this.render('userwatch',data);
+        }
+    }
+
+
     //docs
     fusion.docs = function* (){
 
