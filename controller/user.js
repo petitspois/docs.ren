@@ -653,5 +653,9 @@ module.exports = function () {
 
     }
 
+    user.settings = function* (){
+        this.body  = yield this.render('settings');
+    }
+
     return user;
 }

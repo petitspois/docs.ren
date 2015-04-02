@@ -43,4 +43,7 @@ module.exports = function(app, control){
     //smtp reset pwd
     app.post('/resetmail', control.user.resetmail);
 
+    //settings
+    app.get('/settings', control.user.checkNotLogin, control.user.settings);
+
 }
