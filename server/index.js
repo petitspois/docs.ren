@@ -19,6 +19,8 @@ module.exports = function(){
         //favicon中间件
         fav = require('./parts/favicon'),
 
+        webset = require('./parts/webset'),
+
         router = require('./router/'),
 
         mongoose = require('./mongoose'),
@@ -46,6 +48,9 @@ module.exports = function(){
     //加载favicon.ioc
     app.use(fav());
 
+    //webset
+    app.use(webset(swig));
+
     //connection db
     mongoose(conf.mongodb);
 
@@ -55,6 +60,7 @@ module.exports = function(){
     app.context.msg = function(url, val, title){
         return render('msg',{url:url,msg:val,secondtitle:title,time:5});
     };
+
 
     //Error Handling
     //app.use(function* (next) {

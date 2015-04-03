@@ -21,6 +21,8 @@ module.exports = function(app){
 
     require('./docs')(app, ctrl);
 
+    require('./webset')(app, ctrl);
+
     //404
     app.use(function* (){
         var data;

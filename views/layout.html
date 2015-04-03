@@ -2,11 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}青豆前端{% endblock %}-专注于web前端开发与用户体验</title>
-    <meta name="keywords" content="{% block keywords %}前端, 前端开发, wordpress,html5,css3,html教程{% endblock %}" />
-    <meta name="description" content="{% block description %}青豆前端-关注web前端开发，Javascript，jquery，div+css,等前端技术.{% endblock %}">
+    <title>{% block title %}{% endblock %} - Docs.ren</title>
+    <meta name="keywords" content="{{baseSettings.keywords}}" />
+    <meta name="description" content="{{baseSettings.description}}">
 
-    <!--<link rel="stylesheet" href="/css/bootstrap.css" type="text/css">-->
     <link rel="stylesheet" href="/css/app.css" type="text/css">
     {% block style %}
     {% endblock %}

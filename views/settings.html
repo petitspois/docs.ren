@@ -27,20 +27,21 @@
         <div></div>
 
 
-        <div class="panel panel-default fade-in-up ng-enter">
+
+        <!-- 基本设置 -->
+        <div id="base-set" class="panel panel-default fade-in-up ng-enter">
             <div class="panel-heading font-bold">
                 基本设置
             </div>
             <div class="panel-body">
-                <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-date-disabled"
-                      method="get">
+                <form class="form-horizontal" method="get">
 
                     <!-- 网站描述 -->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">网站描述</label>
 
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="网站描述">
+                            <input type="text" v-model="description" class="form-control" value="{{settings.description}}" placeholder="网站描述">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -50,18 +51,17 @@
                         <label class="col-sm-2 control-label">网站关键字</label>
 
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="网站关键字">
+                            <input type="text" class="form-control" v-model="keywords" value="{{settings.keywords}}" placeholder="网站关键字">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <!-- 流量统计代码-->
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" style="padding-top: 15px;">流量统计代码</label>
+                        <label class="col-sm-2 control-label">流量统计代码</label>
 
                         <div class="col-sm-10">
-                            <textarea style="resize:none;" class="form-control" rows="3"
-                                      placeholder="流量统计代码"></textarea>
+                            <textarea style="resize:none;" v-model="statistics" class="form-control" rows="3" placeholder="流量统计代码">{{settings.statistics}}</textarea>
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -69,7 +69,7 @@
                     <!-- save -->
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
-                            <button type="submit" class="btn btn-primary">保存设置</button>
+                            <button type="submit" v-on="click:save" class="btn btn-primary">保存设置</button>
                         </div>
                     </div>
 

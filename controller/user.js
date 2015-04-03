@@ -12,6 +12,8 @@ var qs = require('querystring'),
 
     postModel = require('../model/').post,
 
+    settingsModel = require('../model/').settings,
+
     formatDate = require('../lib/format'),
 
     smtpMail = require('../lib/smtp'),
@@ -654,9 +656,11 @@ module.exports = function () {
     }
 
     user.settings = function* (){
+        var settings = yield settingsModel.get({name:'base'});
         this.body  = yield this.render('settings', {
             title:'用户中心',
-            user:this.session.user
+            user:this.session.user,
+            settings:settings
         });
     }
 

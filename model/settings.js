@@ -7,6 +7,10 @@ var mongoose = require('mongoose'),
 
 
 var settings = new Schema({
+    name:{
+        type: String,
+        required: true
+    },
     keywords: {
         type: String
     },
@@ -15,8 +19,7 @@ var settings = new Schema({
     }
     //统计
     ,statistics: {
-        type: String,
-        required: false
+        type: String
     }
 
 }, {

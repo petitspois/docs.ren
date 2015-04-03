@@ -9,6 +9,7 @@ module.exports = function () {
         post:require('./post')(),
         comment:require('./comment')(),
         notification:require('./notification')(),
-        docs:require('./docs')()
+        docs:require('./docs')(),
+        webset:require('./webset')()
     };
 };
