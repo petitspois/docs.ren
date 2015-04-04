@@ -78,7 +78,7 @@
         </div>
 
 
-        <div class="panel panel-default hide fade-in-up ng-enter">
+        <div id="set-post" class="panel panel-default hide fade-in-up ng-enter">
 
             <div class="form-inline ng-pristine ng-valid">
                 <div class="panel-body">
@@ -86,13 +86,12 @@
 
                         <div class="form-group">
                             <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="文章标题">
+                            <input type="text" class="form-control" v-model="search" placeholder="文章标题">
                         </div>
-                          <button class="btn btn-sm btn-success">搜索</button>
+                          <button class="btn btn-sm btn-success" v-on="click:loadmore('search', 1)">搜索</button>
 
                     <span class="form-group m-l">
-                            <a href="">全部</a>（389） | <a href="">已发布</a>（381） | <a href="">置顶</a>（4） | <a href="">草稿</a>（8）
-
+                            <a href="javascript:;" v-on="click:loadmore('all', 1)">全部</a> &nbsp;&nbsp;| &nbsp;&nbsp;<a href="javascript:;" v-on="click:loadmore('already', 1)">已发布</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:;" v-on="click:loadmore('top', 1)">置顶</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:;" v-on="click:loadmore('draft', 1)">草稿</a>
                     </span>
 
                 </div>
@@ -100,7 +99,8 @@
 
 
             <div class="panel-heading font-bold">
-                文章
+                <%extra.title%>
+                <span class="badge bg-warning pull-right"><%extra.total%></span>
             </div>
 
 
@@ -117,45 +117,48 @@
 
 
 
-
+                <tr v-if="!posts.length">
+                    <td colspan="7" align="center">无数据</td>
+                </tr>
                 <!-- ngRepeat: user in users -->
-                <tr>
+                <tr v-repeat="post:posts">
 
                     <!-- 标题 -->
                     <td class="v-middle">
-                        <a href="">Mac下用brew搭建PHP(LNMP/LAMP)开发环境</a>
+                        <a class="text-ellipsis" href="/<%post.type%>/<%post._id%>" target="_blank"><%post.title%></a>
                     </td>
 
                     <!-- 作者 -->
                     <td class="v-middle">
-                        <a href="">petitspois</a>
+                        <a href="/user/<%post.name%>"><%post.name%></a>
                     </td>
 
                     <!--分类-->
                     <td class="v-middle">
-                        <a href="">javascript</a>
+                        <a href="javascript:;"><%post.category%></a>
                     </td>
 
                     <!--评论count-->
                     <td class="v-middle">
-                        <a href="">12</a>
+                        <a href="/<%post.type%>/<%post._id%>"><%post.commentCount%></a>
                     </td>
 
                     <!--状态-->
                     <td class="v-middle">
-                        <a href="">已发布</a>
+                        <a href="javascript:;" v-if="post.status">已发布</a>
+                        <a href="javascript:;" v-if="!post.status">草稿</a>
                     </td>
 
 
                     <!--日期-->
                     <td class="v-middle">
-                        <a href="">2014-06-26</a>
+                        <a href="javascript:;" title="<%post.createtime%>"><%post.createtimeformat%></a>
                     </td>
 
                     <!-- 操作-->
                     <td style="white-space: nowrap">
                         <div class="buttons">
-                            <button class="btn btn-sm btn-info" ng-click="rowform.$show()">编辑</button>
+                            <a href="/<%post.type%>/<%post._id%>/edit" target="_blank" class="btn btn-sm btn-info">编辑</a>
                             <button class="btn btn-sm btn-danger" ng-click="removeUser($index)">删除</button>
                         </div>
                     </td>
@@ -166,7 +169,13 @@
 
 
             </table>
-
+            <div class="loader wrapper text-center"><img src="/img/flickr.svg"/></div>
+            <div v-if="extra.total/10>page" class="clearfix text-center panel-heading font-bold">
+                <a href="javascript:;" class="auto" v-on="click:loadmore()">
+                    <i class="fa fa-angle-double-down"></i>
+                    <span>更多主题</span>
+                </a>
+            </div>
 
         </div>
 

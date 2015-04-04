@@ -656,13 +656,15 @@ module.exports = function () {
     }
 
     user.settings = function* (){
-        var settings = yield settingsModel.get({name:'base'});
+        var settings = yield settingsModel.get({name:'base'}),
+            role = (yield model.get({nickname:this.session.user.nickname})).role;
         this.body  = yield this.render('settings', {
             title:'用户中心',
             user:this.session.user,
             settings:settings
         });
     }
+
 
     return user;
 }

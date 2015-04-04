@@ -52,7 +52,8 @@ var post = new Schema({
     //分类
     , category: {
         type: String,
-        required: false
+        required: false,
+        default :'未分类'
     }
     //封面
     , cover:{
