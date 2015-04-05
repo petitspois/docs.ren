@@ -23,6 +23,8 @@ module.exports = function(app){
 
     require('./webset')(app, ctrl);
 
+    require('./category')(app, ctrl);
+
     //404
     app.use(function* (){
         var data;

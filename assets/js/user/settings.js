@@ -21,6 +21,10 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
             page:0,
             posts:[],
             extra:{}
+        },
+        categoryData = {
+            categoryName:'',
+            categories:[]
         };
 
 
@@ -73,6 +77,62 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
                     ctx.posts = ctx.posts.concat(ret.posts);
                     ctx.extra = ret.extra;
                 })
+            }
+        }
+    });
+
+    ///分类设置
+    var setCategory = new Vue({
+        el:'#set-category',
+        data:categoryData,
+        ready:function(){
+            this.categorylist();
+        },
+        methods:{
+            categorylist:function(){
+                var ctx = this;
+                $.ajax({url:'/categoryList', type:'POST'}).then(function(ret){
+                    ctx.categories = ret.categories;
+                });
+            },
+            addCategory:function(){
+                var ctx = this;
+                if(!ctx.categoryName){
+                    gf('error', '分类名不能为空');
+                    return;
+                }
+                $.ajax({url:'/addCategory', type:'POST', data:{name:ctx.categoryName}}).then(function(ret){
+                     if(ret.status){
+                         gf('success', ret.msg);
+                         var adddom = [
+                                 '<tr class="fade-in-up ng-enter">',
+                                 '<td class="v-middle"><a href="javascript:;">'+ret.data.name+'</a></td>',
+                                 '<td style="white-space: nowrap">',
+                                 '<div class="buttons">',
+                                 '<button class="btn btn-sm btn-danger" disabled>删除</button>',
+                                 '</div>',
+                                 '</td>',
+                                 '</tr>'
+                         ].join(' ');
+
+                         $('#category-tr').after(adddom);
+
+                     }else{
+                         gf('error', ret.msg);
+                     }
+                });
+            },
+            removeCategory:function(e, categoryName){
+                 var isdel = confirm("您确定要删除"+categoryName+'分类吗？'),
+                     ctx = this;
+                 if(isdel){
+                     $.ajax({url:'/removeCategory', type:'POST', data:{name:categoryName}}).then(function(ret){
+                          if(ret.status){
+                              gf('success', ret.msg);
+                              $(e.target).closest('tr').remove();
+                          }
+                     });
+                 }
             }
         }
     });

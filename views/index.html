@@ -12,43 +12,20 @@
         </div>
         <div class="wrapper hidden-sm hidden-xs" id="email-menu">
             <ul class="nav nav-pills nav-stacked nav-sm">
-                <!-- ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope active">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/">
-                        Inbox
+                <li class="active">
+                    <a  href="/">
+                        全部
                     </a>
                 </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/starred">
-                        Starred
+                {% for category in categories %}
+                {% if '未分类'!==category.name %}
+                <li>
+                    <a href="/?search={{category.name}}">
+                        {{category.name}}
                     </a>
                 </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/sent">
-                        Sent
-                    </a>
-                </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/important">
-                        Important
-                    </a>
-                </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/draft">
-                        Draft
-                    </a>
-                </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/trash">
-                        Trash
-                    </a>
-                </li>
-                <!-- end ngRepeat: fold in folds -->
+                {%endif%}
+                {%endfor%}
             </ul>
             <div class="wrapper">Labels</div>
             <ul class="nav nav-pills nav-stacked nav-sm">

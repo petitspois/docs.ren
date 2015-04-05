@@ -6,6 +6,7 @@ var model = require('../model/').post,
     userModel = require('../model/').user,
     commentModel = require('../model/').comment,
     actionModel = require('../model/').action,
+    categoryModel = require('../model/').category,
     formatDate = require('../lib/format'),
     parse = require('co-busboy'),
     store = require('../lib/store'),
@@ -67,6 +68,9 @@ module.exports = function () {
 
         //文章表
         var posttable = yield model.add(newPost);
+
+        //添加分类计数
+        yield categoryModel.update({name:category},{'$inc':{'ccount':1}});
 
         //动态
         yield actionModel.add({

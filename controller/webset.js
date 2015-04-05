@@ -5,6 +5,7 @@
 var settingsModel = require('../model/').settings,
     postModel = require('../model/').post,
     commentModel = require('../model').comment,
+    categoryModel = require('../model').category,
     formatDate = require('../lib/format');
 
 
@@ -37,7 +38,6 @@ module.exports = function(){
             search = body.search,
             query = [],
             title;
-        console.log(search)
         switch(postType){
             case 'already':
                 query = [{status:true}, '-createtime', page, 10, '-content -description -cover'];
@@ -64,7 +64,6 @@ module.exports = function(){
 
         var posts = yield postModel.getAll.apply(postModel, query);
 
-        console.log(posts)
 
         yield posts.map(function* (item){
             item.commentCount = yield commentModel.querycount({pid:item._id});
@@ -85,6 +84,46 @@ module.exports = function(){
 
     }
 
+
+    webset.addCategory = function* (){
+        var body = this.request.body,
+            name = body.name;
+        var exist = yield categoryModel.get({name:name});
+
+        if(exist){
+            this.body = {
+                msg:'分类已经存在',
+                status:0
+            }
+            return;
+        }
+
+        var addCategory = yield categoryModel.add({name:name});
+
+        this.body  = {
+            msg:'添加分类成功',
+            status:1,
+            data:addCategory
+        }
+    }
+
+    webset.categoryList = function* (){
+        this.body = {
+            categories: yield categoryModel.getAll({},'-createtime')
+        }
+    }
+
+    webset.removeCategory = function* (){
+        var body = this.request.body,
+            name = body.name;
+        if(name){
+            yield categoryModel.removeSingle({name:name})
+            this.body = {
+                msg:'删除分类成功',
+                status:1
+            }
+        }
+    }
 
     return webset;
 

@@ -12,7 +12,8 @@ var mongoose = require('mongoose'),
         comment:require('./comments'),
         notification:require('./notification'),
         action:require('./action'),
-        settings:require('./settings')
+        settings:require('./settings'),
+        category:require('./category')
     };
 
 for (var key in models) {
@@ -52,6 +53,10 @@ for (var key in models) {
     //remove
     schema.static('byidRemove',function(id){
         return this.findByIdAndRemove(id).exec();
+    });
+
+    schema.static('removeSingle',function(query){
+        return this.remove(query).exec();
     });
 
     //count

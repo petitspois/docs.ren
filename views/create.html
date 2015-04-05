@@ -60,7 +60,9 @@
 
                             <div class="col-sm-10">
                                 <select v-model="docs.category" name="category" class="form-control">
-                                    <option value="未分类" selected>未分类</option>
+                                    {% for category in categories%}
+                                    <option value="{{category.name}}" {% if loop.first%}selected{% endif %}>{{category.name}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>

@@ -8,6 +8,8 @@ var userModel = require('../model/').user,
 
     commentModel = require('../model/').comment,
 
+    categoryModel = require('../model/').category,
+
     formatDate = require('../lib/format');
 
 //get request
@@ -20,7 +22,8 @@ module.exports = function(){
     fusion.getHome = function* (){
         var page = parseInt(this.query.p) ? Math.abs(parseInt(this.query.p)) : 1,
             posts = yield postModel.getAll({status:1},'-istop -createtime',page, 10),
-            total = Math.ceil((yield postModel.querycount({status:1}))/10);
+            total = Math.ceil((yield postModel.querycount({status:1}))/10),
+            categories = yield categoryModel.getAll({}, '-ccount',1,6);
 
         for(var i = 0;i<posts.length;i++){
             posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;
@@ -28,6 +31,8 @@ module.exports = function(){
             posts[i].updatetime = formatDate(posts[i].updatetime, true);
             posts[i].flag = posts[i]['_id'].toString();
         }
+
+
         //signed
         if(this.session.user){
             this.body = yield this.render('index',{
@@ -37,7 +42,8 @@ module.exports = function(){
                 page:{
                     total:total,
                     page:page
-                }
+                },
+                categories:categories
             });
         }else{
             this.body = yield this.render('index',{
@@ -46,7 +52,8 @@ module.exports = function(){
                 page:{
                     total:total,
                     page:page
-                }
+                },
+                categories:categories
             });
         }
 
@@ -84,11 +91,13 @@ module.exports = function(){
     }
     //publish
     fusion.publish = function* (){
+        var categories = yield categoryModel.getAll({});
         if(this.session.user){
             this.body = yield this.render('publish',{
                 title:'发布文章',
                 secondtitle:'发布文章',
-                user:yield userModel.get({email:this.session.user.email})
+                user:yield userModel.get({email:this.session.user.email}),
+                categories:categories
             });
         }
     }
@@ -261,7 +270,8 @@ module.exports = function(){
     }
     //docs create
     fusion.create = function* (){
-        this.body = yield this.render('create',{title:'创建文档',secondtitle:'创建文档',user:this.session.user});
+        var categories = yield categoryModel.getAll({});
+        this.body = yield this.render('create',{title:'创建文档',secondtitle:'创建文档',user:this.session.user,categories:categories});
     }
 
     return fusion;

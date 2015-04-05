@@ -8,6 +8,7 @@ var fs =require('co-fs'),
     userModel = require('../model/').user,
     actionModel = require('../model/').action,
     commentModel = require('../model/').comment,
+    categoryModel = require('../model/').category,
     notificationModel = require('../model/').notification,
     marked = require('../assets/js/editor/marked');
     marked.setOptions({
@@ -80,6 +81,9 @@ module.exports = function () {
         }
 
         var doctable = yield model.add(newDocs);
+
+        //添加分类计数
+        yield categoryModel.update({name:category},{'$inc':{'ccount':1}});
 
         //动态
         yield actionModel.add({
