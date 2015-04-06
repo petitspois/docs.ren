@@ -30,4 +30,7 @@ module.exports = function(app, control){
     app.get('/docs', control.fusion.docs);
     app.get('/create', control.user.checkNotLogin, control.fusion.create);
 
+    //search
+    app.get('/take', control.fusion.take);
+
 }

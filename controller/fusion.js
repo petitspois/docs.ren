@@ -20,6 +20,7 @@ module.exports = function(){
 
     //index
     fusion.getHome = function* (){
+
         var page = parseInt(this.query.p) ? Math.abs(parseInt(this.query.p)) : 1,
             posts = yield postModel.getAll({status:1},'-istop -createtime',page, 10),
             total = Math.ceil((yield postModel.querycount({status:1}))/10),
@@ -272,6 +273,14 @@ module.exports = function(){
     fusion.create = function* (){
         var categories = yield categoryModel.getAll({});
         this.body = yield this.render('create',{title:'创建文档',secondtitle:'创建文档',user:this.session.user,categories:categories});
+    }
+
+    //search
+    fusion.take = function* (){
+        this.body = yield this.render('search',{
+            title:'搜索',
+            secondtitle:'搜索'
+        })
     }
 
     return fusion;
