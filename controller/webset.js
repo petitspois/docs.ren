@@ -3,6 +3,7 @@
  */
 
 var settingsModel = require('../model/').settings,
+    userModel = require('../model/').user,
     postModel = require('../model/').post,
     commentModel = require('../model').comment,
     categoryModel = require('../model').category,
@@ -36,6 +37,7 @@ module.exports = function(){
             postType = body.type || 'all',
             page = body.page || 1,
             search = body.search,
+            role = (yield userModel.get({email:this.session.user.email},'role')).role,
             query = [],
             title;
         switch(postType){
@@ -58,6 +60,10 @@ module.exports = function(){
             default:
                 query = [{}, '-createtime', page, 10, '-content -description -cover'];
                 title = '全部';
+        }
+
+        if(role<2){
+            query[0].name = this.session.user.nickname;
         }
 
         var total = yield postModel.querycount.call(postModel, query[0]);

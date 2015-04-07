@@ -661,6 +661,7 @@ module.exports = function () {
         this.body  = yield this.render('settings', {
             title:'用户中心',
             user:this.session.user,
+            role:role,
             settings:settings
         });
     }

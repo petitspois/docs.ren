@@ -10,15 +10,19 @@
             <a href="javascript:;" class="list-group-item">
                 <h4>操作中心</h4>
             </a>
+            {% if role > 1%}
             <a class="list-group-item active">
                 基本设置
             </a>
-            <a class="list-group-item">
+            {% endif %}
+            <a class="list-group-item {% if role <= 1%}active{%endif%}">
                 文章
             </a>
+            {% if role > 1%}
             <a class="list-group-item">
                 分类管理
             </a>
+            {% endif %}
         </div>
     </div>
     <!-- / right col -->
@@ -27,7 +31,7 @@
         <div></div>
 
 
-
+        {% if role > 1%}
         <!-- 基本设置 -->
         <div id="base-set" class="panel panel-default fade-in-up ng-enter">
             <div class="panel-heading font-bold">
@@ -76,9 +80,9 @@
                 </form>
             </div>
         </div>
+        {% endif %}
 
-
-        <div id="set-post" class="panel panel-default hide fade-in-up ng-enter">
+        <div id="set-post" class="panel panel-default {% if role > 1%}hide{%endif%} fade-in-up ng-enter">
 
             <div class="form-inline ng-pristine ng-valid">
                 <div class="panel-body">
@@ -181,7 +185,7 @@
 
 
         <!-- 分类-->
-
+        {% if role > 1%}
         <div id="set-category" class="panel panel-default hide fade-in-up ng-enter">
 
             <div class="form-inline ng-pristine ng-valid">
@@ -233,7 +237,7 @@
 
 
         </div>
-
+    {% endif %}
 
     </div>
     <!-- / main -->
