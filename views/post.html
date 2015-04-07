@@ -13,95 +13,49 @@
         </div>
         <div class="wrapper hidden-sm hidden-xs" id="email-menu">
             <ul class="nav nav-pills nav-stacked nav-sm">
-                <!-- ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope active">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/">
-                        Inbox
+                <li class="active">
+                    <a  href="/">
+                        全部
                     </a>
                 </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/starred">
-                        Starred
+                {% for category in categories %}
+                {% if '未分类'!==category.name %}
+                <li>
+                    <a href="/take/?s={{category.name}}">
+                        {{category.name}}
                     </a>
                 </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/sent">
-                        Sent
-                    </a>
-                </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/important">
-                        Important
-                    </a>
-                </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/draft">
-                        Draft
-                    </a>
-                </li>
-                <!-- end ngRepeat: fold in folds -->
-                <li ng-repeat="fold in folds" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:fold.filter})" class="ng-binding" href="#/app/mail/inbox/trash">
-                        Trash
-                    </a>
-                </li>
-                <!-- end ngRepeat: fold in folds -->
+                {%endif%}
+                {%endfor%}
             </ul>
             <div class="wrapper">Labels</div>
             <ul class="nav nav-pills nav-stacked nav-sm">
-                <!-- ngRepeat: label in labels -->
-                <li ng-repeat="label in labels" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:label.filter})" class="ng-binding" href="#/app/mail/inbox/angular">
-                        <i class="fa fa-fw fa-circle text-muted" color="#23b7e5" label-color=""
-                           style="color: rgb(35, 183, 229);"></i>
-                        Angular
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" color="#27c24c" style="color: rgb(39, 194, 76);"></i>
+                        置顶
                     </a>
                 </li>
-                <!-- end ngRepeat: label in labels -->
-                <li ng-repeat="label in labels" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:label.filter})" class="ng-binding"
-                       href="#/app/mail/inbox/bootstrap">
-                        <i class="fa fa-fw fa-circle text-muted" color="#7266ba" label-color=""
-                           style="color: rgb(114, 102, 186);"></i>
-                        Bootstrap
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" color="#23b7e5" style="color: rgb(35, 183, 229);"></i>
+                        文章
                     </a>
                 </li>
-                <!-- end ngRepeat: label in labels -->
-                <li ng-repeat="label in labels" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:label.filter})" class="ng-binding" href="#/app/mail/inbox/client">
-                        <i class="fa fa-fw fa-circle text-muted" color="#fad733" label-color=""
-                           style="color: rgb(250, 215, 51);"></i>
-                        Client
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" color="#7266ba" style="color: rgb(114, 102, 186);"></i>
+                        文档
                     </a>
                 </li>
-                <!-- end ngRepeat: label in labels -->
-                <li ng-repeat="label in labels" ui-sref-active="active" class="ng-scope">
-                    <a ui-sref="app.mail.list({fold:label.filter})" class="ng-binding" href="#/app/mail/inbox/work">
-                        <i class="fa fa-fw fa-circle text-muted" color="#27c24c" label-color=""
-                           style="color: rgb(39, 194, 76);"></i>
-                        Work
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" color="#f05050" style="color: #f05050;"></i>
+                        问答
                     </a>
                 </li>
-                <!-- end ngRepeat: label in labels -->
             </ul>
-            <div class="wrapper">
-                <form name="label" class="ng-pristine ng-invalid ng-invalid-required">
-                    <div class="input-group">
-                        <input type="text"
-                               class="form-control input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required"
-                               ng-model="newLabel.name" placeholder="New label" required="">
-            <span class="input-group-btn">
-              <button class="btn btn-sm btn-default" type="button" ng-click="addLabel()" ng-disabled="label.$invalid"
-                      disabled="disabled">Add
-              </button>
-            </span>
-                    </div>
-                </form>
-            </div>
+
         </div>
     </div>
 

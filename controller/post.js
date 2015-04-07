@@ -95,7 +95,8 @@ module.exports = function () {
         var data = {},
             id = this.params.id,
             posts = yield model.get({_id: id}),
-            comments = yield commentModel.getAll({pid: id},'createtime');
+            comments = yield commentModel.getAll({pid: id},'createtime'),
+            categories = yield categoryModel.getAll({});
         //comments data
         for (var i = 0; i < comments.length; i++) {
             comments[i].author = yield userModel.get({nickname: comments[i].name},'-password');
@@ -108,6 +109,7 @@ module.exports = function () {
         data.comments = comments;
         data.posts = posts;
         data.user = this.session.user;
+        data.categories = categories;
 
         if (data.user) {
             data.user = yield userModel.get({email: data.user.email});

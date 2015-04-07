@@ -20,7 +20,7 @@
                 {% for category in categories %}
                 {% if '未分类'!==category.name %}
                 <li>
-                    <a href="/?search={{category.name}}">
+                    <a href="/take/?s={{category.name}}">
                         {{category.name}}
                     </a>
                 </li>

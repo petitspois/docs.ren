@@ -277,9 +277,40 @@ module.exports = function(){
 
     //search
     fusion.take = function* (){
+        var q = this.query,
+            p = q.p ? parseInt(q.p) : 1,
+            s = q.s ? q.s :'',
+            pagination = [],
+            query ={},
+            pagetotal;
+
+        if(p!=p){
+            throw new Error('不是有效的页面符号');
+        }
+
+        s && (query.title = eval('/'+s+'+/i'));
+        posts = yield postModel.getAll(query, '-createtime', p, 10);
+        total = yield postModel.querycount(query);
+        pagetotal = Math.ceil(total/10);
+
+        var start = p<5? 2:p-2,
+            end = p<5? 7: p+3;
+            end > pagetotal && (end = pagetotal);
+            for (var i = start; i < end; i++) {
+                pagination.push(i);
+            }
+
         this.body = yield this.render('search',{
             title:'搜索',
-            secondtitle:'搜索'
+            secondtitle:'搜索',
+            content:s?s:'',
+            posts:posts,
+            pagination:pagination,
+            extra:{
+                current:p,
+                pagetotal:pagetotal,
+                total:total
+            }
         })
     }
 
