@@ -49,6 +49,10 @@ for (var key in models) {
         return this.findOneAndUpdate(conditions,update).exec();
     });
 
+    schema.static('updateSelectAll',function(conditions,update,opts){
+        return this.where().update(conditions,update,opts).exec();
+    });
+
 
     //remove
     schema.static('byidRemove',function(id){

@@ -12,4 +12,7 @@ module.exports = function(app, control){
     //all
     app.post('/notification',control.notification.all);
 
+    //flag
+    app.post('/flagall',control.notification.flagall);
+
 }

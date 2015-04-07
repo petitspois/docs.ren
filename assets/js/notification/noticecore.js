@@ -1,7 +1,7 @@
 /**
  * Created by petitspois on 15/3/8.
  */
-define(['petitspois', 'vue', 'loadin'], function ($, Vue, loadin) {
+define(['petitspois', 'vue', 'loadin', 'gf'], function ($, Vue, loadin, gf) {
 
 
     Vue.config.delimiters = ['(%', '%)'];
@@ -18,7 +18,6 @@ define(['petitspois', 'vue', 'loadin'], function ($, Vue, loadin) {
             noticedata: function (type, e) {
 
                 var me = this;
-
                 //tab effect
                 $('#notice-content').children().each(function () {
                     $(this).removeClass('active');
@@ -45,7 +44,21 @@ define(['petitspois', 'vue', 'loadin'], function ($, Vue, loadin) {
                     location.href = decodeURIComponent(skip);
                 });
 
+            },
+            flagAll:function(){
+                loadin.show('load');
+                $.ajax({url: '/flagall', type: 'POST'}).then(function (ret) {
+                    ret = JSON.parse(ret);
+                    loadin.hide();
+                    if(ret.status){
+                        gf('success', ret.msg);
+                        $('#triggle-all').trigger('click');
+                    }else{
+                        gf('error', ret.msg);
+                    }
+                }, function () {});
             }
+
         }
     });
 

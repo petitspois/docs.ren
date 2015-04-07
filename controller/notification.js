@@ -123,6 +123,24 @@ module.exports = function(){
 
     }
 
+    notification.flagall = function* (){
+            var haveread = yield notificationModel.get({hasRead:false});
+            if(!haveread){
+                this.body = {
+                    msg:'已没有未读消息',
+                    status:0
+                }
+                return;
+            }
+
+            yield notificationModel.updateSelectAll({hasRead:false}, {$set:{hasRead:true}}, { multi: true });
+
+            this.body ={
+                msg:'标记成功',
+                status:1
+            }
+
+    }
 
     return notification;
 
