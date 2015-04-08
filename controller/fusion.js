@@ -166,6 +166,8 @@ module.exports = function(){
         //user
         if(this.session.user){
             data.user = yield userModel.get({email:this.session.user.email}, '-password');
+            //是否已经关注
+            data.iswatch = ~data.user.youwatch.indexOf(oppositeUser._id);
         }
 
         data.opposite = oppositeUser;
@@ -220,6 +222,8 @@ module.exports = function(){
         //user
         if(this.session.user){
             data.user = yield userModel.get({email:this.session.user.email}, '-password');
+            //是否已经关注
+            data.iswatch = ~data.user.youwatch.indexOf(oppositeUser._id);
         }
 
         data.opposite = oppositeUser;

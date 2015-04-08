@@ -121,8 +121,9 @@ module.exports = function () {
     post.edit = function* (){
         var id = this.params.id,
             post = yield model.byId(id),
-            user = yield userModel.byId(this.session.user._id);
-        this.body = yield this.render('publish', {post:post,user:user,edit:post.id});
+            user = yield userModel.byId(this.session.user._id),
+            categories = yield categoryModel.getAll({});
+        this.body = yield this.render('publish', {post:post, user:user, categories:categories, edit:post.id});
     }
 
     //post edit

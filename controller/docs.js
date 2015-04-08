@@ -171,9 +171,11 @@ module.exports = function () {
     docs.edit = function* (){
         var id = this.params.id,
             docs = yield model.byId(id),
-            user = yield userModel.get(this.session.user.nickname);
+            user = yield userModel.get({email:this.session.user.email}),
+            categories = yield categoryModel.getAll({});
             user.password = '';
-        this.body = yield this.render('create', {docs:docs,user:user,edit:docs.id});
+
+        this.body = yield this.render('create', {docs:docs,user:user,categories:categories,edit:docs.id});
     }
 
     //post edit

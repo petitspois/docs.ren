@@ -28,7 +28,17 @@
                                         <a href="{{opposite.github}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon {% if !opposite.github %}disabled{% endif %}" target="_blank"><i class="fa fa-github"></i></a>
                                         <a href="{{opposite.weibo}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon {% if !opposite.weibo %}disabled{% endif %}" target="_blank"><i class="fa fa-weibo"></i></a>
                                     </p>
-                                    <a href="" class="btn btn-sm btn-success btn-rounded">Follow</a>
+                                    {% if user.nickname == opposite.nickname %}
+                                    <a data-iswatch="1" class="btn btn-sm btn-success btn-rounded disabled">已关注</a>
+                                    {% else %}
+                                    <a id="watch" data-iswatch="{{iswatch}}" data-oppositeuid="{{opposite.id}}" href="javascript:;" class="btn btn-sm btn-success btn-rounded">
+                                        {% if iswatch %}
+                                        已关注
+                                        {%else%}
+                                        关注
+                                        {%endif%}
+                                    </a>
+                                    {% endif %}
                                 </div>
 
 
@@ -36,12 +46,12 @@
                             <div class="col-sm-5">
                                 <div class="pull-right pull-none-xs text-center">
                                     <a href="" class="m-b-md inline m">
-                                        <span class="h3 block font-bold">2k</span>
-                                        <small>Followers</small>
+                                        <span class="h3 block font-bold">{{opposite.watchyou.length}}</span>
+                                        <small>粉丝</small>
                                     </a>
                                     <a href="" class="m-b-md inline m">
-                                        <span class="h3 block font-bold">250</span>
-                                        <small>Following</small>
+                                        <span class="h3 block font-bold">{{opposite.youwatch.length}}</span>
+                                        <small>关注</small>
                                     </a>
                                 </div>
                             </div>
@@ -253,5 +263,9 @@
     dataurl = '{{opposite.nickname}}'+'/reply';
     //comments
     require(['user/user']);
+    //watch
+    {% if user.nickname != opposite.nickname %}
+        require(['user/watch']);
+        {% endif %}
 </script>
 {% endblock %}

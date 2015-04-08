@@ -15992,3 +15992,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px,1px,1px,1px);
 }
+.forcehide{
+    display: none !important;
+}

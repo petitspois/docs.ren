@@ -111,7 +111,7 @@
                     <h2 class="font-thin m-n ng-binding">{{posts.title}}</h2>
                 </div>
                 <div class="wrapper b-b">
-                    <a href="">{{posts.name}}</a> 发布于{{posts.ctime}}
+                    <a href="/user/{{posts.name}}">{{posts.name}}</a> 发布于{{posts.ctime}}
                 </div>
                 <div class="wrapper clearfix" style="padding: 20px 35px;">
                     {% autoescape false %}{{ posts.mdRender }}{% endautoescape %}

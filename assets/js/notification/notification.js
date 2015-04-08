@@ -7,8 +7,8 @@ define(['petitspois'],function($){
             ret = JSON.parse(ret);
             try{
                 if(ret.status){
-                    if($('.not-icon-msg').hasClass('hide')){
-                        $('.not-icon-msg').removeClass('hide');
+                    if($('.not-icon-msg').hasClass('forcehide')){
+                        $('.not-icon-msg').removeClass('forcehide');
                     }
                 }
             }catch(e){}
