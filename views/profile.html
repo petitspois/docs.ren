@@ -54,7 +54,7 @@
                     <ul id="profile-tab" class="nav nav-pills nav-sm">
                         <li class="active"><a href="javascript:;">动态</a></li>
                         <li><a href="javascript:;">个人信息</a></li>
-                        <li><a v-on="click:loadwatchyou()" href="javascript:;">粉丝</a></li>
+                        <li><a href="javascript:;">粉丝</a></li>
                         <li><a href="javascript:;">关注</a></li>
                         <li><a href="/security">密码修改</a></li>
                         <li><a href="/settings">网站设置</a></li>
@@ -263,7 +263,7 @@
                 <div id="watch-you" class="profile-sh fade-in-down wrapper panel clearfix">
                     <div class="panel-heading b-b b-light">
                         <span class="badge bg-warning pull-right">{{user.watchyou.length}}</span>
-                        <a href="" class="font-bold">关注我的人</a>
+                        <a href="javascript:;" class="font-bold">粉丝</a>
                     </div>
                     <div class="watchyouloader wrapper text-center"><img src="/img/flickr.svg"/></div>
                     <div v-if="!extra.status" class="wrapper text-center" v-text="extra.msg"></div>
@@ -290,10 +290,10 @@
                 <div id="you-watch" class="profile-sh fade-in-down wrapper panel clearfix">
                     <div class="panel-heading b-b b-light">
                         <span class="badge bg-warning pull-right">{{user.youwatch.length}}</span>
-                        <a href="" class="font-bold">我关注的人</a>
+                        <a href="/javascript:;" class="font-bold">关注</a>
                     </div>
 
-                    <div v-if="!extra.status" class="wrapper text-center" v-text="extra.msg"></div>
+                    <div v-if="!extray.status" class="wrapper text-center" v-text="extray.msg"></div>
 
                     <ul class="list-group no-borders">
                         <li v-repeat="watchyouuser:watchyouusers" class="list-group-item col-sm-3">
@@ -312,6 +312,8 @@
 
                         </li>
                     </ul>
+
+
                 </div>
 
 

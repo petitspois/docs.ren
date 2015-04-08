@@ -41,7 +41,7 @@ define(['petitspois', 'vue', 'loadin'], function ($, Vue, loadin) {
     var mewatch = new Vue({
         data: {
             watchyouusers:[],
-            extra:{}
+            extray:{}
         },
         methods: {
             loadyouwatch: function () {
@@ -50,11 +50,12 @@ define(['petitspois', 'vue', 'loadin'], function ($, Vue, loadin) {
                     ret = JSON.parse(ret);
                     if (ret.status) {
                         me.watchyouusers = ret.data;
+                        me.extray = ret;
                     } else {
-                        me.extra = ret;
+                        me.watchyouusers = [];
+                        me.extray = ret;
                     }
-                }, function () {
-                });
+                }, function () {});
             },
             watch:function(e, uid){
                 var watchNode = e.currentTarget;
@@ -62,7 +63,7 @@ define(['petitspois', 'vue', 'loadin'], function ($, Vue, loadin) {
                 $.ajax({url:'/watch',type:'POST',data:{type:'true', oid:uid}}).then(function(ret){
                     ret = JSON.parse(ret);
                     if(ret.status){
-                        $(watchNode).parent('list-group-item').remove();
+                        $(watchNode).parent('list-group-item').css('background:#ddd;');
                     }
                 },function(){});
             }
