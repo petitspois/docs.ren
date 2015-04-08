@@ -1,7 +1,7 @@
 /**
  * Created by petitspois on 15/3/2.
  */
-define(['petitspois', 'loadin'], function ($, loadin) {
+define(['petitspois', 'loadin', 'gf'], function ($, loadin, gf) {
 
     //提交评论
     $('#comment-btn').on('click', function () {
@@ -18,17 +18,19 @@ define(['petitspois', 'loadin'], function ($, loadin) {
         var $delNode = $(this).parent('each-comments'),
             cid = $delNode.attr('id') || 0;
         if (cid) {
+            var isdel = confirm('确定要删除评论？');
+            if(!isdel)return;
             loadin.show('load');
             $.ajax({url: '/removecomment', type: 'POST', data: {cid: cid}}).then(function (ret) {
                 ret = JSON.parse(ret);
+                loadin.hide();
                 if(ret.status){
-                    loadin.show('alert','删除成功','success');
+                    gf('success', ret.msg);
                     $delNode.remove();
                 }else{
-                    loadin.show('alert',ret.msg, 'danger');
+                    gf('error', ret.msg);
                 }
-            }, function () {
-            })
+            }, function () {})
         }
     })
 

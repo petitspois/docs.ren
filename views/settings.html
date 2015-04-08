@@ -163,7 +163,7 @@
                     <td style="white-space: nowrap">
                         <div class="buttons">
                             <a href="/<%post.type%>/<%post._id%>/edit" target="_blank" class="btn btn-sm btn-info">编辑</a>
-                            <button class="btn btn-sm btn-danger" ng-click="removeUser($index)">删除</button>
+                            <button id="#post-del" v-on="click:del" data-id="<%post._id%>" class="btn btn-sm btn-danger">删除</button>
                         </div>
                     </td>
 

@@ -77,6 +77,18 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
                     ctx.posts = ctx.posts.concat(ret.posts);
                     ctx.extra = ret.extra;
                 })
+            },
+            del:function(e){
+                var isdel = confirm('确定删除文章吗？'),
+                    id = e.target.dataset.id;
+                isdel && $.ajax({url:'/del',type:'POST',data:{id:id}}).then(function(ret){
+                    if(ret.status){
+                        gf('success', ret.msg);
+                        $(e.target).closest('tr').remove();
+                    }else{
+                        gf('error', ret.msg);
+                    }
+                },function(){})
             }
         }
     });

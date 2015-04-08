@@ -33,4 +33,8 @@ module.exports = function(app, control){
     //search
     app.get('/take', control.fusion.take);
 
+    //del all type
+    app.post('/del', control.user.checkNotLogin, control.fusion.del);
+
+
 }

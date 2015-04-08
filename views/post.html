@@ -63,8 +63,8 @@
     <!--index right-->
     <div class="col">
         <!-- uiView:  -->
-        <div ui-view="" class="ng-scope">
-            <div ng-controller="MailDetailCtrl" class="ng-scope">
+        <div>
+            <div>
                 <!-- header -->
                 <div class="wrapper bg-light lter b-b">
                     <a class="btn btn-sm btn-default w-xxs m-r-sm" href="javascript:history.go(-1);"><i class="fa fa-long-arrow-left"></i></a>
@@ -83,7 +83,7 @@
 
                         <!--删除-->
                         {% if posts.name == user.nickname || user.role > posts.role %}
-                        <button class="btn btn-sm btn-default w-xxs w-auto-xs"><i class="fa fa-trash-o"></i></button>
+                            <button id="post-del" data-id="{{posts._id.toString()}}" class="btn btn-sm btn-default w-xxs w-auto-xs"><i class="fa fa-trash-o"></i></button>
                         {% endif %}
                         <!--tags-->
                         <div class="btn-group dropdown">
@@ -227,6 +227,6 @@
         });
     });
     //comments
-    require(['comment/comment']);
+    require(['comment/comment','postsdocs/del']);
 </script>
 {% endblock %}

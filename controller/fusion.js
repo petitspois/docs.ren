@@ -318,6 +318,44 @@ module.exports = function(){
         })
     }
 
+    fusion.del = function* (){
+        var id = this.request.body && this.request.body.id,
+            comment = yield commentModel.get({pid:id},'pid');
+
+        if(!id){
+            this.body = {
+                msg:'文章不存在',
+                status:0
+            }
+            return;
+        }
+
+        if(comment){
+            this.body = {
+                msg:'文章内含有评论，不可以删除',
+                status:0
+            }
+            return;
+        }
+
+        var dData = yield postModel.byidRemove(id);
+
+        if(dData){
+            this.body = {
+                msg:'删除成功',
+                status:1
+            }
+            return;
+        }else{
+            this.body = {
+                msg:'删除失败',
+                status:0
+            }
+        }
+
+
+    }
+
     return fusion;
 
 }
