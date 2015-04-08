@@ -90,6 +90,12 @@ var post = new Schema({
         required:false,
         default :true
     },
+    //文档推荐
+    recommend:{
+        type:Boolean,
+        required:false,
+        default :false
+    },
     //审核状态
     audit:{
         type:Boolean,

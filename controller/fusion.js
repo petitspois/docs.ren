@@ -83,10 +83,15 @@ module.exports = function(){
     }
     //profile
     fusion.profile = function* (){
+        var likes = (yield userModel.get({email:this.session.user.email},'watchyou')).watchyou;
+        if(likes.length){
+            likes = yield userModel.getAll({_id: {$in: likes}}, '', 1, 5, '-password -role');
+        }
         if(this.session.user){
             this.body = yield this.render('profile',{
                 title:'个人中心',
-                user:yield userModel.get({email:this.session.user.email},'-password')
+                user:yield userModel.get({email:this.session.user.email},'-password'),
+                likes:likes
             });
         }
     }

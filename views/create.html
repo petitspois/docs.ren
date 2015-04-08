@@ -119,11 +119,11 @@
             </div>
             {% if edit %}
                 <script>
-                    var istop = {{docs.istop}}, iscomment = {{docs.iscomment}}, cstatus = {{docs.status}};
+                    var istop = {{docs.istop}}, iscomment = {{docs.iscomment}}, cstatus = {{docs.status}}, recommend = {{docs.recommend}};
                 </script>
             {% else %}
                 <script>
-                    var istop = false, iscomment = true, cstatus = true;
+                    var istop = false, iscomment = true, cstatus = true, recommend = false;
                 </script>
             {%endif%}
 
@@ -131,6 +131,7 @@
                 <div class="panel b-a">
                     <div class="panel-heading b-b">发布处理</div>
                     <div class="panel-body">
+                        {% if user.role > 1 %}
                         <div class="checkbox">
                             <label class="i-checks">
                                 <input type="checkbox" value="" v-model="docs.istop" />
@@ -138,6 +139,14 @@
                                 对文档置顶操作
                             </label>
                         </div>
+                        <div class="checkbox">
+                            <label class="i-checks">
+                                <input type="checkbox" value="" v-model="docs.recommend" />
+                                <i></i>
+                                加入推荐
+                            </label>
+                        </div>
+                        {% endif %}
                         <div class="checkbox">
                             <label class="i-checks">
                                 <input type="checkbox" value="" v-model="docs.iscomment" >

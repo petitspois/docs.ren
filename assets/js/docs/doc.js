@@ -37,6 +37,7 @@ define(['petitspois', 'vue', 'vueValidator', 'upload', 'loadin', 'editor/editor'
                 description: '',
                 content: '',
                 istop:istop,
+                recommend:recommend,
                 iscomment: iscomment,
                 cstatus: cstatus,
                 edit: ''

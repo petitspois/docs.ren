@@ -39,7 +39,8 @@ module.exports = function () {
             cover = body.cover,
             istop = body.istop,
             iscomment = body.iscomment,
-            cstatus = body.cstatus;
+            cstatus = body.cstatus,
+            recommend = body.recommend;
 
         if (title.length < 10) {
             this.body = {
@@ -77,7 +78,8 @@ module.exports = function () {
             istop :istop,
             iscomment :iscomment,
             status:cstatus,
-            author: userId
+            author: userId,
+            recommend:recommend
         }
 
         var doctable = yield model.add(newDocs);
@@ -191,7 +193,8 @@ module.exports = function () {
             istop = body.istop,
             iscomment = body.iscomment,
             cstatus = body.cstatus,
-            edit = body.edit;
+            edit = body.edit,
+            recommend = body.recommend;
 
         if(edit){
 
@@ -215,6 +218,7 @@ module.exports = function () {
                 istop :istop,
                 iscomment :iscomment,
                 status:cstatus,
+                recommend:recommend,
                 updatetime:Date.now()
             }
 
