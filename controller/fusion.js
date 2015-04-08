@@ -286,7 +286,8 @@ module.exports = function(){
 
     //search
     fusion.take = function* (){
-        var q = this.query,
+        var ctx = this,
+            q = ctx.query,
             p = q.p ? parseInt(q.p) : 1,
             s = q.s ? q.s :'',
             pagination = [],
@@ -309,11 +310,12 @@ module.exports = function(){
                 pagination.push(i);
             }
 
-        this.body = yield this.render('search',{
+        ctx.body = yield ctx.render('search',{
             title:'搜索',
             secondtitle:'搜索',
             content:s?s:'',
             posts:posts,
+            user:yield userModel.get({email:ctx.session.user.email},'-password -role'),
             pagination:pagination,
             extra:{
                 current:p,

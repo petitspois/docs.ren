@@ -18,6 +18,9 @@ define(['petitspois', 'vue', 'vueValidator','loadin', 'editor/editor'], function
                     tags: '',
                     category: '',
                     content: '',
+                    theme:theme,
+                    istop:istop,
+                    iscomment:iscomment,
                     edit:''
                 }
             },

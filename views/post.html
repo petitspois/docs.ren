@@ -116,6 +116,8 @@
                 <div class="wrapper clearfix" style="padding: 20px 35px;">
                     {% autoescape false %}{{ posts.mdRender }}{% endautoescape %}
                 </div>
+
+                {% if posts.iscomment %}
                 <div class="wrapper b-b b-t margin10-tb">
                     <i class="fa fa-comments-o"></i>
                     <span>评论与回复</span>- 1个回复
@@ -208,7 +210,7 @@
                     </div>
                 </div>
 
-
+{% endif %}
             </div>
         </div>
     </div>

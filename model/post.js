@@ -96,6 +96,10 @@ var post = new Schema({
         required:false,
         default :false
     },
+    theme:{
+        type:String,
+        required:false
+    },
     //审核状态
     audit:{
         type:Boolean,

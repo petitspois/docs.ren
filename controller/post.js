@@ -31,7 +31,10 @@ module.exports = function () {
             title = body.title,
             content = body.content,
             category = body.category,
-            tags = body.tags;
+            tags = body.tags,
+            istop= body.istop,
+            iscomment = body.iscomment,
+            theme = body.theme;
 
         if (title.length < 10) {
             this.body = {
@@ -63,7 +66,10 @@ module.exports = function () {
             tags: fineTags,
             category: category,
             name: this.session.user.nickname,
-            author: userId
+            author: userId,
+            istop: istop,
+            iscomment: iscomment,
+            theme:theme
         }
 
         //文章表
@@ -123,7 +129,7 @@ module.exports = function () {
             post = yield model.byId(id),
             user = yield userModel.byId(this.session.user._id),
             categories = yield categoryModel.getAll({});
-        this.body = yield this.render('publish', {post:post, user:user, categories:categories, edit:post.id});
+        this.body = yield this.render('publish', {post:post, user:user, categories:categories, edit:post.id,});
     }
 
     //post edit
@@ -133,7 +139,10 @@ module.exports = function () {
             content = body.content,
             category = body.category,
             tags = body.tags,
-            edit = body.edit;
+            edit = body.edit,
+            istop= body.istop,
+            iscomment= body.iscomment,
+            theme=body.theme;
 
         if(edit){
 
@@ -151,6 +160,9 @@ module.exports = function () {
                 description: content.slice(0, 80),
                 tags: fineTags,
                 category: category,
+                istop: istop,
+                iscomment: iscomment,
+                theme:theme,
                 updatetime:Date.now()
             }
             yield model.update({_id:edit},{$set:alterPost});

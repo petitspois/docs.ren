@@ -83,7 +83,7 @@
                     <div id="doc-content" class="clearfix padder-md">
                         {% autoescape %}{{docs.mdRender||docs.content}}{% endautoescape %}
                     </div>
-{% if docs.iscomment %}
+                    {% if docs.iscomment %}
                     <div class="wrapper b-b b-t margin10-tb">
                         <i class="fa fa-comments-o"></i>
                         <span>评论与回复</span>- 1个回复

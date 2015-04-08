@@ -11,11 +11,10 @@
 <div class="wrapper-md">
 
 <div class="row">
+    <form id="publish-form" class="form-horizontal">
     <div class="col-sm-9">
         <div class="panel panel-default">
             <div class="panel-body" style="padding: 50px 40px 50px 60px;">
-
-                <form id="publish-form" class="form-horizontal">
 
                     <!--标题-->
                     <div class="form-group">
@@ -27,6 +26,20 @@
                     </div>
 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
+
+
+                <!--主题-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">主题</label>
+                    <div class="col-sm-10">
+
+                        <select v-model="post.theme" name="account" class="form-control">
+                            <option value="share" {% if 'share'===post.theme%}selected{%endif%} >分享</option>
+                            <option value="ask" {% if 'ask' ===post.theme%}selected{%endif%} >问答</option>
+                            <option value="job" {% if 'job' ===post.theme%}selected{%endif%} >招聘</option>
+                        </select>
+                    </div>
+                </div>
 
                     <!--标签-->
                     <div class="form-group">
@@ -63,103 +76,56 @@
                     </div>
                     <input type="hidden" v-model="post.edit" value="{{edit}}"/>
                     <!-- end editor -->
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-4 col-sm-offset-2">
 
-                            <button type="submit" v-attr="disabled:!valid" v-on="click:submit" class="btn btn-primary">
-                                {% if edit %}
-                                    更 改
-                                {% else %}
-                                    发 布
-                                {% endif %}
-                            </button>
-                        </div>
-                    </div>
-                </form>
 
             </div>
         </div>
     </div>
 
+        {% if edit %}
+        <script>
+            var istop = {{post.istop}}, iscomment = {{post.iscomment}}, theme = '{{post.theme}}';
+        </script>
+        {% else %}
+        <script>
+            var istop = false, iscomment = true;
+        </script>
+        {%endif%}
 
 
 
     <div class="col-sm-3">
-        <h5 class="font-bold">Categories</h5>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <a href="">
-                    <span class="badge pull-right">15</span>
-                    Photograph
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="">
-                    <span class="badge pull-right">30</span>
-                    Life style
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="">
-                    <span class="badge pull-right">9</span>
-                    Food
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="">
-                    <span class="badge pull-right">4</span>
-                    Travel world
-                </a>
-            </li>
-        </ul>
-        <div class="tags m-b-lg l-h-2x">
-            <a href="" class="label bg-primary">Bootstrap</a> <a href="" class="label bg-primary">Application</a>
-            <a href="" class="label bg-primary">Apple</a> <a href="" class="label bg-primary">Less</a> <a
-                href="" class="label bg-primary">Theme</a> <a href="" class="label bg-primary">Wordpress</a>
-        </div>
-        <h5 class="font-bold">Recent Posts</h5>
-
-        <div>
-            <div>
-                <a class="pull-left thumb thumb-wrapper m-r">
-                    <img src="./assets/b0.jpg">
-                </a>
-
-                <div class="clear">
-                    <a href="" class="font-semibold text-ellipsis">Bootstrap 3: What you need to know</a>
-
-                    <div class="text-xs block m-t-xs"><a href="">Travel</a> 2 minutes ago</div>
+        <div class="panel b-a">
+            <div class="panel-heading b-b">发布处理</div>
+            <div class="panel-body">
+                {% if user.role > 1 %}
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input type="checkbox" value="" v-model="post.istop" />
+                        <i></i>
+                        对文档置顶操作
+                    </label>
+                </div>
+                {% endif %}
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input type="checkbox" value="" v-model="post.iscomment" >
+                        <i></i>
+                        是否支持评论功能
+                    </label>
                 </div>
             </div>
-            <div class="line"></div>
-            <div>
-                <a class="pull-left thumb thumb-wrapper m-r">
-                    <img src="./assets/b1.jpg">
-                </a>
-
-                <div class="clear">
-                    <a href="" class="font-semibold text-ellipsis">Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit.</a>
-
-                    <div class="text-xs block m-t-xs"><a href="">Design</a> 2 hours ago</div>
-                </div>
+            <div class="b-t panel-body">
+                <button type="submit" class="btn btn-primary pull-right" v-attr="disabled:!valid" v-on="click:submit">
+                    发布
+                </button>
             </div>
-            <div class="line"></div>
-            <div>
-                <a class="pull-left thumb thumb-wrapper m-r">
-                    <img src="./assets/b2.jpg">
-                </a>
 
-                <div class="clear">
-                    <a href="" class="font-semibold text-ellipsis">Sed diam nonummy nibh euismod tincidunt
-                        ut laoreet</a>
-
-                    <div class="text-xs block m-t-xs"><a href="">MFC</a> 1 week ago</div>
-                </div>
-            </div>
         </div>
     </div>
+
+    </form>
+
 </div>
 
 </div>
