@@ -64,20 +64,24 @@
         <div class="wrapper bg-light lter b-b">
             <div class="btn-group pull-right">
                 <button class="btn btn-sm btn-bg btn-default disabled">{{page.page}}</button>
-                <a href="/?p={{page.page-1}}" class="btn btn-sm btn-bg btn-default {% if 1 == page.page %}disabled{% endif %}"><i class="fa fa-chevron-left"></i></a>
-                <a href="/?p={{page.page+1}}" class="btn btn-sm btn-bg btn-default {% if page.total == page.page %}disabled{% endif %}"><i class="fa fa-chevron-right"></i></a>
+                <a href="/?p={{page.page-1}}&t={{t}}" class="btn btn-sm btn-bg btn-default {% if 1 == page.page %}disabled{% endif %}"><i class="fa fa-chevron-left"></i></a>
+                <a href="/?p={{page.page+1}}&t={{t}}" class="btn btn-sm btn-bg btn-default {% if page.total == page.page %}disabled{% endif %}"><i class="fa fa-chevron-right"></i></a>
             </div>
             <div class="btn-toolbar">
                 <div class="btn-group dropdown">
-                    <button class="btn btn-default btn-sm btn-bg dropdown-toggle" data-toggle="dropdown">
-                        <span class="dropdown-label">Filter</span>
+                    <button class="btn btn-default btn-sm btn-bg">
+                        <span id="theme-name" class="dropdown-label">
+                            {% if t == 'all' %}主题{%endif%}
+                            {% if t == 'share'%}分享{%endif%}
+                            {% if t == 'ask'%}问答{%endif%}
+                            {% if t == 'job'%}招聘{%endif%}
+                        </span>
                         <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu text-left text-sm">
-                        <li><a ui-sref="app.mail.list({fold:'unread'})"
-                               href="#/app/mail/inbox/unread">Unread</a></li>
-                        <li><a ui-sref="app.mail.list({fold:'starred'})"
-                               href="#/app/mail/inbox/starred">Starred</a></li>
+                    <ul id="theme-list" class="dropdown-menu text-left text-sm">
+                        <li><a href="/?t=share">分享</a></li>
+                        <li><a href="/?t=ask">问答</a></li>
+                        <li><a href="/?t=job">招聘</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
