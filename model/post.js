@@ -96,9 +96,19 @@ var post = new Schema({
         required:false,
         default :false
     },
+    //项目链接
+    projectLink:{
+        type:String,
+        required:false
+    },
+    //主题
     theme:{
         type:String,
         required:false
+    },
+    viewByCount: {
+        type: Number,
+        default: 0
     },
     //审核状态
     audit:{

@@ -8,7 +8,7 @@ module.exports = function(app, control){
 
     app.post('/setPost', control.user.checkNotLogin, control.webset.setPost);
 
-
+    app.post('/userManagement', control.user.checkNotLogin, control.webset.userManagement);
 
 
 }

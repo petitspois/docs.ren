@@ -16,7 +16,15 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
             description: '',
             statistics: ''
         },
+        userData = {
+            type:'',
+            search:'',
+            page:0,
+            users:[],
+            extra:{}
+        },
         postData = {
+            type:'',
             search:'',
             page:0,
             posts:[],
@@ -45,17 +53,18 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
         }
     });
 
-    ///文章设置
-    var setPost = new Vue({
-        el: '#set-post',
-        data: postData,
+    ///用户设置
+    var baseSet = new Vue({
+        el: '#set-user',
+        data: userData,
         ready:function(){
-            this.loadmore();
+            this.userList();
         },
         methods: {
-            loadmore:function(type, clear){
+            userList:function(type, clear){
                 var ctx = this;
-                type = type || 'all';
+
+                type && (ctx.type = type);
 
                 if('search' === type ){
                     if(!ctx.search){
@@ -69,7 +78,45 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
                 if($('.loader').hasClass('hide')){
                     $('.loader').removeClass('hide');
                 }
-                $.ajax({url: '/setPost', type: 'POST', data: {page:ctx.page, type: type, search:ctx.search}}).then(function (ret) {
+                $.ajax({url: '/userManagement', type: 'POST', data: {page:ctx.page, type: ctx.type, search:ctx.search}}).then(function (ret) {
+                    if(!$('.loader').hasClass('hide')){
+                        $('.loader').addClass('hide');
+                    }
+                    !!clear && (ctx.users.length = 0);
+                    ctx.users = ctx.users.concat(ret.users);
+                    ctx.extra = ret.extra;
+                })
+            }
+        }
+    });
+
+
+    ///文章设置
+    var setPost = new Vue({
+        el: '#set-post',
+        data: postData,
+        ready:function(){
+            this.loadmore();
+        },
+        methods: {
+            loadmore:function(type, clear){
+                var ctx = this;
+
+                type && (ctx.type = type);
+
+                if('search' === type ){
+                    if(!ctx.search){
+                        gf('error', '搜索内容不能为空');
+                        return;
+                    };
+                }
+
+                !!clear && (ctx.page= 0);
+                ctx.page++;
+                if($('.loader').hasClass('hide')){
+                    $('.loader').removeClass('hide');
+                }
+                $.ajax({url: '/setPost', type: 'POST', data: {page:ctx.page, type: ctx.type, search:ctx.search}}).then(function (ret) {
                     if(!$('.loader').hasClass('hide')){
                         $('.loader').addClass('hide');
                     }

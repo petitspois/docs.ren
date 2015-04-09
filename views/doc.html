@@ -36,7 +36,11 @@
                 <!-- header -->
                 <div class="wrapper bg-light lter b-b">
                     <div class="btn-group pull-right">
-                        <a class="btn btn-sm btn-bg btn-default disabled">{{docs.title}}</a>
+                        {% if docs.projectLink %}
+                            <a href="{{docs.projectLink}}" target="_blank" class="btn btn-sm btn-bg btn-primary"><i class="fa fa-link"></i></a>
+                        {%endif%}
+                        <a href="/doc/{{docs._id.toString()}}" class="btn btn-sm btn-bg btn-info">{{docs.title}}</a>
+                        <a href="/user/{{docs.name}}" class="btn btn-sm btn-bg btn-success">{{docs.name}}发布于{{docs.ctime}} - {{docs.viewByCount}} 次浏览</a>
                     </div>
                     <a class="btn btn-sm btn-default w-xxs m-r-sm" href="javascript:history.go(-1);"><i class="fa fa-long-arrow-left"></i></a>
 

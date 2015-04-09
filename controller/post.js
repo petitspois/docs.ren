@@ -103,6 +103,9 @@ module.exports = function () {
             posts = yield model.get({_id: id}),
             comments = yield commentModel.getAll({pid: id},'createtime'),
             categories = yield categoryModel.getAll({});
+        //阅读+1
+        yield model.update({_id:id},{'$inc':{'viewByCount':1}});
+
         //comments data
         for (var i = 0; i < comments.length; i++) {
             comments[i].author = yield userModel.get({nickname: comments[i].name},'-password');

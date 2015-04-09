@@ -73,7 +73,7 @@ module.exports = function () {
             tags: fineTags,
             category: category,
             name: this.session.user.nickname,
-            github:github,
+            projectLink:github,
             cover :cover,
             istop :istop,
             iscomment :iscomment,
@@ -110,6 +110,10 @@ module.exports = function () {
             id = this.params.id,
             docs = yield model.get({_id: id}),
             comments = yield commentModel.getAll({pid: id},'createtime');
+
+        //viewBycount
+        yield model.update({_id:id},{'$inc':{'viewByCount':1}});
+
         //comments data
         for (var i = 0; i < comments.length; i++) {
             comments[i].author = yield userModel.get({nickname: comments[i].name});
@@ -188,7 +192,7 @@ module.exports = function () {
             category = body.category,
             tags = body.tags,
             description=body.description,
-            github = body.github,
+            githublink = body.github,
             cover = body.cover,
             istop = body.istop,
             iscomment = body.iscomment,
@@ -212,8 +216,7 @@ module.exports = function () {
                 description: (description? description : content.slice(0, 120) ),
                 tags: fineTags,
                 category: category,
-                name: this.session.user.nickname,
-                github:github,
+                projectLink:githublink,
                 cover :cover,
                 istop :istop,
                 iscomment :iscomment,

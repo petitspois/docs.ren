@@ -7,6 +7,7 @@ var settingsModel = require('../model/').settings,
     postModel = require('../model/').post,
     commentModel = require('../model').comment,
     categoryModel = require('../model').category,
+    filter = require('co-filter'),
     formatDate = require('../lib/format');
 
 
@@ -55,7 +56,7 @@ module.exports = function(){
                 break;
             case 'search':
                 query = [{title:eval('/'+search+'+/i')}, '-createtime', page, 10, '-content -description -cover'];
-                title='草稿';
+                title='搜索';
                 break;
             default:
                 query = [{}, '-createtime', page, 10, '-content -description -cover'];
@@ -128,6 +129,55 @@ module.exports = function(){
                 msg:'删除分类成功',
                 status:1
             }
+        }
+    }
+
+
+    webset.userManagement = function* (){
+        var body = this.request.body,
+            postType = body.type || 'all',
+            page = body.page || 1,
+            search = body.search,
+            role = (yield userModel.get({email:this.session.user.email},'role')).role,
+            query = [],
+            title;
+        switch(postType){
+            case 'admin':
+                query = [{role:2}, '', page, 10, '-password'];
+                title = '管理员';
+                break;
+            case 'developer':
+                query = [{role:1}, '', page, 10, '-password'];
+                title='开发者';
+                break;
+            case 'member':
+                query = [{role:0}, '', page, 10, '-password'];
+                title='会员';
+                break;
+            case 'search':
+                query = [{'$or':[{nickname:eval('/'+search+'+/i')},{email:eval('/'+search+'+/i')}]}, '', page, 10, '-password'];
+                title='搜索';
+                break;
+            default:
+                query = [{}, '', page, 10, '-password'];
+                title = '所有';
+        }
+
+
+        var total = yield userModel.querycount.call(userModel, query[0]);
+
+        var users = yield userModel.getAll.apply(userModel, query);
+
+        users = yield filter(users, function* (item){
+            return item.role<3;
+        })
+
+        this.body = {
+            extra:{
+                total:total,
+                title:title
+            },
+            users:users
         }
     }
 

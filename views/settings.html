@@ -11,18 +11,22 @@
                 <h4>操作中心</h4>
             </a>
             {% if role > 1%}
-            <a class="list-group-item active">
-                基本设置
-            </a>
+                <a class="list-group-item active">
+                    基本设置
+                </a>
+                <a class="list-group-item">
+                    用户管理
+                </a>
+                <a class="list-group-item">
+                    分类管理
+                </a>
+                <a class="list-group-item">
+                    帮助链接
+                </a>
             {% endif %}
             <a class="list-group-item {% if role <= 1%}active{%endif%}">
                 文章
             </a>
-            {% if role > 1%}
-            <a class="list-group-item">
-                分类管理
-            </a>
-            {% endif %}
         </div>
     </div>
     <!-- / right col -->
@@ -82,6 +86,159 @@
         </div>
         {% endif %}
 
+        <!-- 用户管理 -->
+        {% if role > 1%}
+        <div id="set-user" class="panel panel-default {% if role > 1%}hide{%endif%} fade-in-up ng-enter">
+
+            <div class="form-inline ng-pristine ng-valid">
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label class="sr-only">Email address</label>
+                        <input type="text" class="form-control" v-model="search" placeholder="用户名/Email">
+                    </div>
+                    <button class="btn btn-sm btn-success" v-on="click:userList('search', 1)">搜索</button>
+
+                    <span class="form-group m-l">
+                            <a href="javascript:;" v-on="click:userList('all', 1)">全部</a> &nbsp;&nbsp;| &nbsp;&nbsp;<a href="javascript:;" v-on="click:userList('admin', 1)">管理员</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:;" v-on="click:userList('developer', 1)">开发者</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:;" v-on="click:userList('member', 1)">会员</a>
+                    </span>
+
+                </div>
+            </div>
+
+
+            <div class="panel-heading font-bold">
+                <%extra.title%>
+                <span class="badge bg-warning pull-right"><%extra.total%></span>
+            </div>
+
+
+            <table class="table table-bordered table-hover table-condensed bg-white-only">
+                <tr style="font-weight: bold">
+                    <td style="width:15%">Email</td>
+                    <td style="width:15%">昵称/个性后缀</td>
+                    <td style="width:15%">积分</td>
+                    <td style="width:10%">身份</td>
+                    <td style="width:15%">注册时间</td>
+                    <td style="width:15%">操作</td>
+                </tr>
+
+
+
+                <tr v-if="!users.length">
+                    <td colspan="7" align="center">无数据</td>
+                </tr>
+                <!-- ngRepeat: user in users -->
+                <tr v-repeat="user:users">
+
+                    <!-- Email -->
+                    <td class="v-middle">
+                        <a class="text-ellipsis disabled"  target="_blank"><%user.email%></a>
+                    </td>
+
+                    <!-- 昵称 -->
+                    <td class="v-middle">
+                        <a class="disabled"><%user.nickname%></a>
+                    </td>
+
+                    <!--积分-->
+                    <td class="v-middle">
+                        <a href="javascript:;"><%user.level || 0%></a>
+                    </td>
+
+                    <!--身份-->
+                    <td class="v-middle">
+                        <a v-if="0==user.role" href="javascript:;">会员</a>
+                        <a v-if="1==user.role" href="javascript:;">开发者</a>
+                        <a v-if="2==user.role" href="javascript:;">管理员</a>
+                    </td>
+
+                    <!--注册时间-->
+                    <td class="v-middle">
+                        <a href="javascript:;"><%user.createtime%></a>
+                    </td>
+
+                    <!-- 操作-->
+                    <td style="white-space: nowrap">
+                        <div class="buttons">
+                            <a href="/<%post.type%>/<%post._id%>/edit" target="_blank" class="btn btn-sm btn-info">编辑</a>
+                            <button id="#post-del" v-on="click:del" data-id="<%post._id%>" class="btn btn-sm btn-danger">删除</button>
+                        </div>
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <div class="loader wrapper text-center"><img src="/img/flickr.svg"/></div>
+            <div v-if="extra.total/10>page" class="clearfix text-center panel-heading font-bold">
+                <a href="javascript:;" class="auto" v-on="click:userList()">
+                    <i class="fa fa-angle-double-down"></i>
+                    <span>更多主题</span>
+                </a>
+            </div>
+
+        </div>
+        {% endif %}
+
+
+        <!-- 分类-->
+        {% if role > 1%}
+        <div id="set-category" class="panel panel-default hide fade-in-up ng-enter">
+
+            <div class="form-inline ng-pristine ng-valid">
+                <div class="panel-body">
+
+
+                    <div class="form-group">
+                        <input type="email" class="form-control" v-model="categoryName" placeholder="分类名称">
+                    </div>
+                    <button class="btn btn-sm btn-success" v-on="click:addCategory">添加分类</button>
+
+                </div>
+            </div>
+
+
+            <div class="panel-heading font-bold">
+                分类
+            </div>
+
+
+            <table  class="table table-bordered table-hover table-condensed bg-white-only">
+                <tr id="category-tr" style="font-weight: bold">
+                    <td style="width:35%">名称</td>
+                    <td style="width:15%">操作</td>
+                </tr>
+
+
+                <!-- ngRepeat: user in users -->
+                <tr v-repeat="category:categories">
+
+                    <!-- 分类名 -->
+                    <td class="v-middle">
+                        <a href=""><%category.name%></a>
+                    </td>
+
+                    <!-- 操作-->
+                    <td style="white-space: nowrap">
+                        <div class="buttons">
+                            <button class="btn btn-sm btn-danger" v-on="click:removeCategory($event, category.name)">删除</button>
+                        </div>
+                    </td>
+
+                </tr>
+
+
+
+
+            </table>
+
+
+        </div>
+        {% endif %}
+
+
+        <!-- 文章 -->
         <div id="set-post" class="panel panel-default {% if role > 1%}hide{%endif%} fade-in-up ng-enter">
 
             <div class="form-inline ng-pristine ng-valid">
@@ -89,7 +246,7 @@
 
 
                         <div class="form-group">
-                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                            <label class="sr-only">Email address</label>
                             <input type="text" class="form-control" v-model="search" placeholder="文章标题">
                         </div>
                           <button class="btn btn-sm btn-success" v-on="click:loadmore('search', 1)">搜索</button>
@@ -183,61 +340,6 @@
 
         </div>
 
-
-        <!-- 分类-->
-        {% if role > 1%}
-        <div id="set-category" class="panel panel-default hide fade-in-up ng-enter">
-
-            <div class="form-inline ng-pristine ng-valid">
-                <div class="panel-body">
-
-
-                    <div class="form-group">
-                        <input type="email" class="form-control" v-model="categoryName" placeholder="分类名称">
-                    </div>
-                    <button class="btn btn-sm btn-success" v-on="click:addCategory">添加分类</button>
-
-                </div>
-            </div>
-
-
-            <div class="panel-heading font-bold">
-                分类
-            </div>
-
-
-            <table  class="table table-bordered table-hover table-condensed bg-white-only">
-                <tr id="category-tr" style="font-weight: bold">
-                    <td style="width:35%">名称</td>
-                    <td style="width:15%">操作</td>
-                </tr>
-
-
-                <!-- ngRepeat: user in users -->
-                <tr v-repeat="category:categories">
-
-                    <!-- 分类名 -->
-                    <td class="v-middle">
-                        <a href=""><%category.name%></a>
-                    </td>
-
-                    <!-- 操作-->
-                    <td style="white-space: nowrap">
-                        <div class="buttons">
-                            <button class="btn btn-sm btn-danger" v-on="click:removeCategory($event, category.name)">删除</button>
-                        </div>
-                    </td>
-
-                </tr>
-
-
-
-
-            </table>
-
-
-        </div>
-    {% endif %}
 
     </div>
     <!-- / main -->

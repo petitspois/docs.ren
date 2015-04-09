@@ -66,7 +66,6 @@ define(['petitspois', 'vue', 'vueValidator', 'upload', 'loadin', 'editor/editor'
                 var url = this.docs.edit ? '/docedit' : '/create';
 
                 loadin.show('load');
-
                 $.ajax({type: 'POST', url: url, data: this.$data.docs}).then(function (ret) {
                     ret = JSON.parse(ret);
                     if (ret.status) {

@@ -47,12 +47,6 @@
                         文档
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <i class="fa fa-fw fa-circle text-muted" color="#f05050" style="color: #f05050;"></i>
-                        问答
-                    </a>
-                </li>
             </ul>
 
         </div>
@@ -65,7 +59,7 @@
             <div class="btn-group pull-right">
                 <button class="btn btn-sm btn-bg btn-default disabled">{{page.page}}</button>
                 <a href="/?p={{page.page-1}}&t={{t}}" class="btn btn-sm btn-bg btn-default {% if 1 == page.page %}disabled{% endif %}"><i class="fa fa-chevron-left"></i></a>
-                <a href="/?p={{page.page+1}}&t={{t}}" class="btn btn-sm btn-bg btn-default {% if page.total == page.page %}disabled{% endif %}"><i class="fa fa-chevron-right"></i></a>
+                <a href="/?p={{page.page+1}}&t={{t}}" class="btn btn-sm btn-bg btn-default {% if !page.total || page.total == page.page %}disabled{% endif %}"><i class="fa fa-chevron-right"></i></a>
             </div>
             <div class="btn-toolbar">
                 <div class="btn-group dropdown">

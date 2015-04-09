@@ -29,10 +29,11 @@ module.exports = function(){
             total = Math.ceil((yield postModel.querycount(query))/10),
             categories = yield categoryModel.getAll({}, '-ccount',1,6);
         for(var i = 0;i<posts.length;i++){
-            posts[i].avatar = (yield postModel.getAvatar({name:posts[i].name})).author.avatar;
+            posts[i].avatar = (yield userModel.get({nickname:posts[i].name},'avatar')).avatar;
             posts[i].createtime = formatDate(posts[i].createtime, true);
             posts[i].updatetime = formatDate(posts[i].updatetime, true);
             posts[i].flag = posts[i]['_id'].toString();
+            console.log(posts[i].name)
         }
 
 

@@ -293,8 +293,10 @@ module.exports = function () {
                     item.pid = String(item.pid);
                     if ('comment' == item.type) {
                         var postdata = yield postModel.get({_id: item.rid});
-                        item.title = postdata.title;
-                        item.articleType = postdata.type;
+                        if(postdata) {
+                            item.title = postdata.title;
+                            item.articleType = postdata.type;
+                        }
                     }
                     if ('reply' == item.type) {
                         item.atuser = (yield model.get({_id: item.rid}, 'nickname')).nickname;

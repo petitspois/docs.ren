@@ -46,6 +46,10 @@ var mongoose = require('mongoose'),
             type:String,
             required:true
         },
+        level:{
+            type: Number,
+            default: 0
+        },
         youwatch:{
             type:[],
             required:false,
@@ -65,9 +69,15 @@ var mongoose = require('mongoose'),
             type: Number,
             required: true,
             unique: false,
-            min: 1,
+            min: 0,
             max: 3,
-            default: 1
+            default: 0
+        },
+        //创建时间
+        createtime: {
+            type: Date,
+            required: false,
+            default: Date.now
         }
     });
 
