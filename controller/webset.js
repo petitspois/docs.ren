@@ -181,6 +181,18 @@ module.exports = function(){
         }
     }
 
+    webset.userEdit = function* (){
+        var id = this.params.id,
+            role = (yield userModel.get({email:this.session.user.email},'role')).role,
+            opposite = yield userModel.byId(id);
+        if(role<2)return;
+        this.body = yield this.render('useredit',{
+            title:'用户编辑',
+            user:this.session.user,
+            opposite:opposite
+        });
+    }
+
     return webset;
 
 }

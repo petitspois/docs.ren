@@ -10,5 +10,7 @@ module.exports = function(app, control){
 
     app.post('/userManagement', control.user.checkNotLogin, control.webset.userManagement);
 
+    app.get('/userEdit/:id', control.user.checkNotLogin, control.webset.userEdit);
+
 
 }
