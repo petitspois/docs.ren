@@ -23,7 +23,7 @@
                             <label class="col-sm-2 control-label">Email</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled value="{{opposite.email}}">
+                                <input type="text" class="form-control" v-model="email" disabled value="{{opposite.email}}">
                             </div>
                         </div>
 
@@ -71,7 +71,7 @@
                             <label class="col-sm-2 control-label">积分</label>
 
                             <div class="col-sm-10">
-                                <input type="number" class="form-control"  value="{{opposite.level}}">
+                                <input type="number" class="form-control" v-model="level"  value="{{opposite.level}}">
                             </div>
                         </div>
 
@@ -83,10 +83,10 @@
                             <label class="col-sm-2 control-label">权限</label>
 
                             <div class="col-sm-10">
-                                <select v-model="docs.category" name="category" class="form-control">
-                                    <option value="" selected>会员</option>
-                                    <option value="" >开发者</option>
-                                    <option value="" >管理员</option>
+                                <select v-model="role" name="category" class="form-control">
+                                    <option value="0" selected>会员</option>
+                                    <option value="1" >开发者</option>
+                                    <option value="2" >管理员</option>
                                 </select>
                             </div>
                         </div>
@@ -108,9 +108,9 @@
                 <div class="panel">
 
                     <div class="panel-body">
-                        <button type="submit" class="btn btn-default">取消</button>
+                        <a href="javascript:history.back();" class="btn btn-default">取消</a>
 
-                        <button type="submit" class="btn btn-primary pull-right" v-attr="disabled:!valid" v-on="click:submit">
+                        <button type="submit" class="btn btn-primary pull-right" v-on="click:submit">
                             修改
                         </button>
                     </div>
@@ -126,5 +126,6 @@
 
 {% block loadjs %}
 <script type="text/javascript">
+    require(['user/useredit']);
 </script>
 {% endblock %}

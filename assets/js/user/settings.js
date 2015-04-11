@@ -14,6 +14,7 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
     var baseData = {
             keywords: '',
             description: '',
+            helplink:'',
             statistics: ''
         },
         userData = {
@@ -86,6 +87,18 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
                     ctx.users = ctx.users.concat(ret.users);
                     ctx.extra = ret.extra;
                 })
+            },
+            delUser:function(e){
+                var isdel = confirm('确定删除此用户吗？'),
+                    id = e.target.dataset.id;
+                isdel && $.ajax({url:'/delUser',type:'POST',data:{id:id}}).then(function(ret){
+                    if(ret.status){
+                        gf('success', ret.msg);
+                        $(e.target).closest('tr').remove();
+                    }else{
+                        gf('error', ret.msg);
+                    }
+                },function(){})
             }
         }
     });
@@ -195,5 +208,6 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
             }
         }
     });
+
 
 });

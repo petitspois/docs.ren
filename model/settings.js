@@ -16,6 +16,10 @@ var settings = new Schema({
     },
     description: {
         type: String
+    },
+    //帮助链接
+    helplink:{
+        type: String
     }
     //统计
     ,statistics: {

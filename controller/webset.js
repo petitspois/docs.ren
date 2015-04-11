@@ -11,59 +11,59 @@ var settingsModel = require('../model/').settings,
     formatDate = require('../lib/format');
 
 
-module.exports = function(){
+module.exports = function () {
 
     var webset = {};
 
-    webset.webset = function* (){
+    webset.webset = function* () {
         var body = this.request.body,
-            existBase = yield settingsModel.get({name:'base'});
-        if(existBase){
+            existBase = yield settingsModel.get({name: 'base'});
+        if (existBase) {
             //update
-            yield settingsModel.update({name:'base'},{$set:body});
-        }else{
+            yield settingsModel.update({name: 'base'}, {$set: body});
+        } else {
             //create
             body.name = 'base';
             yield settingsModel.add(body);
         }
 
         this.body = {
-            msg:'操作成功',
-            status:1
+            msg: '操作成功',
+            status: 1
         }
     }
 
-    webset.setPost = function* (){
+    webset.setPost = function* () {
         var body = this.request.body,
             postType = body.type || 'all',
             page = body.page || 1,
             search = body.search,
-            role = (yield userModel.get({email:this.session.user.email},'role')).role,
+            role = (yield userModel.get({email: this.session.user.email}, 'role')).role,
             query = [],
             title;
-        switch(postType){
+        switch (postType) {
             case 'already':
-                query = [{status:true}, '-createtime', page, 10, '-content -description -cover'];
+                query = [{status: true}, '-createtime', page, 10, '-content -description -cover'];
                 title = '已发布';
                 break;
             case 'top':
-                query = [{istop:true}, '-createtime', page, 10, '-content -description -cover'];
-                title='置顶';
+                query = [{istop: true}, '-createtime', page, 10, '-content -description -cover'];
+                title = '置顶';
                 break;
             case 'draft':
-                query = [{status:false}, '-createtime', page, 10, '-content -description -cover'];
-                title='草稿';
+                query = [{status: false}, '-createtime', page, 10, '-content -description -cover'];
+                title = '草稿';
                 break;
             case 'search':
-                query = [{title:eval('/'+search+'+/i')}, '-createtime', page, 10, '-content -description -cover'];
-                title='搜索';
+                query = [{title: eval('/' + search + '+/i')}, '-createtime', page, 10, '-content -description -cover'];
+                title = '搜索';
                 break;
             default:
                 query = [{}, '-createtime', page, 10, '-content -description -cover'];
                 title = '全部';
         }
 
-        if(role<2){
+        if (role < 2) {
             query[0].name = this.session.user.nickname;
         }
 
@@ -72,8 +72,8 @@ module.exports = function(){
         var posts = yield postModel.getAll.apply(postModel, query);
 
 
-        yield posts.map(function* (item){
-            item.commentCount = yield commentModel.querycount({pid:item._id});
+        yield posts.map(function* (item) {
+            item.commentCount = yield commentModel.querycount({pid: item._id});
             item.createtimeformat = formatDate(item.createtime, true);
             item.createtime = formatDate(item.createtime);
             return item;
@@ -81,82 +81,82 @@ module.exports = function(){
 
 
         this.body = {
-            extra:{
-                total:total,
-                title:title
+            extra: {
+                total: total,
+                title: title
             },
-            posts:posts
+            posts: posts
         }
 
 
     }
 
 
-    webset.addCategory = function* (){
+    webset.addCategory = function* () {
         var body = this.request.body,
             name = body.name;
-        var exist = yield categoryModel.get({name:name});
+        var exist = yield categoryModel.get({name: name});
 
-        if(exist){
+        if (exist) {
             this.body = {
-                msg:'分类已经存在',
-                status:0
+                msg: '分类已经存在',
+                status: 0
             }
             return;
         }
 
-        var addCategory = yield categoryModel.add({name:name});
+        var addCategory = yield categoryModel.add({name: name});
 
-        this.body  = {
-            msg:'添加分类成功',
-            status:1,
-            data:addCategory
-        }
-    }
-
-    webset.categoryList = function* (){
         this.body = {
-            categories: yield categoryModel.getAll({},'-createtime')
+            msg: '添加分类成功',
+            status: 1,
+            data: addCategory
         }
     }
 
-    webset.removeCategory = function* (){
+    webset.categoryList = function* () {
+        this.body = {
+            categories: yield categoryModel.getAll({}, '-createtime')
+        }
+    }
+
+    webset.removeCategory = function* () {
         var body = this.request.body,
             name = body.name;
-        if(name){
-            yield categoryModel.removeSingle({name:name})
+        if (name) {
+            yield categoryModel.removeSingle({name: name})
             this.body = {
-                msg:'删除分类成功',
-                status:1
+                msg: '删除分类成功',
+                status: 1
             }
         }
     }
 
 
-    webset.userManagement = function* (){
+    webset.userManagement = function* () {
         var body = this.request.body,
             postType = body.type || 'all',
             page = body.page || 1,
             search = body.search,
-            role = (yield userModel.get({email:this.session.user.email},'role')).role,
+            role = (yield userModel.get({email: this.session.user.email}, 'role')).role,
             query = [],
             title;
-        switch(postType){
+        switch (postType) {
             case 'admin':
-                query = [{role:2}, '', page, 10, '-password'];
+                query = [{role: 2}, '', page, 10, '-password'];
                 title = '管理员';
                 break;
             case 'developer':
-                query = [{role:1}, '', page, 10, '-password'];
-                title='开发者';
+                query = [{role: 1}, '', page, 10, '-password'];
+                title = '开发者';
                 break;
             case 'member':
-                query = [{role:0}, '', page, 10, '-password'];
-                title='会员';
+                query = [{role: 0}, '', page, 10, '-password'];
+                title = '会员';
                 break;
             case 'search':
-                query = [{'$or':[{nickname:eval('/'+search+'+/i')},{email:eval('/'+search+'+/i')}]}, '', page, 10, '-password'];
-                title='搜索';
+                query = [{'$or': [{nickname: eval('/' + search + '+/i')}, {email: eval('/' + search + '+/i')}]}, '', page, 10, '-password'];
+                title = '搜索';
                 break;
             default:
                 query = [{}, '', page, 10, '-password'];
@@ -168,29 +168,63 @@ module.exports = function(){
 
         var users = yield userModel.getAll.apply(userModel, query);
 
-        users = yield filter(users, function* (item){
-            return item.role<3;
+        users = yield filter(users, function* (item) {
+            return item.role < 3;
         })
 
         this.body = {
-            extra:{
-                total:total,
-                title:title
+            extra: {
+                total: total,
+                title: title
             },
-            users:users
+            users: users
         }
     }
 
-    webset.userEdit = function* (){
+    webset.userEdit = function* () {
         var id = this.params.id,
-            role = (yield userModel.get({email:this.session.user.email},'role')).role,
+            role = (yield userModel.get({email: this.session.user.email}, 'role')).role,
             opposite = yield userModel.byId(id);
-        if(role<2)return;
-        this.body = yield this.render('useredit',{
-            title:'用户编辑',
-            user:this.session.user,
-            opposite:opposite
+        if (role < 3)return;
+        this.body = yield this.render('useredit', {
+            title: '用户编辑',
+            user: this.session.user,
+            opposite: opposite
         });
+    }
+
+    webset.saveUser = function* () {
+        var body = this.request.body,
+            email = body.email;
+
+        delete body.email;
+
+        yield userModel.update({email:email},{$set:body});
+
+        this.body = {
+            msg:'更新成功',
+            status:1
+        }
+
+    }
+
+    webset.delUser = function* () {
+        var id = this.request.body && this.request.body.id,
+
+            dData = yield userModel.byidRemove(id);
+
+        if(dData){
+            this.body = {
+                msg:'删除成功',
+                status:1
+            }
+            return;
+        }else{
+            this.body = {
+                msg:'删除失败',
+                status:0
+            }
+        }
     }
 
     return webset;

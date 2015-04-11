@@ -10,6 +10,10 @@ module.exports = function(app, control){
 
     app.post('/userManagement', control.user.checkNotLogin, control.webset.userManagement);
 
+    app.post('/saveUser', control.user.checkNotLogin, control.webset.saveUser);
+
+    app.post('/delUser', control.user.checkNotLogin, control.webset.delUser);
+
     app.get('/userEdit/:id', control.user.checkNotLogin, control.webset.userEdit);
 
 

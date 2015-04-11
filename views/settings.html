@@ -14,14 +14,15 @@
                 <a class="list-group-item active">
                     基本设置
                 </a>
-                <a class="list-group-item">
-                    用户管理
-                </a>
+            {%endif%}
+            {% if role > 2%}
+            <a class="list-group-item">
+                用户管理
+            </a>
+            {%endif%}
+            {% if role > 1%}
                 <a class="list-group-item">
                     分类管理
-                </a>
-                <a class="list-group-item">
-                    帮助链接
                 </a>
             {% endif %}
             <a class="list-group-item {% if role <= 1%}active{%endif%}">
@@ -64,6 +65,17 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
+                    <!-- 帮助链接 -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">帮助链接</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="helplink" value="{{settings.helpLink}}" placeholder="帮助链接">
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+
                     <!-- 流量统计代码-->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">流量统计代码</label>
@@ -87,8 +99,8 @@
         {% endif %}
 
         <!-- 用户管理 -->
-        {% if role > 1%}
-        <div id="set-user" class="panel panel-default {% if role > 1%}hide{%endif%} fade-in-up ng-enter">
+        {% if role > 2%}
+        <div id="set-user" class="panel panel-default {% if role > 2%}hide{%endif%} fade-in-up ng-enter">
 
             <div class="form-inline ng-pristine ng-valid">
                 <div class="panel-body">
@@ -162,7 +174,7 @@
                     <td style="white-space: nowrap">
                         <div class="buttons">
                             <a href="/userEdit/<%user._id%>" target="_blank" class="btn btn-sm btn-info">编辑</a>
-                            <button id="#post-del" v-on="click:del" data-id="<%post._id%>" class="btn btn-sm btn-danger">删除</button>
+                            <button v-on="click:delUser" data-id="<%user._id%>" class="btn btn-sm btn-danger">删除</button>
                         </div>
                     </td>
 
@@ -236,7 +248,6 @@
 
         </div>
         {% endif %}
-
 
         <!-- 文章 -->
         <div id="set-post" class="panel panel-default {% if role > 1%}hide{%endif%} fade-in-up ng-enter">
