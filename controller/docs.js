@@ -63,13 +63,17 @@ module.exports = function () {
             });
         }
 
-        var userId = this.session.user._id || (yield userModel.get({email: this.session.user.email},'-password'))._id;
+        var userId = this.session.user._id || (yield userModel.get({email: this.session.user.email},'-password'))._id,
+            cfilter = function(str) {
+                return str.replace(/[\x00-\xff]|（|）/g,'');
+            },
+            description = cfilter(description || content);
 
         var newDocs = {
             type:'doc',
             title: title,
             content: content,
-            description: (description? description : content.slice(0, 120) ),
+            description: description.slice(0, 100),
             tags: fineTags,
             category: category,
             name: this.session.user.nickname,
@@ -202,7 +206,11 @@ module.exports = function () {
 
         if(edit){
 
-            var fineTags = [];
+            var fineTags = [],
+                cfilter = function(str) {
+                    return str.replace(/[\x00-\xff]|（|）/g,'');
+                },
+                description = cfilter(description || content);
 
             if (tags) {
                 tags.split(',').forEach(function (item, index) {
@@ -213,7 +221,7 @@ module.exports = function () {
             var alterDocs = {
                 title: title,
                 content: content,
-                description: (description? description : content.slice(0, 120) ),
+                description: description.slice(0, 100),
                 tags: fineTags,
                 category: category,
                 projectLink:githublink,

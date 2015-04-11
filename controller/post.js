@@ -57,12 +57,16 @@ module.exports = function () {
             });
         }
 
-        var userId = this.session.user._id || (yield userModel.get({email: this.session.user.email}))._id;
+        var userId = this.session.user._id || (yield userModel.get({email: this.session.user.email}))._id,
+            cfilter = function(str) {
+                return str.replace(/[\x00-\xff]|（|）/g,'');
+            },
+            description = cfilter(content);
 
         var newPost = {
             title: title,
             content: content,
-            description: content.slice(0, 80),
+            description:description.slice(0, 100),
             tags: fineTags,
             category: category,
             name: this.session.user.nickname,
@@ -149,7 +153,11 @@ module.exports = function () {
 
         if(edit){
 
-            var fineTags = [];
+            var fineTags = [],
+                cfilter = function(str) {
+                    return str.replace(/[\x00-\xff]|（|）/g,'');
+                },
+                description = cfilter(content);
 
             if (tags) {
                 tags.split(',').forEach(function (item, index) {
@@ -160,7 +168,7 @@ module.exports = function () {
             var alterPost = {
                 title: title,
                 content: content,
-                description: content.slice(0, 80),
+                description: description.slice(0, 100),
                 tags: fineTags,
                 category: category,
                 istop: istop,
