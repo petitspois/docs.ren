@@ -40,6 +40,19 @@ module.exports = {
         secretKey: 'SaBg18BkjYzWcAZHT9HTMKWk2f5n4aZ5Rd_MwCB5',
         bucket: 'deepblue',
         domain: 'http://deepblue.qiniudn.com'
+    },
+
+    //积分设置
+    level:{
+        //发布 create post or docs or comment or good
+        ///发布文章
+        cp:5,
+        ///发布文档
+        cd:7,
+        ///评论
+        cc:2,
+        ///精华
+        cg:5
     }
 }
 
