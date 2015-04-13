@@ -90,8 +90,9 @@ define(['jquery', 'vue', 'gf'], function ($, Vue, gf) {
             },
             delUser:function(e){
                 var isdel = confirm('确定删除此用户吗？'),
+                    again  = isdel && confirm('删除用户将会删除此用户相关，动态、通知、文章以及评论，请谨慎操作'),
                     id = e.target.dataset.id;
-                isdel && $.ajax({url:'/delUser',type:'POST',data:{id:id}}).then(function(ret){
+                again && $.ajax({url:'/delUser',type:'POST',data:{id:id}}).then(function(ret){
                     if(ret.status){
                         gf('success', ret.msg);
                         $(e.target).closest('tr').remove();

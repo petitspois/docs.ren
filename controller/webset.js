@@ -7,6 +7,8 @@ var settingsModel = require('../model/').settings,
     postModel = require('../model/').post,
     commentModel = require('../model').comment,
     categoryModel = require('../model').category,
+    notificationModel = require('../model').notification,
+    actionModel = require('../model').action,
     filter = require('co-filter'),
     formatDate = require('../lib/format');
 
@@ -211,7 +213,17 @@ module.exports = function () {
     webset.delUser = function* () {
         var id = this.request.body && this.request.body.id,
 
+            //删用户
             dData = yield userModel.byidRemove(id);
+            //删除action
+            yield actionModel.removeSingle({uid:id});
+            //删除相关评论
+            yield commentModel.removeSingle({author:id});
+            //删除通知
+            yield notificationModel.removeSingle({source:id});
+            //相关文章
+            yield postModel.removeSingle({author:id});
+
 
         if(dData){
             this.body = {
