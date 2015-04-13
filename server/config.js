@@ -23,6 +23,7 @@ module.exports = {
         id:'f1a0b9f63b83c392f360',
         secret:'f138d2f6a74812e4d6ff9d809354ccdd2a3fe9b7'
     },
+
     oauthState:'^1986petits25pois12$',
 
     //mongodb contection
@@ -40,6 +41,16 @@ module.exports = {
         secretKey: 'SaBg18BkjYzWcAZHT9HTMKWk2f5n4aZ5Rd_MwCB5',
         bucket: 'deepblue',
         domain: 'http://deepblue.qiniudn.com'
+    },
+
+    //邮件设置
+    smtp:{
+        host:'smtp.163.com',
+        port:465,
+        auth:{
+            user:'petitspois@163.com',
+            pass:'love521424'
+        }
     },
 
     //积分设置

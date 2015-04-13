@@ -20,11 +20,13 @@ define(['petitspois', 'vue', 'vueValidator', 'gf', 'loadin'], function ($, Vue, 
                 var user = this.$data.user;
                 e.preventDefault();
                 loadin.show();
-                $.ajax({type:'POST',dataType:'json', url:'/resetmail',data:user}).then(function(ret){
+                $.ajax({type:'POST', url:'/resetmail',data:user}).then(function(ret){
                     ret = JSON.parse(ret);
                     if(ret.status){
+                        loadin.hide();
                         gf('success', ret.msg);
                     }else{
+                        loadin.hide();
                         gf('error', ret.msg);
                     }
                 }, function(){});

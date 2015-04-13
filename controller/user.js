@@ -623,9 +623,9 @@ module.exports = function () {
     }
 
     user.resetmail = function* () {
-        var ctx = this;
-        body = this.request.body,
-        email = body.email || '';
+        var ctx = this,
+            body = this.request.body,
+            email = body.email || '';
 
         if (email) {
 
@@ -635,23 +635,20 @@ module.exports = function () {
                     key:md5('docs.ren'+Date.now()+'$$#@@#!@#')
                 };
 
-                smtpMail({
-                    to: email,
-                    html: yield ctx.render('smtp', content)
-                }).then(function(){
-                    ctx.session.pwdKey = content.key;
-                    ctx.session.sendemail = content.email;
-                    this.body = {
-                        msg:'邮件发送成功，请尽快查收，更改密码',
-                        status:1
-                    }
-                    return;
-                },function(){
-                    this.body = {
-                        msg:'邮件发送失败，检查网络并重试',
-                        status:0
-                    }
-                });
+            try{
+                yield smtpMail({to: email, html: yield ctx.render('smtp', content)});
+                ctx.session.pwdKey = content.key;
+                ctx.session.sendemail = content.email;
+                ctx.body = {
+                    msg:'邮件发送成功，请尽快查收，更改密码',
+                    status:1
+                }
+            }catch(e){
+                ctx.body = {
+                    msg:'邮件发送失败，检查网络并重试',
+                    status:0
+                }
+            }
 
         }
 
