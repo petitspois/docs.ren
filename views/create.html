@@ -119,11 +119,11 @@
             </div>
             {% if edit %}
                 <script>
-                    var istop = {{docs.istop}}, iscomment = {{docs.iscomment}}, cstatus = {{docs.status}}, recommend = {{docs.recommend}};
+                    var istop = {{docs.istop}}, isgood = {{docs.isgood}}, iscomment = {{docs.iscomment}}, cstatus = {{docs.status}}, recommend = {{docs.recommend}};
                 </script>
             {% else %}
                 <script>
-                    var istop = false, iscomment = true, cstatus = true, recommend = false;
+                    var istop = false, isgood = false, iscomment = true, cstatus = true, recommend = false;
                 </script>
             {%endif%}
 
@@ -137,6 +137,13 @@
                                 <input type="checkbox" value="" v-model="docs.istop" />
                                 <i></i>
                                 对文档置顶操作
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="i-checks">
+                                <input type="checkbox" value="" v-model="docs.isgood" />
+                                <i></i>
+                                添加为精华
                             </label>
                         </div>
                         <div class="checkbox">

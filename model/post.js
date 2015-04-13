@@ -84,6 +84,12 @@ var post = new Schema({
         require:true,
         default:false
     },
+    //是否为精华文章
+    isgood:{
+        type:Boolean,
+        require:true,
+        default:false
+    },
     //状态? 默认发布
     status:{
         type:Boolean,

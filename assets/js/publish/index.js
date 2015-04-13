@@ -20,6 +20,7 @@ define(['petitspois', 'vue', 'vueValidator','loadin', 'editor/editor'], function
                     content: '',
                     theme:theme,
                     istop:istop,
+                    isgood:isgood,
                     iscomment:iscomment,
                     edit:''
                 }

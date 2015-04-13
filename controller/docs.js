@@ -38,6 +38,7 @@ module.exports = function () {
             github = body.github,
             cover = body.cover,
             istop = body.istop,
+            isgood = body.isgood,
             iscomment = body.iscomment,
             cstatus = body.cstatus,
             recommend = body.recommend;
@@ -65,9 +66,10 @@ module.exports = function () {
 
         var userId = this.session.user._id || (yield userModel.get({email: this.session.user.email},'-password'))._id,
             cfilter = function(str) {
-                return str.replace(/[\x00-\xff]|（|）/g,'');
+                return str.replace(/[^\u4e00-\u9fa5a-zA-Z]|（|）/g,'');
             },
             description = cfilter(description || content);
+
 
         var newDocs = {
             type:'doc',
@@ -80,6 +82,7 @@ module.exports = function () {
             projectLink:github,
             cover :cover,
             istop :istop,
+            isgood:isgood,
             iscomment :iscomment,
             status:cstatus,
             author: userId,
@@ -199,6 +202,7 @@ module.exports = function () {
             githublink = body.github,
             cover = body.cover,
             istop = body.istop,
+            isgood = body.isgood,
             iscomment = body.iscomment,
             cstatus = body.cstatus,
             edit = body.edit,
@@ -208,7 +212,7 @@ module.exports = function () {
 
             var fineTags = [],
                 cfilter = function(str) {
-                    return str.replace(/[\x00-\xff]|（|）/g,'');
+                    return str.replace(/[^\u4e00-\u9fa5a-zA-Z]|（|）/g,'');
                 },
                 description = cfilter(description || content);
 
@@ -227,6 +231,7 @@ module.exports = function () {
                 projectLink:githublink,
                 cover :cover,
                 istop :istop,
+                isgood:isgood,
                 iscomment :iscomment,
                 status:cstatus,
                 recommend:recommend,

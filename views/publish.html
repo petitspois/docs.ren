@@ -84,11 +84,11 @@
 
         {% if edit %}
         <script>
-            var istop = {{post.istop}}, iscomment = {{post.iscomment}}, theme = '{{post.theme}}';
+            var istop = {{post.istop}}, isgood = {{post.isgood}}, iscomment = {{post.iscomment}}, theme = '{{post.theme}}';
         </script>
         {% else %}
         <script>
-            var istop = false, iscomment = true, theme = 'share';
+            var istop = false, isgood = false, iscomment = true, theme = 'share';
         </script>
         {%endif%}
 
@@ -104,6 +104,13 @@
                         <input type="checkbox" value="" v-model="post.istop" />
                         <i></i>
                         对文档置顶操作
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input type="checkbox" value="" v-model="post.isgood" />
+                        <i></i>
+                        添加为精华
                     </label>
                 </div>
                 {% endif %}

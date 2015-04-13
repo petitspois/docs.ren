@@ -33,6 +33,7 @@ module.exports = function () {
             category = body.category,
             tags = body.tags,
             istop= body.istop,
+            isgood= body.isgood,
             iscomment = body.iscomment,
             theme = body.theme;
 
@@ -59,7 +60,7 @@ module.exports = function () {
 
         var userId = this.session.user._id || (yield userModel.get({email: this.session.user.email}))._id,
             cfilter = function(str) {
-                return str.replace(/[\x00-\xff]|（|）/g,'');
+                return str.replace(/[^\u4e00-\u9fa5a-zA-Z]|（|）/g,'');
             },
             description = cfilter(content);
 
@@ -72,6 +73,7 @@ module.exports = function () {
             name: this.session.user.nickname,
             author: userId,
             istop: istop,
+            isgood: isgood,
             iscomment: iscomment,
             theme:theme
         }
@@ -136,7 +138,7 @@ module.exports = function () {
             post = yield model.byId(id),
             user = yield userModel.byId(this.session.user._id),
             categories = yield categoryModel.getAll({});
-        this.body = yield this.render('publish', {post:post, user:user, categories:categories, edit:post.id,});
+        this.body = yield this.render('publish', {post:post, user:user, categories:categories, edit:post.id});
     }
 
     //post edit
@@ -148,6 +150,7 @@ module.exports = function () {
             tags = body.tags,
             edit = body.edit,
             istop= body.istop,
+            isgood= body.isgood,
             iscomment= body.iscomment,
             theme=body.theme;
 
@@ -155,7 +158,7 @@ module.exports = function () {
 
             var fineTags = [],
                 cfilter = function(str) {
-                    return str.replace(/[\x00-\xff]|（|）/g,'');
+                    return str.replace(/[^\u4e00-\u9fa5a-zA-Z]|（|）/g,'');
                 },
                 description = cfilter(content);
 
@@ -172,6 +175,7 @@ module.exports = function () {
                 tags: fineTags,
                 category: category,
                 istop: istop,
+                isgood: isgood,
                 iscomment: iscomment,
                 theme:theme,
                 updatetime:Date.now()
