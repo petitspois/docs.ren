@@ -41,7 +41,7 @@ define(['petitspois', 'vue', 'vueValidator','loadin', 'editor/editor'], function
                     $.ajax({type:'POST',url: url,data:this.$data.post}).then(function(ret){
                         ret = JSON.parse(ret);
                         if(ret.status){
-                            location.href = '/';
+                            location.replace('/post/' + ret.data.id);
                         }else{
                             loadin.show('alert', ret.msg, 'danger');
                         }

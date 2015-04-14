@@ -11,39 +11,57 @@
             <a class="btn btn-sm btn-danger w-xs font-bold" href="/publish">发布文章</a>
         </div>
         <div class="wrapper hidden-sm hidden-xs" id="email-menu">
-            <ul class="nav nav-pills nav-stacked nav-sm">
-                <li class="active">
-                    <a  href="/">
-                        全部
-                    </a>
-                </li>
-                {% for category in categories %}
-                {% if '未分类'!==category.name %}
-                <li>
-                    <a href="/take/?s={{category.name}}">
-                        {{category.name}}
-                    </a>
-                </li>
-                {%endif%}
-                {%endfor%}
-            </ul>
-            <div class="wrapper">Labels</div>
+            <!--<ul class="nav nav-pills nav-stacked nav-sm">-->
+                <!--<li class="active">-->
+                    <!--<a  href="/">-->
+                        <!--全部-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--{% for category in categories %}-->
+                <!--{% if '未分类'!==category.name %}-->
+                <!--<li>-->
+                    <!--<a href="/take/?s={{category.name}}">-->
+                        <!--{{category.name}}-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--{%endif%}-->
+                <!--{%endfor%}-->
+            <!--</ul>-->
+            <div class="wrapper">Theme</div>
             <ul class="nav nav-pills nav-stacked nav-sm">
                 <li>
                     <a>
-                        <i class="fa fa-fw fa-circle text-muted" color="#27c24c" style="color: rgb(39, 194, 76);"></i>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: #3a3f51;"></i>
                         置顶
                     </a>
                 </li>
                 <li>
                     <a>
-                        <i class="fa fa-fw fa-circle text-muted" color="#23b7e5" style="color: rgb(35, 183, 229);"></i>
-                        文章
+                        <i class="fa fa-fw fa-circle text-muted" style="color: rgb(39, 194, 76);"></i>
+                        精华
                     </a>
                 </li>
                 <li>
                     <a>
-                        <i class="fa fa-fw fa-circle text-muted" color="#7266ba" style="color: rgb(114, 102, 186);"></i>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: #fad733;"></i>
+                        分享
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: #f05050;"></i>
+                        问答
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: rgb(35, 183, 229);"></i>
+                        招聘
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: rgb(114, 102, 186);"></i>
                         文档
                     </a>
                 </li>
@@ -92,7 +110,7 @@
             {% endif%}
 
             {% for post in posts %}
-                <li class="list-group-item clearfix {% if post.istop %}b-l-success{% elseif 'doc'==post.type %}b-l-primary{%else%}b-l-info{%endif%}">
+                <li class="list-group-item clearfix b-l-white">
 
                     <a class="avatar thumb pull-left m-r" href="/user/{{post.name}}">
                         <img src="{{post.avatar}}">
@@ -105,9 +123,22 @@
                     <div class="clear">
                         <div>
                             <a class="text-md ng-binding" href="/{{post.type}}/{{post.flag}}">{{post.title}}</a>
-                            {% for tag in post.tags %}
-                            <span class="label bg-light m-l-sm ng-binding">{{tag}}</span>
-                            {% endfor %}
+                            {% if post.istop %}
+                                <span class="label bg-dark m-l-sm">置顶</span>
+                            {% elseif post.isgood %}
+                                <span class="label bg-success m-l-sm">精华</span>
+                            {% elseif 'share' === post.theme %}
+                                 <span class="label bg-warning m-l-sm">分享</span>
+                            {% elseif 'ask' === post.theme %}
+                                 <span class="label bg-danger m-l-sm">问答</span>
+                            {% elseif 'job' === post.theme %}
+                                <span class="label bg-danger m-l-sm">招聘</span>
+                            {% elseif 'doc' === post.type %}
+                                <span class="label bg-primary m-l-sm">文档</span>
+                            {%endif%}
+                            <!--{% for tag in post.tags %}-->
+                            <!--<span class="label bg-light m-l-sm ng-binding">{{tag}}</span>-->
+                            <!--{% endfor %}-->
                         </div>
                         <div class="text-ellipsis m-t-xs ng-binding">
                             {{post.description}}

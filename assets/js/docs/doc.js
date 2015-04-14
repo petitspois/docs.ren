@@ -72,7 +72,7 @@ define(['petitspois', 'vue', 'vueValidator', 'upload', 'loadin', 'editor/editor'
                     if (ret.status) {
                         loadin.show('alert', ret.msg, 'success');
                         setTimeout(function(){
-                            location.href = '/';
+                            location.replace('/doc/' + ret.data.id);
                         },500)
                     } else {
                         loadin.show('alert', ret.msg, 'danger');

@@ -12,39 +12,57 @@
             <a class="btn btn-sm btn-danger w-xs font-bold" href="/publish">发布文章</a>
         </div>
         <div class="wrapper hidden-sm hidden-xs" id="email-menu">
-            <ul class="nav nav-pills nav-stacked nav-sm">
-                <li class="active">
-                    <a  href="/">
-                        全部
-                    </a>
-                </li>
-                {% for category in categories %}
-                {% if '未分类'!==category.name %}
-                <li>
-                    <a href="/take/?s={{category.name}}">
-                        {{category.name}}
-                    </a>
-                </li>
-                {%endif%}
-                {%endfor%}
-            </ul>
-            <div class="wrapper">Labels</div>
+            <!--<ul class="nav nav-pills nav-stacked nav-sm">-->
+                <!--<li class="active">-->
+                    <!--<a  href="/">-->
+                        <!--全部-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--{% for category in categories %}-->
+                <!--{% if '未分类'!==category.name %}-->
+                <!--<li>-->
+                    <!--<a href="/take/?s={{category.name}}">-->
+                        <!--{{category.name}}-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--{%endif%}-->
+                <!--{%endfor%}-->
+            <!--</ul>-->
+            <div class="wrapper">Theme</div>
             <ul class="nav nav-pills nav-stacked nav-sm">
                 <li>
                     <a>
-                        <i class="fa fa-fw fa-circle text-muted" color="#27c24c" style="color: rgb(39, 194, 76);"></i>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: #3a3f51;"></i>
                         置顶
                     </a>
                 </li>
                 <li>
                     <a>
-                        <i class="fa fa-fw fa-circle text-muted" color="#23b7e5" style="color: rgb(35, 183, 229);"></i>
-                        文章
+                        <i class="fa fa-fw fa-circle text-muted" style="color: rgb(39, 194, 76);"></i>
+                        精华
                     </a>
                 </li>
                 <li>
                     <a>
-                        <i class="fa fa-fw fa-circle text-muted" color="#7266ba" style="color: rgb(114, 102, 186);"></i>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: #fad733;"></i>
+                        分享
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: #f05050;"></i>
+                        问答
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: rgb(35, 183, 229);"></i>
+                        招聘
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-fw fa-circle text-muted" style="color: rgb(114, 102, 186);"></i>
                         文档
                     </a>
                 </li>

@@ -94,11 +94,13 @@ module.exports = function () {
             uid:newPost.author
         });
 
-
-            this.body = {
-                msg: '发布成功',
-                status: 1
+        this.body = {
+            msg: '发布成功',
+            status: 1,
+            data:{
+               id:posttable.id
             }
+        }
 
     }
 
@@ -180,10 +182,13 @@ module.exports = function () {
                 theme:theme,
                 updatetime:Date.now()
             }
-            yield model.update({_id:edit},{$set:alterPost});
+            var alterSucess = yield model.update({_id:edit},{$set:alterPost});
             this.body = {
                 msg: '更改成功',
-                status: 1
+                status: 1,
+                data:{
+                    id:alterSucess.id
+                }
             }
         }else{
             this.body = {

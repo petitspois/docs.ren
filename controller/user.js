@@ -627,6 +627,16 @@ module.exports = function () {
             body = this.request.body,
             email = body.email || '';
 
+        var isExistEmail = yield  model.get({email:email},'email');
+
+        if(!isExistEmail){
+            ctx.body = {
+                msg:'用户不存在',
+                status:0
+            }
+            return;
+        }
+
         if (email) {
 
             var content = {

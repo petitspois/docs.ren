@@ -106,7 +106,10 @@ module.exports = function () {
 
         this.body = {
             msg: '发布成功',
-            status: 1
+            status: 1,
+            data:{
+                id:doctable.id
+            }
         }
 
     }
@@ -239,10 +242,13 @@ module.exports = function () {
             }
 
 
-            yield model.update({_id:edit},{$set:alterDocs});
+            var alterSuccess = yield model.update({_id:edit},{$set:alterDocs});
             this.body = {
                 msg: '更改成功',
-                status: 1
+                status: 1,
+                data:{
+                    id:alterSuccess.id
+                }
             }
         }else{
             this.body = {

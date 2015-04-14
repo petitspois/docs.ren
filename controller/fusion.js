@@ -323,7 +323,7 @@ module.exports = function(){
             secondtitle:'搜索',
             content:s?s:'',
             posts:posts,
-            user:yield userModel.get({email:ctx.session.user.email},''),
+            user:ctx.session.user ? yield userModel.get({email:ctx.session.user.email},'') : null,
             pagination:pagination,
             extra:{
                 current:p,
