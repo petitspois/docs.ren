@@ -62,6 +62,9 @@ module.exports = function () {
         //save commentData
         var commented = yield commentModel.add(commentData),actionTarget='';
 
+        //update time
+        yield model.update({_id:pid},{$set:{updatetime:Date.now()}});
+
         //notification
         var notificationData = {
             type:'post',

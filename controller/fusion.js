@@ -26,7 +26,7 @@ module.exports = function(){
             query = {status:1};
             t && 'all'!=t && (query.theme = t);
 
-        var posts = yield postModel.getAll(query,'-istop -createtime',page, 10),
+        var posts = yield postModel.getAll(query,'-istop -updatetime',page, 10),
             total = Math.ceil((yield postModel.querycount(query))/10),
             categories = yield categoryModel.getAll({}, '-ccount',1,6);
 
