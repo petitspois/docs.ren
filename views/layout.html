@@ -121,12 +121,18 @@
 
                     <!-- dropdown -->
                     <ul id="user-child-right" class="dropdown-menu animated fadeInRight w">
-                        <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                            <div>
-                                <p>300mb of 500mb used</p>
-                            </div>
-                            <div class="progress-xs m-b-none bg-white progress ng-isolate-scope" value="60">
-                                <div class="progress-bar" style="width: 60%;"></div>
+                        <li class="wrapper b-b bg-light m-t-n-xs m-b-sm">
+                            <div class="m-b-n-xs">
+                                <p>积分:{{level.level}}</p>
+                                {% if level.role < 1 %}
+                                <p>身份:会员</p>
+                                {% elseif 1 == level.role %}
+                                <p>身份:开发者</p>
+                                {% elseif 2 == level.role %}
+                                <p>身份:管理员</p>
+                                {% elseif level.role > 2 %}
+                                <p>身份:PW</p>
+                                {% endif%}
                             </div>
                         </li>
                         <li>

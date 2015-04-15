@@ -18,7 +18,7 @@ define(['petitspois', 'loadin', 'gf'], function ($, loadin, gf) {
         var $delNode = $(this).parent('each-comments'),
             cid = $delNode.attr('id') || 0;
         if (cid) {
-            var isdel = confirm('确定要删除评论？');
+            var isdel = confirm('确定要删除评论？将会扣除相应的积分');
             if(!isdel)return;
             loadin.show('load');
             $.ajax({url: '/removecomment', type: 'POST', data: {cid: cid}}).then(function (ret) {

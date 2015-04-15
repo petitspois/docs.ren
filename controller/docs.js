@@ -2,7 +2,8 @@
  * Created by petitspois on 15/2/25.
  */
 
-var fs =require('co-fs'),
+var level = require('../server/config').level,
+    fs =require('co-fs'),
     formatDate = require('../lib/format'),
     model = require('../model/').post,
     userModel = require('../model/').user,
@@ -92,7 +93,11 @@ module.exports = function () {
         var doctable = yield model.add(newDocs);
 
         //添加分类计数
-        yield categoryModel.update({name:category},{'$inc':{'ccount':1}});
+        //yield categoryModel.update({name:category},{'$inc':{'ccount':1}});
+
+
+        //increase level
+        'true' == cstatus && (yield userModel.update({_id:userId},{$inc:{level:level.cd}}));
 
         //动态
         yield actionModel.add({
@@ -257,10 +262,6 @@ module.exports = function () {
             }
         }
     }
-
-
-
-
 
     return docs;
 }

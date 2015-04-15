@@ -2,7 +2,8 @@
  * Created by petitspois on 15/2/25.
  */
 
-var model = require('../model/').post,
+var level = require('../server/config').level,
+    model = require('../model/').post,
     userModel = require('../model/').user,
     commentModel = require('../model/').comment,
     actionModel = require('../model/').action,
@@ -80,6 +81,9 @@ module.exports = function () {
 
         //文章表
         var posttable = yield model.add(newPost);
+
+        //increase level
+        yield userModel.update({_id:userId},{$inc:{level:level.cp}});
 
         //添加分类计数
         yield categoryModel.update({name:category},{'$inc':{'ccount':1}});

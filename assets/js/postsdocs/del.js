@@ -4,7 +4,7 @@
 define(['petitspois','gf'],function($, gf){
     //posts del
     $('#post-del').on('click', function(){
-        var isdel = confirm('确定删除文章吗？'),
+        var isdel = confirm('确定删除文章吗？,将会扣除相应积分'),
             id = this.dataset.id;
         isdel && $.ajax({url:'/del',type:'POST',data:{id:id}}).then(function(ret){
             ret = JSON.parse(ret);

@@ -2,7 +2,8 @@
  * Created by petitspois on 15/2/25.
  */
 
-var model = require('../model/').post,
+var level = require('../server/config').level,
+    model = require('../model/').post,
     userModel = require('../model/').user,
     commentModel = require('../model/').comment,
     actionModel = require('../model/').action,
@@ -65,6 +66,9 @@ module.exports = function () {
         //update time
         yield model.update({_id:pid},{$set:{updatetime:Date.now()}});
 
+        //increase level
+        yield userModel.update({_id:userId},{$inc:{level:level.cc}});
+
         //notification
         var notificationData = {
             type:'post',
@@ -118,10 +122,14 @@ module.exports = function () {
     //remove comment
     comment.remove = function* (){
         var body = this.request.body,
-            cid = body.cid;
+            cid = body.cid,
+            userId = this.session.user._id || (yield userModel.get({email: this.session.user.email}))._id;
+
         if(cid){
             var cData = yield commentModel.byidRemove(cid);
             if(cData){
+                 //decrease level
+                 yield userModel.update({_id:userId},{$inc:{level:-level.cc}});
                  this.body = {
                      msg:'删除成功',
                      status:1

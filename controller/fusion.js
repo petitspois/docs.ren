@@ -2,7 +2,9 @@
  * Created by qingdou on 15/2/11.
  */
 
-var userModel = require('../model/').user,
+var level = require('../server/config').level,
+
+    userModel = require('../model/').user,
 
     postModel = require('../model/').post,
 
@@ -334,6 +336,7 @@ module.exports = function(){
     }
 
     fusion.del = function* (){
+
         var id = this.request.body && this.request.body.id,
             comment = yield commentModel.get({pid:id},'pid');
 
@@ -353,7 +356,13 @@ module.exports = function(){
             return;
         }
 
-        var dData = yield postModel.byidRemove(id);
+        var dData = yield postModel.byidRemove(id),
+
+            userId = this.session.user._id || (yield userModel.get({email: this.session.user.email},'-password'))._id;
+
+            //decrease level
+            delLevel = 'doc' == dData.type ? level.cd : level.cp;
+            yield userModel.update({_id:userId},{$inc:{level:-delLevel}});
 
         if(dData){
             this.body = {
