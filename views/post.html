@@ -155,6 +155,9 @@
                                     <a id="reply-comment" class="btn-xs pull-right" href="javascript:;"><i class="fa fa-reply"></i></a>
                                 {% endif %}
 
+                                {% if 1 == comment.author.role %}
+                                <label class="label bg-info m-l-xs">Developer</label>
+                                {% endif %}
 
                                 {% if 2 == comment.author.role %}
                                 <label class="label bg-dark m-l-xs">Admin</label>

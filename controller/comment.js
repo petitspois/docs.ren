@@ -61,13 +61,19 @@ module.exports = function () {
         reply && (commentData.reply = reply);
 
         //save commentData
-        var commented = yield commentModel.add(commentData),actionTarget='';
+        var commented = yield commentModel.add(commentData),
+            actionTarget='',
+            backUser = null;
 
         //update time
         yield model.update({_id:pid},{$set:{updatetime:Date.now()}});
 
         //increase level
-        yield userModel.update({_id:userId},{$inc:{level:level.cc}});
+        backUser = yield userModel.update({_id:userId},{$inc:{level:level.cc}});
+
+        if(!backUser.role && backUser.level>1000){
+            yield userModel.update({_id:userId},{$set:{role:1}});
+        }
 
         //notification
         var notificationData = {

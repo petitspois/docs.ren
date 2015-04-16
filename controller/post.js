@@ -80,13 +80,17 @@ module.exports = function () {
         }
 
         //文章表
-        var posttable = yield model.add(newPost);
+        var posttable = yield model.add(newPost),
 
-        //increase level
-        yield userModel.update({_id:userId},{$inc:{level:level.cp}});
+            //increase level
+            backUser = yield userModel.update({_id:userId},{$inc:{level:level.cp}});
+
+        if(!backUser.role && backUser.level>1000){
+            yield userModel.update({_id:userId},{$set:{role:1}});
+        }
 
         //添加分类计数
-        yield categoryModel.update({name:category},{'$inc':{'ccount':1}});
+        //yield categoryModel.update({name:category},{'$inc':{'ccount':1}});
 
         //动态
         yield actionModel.add({
@@ -185,8 +189,20 @@ module.exports = function () {
                 iscomment: iscomment,
                 theme:theme,
                 updatetime:Date.now()
+            },
+                alterSucess = yield model.update({_id:edit},{$set:alterPost}),
+                backUser = null;
+
+            //good level handling
+            if('true'==isgood){
+                //increase level
+                backUser = yield userModel.update({nickname:alterSucess.name},{$inc:{level:level.cg}});
+
+                if(!backUser.role && backUser.level>1000){
+                    yield userModel.update({nickname:alterSucess.name},{$set:{role:1}});
+                }
             }
-            var alterSucess = yield model.update({_id:edit},{$set:alterPost});
+
             this.body = {
                 msg: '更改成功',
                 status: 1,

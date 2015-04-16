@@ -90,14 +90,19 @@ module.exports = function () {
             recommend:recommend
         }
 
-        var doctable = yield model.add(newDocs);
+        var doctable = yield model.add(newDocs),
+            backUser = null;
 
         //添加分类计数
         //yield categoryModel.update({name:category},{'$inc':{'ccount':1}});
 
 
         //increase level
-        'true' == cstatus && (yield userModel.update({_id:userId},{$inc:{level:level.cd}}));
+        'true' == cstatus && (backUser = yield userModel.update({_id:userId},{$inc:{level:level.cd}}));
+
+        if('true' == cstatus && !backUser.role && backUser.level>1000){
+            yield userModel.update({_id:userId},{$set:{role:1}});
+        }
 
         //动态
         yield actionModel.add({
@@ -244,10 +249,18 @@ module.exports = function () {
                 status:cstatus,
                 recommend:recommend,
                 updatetime:Date.now()
+            },
+                alterSuccess = yield model.update({_id:edit},{$set:alterDocs}),
+                backUser = null;
+            //good level handling
+            if('true'==isgood){
+                //increase level
+                'true' == cstatus && (backUser = yield userModel.update({nickname:alterSuccess.name},{$inc:{level:level.cg}}));
+                if('true' == cstatus && !backUser.role && backUser.level>1000){
+                    yield userModel.update({nickname:alterSuccess.name},{$set:{role:1}});
+                }
             }
 
-
-            var alterSuccess = yield model.update({_id:edit},{$set:alterDocs});
             this.body = {
                 msg: '更改成功',
                 status: 1,
