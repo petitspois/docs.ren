@@ -26,7 +26,22 @@ module.exports = function(){
         var t = this.query.t,
             page = parseInt(this.query.p) ? Math.abs(parseInt(this.query.p)) : 1,
             query = {status:1};
-            t && 'all'!=t && (query.theme = t);
+
+        if(t && 'all'!=t){
+            switch (t){
+                case 'top':
+                    query.istop = true;
+                    break;
+                case 'good':
+                    query.isgood = true;
+                    break;
+                case 'doc':
+                    query.type = 'doc';
+                    break;
+                default :
+                    query.theme = t;
+            }
+        }
 
         var posts = yield postModel.getAll(query,'-istop -updatetime',page, 10),
             total = Math.ceil((yield postModel.querycount(query))/10),

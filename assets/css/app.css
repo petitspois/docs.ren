@@ -15995,3 +15995,4 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .forcehide{
     display: none !important;
 }
+.theme-active{background:#f6f8f8;}
