@@ -3,7 +3,7 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block content %}
-<div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
+<div class="hbox hbox-auto-xs hbox-auto-sm">
     <!-- right col -->
     <div class="col w bg-light dker bg-auto">
         <div id="set-tab" class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
@@ -102,7 +102,7 @@
         {% if role > 2%}
         <div id="set-user" class="panel panel-default {% if role > 2%}hide{%endif%} fade-in-up ng-enter">
 
-            <div class="form-inline ng-pristine ng-valid">
+            <div class="form-inline">
                 <div class="panel-body">
 
                     <div class="form-group">
@@ -198,7 +198,7 @@
         {% if role > 1%}
         <div id="set-category" class="panel panel-default hide fade-in-up ng-enter">
 
-            <div class="form-inline ng-pristine ng-valid">
+            <div class="form-inline">
                 <div class="panel-body">
 
 
@@ -252,7 +252,7 @@
         <!-- 文章 -->
         <div id="set-post" class="panel panel-default {% if role > 1%}hide{%endif%} fade-in-up ng-enter">
 
-            <div class="form-inline ng-pristine ng-valid">
+            <div class="form-inline">
                 <div class="panel-body">
 
 

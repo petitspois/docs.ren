@@ -3,7 +3,7 @@
 {% block content %}
 <div class="app-content-body fade-in-up">
     <div class="fade-in-down">
-        <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
+        <div class="hbox hbox-auto-xs hbox-auto-sm">
             <div class="col">
                 <div style="background:url({{opposite.cover}}) center center; background-size:cover">
                     <div class="wrapper-lg bg-white-opacity">
@@ -62,15 +62,15 @@
 
                 <div class="wrapper bg-white b-b text-center">
                     <div id="tab-user" class="btn-group">
-                        <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty">
+                        <label class="btn btn-sm btn-info">
                             <i class="fa fa-check text-active"></i>
                             <a href="/user/{{opposite.nickname}}">{{opposite.nickname}}的主题</a>
                         </label>
-                        <label class="btn btn-sm btn-success ng-untouched ng-valid ng-dirty active">
+                        <label class="btn btn-sm btn-success active">
                             <i class="fa fa-check text-active"></i>
                             <a href="/user/{{opposite.nickname}}/reply">{{opposite.nickname}}的回复</a>
                         </label>
-                        <label class="btn btn-sm btn-primary ng-untouched ng-valid ng-dirty">
+                        <label class="btn btn-sm btn-primary">
                             <i class="fa fa-check text-active"></i>
                             <a href="/user/{{opposite.nickname}}/follow">{{opposite.nickname}}的追随</a>
                         </label>
