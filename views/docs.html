@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 {% block title%}{{title}}{% endblock %}
 {% block content %}
-<div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
+<div class="hbox hbox-auto-xs hbox-auto-sm">
     <!-- main -->
     <div class="col wrapper-lg">
         <h3 class="font-thin m-t-n-xs m-b">推荐文档</h3>
         <div class="row row-sm">
 
+		{% for rd in recommendData %}
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
                 <div class="item">
-
                     <div class="pos-rlt">
                         <a href="/docs/">
                             <div class="item-overlay bg-black-opacity r r-2x r r-2x">
@@ -18,271 +18,20 @@
                                     </div>
                             </div>
                         </a>
-                        <a><img src="http://flatfull.com/themes/angulr/angular/img/b1.jpg" class="img-full r r-2x"></a>
+                        <a><img src="{% if rd.cover %}{{rd.cover}}{% else %}/img/doccover.png{% endif %}" class="img-full r r-2x"></a>
                     </div>
 
                     <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Tempered Song</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Miaow</a>
+                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">{{rd.title}}</a>
+                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">{{rd.name}}</a>
                     </div>
 
                 </div>
             </div>
-
-
-
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b2.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vivamus vel tincidunt libero</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Lauren Taylor</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b3.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Morbi id neque quam liquam sollicitudin</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Allen JH</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <div class="top w-full">
-              <span class="pull-right m-t-n-xs m-r-sm text-white">
-                <i class="fa fa-bookmark i-lg"></i>
-              </span>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b4.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Tincidunt libero</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Amanda Conlan</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b5.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Fermentum diam</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Nisa Colen</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="top w-full">
-                            <span class="pull-right m-t-sm m-r-sm badge bg-info">6</span>
-                        </div>
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b6.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Habitant</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Dan Doorack</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b7.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vivamus vel tincidunt libero</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Ligula H</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b8.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Aliquam sollicitudin venenati</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">James East</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <div class="top">
-                            <span class="badge bg-warning m-l-sm m-t-sm">03:10</span>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b9.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Lementum ligula vitae</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Lauren Taylor</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b10.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Egestas dui nec fermentum </a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Chris Fox</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b11.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Aliquam sollicitudin venenatis ipsum</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Jack Jason</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b12.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vestibulum ullamcorper</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">MM &amp; DD</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="bottom">
-                            <span class="badge m-l-sm m-b-sm">MTV</span>
-                        </div>
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b13.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Aliquam sollicitudin venenatis ipsum</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Jack Jason</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b14.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Vestibulum ullamcorper</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">MM &amp; DD</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix visible-xs"></div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
-                <div class="item">
-                    <div class="pos-rlt">
-                        <div class="item-overlay bg-black-opacity r r-2x">
-                            <div class="center text-center m-t-n w-full">
-                                <a><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-                            </div>
-                        </div>
-                        <a ui-sref="music.detail" href="#/music/detail"><img src="http://flatfull.com/themes/angulr/angular/img/b15.jpg" alt="" class="img-full r r-2x"></a>
-                    </div>
-                    <div class="padder-v">
-                        <a ui-sref="music.detail" class="text-ellipsis" href="#/music/detail">Aliquam sollicitudin venenatis ipsum</a>
-                        <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted" href="#/music/detail">Jack Jason</a>
-                    </div>
-                </div>
-            </div>
+		{%endfor%}
         </div>
+
         <div class="row">
-
-
-
-
-
             <div class="col-md-7">
                 <h3 class="font-thin">最新文档</h3>
                 <div class="row row-sm">

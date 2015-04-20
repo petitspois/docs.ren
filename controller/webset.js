@@ -60,6 +60,10 @@ module.exports = function () {
                 query = [{title: eval('/' + search + '+/i')}, '-createtime', page, 10, '-content -description -cover'];
                 title = '搜索';
                 break;
+            case 'recommend':
+                query = [{recommend:true}, '-createtime', page, 10, '-content -description -cover'];
+                title = '推荐';
+                break;
             default:
                 query = [{}, '-createtime', page, 10, '-content -description -cover'];
                 title = '全部';

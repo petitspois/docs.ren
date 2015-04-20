@@ -286,7 +286,8 @@ module.exports = function(){
 
         //new data
         //类型为文档，状态为已发布，按时间倒序
-        var newData = yield postModel.getAll({type:'doc',status:true},'-createtime',1,8);
+        var newData = yield postModel.getAll({type:'doc',status:true},'-createtime',1,8),
+			recommendData = yield postModel.getAll({type:'doc',recommend:true, status:true},'-createtime',1,15);
 
         newData.map(function(item){
             item.id = item._id + '';
@@ -299,10 +300,12 @@ module.exports = function(){
             {
                 title:'文档专辑',
                 user:this.session.user,
-                docsNew:newData
+                docsNew:newData,
+				recommendData:recommendData
             }
         );
     }
+
     //docs create
     fusion.create = function* (){
         var categories = yield categoryModel.getAll({});
