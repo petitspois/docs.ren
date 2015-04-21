@@ -287,13 +287,13 @@ module.exports = function(){
         //new data
         //类型为文档，状态为已发布，按时间倒序
         var newData = yield postModel.getAll({type:'doc',status:true},'-createtime',1,8),
-			recommendData = yield postModel.getAll({type:'doc',recommend:true, status:true},'-createtime',1,15);
+			recommendData = yield postModel.getAll({type:'doc',recommend:true, status:true},'-createtime',1,15),
+            hotData = yield postModel.getAll({type:'doc', status:true},'-viewByCount',1, 5);
 
-        newData.map(function(item){
-            item.id = item._id + '';
+        yield hotData.map(function*(item){
+            item.avatar = (yield userModel.get({nickname:item.name},'avatar')).avatar;
             return item;
         });
-
 
         //return
         this.body = yield this.render('docs',
@@ -301,7 +301,8 @@ module.exports = function(){
                 title:'文档专辑',
                 user:this.session.user,
                 docsNew:newData,
-				recommendData:recommendData
+				recommendData:recommendData,
+                hotData:hotData
             }
         );
     }
