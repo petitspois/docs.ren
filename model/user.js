@@ -50,6 +50,10 @@ var mongoose = require('mongoose'),
             type: Number,
             default: 0
         },
+        docsTotal:{
+            type: Number,
+            default: 0
+        },
         youwatch:{
             type:[],
             required:false,

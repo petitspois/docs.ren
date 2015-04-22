@@ -89,79 +89,24 @@
     <!-- right col -->
     <div class="col w-md bg-light dker b-l bg-auto no-border-xs">
         <div class="wrapper-md">
-            <div class="m-b-sm text-md">Top Plays</div>
+            <div class="m-b-sm text-md">开发者排名</div>
             <ul class="list-group no-bg no-borders pull-in">
+            {%for dev in developer %}
                 <li class="list-group-item">
-                    <a herf="" class="pull-left thumb-sm m-r">
-                        <img src="http://flatfull.com/themes/angulr/angular/img/b1.jpg" alt="..." class="r">
+                    <a herf="/user/{{dev.nickname}}" class="pull-left thumb-sm m-r">
+                        <img src="{{dev.avatar}}" alt="{{dev.avatar}}" class="r">
                     </a>
                     <div class="clear">
-                        <div><a href="">On the road</a></div>
-                        <small class="text-muted">by Chris Fox</small>
+                        <div><a href="/user/{{dev.nickname}}">{{dev.nickname}}</a></div>
+                        <small class="text-muted">{{dev.docsTotal}}篇文章</small>
                     </div>
                 </li>
-                <li class="list-group-item">
-                    <a herf="" class="pull-left thumb-sm m-r">
-                        <img src="http://flatfull.com/themes/angulr/angular/img/b2.jpg" alt="..." class="r">
-                    </a>
-                    <div class="clear">
-                        <div><a href="">Find a way</a></div>
-                        <small class="text-muted">by Lucy</small>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <a herf="" class="pull-left thumb-sm m-r">
-                        <img src="http://flatfull.com/themes/angulr/angular/img/b3.jpg" alt="..." class="r">
-                    </a>
-                    <div class="clear">
-                        <div><a href="">Nothing to lose</a></div>
-                        <small class="text-muted">Joge Lucky</small>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <a herf="" class="pull-left thumb-sm m-r">
-                        <img src="http://flatfull.com/themes/angulr/angular/img/b4.jpg" alt="..." class="r">
-                    </a>
-                    <div class="clear">
-                        <div><a href="">New day</a></div>
-                        <small class="text-muted">by Folisise Chosielie</small>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <a herf="" class="pull-left thumb-sm m-r">
-                        <img src="http://flatfull.com/themes/angulr/angular/img/b5.jpg" alt="..." class="r">
-                    </a>
-                    <div class="clear">
-                        <div><a href="">Running</a></div>
-                        <small class="text-muted">by Aron Gonzalez</small>
-                    </div>
-                </li>
+            {%endfor%}
             </ul>
-            <div class="text-center">
-                <a href="" class="btn btn-sm btn-info padder-md m-b">More</a>
-            </div>
+            <!--<div class="text-center">-->
+                <!--<a href="" class="btn btn-sm btn-info padder-md m-b">More</a>-->
+            <!--</div>-->
         </div>
-        <!-- streamline -->
-        <div class="text-md wrapper-md">Activity</div>
-        <div class="list-group no-borders no-bg m-l-xs m-r-xs m-t-n">
-            <div class="list-group-item">
-                <div class="text-muted">5 minutes ago</div>
-                <div><a href="" class="text-info">Jessi</a> commented your post.</div>
-            </div>
-            <div class="list-group-item">
-                <div class="text-muted">11:30</div>
-                <div><a ui-sref="music.detail" href="#/music/detail">Jone</a> published a song</div>
-            </div>
-            <div class="list-group-item">
-                <div class="text-muted">Sun, 11 Feb</div>
-                <div><a href="" class="text-info">Jessi</a> upload a video <a href="" class="text-info">Cat</a>.</div>
-            </div>
-            <div class="list-group-item">
-                <div class="text-muted">Thu, 17 Jan</div>
-                <div>Mike Followed you</div>
-            </div>
-        </div>
-        <!-- / streamline -->
     </div>
     <!-- / right col -->
 </div>

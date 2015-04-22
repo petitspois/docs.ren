@@ -104,7 +104,10 @@ module.exports = function () {
             yield userModel.update({_id:userId},{$set:{role:1}});
         }
 
-        //动态
+        //docsTotal
+        'true' == cstatus && (yield userModel.update({_id:userId},{$inc:{docsTotal:1}}));
+
+            //动态
         yield actionModel.add({
             pid:doctable._id,
             type:'doc',

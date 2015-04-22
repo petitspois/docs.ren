@@ -288,7 +288,8 @@ module.exports = function(){
         //类型为文档，状态为已发布，按时间倒序
         var newData = yield postModel.getAll({type:'doc',status:true},'-createtime',1,8),
 			recommendData = yield postModel.getAll({type:'doc',recommend:true, status:true},'-createtime',1,15),
-            hotData = yield postModel.getAll({type:'doc', status:true},'-viewByCount',1, 5);
+            hotData = yield postModel.getAll({type:'doc', status:true},'-viewByCount',1, 5),
+            developer = yield userModel.getAll({},'-docsTotal',1,10);
 
         yield hotData.map(function*(item){
             item.avatar = (yield userModel.get({nickname:item.name},'avatar')).avatar;
@@ -302,7 +303,8 @@ module.exports = function(){
                 user:this.session.user,
                 docsNew:newData,
 				recommendData:recommendData,
-                hotData:hotData
+                hotData:hotData,
+                developer:developer
             }
         );
     }
@@ -377,11 +379,14 @@ module.exports = function(){
 
         var dData = yield postModel.byidRemove(id),
 
-            userId = this.session.user._id || (yield userModel.get({email: this.session.user.email},'-password'))._id;
+            userId = dData.id;
 
             //decrease level
             delLevel = 'doc' == dData.type ? level.cd : level.cp;
             yield userModel.update({_id:userId},{$inc:{level:-delLevel}});
+
+            //docsTotal
+            yield userModel.update({_id:userId},{$inc:{docsTotal:-1}});
 
         if(dData){
             this.body = {
