@@ -379,10 +379,11 @@ module.exports = function(){
 
         var dData = yield postModel.byidRemove(id),
 
-            userId = dData.id;
+            userId = dData.author;
 
             //decrease level
             delLevel = 'doc' == dData.type ? level.cd : level.cp;
+
             yield userModel.update({_id:userId},{$inc:{level:-delLevel}});
 
             //docsTotal
