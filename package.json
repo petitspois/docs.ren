@@ -29,5 +29,12 @@
     "nodemailer": "v1.3.2",
     "nodemailer-smtp-transport": "v1.0.2",
     "qn": "*"
+  },
+  "devDependencies": {
+	   "handlebars": "~3.0.0",
+	   "jshint": "^2.6.3",
+	   "mocha": "~2.2.1",
+	   "uglify-js": "~2.4.17"
   }
+
 }

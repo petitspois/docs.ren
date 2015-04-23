@@ -13,14 +13,13 @@ define(['petitspois','vue','gf'], function($, Vue, gf){
         methods:{
             submit:function(e){
                 e.preventDefault();
-                console.log(this.$data)
                 $.ajax({url:'/saveUser',type:'POST',data:this.$data}).then(function(ret){
                      ret = JSON.parse(ret);
                     gf('success', ret.msg);
                     setTimeout(function(){
-                        location.href='/settings'
-                    },2000)
-                },function(){})
+                        location.href='/settings';
+                    },2000);
+                },function(){});
             }
         }
     });
