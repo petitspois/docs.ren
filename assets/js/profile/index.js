@@ -1,7 +1,7 @@
 /**
  * Created by petitspois on 15/2/15.
  */
-define(['petitspois', 'vue','upload','loadin','profile/watch'],function($, Vue, upload, loadin, watch){
+define(['petitspois', 'vue','upload','loadin', 'pwatch'],function($, Vue, upload, loadin, watch){
 
     var urlHash = location.hash;
 

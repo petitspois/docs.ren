@@ -6,21 +6,25 @@ typeof function (window) {
             var me = this;
 
             requirejs.config({
-                baseUrl: '/js',
+                baseUrl: '/dest/js',
                 paths: {
-                    'jquery':'lib/jquery-2.1.3',
-                    'petitspois':'lib/petitspois',
+                    'jquery':'lib/jquery-2.1.3.min',
+                    'petitspois':'lib/petitspois.min',
                     'vue':'lib/vue.min',
-                    'vueValidator':'lib/vueValidator',
-                    'msg':'effect/msg',
-                    'nav':'effect/nav',
-                    'loadin':'effect/loading',
-                    'upload':'upload/upload',
+                    'vueValidator':'lib/vueValidator.min',
+                    'msg':'effect/msg.min',
+                    'nav':'effect/nav.min',
+                    'loadin':'effect/loading.min',
+                    'upload':'upload/upload.min',
                     'hljs':'lib/highlight.min',
-                    'waypoints':'lib/waypoints',
-                    'gf':'effect/globalflash',
+                    'waypoints':'lib/waypoints.min',
+                    'gf':'effect/globalflash.min',
                     'WebUploader':'lib/webuploader.html5only.min',
-                    'bsm':'lib/bootstrap.min'
+                    'bsm':'lib/bootstrap.min',
+                    'editor':'editor/editor.min',
+                    'marked':'editor/marked.min',
+                    'ext':'editor/ext.min',
+                    'pwatch':'profile/watch.min'
                 },
                 urlArgs: "petitspois=" +  (new Date()).getTime()
             });
@@ -36,7 +40,7 @@ typeof function (window) {
             require(['nav']);
         },
         checkNotice:function(){
-            require(['notification/notification']);
+            require(['notification/notification.min']);
         }
     }
 

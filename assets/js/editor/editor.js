@@ -1,4 +1,4 @@
-define(['editor/marked'],function(marked) {
+define(['marked'],function(marked) {
 
   window.marked = marked;
 
@@ -8132,7 +8132,7 @@ define(['editor/marked'],function(marked) {
     global.Editor = Editor;
 
 
-    require(['editor/ext']);
+    require(['ext']);
 
 
   })(window);

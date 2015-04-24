@@ -201,10 +201,10 @@
     });
     {% if docs.iscomment %}
         //comments
-        require(['comment/comment']);
+        require(['comment/comment.min']);
     {% endif %}
 
-    require(['docs/supervisor','postsdocs/del']);
+    require(['docs/supervisor.min','postsdocs/del.min']);
 
 </script>
 {% endblock %}

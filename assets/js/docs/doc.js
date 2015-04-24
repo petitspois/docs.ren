@@ -1,7 +1,7 @@
 /**
  * Created by petitspois on 15/2/25.
  */
-define(['petitspois', 'vue', 'vueValidator', 'upload', 'loadin', 'editor/editor'], function ($, Vue, valid, upload, loadin) {
+define(['petitspois', 'vue', 'vueValidator', 'upload', 'loadin', 'editor'], function ($, Vue, valid, upload, loadin) {
 
     //editor
     var editor = new Editor();

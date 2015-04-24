@@ -31,7 +31,7 @@
     "qn": "*"
   },
   "devDependencies": {
-	   "handlebars": "~3.0.0",
+	   "clean-css":"*",
 	   "jshint": "^2.6.3",
 	   "mocha": "~2.2.1",
 	   "uglify-js": "~2.4.17"

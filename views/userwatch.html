@@ -260,11 +260,11 @@
     dataurl = '{{opposite.nickname}}'+'/follow';
 
     //comments
-    require(['user/user']);
+    require(['user/user.min']);
 
     //watch
     {% if user.nickname != opposite.nickname %}
-        require(['user/watch']);
+        require(['user/watch.min']);
         {% endif %}
 </script>
 {% endblock %}
