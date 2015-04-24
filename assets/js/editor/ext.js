@@ -2,9 +2,9 @@
  * Created by petitspois on 3/31/15.
  */
 
-define(['jquery', 'WebUploader', 'bsm'], function($, WebUploader){
+define(['jquery', 'WebUploader'], function($, WebUploader){
 
-
+    require(['bsm']);
 
     var toolbar = Editor.toolbar;
 
