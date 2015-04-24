@@ -33,7 +33,6 @@ define(['petitspois', 'loadin', 'gf'], function ($, loadin, gf) {
             }, function () {})
         }
     })
-
     //回复
     ///展开
     $('#reply-comment').on('click',function(){
