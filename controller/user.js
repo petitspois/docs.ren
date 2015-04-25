@@ -4,6 +4,8 @@
 
 var qs = require('querystring'),
 
+    valid = require('validator'),
+
     request = require('co-request'),
 
     model = require('../model/').user,
@@ -37,13 +39,23 @@ module.exports = function () {
             password_re = body.pwd_re,
             gavatar = body.avatar || '';
 
-        if (password != password_re) {
+
+        if (!valid.equals(password, password_re)) {
             this.body = {
                 msg: '两次密码输入不一致。',
                 status: 0
             };
             return;
         }
+
+        if(!valid.isAlpha(name)){
+            this.body = {
+                msg:'个性域名为“A-Z”或“a-z”',
+                status:0
+            }
+            return;
+        }
+
 
         var userEmail = yield model.get({email: email}, 'email'),
             userNickname = yield model.get({nickname: name}, 'name');
