@@ -64,7 +64,11 @@ module.exports = {
         cc:2,
         ///精华
         cg:5
-    }
+    },
+
+    enableStatic:true,
+
+    debug:true
 
 }
 
