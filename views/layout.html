@@ -273,6 +273,7 @@
         <span class="pull-right ng-binding">
             <a href="#gotop" target="_self" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a>
             v0.0.1
+            {% autoescape false %}{{baseSettings.statistics}}{% endautoescape %}
         </span>
         © 2015 Copyright.
     </div>
@@ -294,6 +295,5 @@
 {% endblock %}
 {% block loadjs %}
 {% endblock %}
-{% autoescape false %}{{baseSettings.statistics}}{% endautoescape %}
 </body>
 </html>

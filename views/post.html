@@ -237,6 +237,7 @@
 {% endblock %}
 {% block loadjs %}
 <script>
+    setTimeout(function(){
     //hljs
     require(['jquery','lib/highlight.min'], function ($, hljs) {
         $('pre code').each(function(i, block) {
@@ -246,5 +247,6 @@
     });
     //comments
     require(['comment/comment.min','postsdocs/del.min']);
+    },1000)
 </script>
 {% endblock %}
