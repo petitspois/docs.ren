@@ -293,7 +293,7 @@
                     <td colspan="7" align="center">无数据</td>
                 </tr>
                 <!-- ngRepeat: user in users -->
-                <tr v-repeat="post:posts">
+                <tr v-cloak v-repeat="post:posts">
 
                     <!-- 标题 -->
                     <td class="v-middle">
@@ -342,7 +342,7 @@
 
             </table>
             <div class="loader wrapper text-center"><img src="/img/flickr.svg"/></div>
-            <div v-if="extra.total/10>page" class="clearfix text-center panel-heading font-bold">
+            <div v-cloak v-if="extra.total/10>page" class="clearfix text-center panel-heading font-bold">
                 <a href="javascript:;" class="auto" v-on="click:loadmore()">
                     <i class="fa fa-angle-double-down"></i>
                     <span>更多主题</span>

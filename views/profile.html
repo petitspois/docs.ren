@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="loader wrapper text-center"><img src="/img/flickr.svg"/></div>
-                    <div v-if="page.page*10<page.total" class="clearfix text-center">
+                    <div v-cloak v-if="page.page*10<page.total" class="clearfix text-center">
                         <a href="javascript:;" class="auto" v-on="click:eachdata()">
                             <i class="fa fa-angle-double-down"></i>
                             <span>更多主题</span>
