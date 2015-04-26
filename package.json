@@ -28,7 +28,8 @@
     "validator": "3.22.1",
     "nodemailer": "v1.3.2",
     "nodemailer-smtp-transport": "v1.0.2",
-    "qn": "*"
+    "qn": "*",
+	"pm2": "0.12.10"
   },
   "devDependencies": {
 	   "clean-css":"*",

@@ -9,8 +9,9 @@ Docs.ren 一个微文档微社区，以npmjs.com, github.com等，中文项目�
 ##开始
 ###前置条件
 * iojs(*)
-* mongdb(*)
+* mongdb(*)	
 * make(直接make,安装依赖)
+* cp temp.config.js server/config.js(设置config)	
 * node app或make start(pm2启动，本地不建议)
 * 完成
 
