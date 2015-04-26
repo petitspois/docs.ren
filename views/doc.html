@@ -84,7 +84,7 @@
                 </div>
 
 
-                    <div id="doc-content" class="clearfix padder-md">
+                    <div class="post-css clearfix padder-md">
                         {% autoescape %}{{docs.mdRender||docs.content}}{% endautoescape %}
                     </div>
                     {% if docs.iscomment %}
@@ -198,6 +198,7 @@
         $('pre code').each(function(i, block) {
             hljs.highlightBlock(block);
         });
+        $('.post-css').find('table').addClass('table table-bordered table-hover table-condensed bg-white-only');
     });
     {% if docs.iscomment %}
         //comments

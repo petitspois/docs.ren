@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  *//*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
-    font-family: sans-serif;
+    font: 12px/1.5 Tahoma,'\5FAE\8F6F\96C5\9ED1','Microsoft Yahei',"hiragino sans gb", Helvetica, Arial, "\5b8b\4f53", 'sans-serif';
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%
 }
@@ -15996,3 +15996,21 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     display: none !important;
 }
 .theme-active{background:#f6f8f8;}
+
+.post-css p{
+    font-size: 15px;
+    line-height: 2em;
+}
+
+.post-css li{
+    line-height: 2em;
+}
+
+.post-css h1, .post-css h2,.post-css h3,.post-css h4,.post-css h5,.post-css h6{
+    margin: 30px 0 15px;
+    font-weight: bold;
+}
+
+.post-css pre{
+    margin-top:20px;
+}

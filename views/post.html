@@ -125,7 +125,7 @@
                 <div class="wrapper b-b">
                     <a href="/user/{{posts.name}}">{{posts.name}}</a> 发布于{{posts.ctime}} - {{posts.viewByCount}} 次浏览 - 主题 {% if 'share' === posts.theme%}分享{%endif%}{%if 'ask' === posts.theme%}问答{%endif%}{% if 'job' === posts.theme%}招聘{%endif%}
                 </div>
-                <div class="wrapper clearfix" style="padding: 20px 35px;">
+                <div class="post-css clearfix padder-md" style="padding: 20px 35px;">
                     {% autoescape false %}{{ posts.mdRender }}{% endautoescape %}
                 </div>
 
@@ -242,6 +242,7 @@
         $('pre code').each(function(i, block) {
             hljs.highlightBlock(block);
         });
+        $('.post-css').find('table').addClass('table table-bordered table-hover table-condensed bg-white-only');
     });
     //comments
     require(['comment/comment.min','postsdocs/del.min']);
