@@ -189,6 +189,7 @@ module.exports = function(){
             oppositeUser = yield userModel.get({nickname:username},'-password'),
             page = parseInt(this.request.body && this.request.body.page) ? Math.abs(parseInt(this.request.body.page)) : 1,
             comments = yield commentModel.getAll({author:oppositeUser._id},'-createtime',page, 10),
+            likes = (yield userModel.get({nickname:username},'watchyou')).watchyou,
             poststotal = yield commentModel.querycount({author:oppositeUser._id}),
             remain = poststotal-page*10;
 
@@ -223,7 +224,10 @@ module.exports = function(){
 
         data.poststotal = poststotal;
         data.oppositeposts = comments;
-
+        if(likes.length){
+            likes = yield userModel.getAll({_id: {$in: likes}}, '', 1, 5, '-password -role');
+        }
+        data.likes = likes;
 
         if(this.request.body && this.request.body.page){
             this.body = {
@@ -244,6 +248,7 @@ module.exports = function(){
             oppositeUser = yield userModel.get({nickname:username},'-password'),
             page = parseInt(this.request.body && this.request.body.page) ? Math.abs(parseInt(this.request.body.page)) : 1,
             watchs = yield postModel.getAll({'author':{'$in':oppositeUser.youwatch}},'-createtime',page, 10),
+            likes = (yield userModel.get({nickname:username},'watchyou')).watchyou,
             poststotal = yield postModel.querycount({'author':{'$in':oppositeUser.youwatch}}),
             remain = poststotal-page*10;
 
@@ -271,7 +276,10 @@ module.exports = function(){
         //data.iswatch =
         data.poststotal = poststotal;
         data.oppositeposts = watchs;
-
+        if(likes.length){
+            likes = yield userModel.getAll({_id: {$in: likes}}, '', 1, 5, '-password -role');
+        }
+        data.likes = likes;
 
         if(this.request.body && this.request.body.page){
             this.body = {
