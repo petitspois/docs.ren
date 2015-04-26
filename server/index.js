@@ -43,7 +43,7 @@ module.exports = function(){
     app.use(session({maxAge:7* 24 * 60 * 60 * 1000},app));
 
     //static cache
-    app.use(sC(conf.static, {maxAge:60 * 60 * 24 * 7,dynamic:true}));
+    conf.enableStatic && app.use(sC(conf.static, {maxAge:60 * 60 * 24 * 7,dynamic:true}));
 
     //加载favicon.ioc
     app.use(fav());
