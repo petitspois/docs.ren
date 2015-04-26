@@ -139,6 +139,7 @@ module.exports = function(){
             oppositeUser = yield userModel.get({nickname:username},'-password'),
             page = parseInt(this.request.body && this.request.body.page) ? Math.abs(parseInt(this.request.body.page)) : 1,
             posts = yield postModel.getAll({name:username},'-createtime',page, 10),
+            likes = (yield userModel.get({nickname:username},'watchyou')).watchyou,
             poststotal = yield postModel.querycount({name:username}),
             remain = poststotal-page*10;
 
@@ -166,8 +167,10 @@ module.exports = function(){
             //data.iswatch =
             data.poststotal = poststotal;
             data.oppositeposts = posts;
-
-
+            if(likes.length){
+                likes = yield userModel.getAll({_id: {$in: likes}}, '', 1, 5, '-password -role');
+            }
+        data.likes = likes;
         if(this.request.body && this.request.body.page){
             this.body = {
                 data:data.oppositeposts,

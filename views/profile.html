@@ -333,19 +333,23 @@
                     <div class="">
                         <h4 class="m-t-xs m-b-xs">新增粉丝</h4>
                         <ul class="list-group no-bg no-borders ">
-                            {% for like in likes %}
+                            <ul class="list-group no-bg no-borders ">
+                                {% for like in likes %}
                                 <li class="list-group-item">
-                                    <a herf="" class="pull-left thumb-sm avatar m-r">
-                                        <img src="{{like.avatar}}" alt="..."
-                                             class="img-circle">
+                                    <a href="/user/{{like.nickname}}" class="pull-left thumb-sm avatar m-r">
+                                        <img src="{{like.avatar}}" class="img-circle">
                                     </a>
 
                                     <div class="clear">
-                                        <div><a href="">{{like.nickname}}</a></div>
-                                        <small class="text-muted">Designer, Blogger</small>
+                                        <div><a href="/user/{{like.nickname}}">{{like.nickname}}</a></div>
+                                        <small class="text-muted">关注</small>
                                     </div>
                                 </li>
-                            {% endfor %}
+                                {% endfor %}
+                                {% if !likes.length%}
+                                <small class="text-muted">暂无粉丝</small>
+                                {%endif%}
+                            </ul>
                         </ul>
                     </div>
                     <!--<div class="panel b-a">-->

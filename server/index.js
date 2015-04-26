@@ -34,7 +34,7 @@ module.exports = function(){
     app.keys = [conf.secret];
 
     //debug
-    app.use(logger());
+    conf.debug && app.use(logger());
 
     //parse
     app.use(bodyparser({formLimit:'2mb'}));
@@ -63,14 +63,14 @@ module.exports = function(){
 
 
     //Error Handling
-    //app.use(function* (next) {
-    //    try {
-    //        yield next;
-    //    } catch (err) {
-    //        console.log(err)
-    //        this.redirect('/404');
-    //    }
-    //});
+    app.use(function* (next) {
+        try {
+            yield next;
+        } catch (err) {
+            console.log(err)
+            this.redirect('/404');
+        }
+    });
 
     //routers
     router(app);
