@@ -25,8 +25,7 @@ typeof function (window) {
                     'marked':'editor/marked.min',
                     'ext':'editor/ext.min',
                     'pwatch':'profile/watch.min'
-                },
-                urlArgs: "petitspois=" +  (new Date()).getTime()
+                }
             });
 
 
