@@ -13,7 +13,7 @@ install:
 start: install
 	@nohup pm2 start app.js -i max --name "docs" --max-memory-restart 460M &>> docs.log &
 
-restart: install build
+restart: install
 	@nohup pm2 restart "docs" &>> docs.log &
 
 assets/dest/js/%.min.js: assets/js/%.js
