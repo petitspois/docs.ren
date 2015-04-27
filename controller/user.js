@@ -56,7 +56,7 @@ module.exports = function () {
             return;
         }
 
-        if(!isLength(name, 6, 12)){
+        if(!valid.isLength(name, 6, 12)){
             this.body = {
                 msg:'个性域名为6-12位',
                 status:0
