@@ -149,7 +149,6 @@ module.exports = function () {
         data.comments = comments;
         data.docs = docs;
         data.user = this.session.user;
-        data.title = docs.title;
 
         if (data.user) {
             data.user = yield userModel.get({email: data.user.email},'-password');
