@@ -56,6 +56,13 @@ module.exports = function () {
             return;
         }
 
+        if(!isLength(name, 6, 12)){
+            this.body = {
+                msg:'个性域名为6-12位',
+                status:0
+            }
+            return;
+        }
 
         var userEmail = yield model.get({email: email}, 'email'),
             userNickname = yield model.get({nickname: name}, 'name');

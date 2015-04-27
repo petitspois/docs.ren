@@ -117,7 +117,7 @@
                         </li>
                         {% endfor%}
 
-                        <li v-repeat="op:ops" class="list-group-item clearfix">
+                        <li v-cloak v-repeat="op:ops" class="list-group-item clearfix">
                             <a href="(%op.url%)">
                                 <div class="pull-right text-sm text-muted">
                                     <span class="hidden-xs ng-binding">(%op.createtime%)</span>
@@ -136,7 +136,7 @@
 
                     </ul>
 
-                    <div v-if="!!(extra>0)" class="clearfix panel-footer text-center">
+                    <div v-cloak v-if="!!(extra>0)" class="clearfix panel-footer text-center">
                         <a href="javascript:;" class="auto" v-on="click:more">
 
                             <b v-if="!!(extra>0)" class="badge bg-info pull-right">(%extra%)</b>
