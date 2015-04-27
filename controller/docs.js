@@ -149,6 +149,7 @@ module.exports = function () {
         data.comments = comments;
         data.docs = docs;
         data.user = this.session.user;
+        data.title = docs.title;
 
         if (data.user) {
             data.user = yield userModel.get({email: data.user.email},'-password');
@@ -204,7 +205,7 @@ module.exports = function () {
             categories = yield categoryModel.getAll({});
             user.password = '';
 
-        this.body = yield this.render('create', {docs:docs,user:user,categories:categories,edit:docs.id});
+        this.body = yield this.render('create', {title:'编辑',docs:docs,user:user,categories:categories,edit:docs.id});
     }
 
     //post edit
@@ -253,8 +254,16 @@ module.exports = function () {
                 recommend:recommend,
                 updatetime:Date.now()
             },
-                alterSuccess = yield model.update({_id:edit},{$set:alterDocs}),
+                alterSuccess,
                 backUser = null;
+
+            if(!cover){
+                delete alterDocs.cover;
+            }
+
+            alterSuccess = yield model.update({_id:edit},{$set:alterDocs});
+
+
             //good level handling
             if('true'==isgood){
                 //increase level

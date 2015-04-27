@@ -148,7 +148,7 @@ module.exports = function () {
             post = yield model.byId(id),
             user = yield userModel.byId(this.session.user._id),
             categories = yield categoryModel.getAll({});
-        this.body = yield this.render('publish', {post:post, user:user, categories:categories, edit:post.id});
+        this.body = yield this.render('publish', {title:'编辑',post:post, user:user, categories:categories, edit:post.id});
     }
 
     //post edit

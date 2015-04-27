@@ -21,9 +21,7 @@ define(['jquery'],function($){
         $('#nav-docs > .nav').append('<li class="l-h-2x bg b-b"><a  class="text-info text-ellipsis" href="#'+$(this)[0].id+'">'+$(this).text()+'</a></li>');
 
         //h3 node handling
-        if(++k >=cH2Len){
-
-        }else{
+        if(++k < cH2Len){
             $(this).nextUntil('h2','h3').each(function(){
                 $(this)[0].id = 'petitspois'+setTimeout('1');
                 $('#nav-docs > .nav').append('<li><a class="text-ellipsis" href="#'+$(this)[0].id+'">'+$(this).text()+'</a></li>');
