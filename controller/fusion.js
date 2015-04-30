@@ -56,31 +56,31 @@ module.exports = function(){
 
 
 
-//        //signed
-//        if(this.session.user){
-//                this.body = yield this.render('index',{
-//                title:'首页',
-//                user:yield userModel.get({email:this.session.user.email}),
-//                posts:posts,
-//                t:t?t:'all',
-//                page:{
-//                    total:total,
-//                    page:page
-//                },
-//                categories:categories
-//            });
-//        }else{
-//            this.body = yield this.render('index',{
-//                title:'首页',
-//                posts:posts,
-//                t:t?t:'all',
-//                page:{
-//                    total:total,
-//                    page:page
-//                },
-//                categories:categories
-//            });
-//        }
+        //signed
+        if(this.session.user){
+                this.body = yield this.render('index',{
+                title:'首页',
+                user:yield userModel.get({email:this.session.user.email}),
+                posts:posts,
+                t:t?t:'all',
+                page:{
+                    total:total,
+                    page:page
+                },
+                categories:categories
+            });
+        }else{
+            this.body = yield this.render('index',{
+                title:'首页',
+                posts:posts,
+                t:t?t:'all',
+                page:{
+                    total:total,
+                    page:page
+                },
+                categories:categories
+            });
+        }
 
     }
     //signup
