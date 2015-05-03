@@ -85,5 +85,4 @@ var mongoose = require('mongoose'),
         }
     });
 
-
 module.exports = schema;

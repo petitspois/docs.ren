@@ -7,11 +7,9 @@ module.exports = function(){
 
         swig = require('swig'),
 
-        logger = require('koa-logger'),
+        render = require('koa-swig'),
 
-        sC = require('koa-static-cache'),
-
-        views = require('co-views'),
+        ksc = require('koa-static-cache'),
 
         bodyparser = require('koa-bodyparser'),
 
@@ -34,7 +32,7 @@ module.exports = function(){
     app.keys = [conf.secret];
 
     //debug
-    conf.debug && app.use(logger());
+    conf.debug && app.use(require('koa-logger')());
 
     //parse
     app.use(bodyparser({formLimit:'2mb'}));
@@ -43,7 +41,7 @@ module.exports = function(){
     app.use(session({maxAge:7* 24 * 60 * 60 * 1000},app));
 
     //static cache
-    conf.enableStatic && app.use(sC(conf.static, {maxAge:0,dynamic:true}));
+    conf.enableStatic && app.use(ksc(conf.static, {maxAge:0, dynamic:true}));
 
     //加载favicon.ioc
     app.use(fav());
@@ -55,7 +53,13 @@ module.exports = function(){
     mongoose(conf.mongodb);
 
     //init methods
-    app.context.render = render = views(conf.views, { map:{ html:'swig' } });
+    app.context.render = render({
+        root: conf.views,
+        autoescape: true,
+        cache: 'memory', // disable, set to false
+        ext: 'html'
+    });
+
 
     app.context.msg = function(url, val, title){
         return render('msg',{url:url,msg:val,secondtitle:title,time:5});
@@ -63,14 +67,14 @@ module.exports = function(){
 
 
     //Error Handling
-    app.use(function* (next) {
-        try {
-            yield next;
-        } catch (err) {
-            console.log(err)
-            this.redirect('/404');
-        }
-    });
+    //app.use(function* (next) {
+    //    try {
+    //        yield next;
+    //    } catch (err) {
+    //        console.log(err)
+    //        this.redirect('/404');
+    //    }
+    //});
 
     //routers
     router(app);

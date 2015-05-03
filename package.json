@@ -9,33 +9,30 @@
   "engines":"0.11.14",
   "dependencies":{
     "koa":"~0.14.0",
-    "swig":"~1.4.2",
+    "swig": "^1.4.2",
+    "koa-swig": "^2.0.0",
     "koa-router":"3.8.0",
     "koa-logger": "1.2.2",
     "koa-session": "3.1.0",
     "koa-static-cache":"*",
     "koa-bodyparser": "1.0.1",
-    "co":"~4.1.0",
-    "co-views":"*",
     "co-fs":"*",
     "co-filter":"*",
     "co-request":"*",
-    "co-busboy":"*",
     "mongoose": "^3.8.24",
     "moment": "^2.8.4",
-    "xss": "*",
     "lodash":"3.3.1",
     "validator": "3.22.1",
     "nodemailer": "v1.3.2",
     "nodemailer-smtp-transport": "v1.0.2",
-    "qn": "*",
-	"pm2": "0.12.10"
+    "qn": "*"
   },
   "devDependencies": {
-	   "clean-css":"*",
-	   "jshint": "^2.6.3",
-	   "mocha": "~2.2.1",
-	   "uglify-js": "~2.4.17"
+    "pm2": "0.12.10",
+    "clean-css":"*",
+    "jshint": "^2.6.3",
+    "mocha": "~2.2.1",
+    "uglify-js": "~2.4.17"
   }
 
 }

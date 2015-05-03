@@ -25,6 +25,7 @@ module.exports = function(app){
 
     require('./category')(app, ctrl);
 
+    ctrl = null;
     //404
     app.use(function* (){
         var data;

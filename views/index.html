@@ -122,7 +122,7 @@
                     </div>
                     <div class="clear">
                         <div>
-                            <a class="text-md ng-binding" href="/{{post.type}}/{{post.flag}}">{{post.title}}</a>
+                            <a class="text-md ng-binding" href="/{{post.type}}/{{post._id.toString()}}">{{post.title}}</a>
                             {% if post.istop %}
                                 <span class="label bg-dark m-l-sm">置顶</span>
                             {% elseif post.isgood %}
