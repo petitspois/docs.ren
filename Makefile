@@ -11,7 +11,7 @@ install:
 	@npm install
 
 start: install
-	@nohup pm2 start app.js -i max --name "docs" --max-memory-restart 460M &>> docs.log &
+	@nohup pm2 start app.js -i max --name "docs" --max-memory-restart 1000M &>> docs.log &
 
 restart: install
 	@nohup pm2 restart "docs" &>> docs.log &
