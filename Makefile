@@ -30,4 +30,4 @@ mincss: $(min_css)
 
 lint: $(js_file)
 	@jshint $? --config ./jshint.json
-.PHONY: lint minjs
+.PHONY: install start restart lint minjs mincss
