@@ -67,14 +67,14 @@ module.exports = function(){
 
 
     //Error Handling
-    //app.use(function* (next) {
-    //    try {
-    //        yield next;
-    //    } catch (err) {
-    //        console.log(err)
-    //        this.redirect('/404');
-    //    }
-    //});
+    app.use(function* (next) {
+        try {
+            yield next;
+        } catch (err) {
+            console.log(err)
+            this.redirect('/404');
+        }
+    });
 
     //routers
     router(app);
