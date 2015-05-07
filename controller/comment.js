@@ -3,157 +3,202 @@
  */
 
 var level = require('../server/config').level,
-    model = require('../model/').post,
-    userModel = require('../model/').user,
-    commentModel = require('../model/').comment,
-    actionModel = require('../model/').action,
-    notificationModel = require('../model/').notification,
-    marked = require('../assets/js/editor/marked');
-    marked.setOptions({
-        renderer: new marked.Renderer(),
-        gfm: true,
-        tables: true,
-        breaks: false,
-        pedantic: false,
-        sanitize: true,
-        smartLists: true,
-        smartypants: false
-    });
+	model = require('../model/').post,
+	userModel = require('../model/').user,
+	commentModel = require('../model/').comment,
+	actionModel = require('../model/').action,
+	notificationModel = require('../model/').notification,
+	marked = require('../assets/js/editor/marked');
+marked.setOptions({
+	renderer: new marked.Renderer(),
+	gfm: true,
+	tables: true,
+	breaks: false,
+	pedantic: false,
+	sanitize: true,
+	smartLists: true,
+	smartypants: false
+});
 
 
-module.exports = function () {
+module.exports = function() {
 
-    var comment = {};
+	var comment = {};
 
-    //post comment
-    comment.comment = function* () {
-        var body = this.request.body,
-            comment = body.comment,
-            pid = body.pid,
-            reply = body.reply;
+	//post comment
+	comment.comment = function*() {
 
-        if(!this.session.user){
-            this.body = {
-                msg: '未登录，登陆跳转中...',
-                status: 2
-            }
-            return;
-        }
+		var ctx = this,
+			userSession = ctx.session.user || '',
+			body = ctx.request.body,
+			comment = body.comment,
+			pid = body.pid,
+			reply = body.reply;
 
-        if (!comment) {
-            this.body = {
-                msg: '评论内容不能为空',
-                status: 0
-            }
-            return;
-        }
+		if (!userSession) {
+			ctx.body = {
+				msg: '未登录，登陆跳转中...',
+				status: 2
+			}
+			return;
+		}
 
-        var userId = this.session.user._id || (yield userModel.get({email: this.session.user.email}))._id;
+		if (!comment) {
+			ctx.body = {
+				msg: '评论内容不能为空',
+				status: 0
+			}
+			return;
+		}
 
-        var commentData = {
-            pid: pid,
-            name: this.session.user.nickname,
-            email: this.session.user.email,
-            comment: comment,
-            author: userId
-        }
+		var userId = userSession._id || (yield userModel.get({
+				email: userSession.email
+			}))._id,
 
-        reply && (commentData.reply = reply);
+			commentData = {
+				pid: pid,
+				name: userSession.nickname,
+				email: userSession.email,
+				comment: comment,
+				author: userId
+			};
 
-        //save commentData
-        var commented = yield commentModel.add(commentData),
-            actionTarget='',
-            backUser = null;
+		if (reply) commentData.reply = reply;
 
-        //update time
-        yield model.update({_id:pid},{$set:{updatetime:Date.now()}});
+		//save commentData
+		var commented = yield commentModel.add(commentData),
+			actionTarget = '',
+			backUser = null;
 
-        //increase level
-        backUser = yield userModel.update({_id:userId},{$inc:{level:level.cc}});
+		//update time
+		yield model.update({
+			_id: pid
+		}, {
+			$set: {
+				updatetime: Date.now()
+			}
+		});
 
-        if(!backUser.role && backUser.level>1000){
-            yield userModel.update({_id:userId},{$set:{role:1}});
-        }
+		//increase level
+		backUser = yield userModel.update({
+			_id: userId
+		}, {
+			$inc: {
+				level: level.cc
+			}
+		});
 
-        //notification
-        var notificationData = {
-            type:'post',
-            source:this.session.user._id || (yield userModel.get({email:this.session.user.email},'_id'))._id,
-            resource:pid,
-            location:(yield commentModel.get({name:commentData.name},'','-createtime'))._id
-        }
+		if (!backUser.role && backUser.level > 1000) {
+			yield userModel.update({
+				_id: userId
+			}, {
+				$set: {
+					role: 1
+				}
+			});
+		}
 
-        if(reply){
-            notificationData.hasReply = true;
-            notificationData.target = (yield userModel.get({nickname:reply},'_id'))._id;
-            actionTarget = notificationData.target;
-        }else{
-            notificationData.target = (yield model.get({_id:pid})).author;
-            actionTarget = pid;
-        }
+		//notification
+		var notificationData = {
+			type: 'post',
+			source: userSession._id || (yield userModel.get({
+				email: userSession.email
+			}, '_id'))._id,
+			resource: pid,
+			location: (yield commentModel.get({
+				name: commentData.name
+			}, '', '-createtime'))._id
+		}
 
-        //save notifications
-        yield notificationModel.add(notificationData);
+		if (reply) {
+			notificationData.hasReply = true;
+			notificationData.target = (yield userModel.get({
+				nickname: reply
+			}, '_id'))._id;
+			actionTarget = notificationData.target;
+		} else {
+			notificationData.target = (yield model.get({
+				_id: pid
+			})).author;
+			actionTarget = pid;
+		}
 
-        //save actionData
-        yield actionModel.add({
-            type:reply?'reply':'comment',
-            uid:commentData.author,
-            name:commentData.name,
-            rid:actionTarget,
-            comment:commentData.comment
-        });
+		//save notifications
+		yield notificationModel.add(notificationData);
 
-        //async callbacks
-        var backData = {
-            name:this.session.user.nickname,
-            createtime:'即将',
-            comment:marked(comment),
-            avatar:(yield userModel.get({email:this.session.user.email}, 'avatar')).avatar
-        }
+		//save actionData
+		yield actionModel.add({
+			type: reply ? 'reply' : 'comment',
+			uid: commentData.author,
+			name: commentData.name,
+			rid: actionTarget,
+			comment: commentData.comment
+		});
 
-        reply && (backData.reply = reply);
+		//async callbacks
+		var backData = {
+			name: this.session.user.nickname,
+			createtime: '即将',
+			comment: marked(comment),
+			avatar: (yield userModel.get({
+				email: this.session.user.email
+			}, 'avatar')).avatar
+		}
 
-        if (commented) {
-            this.body = {
-                msg: '发布成功',
-                status: 1,
-                data: backData
-            }
-        }
+		if(reply) backData.reply = reply;
 
-    }
+		if (commented) {
+			this.body = {
+				msg: '发布成功',
+				status: 1,
+				data: backData
+			}
+		}
+
+	}
 
 
-    //remove comment
-    comment.remove = function* (){
-        var body = this.request.body,
-            cid = body.cid,
-            userId = this.session.user._id || (yield userModel.get({email: this.session.user.email}))._id;
+	//remove comment
+	comment.remove = function*() {
+		var ctx = this,
+            userSession = ctx.session.user || '',
+            body = ctx.request.body,
+			cid = body.cid,
+			userId = userSession._id || (yield userModel.get({
+				email: userSession.email
+			}))._id;
 
-        if(cid){
-            var cData = yield commentModel.byidRemove(cid);
-            if(cData){
-                 //decrease level
-                 yield userModel.update({_id:userId},{$inc:{level:-level.cc}});
-                 this.body = {
-                     msg:'删除成功',
-                     status:1
-                 }
-            }else{
-                this.body = {
-                    msg:'删除失败',
-                    status:0
-                }
-            }
-        }else{
-            this.body = {
-                msg:'cid不存在',
-                status:0
-            }
-        }
+		if (cid) {
 
-    }
+			var cData = yield commentModel.byidRemove(cid);
 
-    return comment;
+			if (cData) {
+				//decrease level
+				yield userModel.update({
+					_id: userId
+				}, {
+					$inc: {
+						level: -level.cc
+					}
+				});
+				this.body = {
+					msg: '删除成功',
+					status: 1
+				}
+			} else {
+				this.body = {
+					msg: '删除失败',
+					status: 0
+				}
+			}
+		} else {
+			this.body = {
+				msg: 'cid不存在',
+				status: 0
+			}
+		}
+
+	}
+
+	return comment;
 }
