@@ -4,7 +4,11 @@
 Based vuejs, koajs build Documentation Community
 
 ##简介
-Docs.ren 一个微文档微社区，以npmjs.com, github.com等，中文项目简介为主要方向。目前部署在阿里云上。使用最新版iojs。（当然目前只是构想，- ^ -）
+Docs.ren 一个微文档微社区，以npmjs.com, github.com等，中文项目简介为主要方向。目前部署在阿里云上。（当然目前只是构想，- ^ -）
+
+##部署
+
+线上部署----iojs2.0.0。
 
 ##开始
 ###前置条件
