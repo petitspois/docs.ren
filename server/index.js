@@ -81,7 +81,6 @@ module.exports = function() {
 		try {
 			yield next;
 		} catch (err) {
-			console.log(err)
 			this.redirect('/404');
 		}
 	});

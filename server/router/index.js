@@ -30,7 +30,7 @@ module.exports = function(app){
     app.use(function* (){
         var data;
         if(this.session.user) data = {user:this.session.user};
-        this.body = yield render('404', data);
+        this.body = yield this.render('404', data);
     });
 
 }
