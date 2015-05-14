@@ -24,8 +24,8 @@ module.exports = function() {
 		mongoose = require('./mongoose'),
 
 		//获取默认配置
-		conf = require('./config'),
-		renderView;
+		conf = require('./config');
+
 
 
 
@@ -61,7 +61,7 @@ module.exports = function() {
 	mongoose(conf.mongodb);
 
 	//init methods
-	app.context.render = render = render({
+	app.context.render = render({
 		root: conf.views,
 		autoescape: true,
 		cache: 'memory', // disable, set to false
@@ -69,7 +69,7 @@ module.exports = function() {
 	});
 
 	//msg
-	app.use(msg(render, app));
+	app.use(msg(app));
 
 
 	//Error Handling

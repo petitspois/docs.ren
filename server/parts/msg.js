@@ -4,7 +4,7 @@
 var settingsModel = require('../../model/').settings,
 	userModel = require('../../model/').user;
 
-module.exports = function(render, app) {
+module.exports = function(app) {
 	return function* msg(next) {
 		var ctx = this;
 
