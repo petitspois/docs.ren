@@ -17,12 +17,15 @@ module.exports = function() {
 
 		webset = require('./parts/webset'),
 
+		msg = require('./parts/msg'),
+
 		router = require('./router/'),
 
 		mongoose = require('./mongoose'),
 
 		//获取默认配置
-		conf = require('./config');
+		conf = require('./config'),
+		renderView;
 
 
 
@@ -58,22 +61,15 @@ module.exports = function() {
 	mongoose(conf.mongodb);
 
 	//init methods
-	app.context.render = render({
+	app.context.render = render = render({
 		root: conf.views,
 		autoescape: true,
 		cache: 'memory', // disable, set to false
 		ext: 'html'
 	});
 
-
-	app.context.msg = function(url, val, title) {
-		return render('msg', {
-			url: url,
-			msg: val,
-			secondtitle: title,
-			time: 5
-		});
-	};
+	//msg
+	app.use(msg(render, app));
 
 
 	//Error Handling
