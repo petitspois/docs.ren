@@ -53,7 +53,7 @@ module.exports = function () {
         }
 
 
-        posts = yield postModel.getAll(query, '-istop -updatetime', page, 10, 'name type title description createtime updatetime'),
+        posts = yield postModel.getAll(query, '-istop -updatetime', page, 10, 'name type title description createtime updatetime theme'),
             total = Math.ceil((yield postModel.querycount(query)) / 10);
 
         yield posts.map(function* (item) {
